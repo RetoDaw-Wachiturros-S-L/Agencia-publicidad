@@ -106,3 +106,7 @@ Para una colaboración profesional y ordenada en el desarrollo, sigue estos est�
 ## ✨ Modelo Entidad Relación
 
 - Enlace al modelo entidad relación (púbilco, solo view) [MER](https://www.mermaidchart.com/d/6dcc4643-879d-4802-9e9d-9af3d03bcde4)
+ ## Wire Frame:
+ [URL](https://wireframe.cc/pro)
+ Usr -> DanTom
+ Pass -> Me la pides :)
