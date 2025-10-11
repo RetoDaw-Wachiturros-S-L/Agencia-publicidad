@@ -1,53 +1,75 @@
 CREATE DATABASE IF NOT EXISTS marketplace;
 USE marketplace;
 
--- Tabla: comerciantes (vendedores)
-CREATE TABLE comerciantes (
+-- Tabla: usuarios (unificada)
+CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_empresa VARCHAR(50) NOT NULL UNIQUE,
     nombre VARCHAR(50) NOT NULL,
-    apellido VARCHAR(100),
+    apellido VARCHAR(50),
+    email VARCHAR(100) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     fecha_inscripcion DATETIME DEFAULT CURRENT_TIMESTAMP,
-    num_telefono VARCHAR(20),
-    email VARCHAR(100) UNIQUE,
-    foto_perfil VARCHAR(255)
+    foto_perfil VARCHAR(255),
+    tipo_usuario ENUM('ADMINISTRADOR', 'COMERCIANTE', 'VISITANTE') NOT NULL
 );
 
--- Tabla: visitantes (compradores)
-CREATE TABLE visitantes (
+-- Tabla: comerciantes (datos adicionales)
+CREATE TABLE comerciantes (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL,
-    apellido VARCHAR(50) NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    fecha_alta DATETIME DEFAULT CURRENT_TIMESTAMP,
-    num_telefono VARCHAR(9),
-    email VARCHAR(100) UNIQUE,
-    foto_perfil VARCHAR(255)
+    id_usuario INT NOT NULL,
+    nombre_empresa VARCHAR(50) NOT NULL UNIQUE,
+    nif_empresa VARCHAR(9) NOT NULL,
+    comentario_empresa TEXT,
+    num_telefono VARCHAR(20),
+    comerciante_desde DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+        ON DELETE CASCADE
 );
 
--- Tabla: anuncios
+-- Tabla: anuncios (sin precio)
 CREATE TABLE anuncios (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_prod VARCHAR(150) NOT NULL,
-    foto_principal VARCHAR(255),
-    descripcion TEXT,
-    precio DECIMAL(10,2) NOT NULL,
+    id_comerciante INT NOT NULL,
+    titulo VARCHAR(150) NOT NULL,
+    detalles TEXT,
     fecha_publicacion DATETIME DEFAULT CURRENT_TIMESTAMP,
-    id_vendedor INT NOT NULL,
-    categoria VARCHAR(100),
-    FOREIGN KEY (id_vendedor) REFERENCES comerciantes(id)
+    FOREIGN KEY (id_comerciante) REFERENCES comerciantes(id)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
+);
+
+-- Tabla: fotos de anuncios
+CREATE TABLE fotos_anuncios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_anuncio INT NOT NULL,
+    url_foto VARCHAR(255) NOT NULL,
+    FOREIGN KEY (id_anuncio) REFERENCES anuncios(id)
+        ON DELETE CASCADE
+);
+
+-- Tabla: categorías (tags)
+CREATE TABLE categorias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) UNIQUE NOT NULL
+);
+
+-- Tabla: relación N:M entre anuncios y categorías
+CREATE TABLE anuncios_categorias (
+    id_anuncio INT NOT NULL,
+    id_categoria INT NOT NULL,
+    PRIMARY KEY (id_anuncio, id_categoria),
+    FOREIGN KEY (id_anuncio) REFERENCES anuncios(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (id_categoria) REFERENCES categorias(id)
+        ON DELETE CASCADE
 );
 
 -- Tabla: favoritos
 CREATE TABLE favoritos (
-    id_usuario INT,
-    id_anuncio INT,
+    id_usuario INT NOT NULL,
+    id_anuncio INT NOT NULL,
     fecha_guardado DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id_usuario, id_anuncio),
-    FOREIGN KEY (id_usuario) REFERENCES visitantes(id)
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
         ON DELETE CASCADE,
     FOREIGN KEY (id_anuncio) REFERENCES anuncios(id)
         ON DELETE CASCADE
@@ -58,13 +80,13 @@ CREATE TABLE conversaciones (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_anuncio INT NOT NULL,
     id_visitante INT NOT NULL,
-    id_vendedor INT NOT NULL,
+    id_comerciante INT NOT NULL,
     fecha_inicio DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_anuncio) REFERENCES anuncios(id)
         ON DELETE CASCADE,
-    FOREIGN KEY (id_visitante) REFERENCES visitantes(id)
+    FOREIGN KEY (id_visitante) REFERENCES usuarios(id)
         ON DELETE CASCADE,
-    FOREIGN KEY (id_vendedor) REFERENCES comerciantes(id)
+    FOREIGN KEY (id_comerciante) REFERENCES comerciantes(id)
         ON DELETE CASCADE
 );
 
@@ -77,11 +99,13 @@ CREATE TABLE mensajes (
     fecha_envio DATETIME DEFAULT CURRENT_TIMESTAMP,
     visto BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (id_conversacion) REFERENCES conversaciones(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (id_emisor) REFERENCES usuarios(id)
         ON DELETE CASCADE
-    -- FOREIGN KEY (id_emisor) se omite por ambigüedad entre visitante y comerciante
 );
 
 -- Índices recomendados
-CREATE INDEX idx_anuncios_vendedor ON anuncios(id_vendedor);
+CREATE INDEX idx_anuncios_comerciante ON anuncios(id_comerciante);
 CREATE INDEX idx_mensajes_conversacion ON mensajes(id_conversacion);
 CREATE INDEX idx_conversaciones_anuncio ON conversaciones(id_anuncio);
+CREATE INDEX idx_anuncios_categoria ON anuncios_categorias(id_categoria);
