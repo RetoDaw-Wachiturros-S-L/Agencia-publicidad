@@ -110,3 +110,12 @@ Para una colaboración profesional y ordenada en el desarrollo, sigue estos est�
  [URL](https://wireframe.cc/pro)
  Usr -> DanTom
  Pass -> Me la pides :)
+
+ ## 🐬 Acceso a base de datos
+
+ - Usuario: doadmin
+ - Contraseña: AVNS_T7F5ypei-vq0X2smLnX
+ - Host: wachiturros-do-user-18805607-0.m.db.ondigitalocean.com
+ - Puerto: 25060
+ - Database: defaultdb
+ - SSLmode: Required
