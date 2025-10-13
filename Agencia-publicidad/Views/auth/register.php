@@ -13,7 +13,7 @@ if(isset($mensaje_error)) :?>
     <p style='color:red;'><?= $mensaje_error ?></p>
 <?php endif; ?>
 
-<form action='./ejercicio04.php' method='post'>
+<form action='index.php?controller=registerController&accion=store' method='post'>
     <fieldset>
         <legend>Registro</legend>
         <p>
