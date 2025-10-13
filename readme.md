@@ -119,3 +119,4 @@ Para una colaboraci√≥n profesional y ordenada en el desarrollo, sigue estos est√
  - Puerto: 25060
  - Database: defaultdb
  - SSLmode: Required
+ - Certificado SSL: (Descargar)[https://www.mediafire.com/file/z71h9wdf0r7x34j/ca-certificate.crt/file]
