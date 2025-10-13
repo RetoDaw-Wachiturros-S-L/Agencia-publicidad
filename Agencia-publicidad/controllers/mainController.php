@@ -1,6 +1,6 @@
 <?php
 
-class mainController {
+class MainController {
     
     public function index() {
         echo "<h1>🎨 Bienvenido a Nuestra Agencia de Publicidad</h1>";
