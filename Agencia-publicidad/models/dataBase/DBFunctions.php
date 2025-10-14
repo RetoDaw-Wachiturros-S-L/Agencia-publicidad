@@ -21,6 +21,19 @@ class DBFunctions {
         
         return $stmt->execute();
     }
+    public function comprobarUsuario($email,$contrasena) {
+        $pdo = DBCon::getConnection();
+        $sql = "SELECT password_hash FROM usuarios WHERE email = :email";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':email', $email);
+        $stmt->execute();
+        $usuario = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $contrasenaHash = "";
+        foreach($usuario as $u){
+            $contrasenaHash = $u;
+        }
+        return password_verify($contrasena,$contrasenaHash);
+    }
     function getAll(){
         $pdo = DBCon::getConnection();
         $sql = "SELECT 

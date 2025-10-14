@@ -88,7 +88,7 @@ class OutController {
     }
 
     private function comprobarUser($email,$contrasena){
-        
+        return $this->dbFunctions->comprobarUsuario($email,$contrasena);
     }
 
     public function iniciarSesion(){
@@ -107,13 +107,17 @@ class OutController {
                 $errores[] = "La constraseña no puede estar vacia subnormal";
             }
             if(empty($errores)){
-                $existe = $this->comprobarUser($email,$contrasena);
+                if ($this->comprobarUser($email,$contrasena) == 1){
+                    echo "Inicisate sesión correctamente";
+                } else {    
+                    echo "Usuario o contraseña incorrectos";
+                }
             } else {
                 // Mostrar errores
                 $mensaje_error = implode("<br>", $errores);
                 include 'Views/auth/login.php';
             }
-        }else {
+        } else {
             include 'Views/auth/login.php';
         }
     } 
