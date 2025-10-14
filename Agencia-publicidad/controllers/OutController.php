@@ -15,7 +15,7 @@ require_once __DIR__ . '/../models/dataBase/DBFunctions.php';
     // require_once __DIR__ . '/../models/TipoPersonaEnum.php';
     // require_once __DIR__ . '/../models/DBFunctions.php';
 
-class RegisterController {
+class OutController {
     
     private DBFunctions $dbFunctions;
     
@@ -84,8 +84,35 @@ class RegisterController {
     }
     
     private function guardarUsuario($nuevoUsuario) {
-
+        $this->dbFunctions->guardarUsuario($nuevoUsuario);
     }
+
+    public function iniciarSesion(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = $_POST['email'] ?? '';
+            $contrasena = $_POST['contrasena'] ?? '';
+            $errores = [];
+
+
+            if (empty($email)) {
+                $errores[] = "El email es obligatorio";
+            }
+            
+            if (empty($contrasena)) {
+                $errores[] = "La constraseña no puede estar vacia subnormal";
+            }
+            if(empty($errores)){
+                //verificar en la base de datos
+            } else {
+                // Mostrar errores
+                $mensaje_error = implode("<br>", $errores);
+                include 'Views/auth/login.php';
+            }
+        }else {
+            include 'Views/auth/login.php';
+        }
+    } 
+
 }
 
 ?>
