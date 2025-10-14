@@ -87,8 +87,13 @@ class OutController {
         $this->dbFunctions->guardarUsuario($nuevoUsuario);
     }
 
+    private function comprobarUser($email,$contrasena){
+        
+    }
+
     public function iniciarSesion(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
             $email = $_POST['email'] ?? '';
             $contrasena = $_POST['contrasena'] ?? '';
             $errores = [];
@@ -102,7 +107,7 @@ class OutController {
                 $errores[] = "La constraseña no puede estar vacia subnormal";
             }
             if(empty($errores)){
-                //verificar en la base de datos
+                $existe = $this->comprobarUser($email,$contrasena);
             } else {
                 // Mostrar errores
                 $mensaje_error = implode("<br>", $errores);
