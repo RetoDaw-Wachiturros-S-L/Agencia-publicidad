@@ -28,11 +28,10 @@ class DBFunctions {
         $stmt->bindValue(':email', $email);
         $stmt->execute();
         $usuario = $stmt->fetch(\PDO::FETCH_ASSOC);
-        $contrasenaHash = "";
-        foreach($usuario as $u){
-            $contrasenaHash = $u;
+        if ($usuario && isset($usuario['password_hash'])) {
+            return password_verify($contrasena, $usuario['password_hash']);
         }
-        return password_verify($contrasena,$contrasenaHash);
+return false;
     }
     function getAll(){
         $pdo = DBCon::getConnection();
