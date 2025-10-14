@@ -13,17 +13,10 @@ if(isset($mensaje_error)) :?>
     <p style='color:red;'><?= $mensaje_error ?></p>
 <?php endif; ?>
 
-<form action='index.php?controller=RegisterController&accion=store' method='post'>
+<form action='index.php?controller=OutController&accion=iniciarSesion' method='post'>
     <fieldset>
         <legend>Inicio de sesion</legend>
-        <p>
-            <label for='nombre'>Nombre</label>
-            <input type='text' id='nombre' name='nombre' required>
-        </p>
-        <p>
-            <label for='apellido'>Apellido</label>
-            <input type='text' id='apellido' name='apellido' required>
-        </p>
+    
         <p>
             <label for='email'>Email</label>
             <input type='email' id='email' name='email' required>
@@ -31,17 +24,6 @@ if(isset($mensaje_error)) :?>
         <p>
             <label for='contrasena'>Contraseña</label>
             <input type='password' id='contrasena' name='contrasena' required>
-        </p>
-        <p>
-            <label for='contrasena2'>Repetir Contraseña</label>
-            <input type='password' id='contrasena2' name='contrasena2' required>
-        </p>
-        <p>
-            <h4>Subir foto</h4>
-        </p>
-        <p>
-            <input type="checkbox" name="es_comercio" id="es_comercio" value="1">
-            <label for="es_comercio">¿Eres un comercio?</label>
         </p>
         <p>
             <input type='submit' value='Enviar'>

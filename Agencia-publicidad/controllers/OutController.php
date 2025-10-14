@@ -1,6 +1,6 @@
 <?php
 
-class RegisterController {
+class OutController {
     
     public function store() {
         // Verificar que la petición sea POST
@@ -53,7 +53,31 @@ class RegisterController {
             include 'Views/auth/register.php';
         }
     }
-    
+    public function iniciarSesion(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = $_POST['email'] ?? '';
+            $contrasena = $_POST['contrasena'] ?? '';
+            $errores = [];
+
+
+            if (empty($email)) {
+                $errores[] = "El email es obligatorio";
+            }
+            
+            if (empty($contrasena)) {
+                $errores[] = "La constraseña no puede estar vacia subnormal";
+            }
+            if(empty($errores)){
+                //verificar en la base de datos
+            } else {
+                // Mostrar errores
+                $mensaje_error = implode("<br>", $errores);
+                include 'Views/auth/login.php';
+            }
+        }else {
+            include 'Views/auth/login.php';
+        }
+    } 
     private function guardarUsuario($nombre, $apellido, $email, $contrasena, $es_comercio) {
         // Aquí implementarás la lógica para guardar en BD
         // Por ahora solo mostramos los datos recibidos
