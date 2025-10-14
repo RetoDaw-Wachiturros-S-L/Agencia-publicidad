@@ -88,7 +88,12 @@ class OutController {
     }
 
     private function comprobarUser($email,$contrasena){
+        $SesionIniciada = $_SESSION['sesionIniciada']??false;
+        if($this->dbFunctions->comprobarUsuario($email,$contrasena) == 1 && !$SesionIniciada){
+            $SesionIniciada = true;
+        }
         return $this->dbFunctions->comprobarUsuario($email,$contrasena);
+       
     }
 
     public function iniciarSesion(){
