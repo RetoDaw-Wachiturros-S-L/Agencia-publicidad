@@ -15,6 +15,7 @@ class RegisterController {
             $es_comercio = isset($_POST['es_comercio']) ? 1 : 0;
             
             // Validaciones básicas
+            // TODO Pasar validaciones a UTILS
             $errores = [];
             
             if (empty($nombre)) {
