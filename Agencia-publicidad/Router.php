@@ -24,8 +24,15 @@ class Router {
 
         require_once $controllerFile;
         
-        // Instanciar controlador
-        $controller = new $controllerName();
+        // Instanciar controlador (soporta clases con o sin namespace)
+        $fqcnNamespaced = "AgenciaPublicidad\\Controllers\\{$controllerName}";
+        if (class_exists($fqcnNamespaced)) {
+            $controller = new $fqcnNamespaced();
+        } elseif (class_exists($controllerName)) {
+            $controller = new $controllerName();
+        } else {
+            throw new Exception("No se encontró la clase del controlador: {$controllerName}");
+        }
 
         // Ejecutar método
         $controller->$action();

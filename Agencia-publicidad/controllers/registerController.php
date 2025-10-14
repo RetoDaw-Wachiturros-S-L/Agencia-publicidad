@@ -1,7 +1,28 @@
 <?php
+namespace AgenciaPublicidad\Controllers;
+
+
+use AgenciaPublicidad\Models\UsuarioRegistrado;
+use AgenciaPublicidad\Models\TipoPersonaEnum;
+use AgenciaPublicidad\Models\DBFunctions;
+
+// Cargas directas para entornos sin autoloader
+require_once __DIR__ . '/../models/UsuarioRegistrado.php';
+require_once __DIR__ . '/../models/TipoPersonaEnum.php';
+require_once __DIR__ . '/../models/dataBase/DBFunctions.php';
+
+    // require_once __DIR__ . '/../models/UsuarioRegistrado.php';
+    // require_once __DIR__ . '/../models/TipoPersonaEnum.php';
+    // require_once __DIR__ . '/../models/DBFunctions.php';
 
 class RegisterController {
     
+    private DBFunctions $dbFunctions;
+    
+    public function __construct() {
+        $this->dbFunctions = new DBFunctions();
+    }
+
     public function store() {
         // Verificar que la petición sea POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -12,7 +33,6 @@ class RegisterController {
             $email = $_POST['email'] ?? '';
             $contrasena = $_POST['contrasena'] ?? '';
             $contrasena2 = $_POST['contrasena2'] ?? '';
-            $es_comercio = isset($_POST['es_comercio']) ? 1 : 0;
             
             // Validaciones básicas
             // TODO Pasar validaciones a UTILS
@@ -37,7 +57,16 @@ class RegisterController {
             // Si no hay errores, procesar el registro
             if (empty($errores)) {
                 // Aquí guardarías en la base de datos
-                $this->guardarUsuario($nombre, $apellido, $email, $contrasena, $es_comercio);
+            $nuevoUsuario = new UsuarioRegistrado(
+                $nombre,
+                $apellido,
+                $email,
+                $contrasena,
+                new \DateTime(),
+                null,
+                TipoPersonaEnum::VISITANTE); //se tiene que poner la opcion pero si no poner VISITANTE por defecto
+
+                $this->dbFunctions->guardarUsuario($nuevoUsuario);
                 
                 // Redirigir o mostrar éxito
                 echo "Usuario registrado exitosamente";
@@ -54,14 +83,8 @@ class RegisterController {
         }
     }
     
-    private function guardarUsuario($nombre, $apellido, $email, $contrasena, $es_comercio) {
-        // Aquí implementarás la lógica para guardar en BD
-        // Por ahora solo mostramos los datos recibidos
-        echo "<h3>Datos a guardar:</h3>";
-        echo "Nombre: $nombre<br>";
-        echo "Apellido: $apellido<br>";
-        echo "Email: $email<br>";
-        echo "Es comercio: " . ($es_comercio ? 'Sí' : 'No') . "<br>";
+    private function guardarUsuario($nuevoUsuario) {
+
     }
 }
 

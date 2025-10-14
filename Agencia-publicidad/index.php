@@ -6,9 +6,8 @@ include "./models/tipoPersonaEnum.php";
 use AgenciaPublicidad\Models\UsuarioRegistrado;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
 
+
 Router::dispatch();
-
-
 
 
 
