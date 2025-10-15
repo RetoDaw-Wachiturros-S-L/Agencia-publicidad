@@ -118,10 +118,12 @@ class OutController {
                         $usuarioData['foto_perfil'] ?? null, //No es para nada necesario asique tampoco lo guardamos
                         TipoPersonaEnum::from($usuarioData['tipo_usuario'])
                     );
-                    // Mostrar el estado del objeto UsuarioRegistrado
+
+                    // Mostrar el estado del objeto UsuarioRegistrado DEBUG
                     echo "<pre>Objeto UsuarioRegistrado:\n";
                     var_dump($usuario);
                     echo "</pre>";
+
                     $_SESSION['usuario'] = [
                         // 'id' => $usuarioData['id'], En cuanto se pueda, hacer función para obtener el id
                         'email' => $usuarioData['email'],
@@ -130,13 +132,13 @@ class OutController {
                         'tipo' => $usuarioData['tipo_usuario'],
                         'login_time' => time()
                     ];
-                    // Mostrar el estado de la sesión
+
+                    // Mostrar el estado de la sesión DEBUG
                     echo "<pre>Contenido de \$_SESSION['usuario']:\n";
                     var_dump($_SESSION['usuario']);
                     echo "</pre>";
-                } else {
-                    echo "Usuario o contraseña incorrectos";
-                }
+
+                } else { echo "Usuario o contraseña incorrectos"; }
             } else {
                 // Mostrar errores
                 $mensaje_error = implode("<br>", $errores);
