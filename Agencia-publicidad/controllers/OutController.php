@@ -101,7 +101,7 @@ class OutController {
             }
             
             if (empty($contrasena)) {
-                $errores[] = "La constraseña no puede estar vacia subnormal";
+                $errores[] = "La constraseña no puede estar vacia";
             }
             if(empty($errores)){
                 //Almaceno en usuarioData la información del usuario solicitado
@@ -148,6 +148,16 @@ class OutController {
             include 'Views/auth/login.php';
         }
     } 
+
+    public function logout() {
+        echo "Entra en logout";
+        if (isset($_SESSION['usuario'])) {
+            echo "Sesion cerrada";
+            session_destroy();
+            header("Location: ../index.php?controller=mainController");
+            exit;
+        }
+    }
 
 }
 
