@@ -21,6 +21,7 @@ class OutController {
     
     public function __construct() {
         $this->dbFunctions = new DBFunctions();
+        session_start();
     }
 
     public function store() {
@@ -89,6 +90,7 @@ class OutController {
 
     public function iniciarSesion(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
             $email = $_POST['email'] ?? '';
             $contrasena = $_POST['contrasena'] ?? '';
             $errores = [];
@@ -102,13 +104,47 @@ class OutController {
                 $errores[] = "La constraseña no puede estar vacia subnormal";
             }
             if(empty($errores)){
-                //verificar en la base de datos
+                //Almaceno en usuarioData la información del usuario solicitado
+                $usuarioData = $this->dbFunctions->comprobarUsuario($email, $contrasena);
+                //Si existe procedo a crear la sesion
+                if (!empty($usuarioData)) {
+                    echo "Iniciaste sesión correctamente";
+                    $usuario = new UsuarioRegistrado(
+                        $usuarioData['nombre'],
+                        $usuarioData['apellido'],
+                        $usuarioData['email'],
+                        '', // No guardes la contraseña
+                        new \DateTime($usuarioData['fecha_inscripcion']), //La ia me recomienda almacenar la fecha asique pa dentro
+                        $usuarioData['foto_perfil'] ?? null, //No es para nada necesario asique tampoco lo guardamos
+                        TipoPersonaEnum::from($usuarioData['tipo_usuario'])
+                    );
+
+                    // Mostrar el estado del objeto UsuarioRegistrado DEBUG
+                    echo "<pre>Objeto UsuarioRegistrado:\n";
+                    var_dump($usuario);
+                    echo "</pre>";
+
+                    $_SESSION['usuario'] = [
+                        // 'id' => $usuarioData['id'], En cuanto se pueda, hacer función para obtener el id
+                        'email' => $usuarioData['email'],
+                        'nombre' => $usuarioData['nombre'],
+                        'apellido' => $usuarioData['apellido'],
+                        'tipo' => $usuarioData['tipo_usuario'],
+                        'login_time' => time()
+                    ];
+
+                    // Mostrar el estado de la sesión DEBUG
+                    echo "<pre>Contenido de \$_SESSION['usuario']:\n";
+                    var_dump($_SESSION['usuario']);
+                    echo "</pre>";
+
+                } else { echo "Usuario o contraseña incorrectos"; }
             } else {
                 // Mostrar errores
                 $mensaje_error = implode("<br>", $errores);
                 include 'Views/auth/login.php';
             }
-        }else {
+        } else {
             include 'Views/auth/login.php';
         }
     } 
