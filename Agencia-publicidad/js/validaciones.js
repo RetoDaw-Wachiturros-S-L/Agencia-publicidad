@@ -8,7 +8,7 @@ function validarEmail(email) {
 }
 
 function validarLongitud(valor, min, max) {
-    return valor.length >= min && valor.lengt <= max;
+    return valor.length >= min && valor.length <= max;
 }
 
 function validarContrasena(pass) {
