@@ -13,7 +13,7 @@ if(isset($mensaje_error)) :?>
     <p style='color:red;'><?= $mensaje_error ?></p>
 <?php endif; ?>
 
-<form action='index.php?controller=OutController&accion=iniciarSesion' method='post'>
+<form action='<?= BASE_URL ?>/index.php?controller=OutController&accion=iniciarSesion' method='post'>
     <fieldset>
         <legend>Inicio de sesion</legend>
     
@@ -30,6 +30,9 @@ if(isset($mensaje_error)) :?>
         </p>
     </fieldset>
 </form>
+
+<script src="<?= BASE_URL ?>/js/login.js"></script>
+<script src="<?= BASE_URL ?>/js/validaciones.js"></script>
 
 </body>
 </html>
