@@ -13,9 +13,6 @@ require_once __DIR__ . '/../models/TipoPersonaEnum.php';
 require_once __DIR__ . '/../models/dataBase/DBFunctions.php';
 require_once __DIR__ . '/../models/dataBase/DBUser.php';
 
-    // require_once __DIR__ . '/../models/UsuarioRegistrado.php';
-    // require_once __DIR__ . '/../models/TipoPersonaEnum.php';
-    // require_once __DIR__ . '/../models/DBFunctions.php';
 
 class OutController {
     
@@ -62,7 +59,7 @@ class OutController {
             // Si no hay errores, procesar el registro
             if (empty($errores)) {
                 // Aquí guardarías en la base de datos
-            $nuevoUsuario = new UsuarioRegistrado(
+                $nuevoUsuario = new UsuarioRegistrado(
                 $nombre,
                 $apellido,
                 $email,

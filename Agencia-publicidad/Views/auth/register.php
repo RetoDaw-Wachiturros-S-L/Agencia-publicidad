@@ -13,7 +13,7 @@ if(isset($mensaje_error)) :?>
     <p style='color:red;'><?= $mensaje_error ?></p>
 <?php endif; ?>
 
-<form action='index.php?controller=OutController&accion=store' method='post'>
+<form action='../../index.php?controller=OutController&accion=store' method='post' id="registro">
     <fieldset>
         <legend>Registro</legend>
         <p>
@@ -45,6 +45,43 @@ if(isset($mensaje_error)) :?>
         <p>
             <input type='submit' value='Enviar'>
         </p>
+        <div id="formulario_extra" >
+            <p>
+                <label for="nombrEmpresa">Nombre de la empresa:</label>
+                <input type="text" id="nombrEmpresa" name="nombrEmpresa">
+            </p>
+            <p>
+                <label for="nifEmpresa">NIF de la empresa:</label>
+                <input type="text" id="nifEmpresa" name="nombrEmpresa">
+            </p>
+            <p>
+                <label for="comentarioEmpresa">Comentario sobre la empresa:</label>
+                <input type="text" id="comentarioEmpresa" name="comentarioEmpresa" required>
+            </p>
+            <p>
+                <label for="telefonoEmpresa">Teléfono de la empresa:</label>
+                <input type="tel" id="telefonoEmpresa" name="telefonoEmpresa" required>
+            </p>
+            
+        </div>
+        <script>
+            
+            const checkbox = document.getElementById('es_comercio');
+            const extraForm = document.getElementById('formulario_extra');
+            const form = document.getElementById('registro');
+            extraForm.style.display = 'none';
+            checkbox.addEventListener('change', mostrarFormunuevo);
+
+            function mostrarFormunuevo(){
+                if(this.checked){
+                    extraForm.style.display = 'block';
+                    form.action = '../../index.php?controller=OutController&accion=storeComercio';
+                }else{
+                    extraForm.style.display = "none";
+                }
+            }
+
+        </script>
     </fieldset>
 </form>
 
