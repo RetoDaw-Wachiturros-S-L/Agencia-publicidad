@@ -45,6 +45,38 @@ if(isset($mensaje_error)) :?>
         <p>
             <input type='submit' value='Enviar'>
         </p>
+        <div id="formulario_extra">
+            <p>
+                <label for="nombrEmpresa">Nombre de la empresa:</label>
+                <input type="text" id="nombrEmpresa" name="nombrEmpresa">
+            </p>
+            <p>
+                <label for="nifEmpresa">NIF de la empresa:</label>
+                <input type="text" id="nifEmpresa" name="nombrEmpresa">
+            </p>
+            <p>
+                <label for="comentarioEmpresa">Comentario sobre la empresa:</label>
+                <input type="text" id="comentarioEmpresa" name="comentarioEmpresa" required>
+            </p>
+            <p>
+                <label for="telefonoEmpresa">Teléfono de la empresa:</label>
+                <input type="tel" id="telefonoEmpresa" name="telefonoEmpresa" required>
+            </p>
+            
+        </div>
+        <script>
+            
+            const checkbox = document.getElementById('es_comercio');
+            const extraForm = document.getElementById('formulario_extra');
+            extraForm.style.display = 'none'; // Ocultar el formulario extra inicialmente
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    extraForm.style.display = 'block';
+                } else {
+                    extraForm.style.display = 'none';
+                }
+            });
+        </script>
     </fieldset>
 </form>
 
