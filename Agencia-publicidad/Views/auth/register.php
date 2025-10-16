@@ -45,7 +45,7 @@ if(isset($mensaje_error)) :?>
         <p>
             <input type='submit' value='Enviar'>
         </p>
-        <div id="formulario_extra">
+        <div id="formulario_extra" >
             <p>
                 <label for="nombrEmpresa">Nombre de la empresa:</label>
                 <input type="text" id="nombrEmpresa" name="nombrEmpresa">
@@ -69,18 +69,18 @@ if(isset($mensaje_error)) :?>
             const checkbox = document.getElementById('es_comercio');
             const extraForm = document.getElementById('formulario_extra');
             const form = document.getElementById('registro');
-            extraForm.style.display = 'none'; // Ocultar el formulario extra inicialmente
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
-                    extraForm.style.display = 'block';
-                } else {
-                    extraForm.style.display = 'none';
-                }
-            });
-            if (extraForm.style.display = 'block') {
-                regiistro.action = '..\..\index.php?controller=OutController&accion=storeComercio';
+            extraForm.style.display = 'none';
+            checkbox.addEventListener('change', mostrarFormunuevo);
 
+            function mostrarFormunuevo(){
+                if(this.checked){
+                    extraForm.style.display = 'block';
+                    form.action = '../../index.php?controller=OutController&accion=storeComercio';
+                }else{
+                    extraForm.style.display = "none";
+                }
             }
+
         </script>
     </fieldset>
 </form>
