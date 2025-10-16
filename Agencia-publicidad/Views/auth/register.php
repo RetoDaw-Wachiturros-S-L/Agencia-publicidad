@@ -75,7 +75,7 @@ if(isset($mensaje_error)) :?>
             function mostrarFormunuevo(){
                 if(this.checked){
                     extraForm.style.display = 'block';
-                    form.action = '../../index.php?controller=OutController&accion=storeComercio';
+                
                 }else{
                     extraForm.style.display = "none";
                 }

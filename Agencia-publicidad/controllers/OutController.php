@@ -55,6 +55,29 @@ class OutController {
             if ($contrasena !== $contrasena2) {
                 $errores[] = "Las contraseñas no coinciden";
             }
+            if ($_POST["es_comercio"]==1){
+                $nombrEmpresa = $_POST['nombrEmpresa'] ?? '';
+                $nifEmpresa = $_POST['nifEmpresa'] ?? '';
+                $comentarioEmpresa = $_POST['comentarioEmpresa'] ?? '';
+                $telefonoEmpresa = $_POST['telefonoEmpresa'] ?? '';
+
+                if (empty($nombrEmpresa)) {
+                    $errores[] = "El nombre de la empresa es obligatorio";
+                }
+                
+                if (empty($nifEmpresa)) {
+                    $errores[] = "El NIF de la empresa es obligatorio";
+                }
+                
+                if (empty($comentarioEmpresa)) {
+                    $errores[] = "El comentario sobre la empresa es obligatorio";
+                }
+                
+                if (empty($telefonoEmpresa)) {
+                    $errores[] = "El teléfono de la empresa es obligatorio";
+                }
+
+            }
             
             // Si no hay errores, procesar el registro
             if (empty($errores)) {
@@ -67,11 +90,32 @@ class OutController {
                 new \DateTime(),
                 null,
                 TipoPersonaEnum::VISITANTE); //se tiene que poner la opcion pero si no poner VISITANTE por defecto
-
                 $this->dbUser->guardarUsuario($nuevoUsuario);
+                
+                if($_POST["es_comercio"]==1){
+                    TipoPersonaEnum::COMERCIANTE;
+                    $nuevoComerciante = new Comerciante(
+                    $nombre,
+                    $apellido,
+                    $email,
+                    $contrasena,
+                    new \DateTime(),
+                    null,
+                    TipoPersonaEnum::COMERCIANTE,
+                    $nombrEmpresa,
+                    $nifEmpresa,
+                    $comentarioEmpresa,
+                    $telefonoEmpresa,
+                    new \DateTime(),
+                    );
+
+                        $this->dbUser->guardarComerciante($nuevoComerciante);
+                    }
+               
                 
                 // Redirigir o mostrar éxito
                 echo "Usuario registrado exitosamente";
+               
                 
             } else {
                 // Mostrar errores

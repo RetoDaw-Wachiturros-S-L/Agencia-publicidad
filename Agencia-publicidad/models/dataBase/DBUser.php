@@ -21,6 +21,20 @@ class DBUser {
         
         return $stmt->execute();
     }
+    public function guardarComerciante(Comerciante $usuario) {
+        $pdo = DBCon::getConnection();
+        $sql = "INSERT INTO comerciantes (nombre_empresa , nif_empresa , comentario_empresa, num_telefono, comerciante_desde) 
+                VALUES (:nombrEmpresa, :nifEmpresa, :comentarioEmpresa, :numTelefono, :comercianteDesde)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':nombrEmpresa', $usuario->getNombrEmpresa());
+        $stmt->bindValue(':nifEmpresa', $usuario->getNifEmpresa());
+        $stmt->bindValue(':comentarioEmpresa', $usuario->getComentarioEmpresa());
+        $stmt->bindValue(':numTelefono', $usuario->getNumeroEmpresa());
+        $stmt->bindValue(':comercianteDesde', $usuario->getFechaAltaComerciante()->format('Y-m-d'));
+        
+        return $stmt->execute();
+    }
+    
 
     public function comprobarUsuario($email,$contrasena) {
         $pdo = DBCon::getConnection();
