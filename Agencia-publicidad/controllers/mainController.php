@@ -9,6 +9,7 @@ class MainController {
         echo "<a href='index.php?controller=OutController&accion=store'>📝 Registro de Usuario</a><br>";
         echo "<a href='index.php?controller=mainController&accion=about'>ℹ️ Sobre Nosotros</a><br>";
         echo "<a href='index.php?controller=OutController&accion=iniciarSesion'>Login de Usuario</a><br>";
+        echo "<a href='index.php?controller=OutController&accion=logout'>Logout</a><br>";
         echo "</nav>";
     }
     
