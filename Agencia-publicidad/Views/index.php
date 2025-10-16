@@ -25,9 +25,10 @@
         ?>
         <?php if (isset($isLoggedIn) && $isLoggedIn == true):?>
             <h2>Sesión iniciada</h2>
-                <?php if ($currentUser['tipo'] === 'COMERCIANTE'): ?>
+                <?php var_dump($currentUser); ?>
+            <?php if ($currentUser['tipo'] === 'COMERCIANTE'):?>
                 <h2>Es comerciante</h2>
-                <?php endif; ?>
+            <?php endif; ?>
         <?php endif; ?>
         </nav>
 </body>

@@ -10,10 +10,10 @@
 
     if ($isLoggedIn) {
         $currentUser = [
-            'email' => $usuarioData['email'] ?? null,
-            'nombre' => $usuarioData['nombre'] ?? null,
-            'apellido' => $usuarioData['apellido'] ?? null,
-            'tipo' => $usuarioData['tipo_usuario'] ?? null,
+            'email' => $_SESSION['usuario']['email'] ?? null,
+            'nombre' => $_SESSION['usuario']['nombre'] ?? null,
+            'apellido' => $_SESSION['usuario']['apellido'] ?? null,
+            'tipo' => $_SESSION['usuario']['tipo'] ?? null,
             'login_time' => time()
         ];
 
