@@ -39,5 +39,6 @@ class DBUser {
             return "";
         }
     }
+
 }
 ?>
