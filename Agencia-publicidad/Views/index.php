@@ -1,6 +1,6 @@
 <?php
     //Comprobar session
-    require_once __DIR__ . '/../utils/auth_helper.php'
+    require_once __DIR__ . '/../utils/auth_helper.php';
 ?>
 
 <!DOCTYPE html>
@@ -18,8 +18,16 @@
         <a href='index.php?controller=MainController&accion=about'>ℹ️ Sobre Nosotros</a><br>
         <a href='index.php?controller=OutController&accion=iniciarSesion'>Login de Usuario</a><br>
         <a href='index.php?controller=OutController&accion=logout'>Logout</a><br>
-        <?php if (isset($logged) && $logged == true): ?>
+        <?php
+                    echo "<pre>Contenido de \$_SESSION['usuario']:\n";
+                    var_dump($_SESSION['usuario']);
+                    echo "</pre>";
+        ?>
+        <?php if (isset($isLoggedIn) && $isLoggedIn == true):?>
             <h2>Sesión iniciada</h2>
+                <?php if ($currentUser['tipo'] === 'COMERCIANTE'): ?>
+                <h2>Es comerciante</h2>
+                <?php endif; ?>
         <?php endif; ?>
         </nav>
 </body>
