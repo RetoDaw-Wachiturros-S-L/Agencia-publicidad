@@ -1,5 +1,3 @@
-console.log('Hola, JS cargado');
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const form = document.getElementById("registro");
@@ -56,9 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Script de Koldo (desplegar opciones en caso de ser comercio) Variables declaradas arriba
 
     extraForm.style.display = 'none';
-
-    console.log('checkbox', checkbox);
-    console.log('extraForm', extraForm);
 
     function mostrarFormNuevo() {
         console.log('checkbox.checked =', checkbox.checked);
