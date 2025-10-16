@@ -11,9 +11,6 @@ require_once __DIR__ . '/../models/UsuarioRegistrado.php';
 require_once __DIR__ . '/../models/TipoPersonaEnum.php';
 require_once __DIR__ . '/../models/dataBase/DBFunctions.php';
 
-    // require_once __DIR__ . '/../models/UsuarioRegistrado.php';
-    // require_once __DIR__ . '/../models/TipoPersonaEnum.php';
-    // require_once __DIR__ . '/../models/DBFunctions.php';
 
 class OutController {
     
@@ -57,7 +54,7 @@ class OutController {
             // Si no hay errores, procesar el registro
             if (empty($errores)) {
                 // Aquí guardarías en la base de datos
-            $nuevoUsuario = new UsuarioRegistrado(
+                $nuevoUsuario = new UsuarioRegistrado(
                 $nombre,
                 $apellido,
                 $email,
@@ -66,7 +63,7 @@ class OutController {
                 null,
                 TipoPersonaEnum::VISITANTE); //se tiene que poner la opcion pero si no poner VISITANTE por defecto
 
-                $this->dbFunctions->guardarUsuario($nuevoUsuario);
+                $this->dbFunctions->create($nuevoUsuario);
                 
                 // Redirigir o mostrar éxito
                 echo "Usuario registrado exitosamente";
@@ -84,7 +81,7 @@ class OutController {
     }
     
     private function guardarUsuario($nuevoUsuario) {
-        $this->dbFunctions->guardarUsuario($nuevoUsuario);
+        $this->dbFunctions->create($nuevoUsuario);
     }
 
     public function iniciarSesion(){
