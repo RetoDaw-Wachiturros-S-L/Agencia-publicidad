@@ -1,6 +1,7 @@
 <?php
     //Comprobar session
     require_once __DIR__ . '/../utils/auth_helper.php';
+    require_once __DIR__ . '/../config/config.php';
 ?>
 
 <!DOCTYPE html>
