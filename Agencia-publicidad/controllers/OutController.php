@@ -88,6 +88,24 @@ class OutController {
         $this->dbFunctions->guardarUsuario($nuevoUsuario);
     }
 
+    private function comprobarUser($email, $contrasena) {
+
+        $_SESSION['sesionIniciada'] ?? false;
+        $usuarioValido = $this->dbFunctions->comprobarUsuario($email, $contrasena);
+
+        if ($usuarioValido == 1 && !$_SESSION['sesionIniciada']) {
+           $_SESSION['sesionIniciada'] = true;
+           echo "Usuario válido, sesión iniciada";
+        } elseif ($usuarioValido == 0) {
+            echo "Usuario inválido";
+        }else {
+            echo "Ya hay una sesión iniciada";
+        }
+
+    return $usuarioValido;
+}
+
+
     public function iniciarSesion(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
