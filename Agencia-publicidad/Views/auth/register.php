@@ -13,7 +13,7 @@ if(isset($mensaje_error)) :?>
     <p style='color:red;'><?= $mensaje_error ?></p>
 <?php endif; ?>
 
-<form action='index.php?controller=OutController&accion=store' method='post'>
+<form action='../../index.php?controller=OutController&accion=store' method='post' id="registro">
     <fieldset>
         <legend>Registro</legend>
         <p>
@@ -68,6 +68,7 @@ if(isset($mensaje_error)) :?>
             
             const checkbox = document.getElementById('es_comercio');
             const extraForm = document.getElementById('formulario_extra');
+            const form = document.getElementById('registro');
             extraForm.style.display = 'none'; // Ocultar el formulario extra inicialmente
             checkbox.addEventListener('change', function() {
                 if (this.checked) {
@@ -76,6 +77,10 @@ if(isset($mensaje_error)) :?>
                     extraForm.style.display = 'none';
                 }
             });
+            if (extraForm.style.display = 'block') {
+                regiistro.action = '..\..\index.php?controller=OutController&accion=storeComercio';
+
+            }
         </script>
     </fieldset>
 </form>
