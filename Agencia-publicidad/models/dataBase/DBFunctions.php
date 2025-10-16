@@ -5,7 +5,7 @@ namespace AgenciaPublicidad\Models;
 use AgenciaPublicidad\Models\UsuarioRegistrado;
 
 require_once __DIR__ . '/DBCon.php';
-require_once __DIR__ . '/../../Controllers/UsuarioRegistrado.php';
+require_once __DIR__ . '/../UsuarioRegistrado.php';
 
 class DBFunctions {
 
