@@ -1,4 +1,8 @@
 <?php
+namespace AgenciaPublicidad\Models;
+use DateTime;
+use AgenciaPublicidad\Models\UsuarioRegistrado;
+
 class Comerciante extends UsuarioRegistrado {
     private string $nombrEmpresa;
     private string $nifEmpresa;

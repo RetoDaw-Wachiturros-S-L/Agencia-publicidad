@@ -5,22 +5,23 @@ namespace AgenciaPublicidad\Controllers;
 use AgenciaPublicidad\Models\UsuarioRegistrado;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
 use AgenciaPublicidad\Models\DBFunctions;
+use AgenciaPublicidad\Models\DBUser;
 
 // Cargas directas para entornos sin autoloader
 require_once __DIR__ . '/../models/UsuarioRegistrado.php';
 require_once __DIR__ . '/../models/TipoPersonaEnum.php';
 require_once __DIR__ . '/../models/dataBase/DBFunctions.php';
+require_once __DIR__ . '/../models/dataBase/DBUser.php';
 
-    // require_once __DIR__ . '/../models/UsuarioRegistrado.php';
-    // require_once __DIR__ . '/../models/TipoPersonaEnum.php';
-    // require_once __DIR__ . '/../models/DBFunctions.php';
 
 class OutController {
     
     private DBFunctions $dbFunctions;
+    private DBUser $dbUser;
     
     public function __construct() {
         $this->dbFunctions = new DBFunctions();
+        $this->dbUser = new DBUser();
         session_start();
     }
 
@@ -54,11 +55,34 @@ class OutController {
             if ($contrasena !== $contrasena2) {
                 $errores[] = "Las contraseñas no coinciden";
             }
+            if ($_POST["es_comercio"]==1){
+                $nombrEmpresa = $_POST['nombrEmpresa'] ?? '';
+                $nifEmpresa = $_POST['nifEmpresa'] ?? '';
+                $comentarioEmpresa = $_POST['comentarioEmpresa'] ?? '';
+                $telefonoEmpresa = $_POST['telefonoEmpresa'] ?? '';
+
+                if (empty($nombrEmpresa)) {
+                    $errores[] = "El nombre de la empresa es obligatorio";
+                }
+                
+                if (empty($nifEmpresa)) {
+                    $errores[] = "El NIF de la empresa es obligatorio";
+                }
+                
+                if (empty($comentarioEmpresa)) {
+                    $errores[] = "El comentario sobre la empresa es obligatorio";
+                }
+                
+                if (empty($telefonoEmpresa)) {
+                    $errores[] = "El teléfono de la empresa es obligatorio";
+                }
+
+            }
             
             // Si no hay errores, procesar el registro
             if (empty($errores)) {
                 // Aquí guardarías en la base de datos
-            $nuevoUsuario = new UsuarioRegistrado(
+                $nuevoUsuario = new UsuarioRegistrado(
                 $nombre,
                 $apellido,
                 $email,
@@ -66,11 +90,32 @@ class OutController {
                 new \DateTime(),
                 null,
                 TipoPersonaEnum::VISITANTE); //se tiene que poner la opcion pero si no poner VISITANTE por defecto
+                $this->dbUser->guardarUsuario($nuevoUsuario);
+                
+                if($_POST["es_comercio"]==1){
+                    TipoPersonaEnum::COMERCIANTE;
+                    $nuevoComerciante = new Comerciante(
+                    $nombre,
+                    $apellido,
+                    $email,
+                    $contrasena,
+                    new \DateTime(),
+                    null,
+                    TipoPersonaEnum::COMERCIANTE,
+                    $nombrEmpresa,
+                    $nifEmpresa,
+                    $comentarioEmpresa,
+                    $telefonoEmpresa,
+                    new \DateTime(),
+                    );
 
-                $this->dbFunctions->guardarUsuario($nuevoUsuario);
+                        $this->dbUser->guardarComerciante($nuevoComerciante);
+                    }
+               
                 
                 // Redirigir o mostrar éxito
                 echo "Usuario registrado exitosamente";
+               
                 
             } else {
                 // Mostrar errores
@@ -85,7 +130,7 @@ class OutController {
     }
     
     private function guardarUsuario($nuevoUsuario) {
-        $this->dbFunctions->guardarUsuario($nuevoUsuario);
+        $this->dbUser->guardarUsuario($nuevoUsuario);
     }
 
     public function iniciarSesion(){
@@ -105,7 +150,7 @@ class OutController {
             }
             if(empty($errores)){
                 //Almaceno en usuarioData la información del usuario solicitado
-                $usuarioData = $this->dbFunctions->comprobarUsuario($email, $contrasena);
+                $usuarioData = $this->dbUser->comprobarUsuario($email, $contrasena);
                 //Si existe procedo a crear la sesion
                 if (!empty($usuarioData)) {
                     echo "Iniciaste sesión correctamente";
