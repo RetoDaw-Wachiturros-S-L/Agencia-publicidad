@@ -32,10 +32,11 @@ class DBUser {
         $stmt->bindValue(':nifEmpresa', $usuario->getNifEmpresa());
         $stmt->bindValue(':comentarioEmpresa', $usuario->getComentarioEmpresa());
         $stmt->bindValue(':numTelefono', $usuario->getNumeroEmpresa());
-        $stmt->bindValue(':comercianteDesde', $usuario->getFechaAltaComerciante()->format('yyyy-mm-dd'));
+        $stmt->bindValue(':comercianteDesde', $usuario->getFechaAltaComerciante()->format('Y-m-d H:i:s'));
         
         return $stmt->execute();
     }
+
     public function sacarIdUsuario($email){
         $pdo = DBCon::getConnection();
         $sql = "SELECT id FROM usuarios WHERE email = :email";
@@ -48,7 +49,6 @@ class DBUser {
         } else {
             return null;
         }
-
     }
     
 

@@ -6,12 +6,14 @@ use AgenciaPublicidad\Models\UsuarioRegistrado;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
 use AgenciaPublicidad\Models\DBFunctions;
 use AgenciaPublicidad\Models\DBUser;
+use AgenciaPublicidad\Models\Comerciante;
 
 // Cargas directas para entornos sin autoloader
 require_once __DIR__ . '/../models/UsuarioRegistrado.php';
 require_once __DIR__ . '/../models/TipoPersonaEnum.php';
 require_once __DIR__ . '/../models/dataBase/DBFunctions.php';
 require_once __DIR__ . '/../models/dataBase/DBUser.php';
+require_once __DIR__ . '/../models/Comerciante.php';
 
 
 class OutController {
@@ -55,15 +57,15 @@ class OutController {
             if ($contrasena !== $contrasena2) {
                 $errores[] = "Las contraseñas no coinciden";
             }
-            if ($_POST["es_comercio"]==1){
-                $nombrEmpresa = $_POST['nombrEmpresa'] ?? '';
+            if (isset($_POST["es_comercio"]) && $_POST["es_comercio"]==1){
+                $nombreEmpresa = $_POST['nombreEmpresa'] ?? '';
                 $nifEmpresa = $_POST['nifEmpresa'] ?? '';
                 $comentarioEmpresa = $_POST['comentarioEmpresa'] ?? '';
                 $telefonoEmpresa = $_POST['telefonoEmpresa'] ?? '';
 
-                if (empty($nombrEmpresa)) {
+                if (empty($nombreEmpresa)) {
                     $errores[] = "El nombre de la empresa es obligatorio";
-                }
+                }  
                 
                 if (empty($nifEmpresa)) {
                     $errores[] = "El NIF de la empresa es obligatorio";
@@ -92,25 +94,24 @@ class OutController {
                 TipoPersonaEnum::VISITANTE); //se tiene que poner la opcion pero si no poner VISITANTE por defecto
                 $this->dbUser->guardarUsuario($nuevoUsuario);
                 
-                if($_POST["es_comercio"]==1){
-                    TipoPersonaEnum::COMERCIANTE;
-                    $nuevoComerciante = new Comerciante(
+                
+                TipoPersonaEnum::COMERCIANTE;
+                $nuevoComerciante = new Comerciante(
                     $nombre,
                     $apellido,
                     $email,
                     $contrasena,
                     new \DateTime(),
-                    null,
+                    "",
                     TipoPersonaEnum::COMERCIANTE,
-                    $nombrEmpresa,
+                    $nombreEmpresa,
                     $nifEmpresa,
                     $comentarioEmpresa,
                     $telefonoEmpresa,
                     new \DateTime(),
                     );
 
-                        $this->dbUser->guardarComerciante($nuevoComerciante);
-                    }
+                    $this->dbUser->guardarComerciante($nuevoComerciante);
                
                 
                 // Redirigir o mostrar éxito
