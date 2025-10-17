@@ -14,7 +14,7 @@ class Router {
         self::loadController($controllerName, $action);
     }
     
-    private static function loadController($controllerName, $action) {
+    private static function loadController($controllerName, $action){
         // Construir ruta del archivo del controlador
         $controllerFile = "./controllers/{$controllerName}.php";
 

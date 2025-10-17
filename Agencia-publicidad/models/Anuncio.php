@@ -1,5 +1,5 @@
 <?php 
-namespace Agenciapublicidad\Models;
+namespace AgenciaPublicidad\Models;
 
 use DateTime;
 

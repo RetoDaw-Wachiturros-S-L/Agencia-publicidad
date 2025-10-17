@@ -1,37 +1,35 @@
 <?php 
 namespace AgenciaPublicidad\Models\DataBase;
 
-use AgenciaPublicidad\Models\DBCon;
-use AgenciaPublicidad\Models\Anuncio;
+use AgenciaPublicidad\Models\DataBase\DBCon;
+use \AgenciaPublicidad\Models\Anuncio;
 
 require_once __DIR__ ."/DBCon.php";
 
 class AnunciosDB{
     public function getAll():array{
         $pdo = DBCon::getConnection();
-        $sql = $pdo->prepare("SELECT * FROM ANUNCIOS");
+        $sql = $pdo->prepare("SELECT id, id_comerciante, titulo, detalles, fecha_publicacion FROM anuncios");
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function getById(int $id):Anuncio|null{
         $pdo = DBCon::getConnection();
-        $sql = $pdo->prepare("SELECT id, id_comerciante, titulo, detalles, fecha_publicacion FROM ANUNCIOS WHERE ID = :ID");
+        $sql = $pdo->prepare("SELECT id, id_comerciante, titulo, detalles, fecha_publicacion FROM anuncios WHERE ID = :ID");
         //Aqui para obtener todo hay que hacer con join pero de momento no hace falta
         $sql->execute([':ID' => $id]);
         $data = $sql->fetch(\PDO::FETCH_ASSOC);
-        if($data){
-            return new Anuncio(
-                $data['id'],
-                $data['titulo'],
-                $data['urlFotos'] ?? null,
-                $data['descripcion'] ?? null,
-                $data['fechaPublicacion'],
-                // $data['anunciante'],
-                $data['categorias'] ?? null,
-            );
-        }
-        return null;
+        if(!$data) return null;
+        return new Anuncio(
+        $data['id'],
+        $data['titulo'],
+        $data['urlFotos'] ?? null,
+        $data['descripcion'] ?? null,
+        $data['fechaPublicacion'],
+        // $data['anunciante'],
+        $data['categorias'] ?? null,
+        );
     }
 
     public function update(int $id, Anuncio $anuncioData):bool{
