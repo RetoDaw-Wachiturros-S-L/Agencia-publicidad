@@ -15,6 +15,9 @@ class Comerciante extends UsuarioRegistrado {
         $this->numeroEmpresa = $numeroEmpresa;
         $this->fechaAltaComerciante = $fechaAltaComerciante;
     }
+    public function getEmail(): string {
+        return parent::getEmail();
+    }
     public function getNombrEmpresa(): string {
         return $this->nombrEmpresa;
     }
