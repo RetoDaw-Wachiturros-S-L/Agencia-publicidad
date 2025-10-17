@@ -44,9 +44,38 @@ class AdsController{
 
         return $this->dbFunctions->update($id,$anuncio);
     }
+
     public function delete(int $id):bool {
         $id = $_POST["id"] ?? null;
         if(!isset($id)) throw new \Exception("No se puede borrar un anuncio si no se proporciona un Id");
         return $this->dbFunctions->delete($id);
+    }
+
+    public function create() {
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        
+            // Recibir todos los datos del formulario
+            $titulo = $_POST['titulo'] ?? '';
+            $contenido = $_POST['editordata'] ?? '';
+
+            // Validaciones
+
+            $errores = [];
+            
+            if (empty($nombre)) {
+                $errores[] = "El nombre es obligatorio";
+            }
+
+            // Si no hay errores, procesar el registro
+            if (empty($errores)) {
+                
+            }
+        
+        }  else {
+            // Si no es POST, mostrar el formulario
+            include 'views/ads/ads.create.php';
+        }
+
     }
 }

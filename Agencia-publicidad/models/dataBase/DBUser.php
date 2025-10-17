@@ -1,6 +1,7 @@
 <?php 
 //CRUD de tabla usuarios
 namespace AgenciaPublicidad\Models;
+use AgenciaPublicidad\Models\dataBase\DBCon;
 
 require_once __DIR__ . '/DBCon.php';
 
