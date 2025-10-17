@@ -13,23 +13,28 @@ if(isset($mensaje_error)) :?>
     <p style='color:red;'><?= $mensaje_error ?></p>
 <?php endif; ?>
 
-<form action='index.php?controller=OutController&accion=iniciarSesion' method='post'>
+<form action='<?= BASE_URL ?>/index.php?controller=OutController&accion=iniciarSesion' method='post' id="login">
     <fieldset>
         <legend>Inicio de sesion</legend>
     
         <p>
             <label for='email'>Email</label>
             <input type='email' id='email' name='email' required>
+            <span class="error"></span>
         </p>
         <p>
             <label for='contrasena'>Contraseña</label>
             <input type='password' id='contrasena' name='contrasena' required>
+            <span class="error"></span>
         </p>
         <p>
             <input type='submit' value='Enviar'>
         </p>
     </fieldset>
 </form>
+
+<script src="<?= BASE_URL ?>/js/login.js"></script>
+<script src="<?= BASE_URL ?>/js/validaciones.js"></script>
 
 </body>
 </html>
