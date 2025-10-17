@@ -17,7 +17,7 @@ CREATE TABLE usuarios (
 CREATE TABLE comerciantes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
-    nombre_empresa VARCHAR(50) NOT NULL UNIQUE,
+    nombre_empresa VARCHAR(50) NOT NULL,
     nif_empresa VARCHAR(9) NOT NULL,
     comentario_empresa TEXT,
     num_telefono VARCHAR(20),
