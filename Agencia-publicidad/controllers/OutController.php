@@ -4,7 +4,7 @@ namespace AgenciaPublicidad\Controllers;
 
 use AgenciaPublicidad\Models\UsuarioRegistrado;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
-use AgenciaPublicidad\Models\DBFunctions;
+use AgenciaPublicidad\Models\dataBase\DBFunctions;
 use AgenciaPublicidad\Models\DBUser;
 use AgenciaPublicidad\Models\Comerciante;
 
@@ -94,8 +94,8 @@ class OutController {
                 TipoPersonaEnum::VISITANTE); //se tiene que poner la opcion pero si no poner VISITANTE por defecto
                 $this->dbUser->guardarUsuario($nuevoUsuario);
                 
-                
-                TipoPersonaEnum::COMERCIANTE;
+                if (isset($_POST["es_comercio"]) && $_POST["es_comercio"]==1) {
+                    TipoPersonaEnum::COMERCIANTE;
                 $nuevoComerciante = new Comerciante(
                     $nombre,
                     $apellido,
@@ -112,7 +112,7 @@ class OutController {
                     );
 
                     $this->dbUser->guardarComerciante($nuevoComerciante);
-               
+                }               
                 
                 // Redirigir o mostrar éxito
                 echo "Usuario registrado exitosamente";
