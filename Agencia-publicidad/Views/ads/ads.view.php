@@ -6,8 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="index.php?controller=AdsController&accion=showAll" method="
-    post">
+    <form action="/Agencia-publicidad/Agencia-publicidad/index.php?controller=AdsController&accion=show" method="post">
     <button name="boton" value="1">Ver anuncio 1</button>
     <button name="boton" value="2">Ver Anuncio 2</button>
     <button name="boton" value="3">Ver Anuncio 3</button>

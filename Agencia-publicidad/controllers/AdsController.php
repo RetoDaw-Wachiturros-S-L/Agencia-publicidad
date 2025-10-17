@@ -33,7 +33,6 @@ class AdsController{
         if($id == "" || $id <= 0) throw new \Exception("El id no puede ser menor a 0");
 
 		$anuncio = $this->dbFunctions->getById($id);
-        require __DIR__ . '/../Views/ads/ads.view.php';
     }
 
     public function edit(int $id, Anuncio $anuncio):bool {
