@@ -1,0 +1,22 @@
+.contenedor-principal {
+    background-color: #FFF5E6;
+    display: grid;
+    /* 1 columna para todo el ancho */
+    grid-template-columns: 1fr; 
+    /* Fila para el header y fila para los anuncios */
+    grid-template-rows: auto 1fr; 
+    gap: 30px; 
+    padding: 20px;
+}
+
+.contenedor-tarjetas {
+    display: grid;
+  
+    /* Configuración Clave: Grid Automático */
+    /* Crea tantas columnas como sea posible: 
+        - Mínimo de 300px de ancho por tarjeta.
+        - 1fr asegura que las columnas restantes se expandan equitativamente. */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  
+    gap: 20px; /* Espaciado entre las tarjetas */
+}

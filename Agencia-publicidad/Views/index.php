@@ -10,8 +10,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css">
 </head>
-<body>
+<body class="contenedor-principal">
+    
         <h1>🎨 Bienvenido a Nuestra Agencia de Publicidad</h1>
         <p>Esta es la página principal de la agencia.</p>
         <nav>
