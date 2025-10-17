@@ -1,0 +1,74 @@
+<?php 
+//CRUD de tabla usuarios
+namespace AgenciaPublicidad\Models;
+
+require_once __DIR__ . '/DBCon.php';
+
+class DBUser {
+    
+    public function guardarUsuario(UsuarioRegistrado $usuario) {
+        $pdo = DBCon::getConnection();
+        $sql = "INSERT INTO usuarios (nombre, apellido, email, password_hash, tipo_usuario) 
+                VALUES (:nombre, :apellido, :email, :contrasenna, :tipo_usuario)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':nombre', $usuario->getNombre());
+        $stmt->bindValue(':apellido', $usuario->getApellido());
+        $stmt->bindValue(':email', $usuario->getEmail());
+        // Hashear la contraseña antes de guardarla
+        $hashedPassword = password_hash($usuario->getPassword(), PASSWORD_BCRYPT);
+        $stmt->bindValue(':contrasenna', $hashedPassword);
+        $stmt->bindValue(':tipo_usuario', $usuario->getTipo()->value);
+        
+        return $stmt->execute();
+    }
+    public function guardarComerciante(Comerciante $usuario) {
+        $id= $this->sacarIdUsuario($usuario->getEmail());
+        $pdo = DBCon::getConnection();
+        $sql = "INSERT INTO comerciantes (id_usuario, nombre_empresa , nif_empresa , comentario_empresa, num_telefono, comerciante_desde) 
+                VALUES (:idUsuario, :nombrEmpresa, :nifEmpresa, :comentarioEmpresa, :numTelefono, :comercianteDesde)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':idUsuario', $id);
+        $stmt->bindValue(':nombrEmpresa', $usuario->getNombrEmpresa());
+        $stmt->bindValue(':nifEmpresa', $usuario->getNifEmpresa());
+        $stmt->bindValue(':comentarioEmpresa', $usuario->getComentarioEmpresa());
+        $stmt->bindValue(':numTelefono', $usuario->getNumeroEmpresa());
+        $stmt->bindValue(':comercianteDesde', $usuario->getFechaAltaComerciante()->format('Y-m-d H:i:s'));
+        
+        return $stmt->execute();
+    }
+
+    public function sacarIdUsuario($email){
+        $pdo = DBCon::getConnection();
+        $sql = "SELECT id FROM usuarios WHERE email = :email";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':email', $email);
+        $stmt->execute();
+        $usuario = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($usuario && isset($usuario['id'])) {
+            return $usuario['id'];
+        } else {
+            return null;
+        }
+    }
+    
+
+    public function comprobarUsuario($email,$contrasena) {
+        $pdo = DBCon::getConnection();
+        $sql = "SELECT * FROM usuarios WHERE email = :email";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':email', $email);
+        $stmt->execute();
+        $usuario = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($usuario && isset($usuario['password_hash'])) {
+            if (password_verify($contrasena, $usuario['password_hash'])==1){
+                return $usuario;
+            } else {
+                return "";
+            }
+        } else {
+            return "";
+        }
+    }
+
+}
+?>
