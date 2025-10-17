@@ -15,14 +15,16 @@
         <h1>🎨 Bienvenido a Nuestra Agencia de Publicidad</h1>
         <p>Esta es la página principal de la agencia.</p>
         <nav>
-        <a href='<?= BASE_URL ?>/index.php?controller=OutController&accion=store'>📝 Registro de Usuario</a><br>
-        <a href='<?= BASE_URL ?>/index.php?controller=MainController&accion=about'>ℹ️ Sobre Nosotros</a><br>
-        <a href='<?= BASE_URL ?>/index.php?controller=OutController&accion=iniciarSesion'>Login de Usuario</a><br>
-        <a href='<?= BASE_URL ?>/index.php?controller=OutController&accion=logout'>Logout</a><br>
+        <a href='index.php?controller=OutController&accion=store'>📝 Registro de Usuario</a><br>
+        <a href='index.php?controller=MainController&accion=about'>ℹ️ Sobre Nosotros</a><br>
+        <a href='index.php?controller=OutController&accion=iniciarSesion'>Login de Usuario</a><br>
+        <a href='index.php?controller=OutController&accion=logout'>Logout</a><br>
         <?php
+        if (isset($_SESSION['usuario'])) {
                     echo "<pre>Contenido de \$_SESSION['usuario']:\n";
                     var_dump($_SESSION['usuario']);
                     echo "</pre>";
+        }
         ?>
         <?php if (isset($isLoggedIn) && $isLoggedIn == true):?>
             <h2>Sesión iniciada</h2>

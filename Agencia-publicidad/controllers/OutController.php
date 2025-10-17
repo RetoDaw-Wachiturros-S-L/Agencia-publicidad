@@ -200,7 +200,6 @@ class OutController {
         if (isset($_SESSION['usuario'])) {
             echo "Sesion cerrada";
             session_destroy();
-            header("Location: ../index.php?controller=mainController");
             exit;
         }
     }
