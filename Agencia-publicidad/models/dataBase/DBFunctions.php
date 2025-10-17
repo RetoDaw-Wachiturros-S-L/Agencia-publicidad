@@ -1,11 +1,12 @@
 <?php 
 //CRUD de tabla usuarios
-namespace AgenciaPublicidad\Models;
+namespace AgenciaPublicidad\Models\DataBase;
 
 use AgenciaPublicidad\Models\UsuarioRegistrado;
+use AgenciaPublicidad\Models\DataBase\DBCon;
 
 require_once __DIR__ . '/DBCon.php';
-require_once __DIR__ . '/../../Controllers/UsuarioRegistrado.php';
+require_once __DIR__ . '/../UsuarioRegistrado.php';
 
 class DBFunctions {
 

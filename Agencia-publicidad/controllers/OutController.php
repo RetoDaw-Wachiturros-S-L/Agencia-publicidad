@@ -4,7 +4,7 @@ namespace AgenciaPublicidad\Controllers;
 
 use AgenciaPublicidad\Models\UsuarioRegistrado;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
-use AgenciaPublicidad\Models\DBFunctions;
+use AgenciaPublicidad\Models\DataBase\DBFunctions;
 
 // Cargas directas para entornos sin autoloader
 require_once __DIR__ . '/../models/UsuarioRegistrado.php';

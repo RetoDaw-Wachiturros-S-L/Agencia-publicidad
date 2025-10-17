@@ -11,8 +11,6 @@ class AdsController{
     }
 
     public function showAll():array {
-
-
         return $this->dbFunctions->getAll();
     }
 
