@@ -22,7 +22,7 @@ class DBUser {
         return $stmt->execute();
     }
     public function guardarComerciante(Comerciante $usuario) {
-        $id= $this->sacarIdUsuarrio($usuario->getEmail());
+        $id= $this->sacarIdUsuario($usuario->getEmail());
         $pdo = DBCon::getConnection();
         $sql = "INSERT INTO comerciantes (id_usuario, nombre_empresa , nif_empresa , comentario_empresa, num_telefono, comerciante_desde) 
                 VALUES (:idUsuario, :nombrEmpresa, :nifEmpresa, :comentarioEmpresa, :numTelefono, :comercianteDesde)";
@@ -36,7 +36,7 @@ class DBUser {
         
         return $stmt->execute();
     }
-    public function sacarIdUsuarrio($email){
+    public function sacarIdUsuario($email){
         $pdo = DBCon::getConnection();
         $sql = "SELECT id FROM usuarios WHERE email = :email";
         $stmt = $pdo->prepare($sql);
