@@ -1,8 +1,10 @@
 <?php
 namespace AgenciaPublicidad\Models;
+
 use DateTime;
 use AgenciaPublicidad\Models\UsuarioRegistrado;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
+
 
 class Comerciante extends UsuarioRegistrado {
     private string $nombreEmpresa;

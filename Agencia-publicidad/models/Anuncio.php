@@ -9,7 +9,7 @@ class Anuncio{
     private array $urlFotos;
     private string $descripcion;
     private DateTime $fechaPublicacion;
-    private UsuarioRegistrado $anunciante;
+    private Comerciante $anunciante;
     private array $categorias;
     
     public function __construct(int $id, string $titulo, ?array $urlFotos, ?string $descripcion, ?float $precio, DateTime $fechaPublicacion, UsuarioRegistrado $anunciante, ?array $categorias){
