@@ -2,18 +2,34 @@
 namespace AgenciaPublicidad\Models;
 use DateTime;
 use AgenciaPublicidad\Models\UsuarioRegistrado;
+use AgenciaPublicidad\Models\TipoPersonaEnum;
 
 class Comerciante extends UsuarioRegistrado {
-    private string $nombrEmpresa;
+    private string $nombreEmpresa;
     private string $nifEmpresa;
     private string $comentarioEmpresa;
     private string $numeroEmpresa;
     private DateTime $fechaAltaComerciante;
 
+    public function __construct(
+        string $nombre,
+        string $apellido,
+        string $email,
+        string $password,
+        DateTime $fechaInscripcion,
+        string $fotoPerfil,
+        TipoPersonaEnum $tipo,
+        string $nombreEmpresa,
+        string $nifEmpresa,
+        string $comentarioEmpresa,
+        string $numeroEmpresa,
+        DateTime $fechaAltaComerciante
+    ) {
+        // Llamada al constructor padre con los parámetros de UsuarioRegistrado
+        parent::__construct($nombre, $apellido, $email, $password, $fechaInscripcion, $fotoPerfil, $tipo);
 
-    public function __construct(string $nombrEmpresa, string $nifEmpresa, string $comentarioEmpresa, string $numeroEmpresa, DateTime $fechaAltaComerciante) {
-        parent::__construct();
-        $this->nombrEmpresa = $nombrEmpresa;
+        // Inicializar campos específicos de Comerciante
+        $this->nombreEmpresa = $nombreEmpresa;
         $this->nifEmpresa = $nifEmpresa;
         $this->comentarioEmpresa = $comentarioEmpresa;
         $this->numeroEmpresa = $numeroEmpresa;
@@ -23,10 +39,10 @@ class Comerciante extends UsuarioRegistrado {
         return parent::getEmail();
     }
     public function getNombrEmpresa(): string {
-        return $this->nombrEmpresa;
+        return $this->nombreEmpresa;
     }
     public function setNombrEmpresa(string $nombrEmpresa): void {
-        $this->nombrEmpresa = $nombrEmpresa;
+        $this->nombreEmpresa = $nombrEmpresa;
     }
     public function getNifEmpresa(): string{
         return $this->nifEmpresa;
