@@ -19,66 +19,91 @@ class AnunciosDB{
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function getById(int $id):Anuncio|null{
+    public function getById(int $id): Anuncio|null {
         $pdo = DBCon::getConnection();
-        $sql = $pdo->prepare("SELECT 
-                                        a.id,
-                                        a.titulo,
-                                        a.detalles,
-                                        a.fecha_publicacion,
 
-                                        c.id,
-                                        c.id_usuario,
-                                        c.nombre_empresa,
-                                        c.cif_empresa,
-                                        c.comentario_empresa,
-                                        c.num_telefono,
-                                        c.comerciante_desde,
+        $sql = $pdo->prepare("
+            SELECT 
+                a.id   AS a_id,
+                a.titulo AS a_titulo,
+                a.detalles AS a_detalles,
+                a.fecha_publicacion AS a_fecha_publicacion,
+                c.id   AS c_id,
+                c.nombre_empresa AS c_nombre_empresa,
+                c.nif_empresa AS c_nif_empresa,
+                c.comentario_empresa AS c_comentario_empresa,
+                c.num_telefono AS c_num_telefono,
+                c.comerciante_desde AS c_comerciante_desde,
+                u.id   AS u_id,
+                u.nombre AS u_nombre,
+                u.apellido AS u_apellido,
+                u.email AS u_email,
+                u.password_hash AS u_password_hash,
+                u.fecha_inscripcion AS u_fecha_inscripcion,
+                u.foto_perfil AS u_foto_perfil,
+                u.tipo_usuario AS u_tipo_usuario
+            FROM anuncios a
+            INNER JOIN comerciantes c ON a.id_comerciante = c.id
+            INNER JOIN usuarios u ON c.id_usuario = u.id
+            WHERE a.id = :ID
+            LIMIT 1
+        ");
+        $sql->bindValue(':ID', (int)$id, \PDO::PARAM_INT);
 
-                                        u.id,
-                                        u.nombre,
-                                        u.apellido,
-                                        u.email,
-                                        u.password_hash,
-                                        u.fecha_inscripcion,
-                                        u.foto_perfil,
-                                        u.tipo_usuario
+        try {
+            $sql->execute();
+        } catch (\PDOException $e) {
+            error_log("AnunciosDB::getById SQL error: " . $e->getMessage());
+            return null;
+        }
 
-                                        FROM anuncios a 
-                                        INNER JOIN comerciantes c ON a.id_comerciante = c.id 
-                                        INNER JOIN usuarios u ON c.id_usuario = u.id
-                                        WHERE a.id = :ID");
-        //Aqui para obtener todo hay que hacer con join pero de momento no hace falta
-        $sql->execute([':ID' => $id]);
+        // Debug: mostrar parámetros y estado de la consulta
+        ob_start();
+        $sql->debugDumpParams();
+        $dbg = ob_get_clean();
+        error_log("AnunciosDB::getById debugDumpParams: " . $dbg);
+
+        $errorInfo = $sql->errorInfo();
+        error_log("AnunciosDB::getById errorInfo: " . json_encode($errorInfo));
+
         $data = $sql->fetch(\PDO::FETCH_ASSOC);
-        if(!$data) return null;
+        error_log("AnunciosDB::getById fetch result: " . var_export($data, true));
 
-        $comerciante = new Comerciante(
-            $data['u.nombre'] ,
-            $data['u.apellido'] ,
-            $data['u.email'] ,
-            $data['u.password_hash'] ,
-            $data['u.fecha_inscripcion'] ?? new \DateTime(),
-            $data['u.foto_perfil'] ?? null,
-            $data['u.tipo_persona'] ?? TipoPersonaEnum::COMERCIANTE,
-            $data['c.nombre_empresa'],
-            $data['c.nif_empresa'],
-            $data['c.comentario_empresa'] ?? null,
-            $data['c.num_telefono'] ?? null,
-            $data['c.comerciante_desde'] ?? new \DateTime()
-        );
+        if (!$data) {
+            error_log("AnunciosDB::getById: no rows for id={$id}");
+            return null;
+        }
 
-        $fecha = isset($data['a.fecha_publicacion']) ? new \DateTime($data['a.fecha_publicacion']) : new \DateTime();
+        // Construir objetos con comprobaciones mínimas (ajusta constructores reales)
+        $comerciante = null;
+        if (!empty($data['c_id'])) {
+            $comerciante = new Comerciante(
+                $data['u_nombre'] ?? '',
+                $data['u_apellido'] ?? '',
+                $data['u_email'] ?? '',
+                $data['u_password_hash'] ?? '',
+                isset($data['u_fecha_inscripcion']) ? new \DateTime($data['u_fecha_inscripcion']) : new \DateTime(),
+                $data['u_foto_perfil'] ?? null,
+                TipoPersonaEnum::COMERCIANTE, // ajustar según tu enum
+                $data['c_nombre_empresa'] ?? '',
+                $data['c_nif_empresa'] ?? '',
+                $data['c_comentario_empresa'] ?? '',
+                $data['c_num_telefono'] ?? '',
+                isset($data['c_comerciante_desde']) ? new \DateTime($data['c_comerciante_desde']) : new \DateTime()
+            );
+        }
+
+        $fecha = isset($data['a_fecha_publicacion']) ? new \DateTime($data['a_fecha_publicacion']) : new \DateTime();
 
         return new Anuncio(
-            (int)$data['a.id'],
-            (string)$data['a.titulo'],
-            [], // urlFotos
-            isset($data['a.detalles']) ? (string)$data['a.detalles'] : null,
-            null, // precio no disponible en SELECT
+            (int)$data['a_id'],
+            (string)$data['a_titulo'],
+            [], // urls fotos placeholder
+            $data['a_detalles'] ?? '',
+            null,
             $fecha,
             $comerciante,
-            [] // categorias, cudruple join
+            []
         );
     }
 

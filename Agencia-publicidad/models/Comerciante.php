@@ -2,9 +2,13 @@
 namespace AgenciaPublicidad\Models;
 
 use DateTime;
-use AgenciaPublicidad\Models\UsuarioRegistrado;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
 
+// Cargar la clase padre si no existe autoloader
+require_once __DIR__ . '/UsuarioRegistrado.php';
+require_once __DIR__ . '/TipoPersonaEnum.php';
+
+use AgenciaPublicidad\Models\UsuarioRegistrado;
 
 class Comerciante extends UsuarioRegistrado {
     private string $nombreEmpresa;
