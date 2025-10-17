@@ -21,7 +21,10 @@ if(isset($mensaje_error)) :?>
     <p style='color:red;'><?= $mensaje_error ?></p>
 <?php endif; ?>
 
-<form action='<?= BASE_URL ?>/index.php?controller=OutController&accion=store' method='post' id="registro">
+<form
+    action='index.php?controller=OutController&accion=store'
+    method='post' 
+    id="registro">
     <fieldset>
         <legend>Registro</legend>
         <p>
@@ -61,20 +64,24 @@ if(isset($mensaje_error)) :?>
         </p>
         <div id="formulario_extra" >
             <p>
-                <label for="nombrEmpresa">Nombre de la empresa:</label>
-                <input type="text" id="nombrEmpresa" name="nombrEmpresa">
+                <label for="nombreEmpresa">Nombre de la empresa:</label>
+                <input type="text" id="nombreEmpresa" name="nombreEmpresa">
+                <span class="error"></span>
             </p>
             <p>
                 <label for="nifEmpresa">NIF de la empresa:</label>
-                <input type="text" id="nifEmpresa" name="nombrEmpresa">
+                <input type="text" id="nifEmpresa" name="nifEmpresa">
+                <span class="error"></span>
             </p>
             <p>
                 <label for="comentarioEmpresa">Comentario sobre la empresa:</label>
                 <input type="text" id="comentarioEmpresa" name="comentarioEmpresa">
+                <span class="error"></span>
             </p>
             <p>
                 <label for="telefonoEmpresa">Teléfono de la empresa:</label>
-                <input type="tel" id="telefonoEmpresa" name="telefonoEmpresa">
+                <input type="tel" id="telefonoEmpresa" name="telefonoEmpresa" minlength="9" maxlength="9">
+                <span class="error"></span>
             </p>
         </div>
        
