@@ -1,4 +1,6 @@
 <?php
+
+use AgenciaPublicidad\Models\TipoPersonaEnum;
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
@@ -17,7 +19,7 @@
             'login_time' => time()
         ];
 
-        $isAdmin = ($currentUser['tipo'] === 'ADMINISTRADOR');
+        $isAdmin = $currentUser['tipo'] == TipoPersonaEnum::ADMINISTRADOR;
     }
 
 ?>

@@ -1,16 +1,21 @@
 <?php
-    require_once __DIR__ . '/../../utils/auth_helper.php';
-    if (!$currentUser['tipo']=='COMERCIANTE' || !$currentUser['tipo']=='ADMINISTRADOR') {
-        http_response_code(403);
-        require_once __DIR__ . '/../errors/403.php';
-    }
+require_once __DIR__ . '/../../utils/auth_helper.php';
+if (!isset($currentUser)){    
+    require_once __DIR__ . '/../errors/403.php';
+    exit;
+}
+if ($currentUser['tipo'] !== 'COMERCIANTE' && $currentUser['tipo'] !== 'ADMINISTRADOR') {
+    http_response_code(403);
+    //redirigir a main
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Document</title> 
 
     <!-- Editor de texto enriquecido
     include libraries(jQuery, bootstrap)
@@ -24,7 +29,11 @@
     -->
 </head>
 <body>
-    <form action="../../index.php?controller=AdsController&accion=create" method="post">
+    <form 
+        action="../../index.php?controller=AdsController&accion=create" 
+        method="post"
+        id="register"
+    >
         <p>
             <label for="titulo">Título del anuncio:</label>
             <input type="text" name="titulo" id="titulo">
@@ -37,12 +46,9 @@
             <input type="submit" name="enviar">
         </p>
     </form>
-    <!-- Editor de texto enriquecido
-    <script>
-    $(document).ready(function() {
-        $('#summernote').summernote();
-    });
-    -->
-  </script>
+
+    
+<script src="<?= BASE_URL ?>/js/create.js"></script>
+<script src="<?= BASE_URL ?>/js/validaciones.js"></script>
 </body>
 </html>
