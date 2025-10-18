@@ -26,6 +26,7 @@ class AdsController{
 
     //TODO todas las funciones deberian de devolver algo a la view de momento solo estamos depurando
     public function show():void {
+
         $id = $_POST["boton"] ?? null;
         echo $id;
 
@@ -33,6 +34,8 @@ class AdsController{
         if($id == "" || $id <= 0) throw new \Exception("El id no puede ser menor a 0");
 
 		$anuncio = $this->dbFunctions->getById($id);
+
+        echo var_dump($anuncio);
     }
 
     public function edit(int $id, Anuncio $anuncio):bool {
