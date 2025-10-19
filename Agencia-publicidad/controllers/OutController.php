@@ -37,6 +37,7 @@ class OutController {
             $email = $_POST['email'] ?? '';
             $contrasena = $_POST['contrasena'] ?? '';
             $contrasena2 = $_POST['contrasena2'] ?? '';
+            $fotoPerfil = $_POST['fotoPerfil'] ?? null;
             
             // Validaciones básicas
             // TODO Pasar validaciones a UTILS
@@ -85,12 +86,13 @@ class OutController {
             if (empty($errores)) {
                 // Aquí guardarías en la base de datos
                 $nuevoUsuario = new UsuarioRegistrado(
+                null, // id_usuario (null para usuario nuevo)
                 $nombre,
                 $apellido,
                 $email,
                 $contrasena,
                 new \DateTime(),
-                null,
+                null, // foto_perfil
                 TipoPersonaEnum::VISITANTE); //se tiene que poner la opcion pero si no poner VISITANTE por defecto
                 $this->dbUser->guardarUsuario($nuevoUsuario);
                 
@@ -150,33 +152,27 @@ class OutController {
                 $errores[] = "La constraseña no puede estar vacia";
             }
             if(empty($errores)){
-                //Almaceno en usuarioData la información del usuario solicitado
-                $usuarioData = $this->dbUser->comprobarUsuario($email, $contrasena);
+                $comerciante = null;
+                //Comprobar usuario devuelve Usuario si es true y si no devuelve null
+                $usuario = $this->dbUser->comprobarUsuario($email, $contrasena);
+                if($usuario->getTipo() == TipoPersonaEnum::COMERCIANTE){
+                    $comerciante = $this->dbUser->usuarioComerciante($usuario);
+                }
+                echo "<pre>DEBUG - Usuario devuelto: ";
+                // var_dump($usuario);
+                var_dump($comerciante);
+                echo "</pre>";
                 //Si existe procedo a crear la sesion
-                if (!empty($usuarioData)) {
-                    echo "Iniciaste sesión correctamente";
-                    $usuario = new UsuarioRegistrado(
-                        $usuarioData['nombre'],
-                        $usuarioData['apellido'],
-                        $usuarioData['email'],
-                        '', // No guardes la contraseña
-                        new \DateTime($usuarioData['fecha_inscripcion']), //La ia me recomienda almacenar la fecha asique pa dentro
-                        $usuarioData['foto_perfil'] ?? null, //No es para nada necesario asique tampoco lo guardamos
-                        TipoPersonaEnum::from($usuarioData['tipo_usuario'])
-                    );
-
-                    // Mostrar el estado del objeto UsuarioRegistrado DEBUG
-                    echo "<pre>Objeto UsuarioRegistrado:\n";
-                    var_dump($usuario);
-                    echo "</pre>";
+                if (!(empty($usuario) && empty($comerciante))) {
 
                     $_SESSION['usuario'] = [
-                        // 'id' => $usuarioData['id'], En cuanto se pueda, hacer función para obtener el id
-                        'email' => $usuarioData['email'],
-                        'nombre' => $usuarioData['nombre'],
-                        'apellido' => $usuarioData['apellido'],
-                        'tipo' => $usuarioData['tipo_usuario'],
-                        'login_time' => time()
+                        'id' => $usuario->getIdUsuario(),
+                        'email' => $usuario->getEmail(),
+                        'nombre' => $usuario->getNombre(),
+                        'apellido' => $usuario->getApellido(),
+                        'tipo' => $usuario->getTipo()->value,
+                        'login_time' => time(),
+                        'id_comerciante' => $comerciante->getIdComerciante(),
                     ];
 
                     // Mostrar el estado de la sesión DEBUG

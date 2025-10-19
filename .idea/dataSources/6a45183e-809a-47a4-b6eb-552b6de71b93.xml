@@ -1120,7 +1120,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
     <column id="311" parent="302" name="id">
-      <AutoIncrement>4</AutoIncrement>
+      <AutoIncrement>8</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1147,6 +1147,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <foreign-key id="316" parent="302" name="anuncios_ibfk_1">
       <ColNames>id_comerciante</ColNames>
       <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
       <RefColNames>id</RefColNames>
       <RefTableName>comerciantes</RefTableName>
     </foreign-key>

@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Validaciones
 
         if (!validarVacio(nombre.value)) {
+            console.log(nombre.value)
             mostrarError(nombre, "El nombre es obligatorio.");
             valido = false;
         }
@@ -46,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Si todo es válido, enviar el formulario
         if (valido) {
-        form.submit();
+            form.submit();
         }
         
     })

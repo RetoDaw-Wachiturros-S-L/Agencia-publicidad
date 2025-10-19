@@ -1,12 +1,14 @@
 <?php
 require_once __DIR__ . '/../../utils/auth_helper.php';
-if (!isset($currentUser)){    
+
+if (!isset($currentUser) || empty($currentUser)){    
+    echo "Error: Usuario no autenticado";
     require_once __DIR__ . '/../errors/403.php';
     exit;
 }
+
 if ($currentUser['tipo'] !== 'COMERCIANTE' && $currentUser['tipo'] !== 'ADMINISTRADOR') {
     http_response_code(403);
-    //redirigir a main
     exit;
 }
 ?>
@@ -34,21 +36,50 @@ if ($currentUser['tipo'] !== 'COMERCIANTE' && $currentUser['tipo'] !== 'ADMINIST
         method="post"
         id="register"
     >
+
         <p>
             <label for="titulo">Título del anuncio:</label>
             <input type="text" name="titulo" id="titulo">
+            <span class="error"></span>
         </p>
         <p>
-            <label for="editordata">Desarrolla tu anuncio:</label>
-            <textarea id="summernote" name="editordata"></textarea>
+            <label for="descripcion">Desarrolla tu anuncio:</label>
+            <textarea id="descripcion" name="descripcion"></textarea>
+            <span class="error"></span>
+
         </p>
+        <!-- <p>
+            <label for="fotos">Fotos para el anuncio:</label>
+            <img src="#" id="imgPreview" alt="Previsualizacion" width="300">
+            <input type="file" accept="image/"></input>
+            <span class="error"></span>
+        </p>
+        <p>
+             Pensaba separar x comas o si no que si hay espacio ponerle una para luego añadir a un array y desde ahi hacer la insert 
+            <label for="tags">Palabras clave del anuncio:</label>
+            <input type="text" id="tags" name="tags"></input>
+            <span class="error"></span>
+        </p> -->
         <p>
             <input type="submit" name="enviar">
         </p>
     </form>
 
     
-<script src="<?= BASE_URL ?>/js/create.js"></script>
-<script src="<?= BASE_URL ?>/js/validaciones.js"></script>
+<script src="../../js/create.js"></script>
+<script src="../../js/validaciones.js"></script>
+
+    <?php
+    echo "<pre>DEBUG - Función create():\n";
+        echo "Sesión completa:\n";
+        var_dump($_SESSION);
+        echo "\nUsuario actual:\n";
+        var_dump($currentUser);
+        echo "\nDatos del anuncio:\n";
+        echo "Título: " . $anuncio->getTitulo() . "\n";
+        echo "Descripción: " . $anuncio->getDescripcion() . "\n";
+        echo "ID del comerciante que se usará: " . ($currentUser['id'] ?? 'NO DEFINIDO') . "\n";
+        echo "</pre>";
+    ?>
 </body>
 </html>

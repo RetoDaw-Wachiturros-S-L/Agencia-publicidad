@@ -18,6 +18,7 @@
         <a href='index.php?controller=MainController&accion=about'>ℹ️ Sobre Nosotros</a><br>
         <a href='index.php?controller=OutController&accion=iniciarSesion'>Login de Usuario</a><br>
         <a href='views/ads/ads.view.php'>Lo de los botones</a><br>
+        <a href='views/ads/ads.create.php'>Nuevo Anuncio (Si estás loggeado)</a>
         <a href='index.php?controller=AdsController&accion=showAll'>Mostrar todos</a><br>
         <a href='index.php?controller=OutController&accion=logout'>Logout</a><br>
         <?php

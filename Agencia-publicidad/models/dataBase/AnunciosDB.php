@@ -5,7 +5,9 @@ use AgenciaPublicidad\Models\Comerciante;
 use AgenciaPublicidad\Models\DataBase\DBCon;
 use AgenciaPublicidad\Models\Anuncio;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
+use AgenciaPublicidad\Utils;
 
+require_once __DIR__ . '/../../utils/auth_helper.php';
 require_once __DIR__ . '/DBCon.php';
 require_once __DIR__ . '/../Anuncio.php';
 require_once __DIR__ . '/../Comerciante.php';
@@ -98,12 +100,11 @@ class AnunciosDB{
         return new Anuncio(
             (int)$data['a_id'],
             (string)$data['a_titulo'],
-            [], // urls fotos placeholder
+            $data['f_url_foto'] ?? null, // urls fotos placeholder
             $data['a_detalles'] ?? '',
-            null,
             $fecha,
             $comerciante,
-            []
+            $data['cat_nombre'] ?? null, //esto ta devuelve un array (habría que recorrerlo)
         );
     }
 
@@ -127,6 +128,21 @@ class AnunciosDB{
         $sql->bindValue(":ID", $id);
         return $sql->execute();
     }
+
+    public function create(Anuncio $anuncio):bool{
+        $currentUser = $_SESSION['usuario'] ?? null;
+
+        $pdo = DBCon::getConnection();
+        $sql = $pdo->prepare("INSERT INTO 
+                                anuncios(id_comerciante, titulo, detalles)
+                                VALUES(:id_comerciante, :titulo, :detalles)");
+                                //Aqi faltaria con añadir TAGS y FOTOS
+        $sql->bindValue(":id_comerciante",$currentUser['id_comerciante']);
+        $sql->bindValue(":titulo", $anuncio->getTitulo());
+        $sql->bindValue(":detalles", $anuncio->getDescripcion());        
+        
+        return $sql->execute();
+    }        
 }
 
 

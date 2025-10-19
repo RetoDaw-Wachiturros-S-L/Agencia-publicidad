@@ -1,6 +1,9 @@
 <?php 
 namespace AgenciaPublicidad\Controllers;
 
+use AgenciaPublicidad\Utils;
+
+require_once __DIR__ . '/../utils/auth_helper.php';
 require_once __DIR__ . '/../models/Anuncio.php';
 require_once __DIR__ . '/../models/dataBase/AnunciosDB.php';
 
@@ -8,7 +11,7 @@ use AgenciaPublicidad\Models\Anuncio;
 use AgenciaPublicidad\Models\DataBase\AnunciosDB;
 
 class AdsController{
-    private AnunciosDB $dbFunctions;
+    private AnunciosDB  $dbFunctions;
     
     public function __construct(){
         $this->dbFunctions = new AnunciosDB();
@@ -59,20 +62,33 @@ class AdsController{
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
             // Recibir todos los datos del formulario
-            $titulo = $_POST['titulo'] ?? '';
-            $contenido = $_POST['editordata'] ?? '';
+            $titulo = $_POST['titulo'];
+            $descripcion = $_POST['descripcion'] ?? '';
+            $urlFotos = $_POST['url_fotos'] ?? null;
+            $categorias = $_POST['categorias'] ?? null; 
 
             // Validaciones
 
             $errores = [];
             
-            if (empty($nombre)) {
-                $errores[] = "El nombre es obligatorio";
+            if (empty($titulo)) {
+                $errores[] = "El titulo es obligatorio";
             }
 
             // Si no hay errores, procesar el registro
             if (empty($errores)) {
-                
+                //crea un obj anuncio y lo manda a insert
+                $anuncio = new Anuncio(
+                    id: null, //id
+                    titulo: $titulo,
+                    urlFotos: $urlFotos,
+                    descripcion: $descripcion,
+                    fechaPublicacion: new \DateTime,
+                    anunciante: null, //usuario comerciante
+                    categorias: $categorias,                 
+                );
+
+                $this->dbFunctions->create($anuncio);
             }
         
         }  else {
