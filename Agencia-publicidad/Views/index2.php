@@ -47,6 +47,33 @@
         <p id="desc-anuncio">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus vero placeat reiciendis necessitatibus facilis reprehenderit nihil sunt omnis amet fuga assumenda, consequatur natus, blanditiis pariatur neque quam quas repellat qui!</p>
     </div>
 
+        <div class="card-anuncio">
+        <div class="div-tj-img">
+            <img src="../img/logo.png" alt="logo">
+            <!-- Imagen que tendrá src autogenerado y alt igual -->
+        </div>
+        <h2 id="titulo-anuncio" >Titulo 1</h2>
+        <p id="desc-anuncio">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus vero placeat reiciendis necessitatibus facilis reprehenderit nihil sunt omnis amet fuga assumenda, consequatur natus, blanditiis pariatur neque quam quas repellat qui!</p>
+    </div>
+
+        <div class="card-anuncio">
+        <div class="div-tj-img">
+            <img src="../img/logo.png" alt="logo">
+            <!-- Imagen que tendrá src autogenerado y alt igual -->
+        </div>
+        <h2 id="titulo-anuncio" >Titulo 1</h2>
+        <p id="desc-anuncio">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus vero placeat reiciendis necessitatibus facilis reprehenderit nihil sunt omnis amet fuga assumenda, consequatur natus, blanditiis pariatur neque quam quas repellat qui!</p>
+    </div>
+
+        <div class="card-anuncio">
+        <div class="div-tj-img">
+            <img src="../img/logo.png" alt="logo">
+            <!-- Imagen que tendrá src autogenerado y alt igual -->
+        </div>
+        <h2 id="titulo-anuncio" >Titulo 1</h2>
+        <p id="desc-anuncio">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus vero placeat reiciendis necessitatibus facilis reprehenderit nihil sunt omnis amet fuga assumenda, consequatur natus, blanditiis pariatur neque quam quas repellat qui!</p>
+    </div>
+
     <script src="../js/index.js"></script>
     </main>
 </body>
