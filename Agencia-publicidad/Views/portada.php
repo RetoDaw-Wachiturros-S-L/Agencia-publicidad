@@ -18,7 +18,7 @@
         </div>
         
         <img src="../img/portada.png".png alt="" class="monumento">
-        <div class="acceder">
+        <div>
             <a href="" class="acceder">Acceder</a>
         </div>
     </main>
