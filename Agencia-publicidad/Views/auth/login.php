@@ -1,8 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Formulario de inicio de sesion</title>
+    <link rel="stylesheet" href="../../css/layout.css">
 </head>
 <body>
 <h1>Formulario de inicio de sesion</h1>
@@ -13,7 +14,7 @@ if(isset($mensaje_error)) :?>
     <p style='color:red;'><?= $mensaje_error ?></p>
 <?php endif; ?>
 
-<form action='<?= BASE_URL ?>/index.php?controller=OutController&accion=iniciarSesion' method='post' id="login">
+<form action='../index.php?controller=OutController&accion=iniciarSesion' method='post' id="login">
     <fieldset>
         <legend>Inicio de sesion</legend>
     
@@ -33,8 +34,8 @@ if(isset($mensaje_error)) :?>
     </fieldset>
 </form>
 
-<script src="<?= BASE_URL ?>/js/login.js"></script>
-<script src="<?= BASE_URL ?>/js/validaciones.js"></script>
+<script src="../../js/validaciones.js"></script>
+<script src="../../js/login.js"></script>
 
 </body>
 </html>

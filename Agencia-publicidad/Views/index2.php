@@ -15,7 +15,7 @@
         <div id="buscar">
             <input type="text" class="search"> 
         </div>
-        
+
         <?php if (isset($isLoggedIn) && $isLoggedIn == false):?>
             <?= $isLoggedIn ?>
             <a href="../index.php?controller=OutController&accion=iniciarSesion" class="login">
@@ -24,9 +24,11 @@
         <?php endif; ?>
 
         <?php if (isset($isLoggedIn) && $isLoggedIn == true):?>
-            <p>B1</p>
-            <p>B2</p>
-            <p>B3</p>
+
+            <img src="../img/User.png" alt="persona">
+            <img src="../img/Bell.png" alt="campana">
+            <img src="../img/User.png" alt="corazon">
+
             <?php if ($isAdmin):?>
                 <p>B4</p>    
             <?php endif; ?>
@@ -68,7 +70,6 @@
         <div class="card-anuncio">
         <div class="div-tj-img">
             <img src="../img/logo.png" alt="logo">
-            <a href=""></a>
             <!-- Imagen que tendrá src autogenerado y alt igual -->
         </div>
         <h2 id="titulo-anuncio" >Titulo 1</h2>

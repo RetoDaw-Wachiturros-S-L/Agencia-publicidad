@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; 
+  padding: 1em;
+  gap: 1em; 
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+/* Card individual */
+.card-anuncio {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  border: #0F3B61 1px solid;
+  border-radius: 0.7em;
+  background-color: #FFCDC1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.login {
+    
+}
+
+.login:hover {
+  background-color: #FFF5E6;
+  transform: translateY(-4px);
+}
