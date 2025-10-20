@@ -1,39 +1,81 @@
-<?php
-    //Comprobar session
-    require_once __DIR__ . '/../utils/auth_helper.php';
-    require_once __DIR__ . '/../config/config.php';
-?>
-
+<?php require_once __DIR__ . '/../utils/auth_helper.php';?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css">
+    <title>Pagina principal</title>
+    <link rel="stylesheet" href="../css/layout.css"/>
+    <link rel="stylesheet" href="../css/index.css"/>
 </head>
-<body class="contenedor-principal">
-    <header class="header">Aquí va el header</header>
-    <main>
-        <p>Aquí va la generación dinamica de anuncios</p>
+<body>
+    <header>
+        <img src="../img/logo_SSombra.png" alt="Logo de comerciantes vitoria" class="logo">
+        
+        <div id="buscar">
+            <input type="text" class="search"> 
+        </div>
+        
+        <?php if (isset($isLoggedIn) && $isLoggedIn == false):?>
+            <?= $isLoggedIn ?>
+            <a href="../index.php?controller=OutController&accion=iniciarSesion" class="login">
+                <img src="../img/login.png" alt="Boton de login" id="btnLogin">
+            </a>
+        <?php endif; ?>
 
-    <h1>🎨 Bienvenido a Nuestra Agencia de Publicidad</h1>
-        <p>Esta es la página principal de la agencia.</p>
-        <nav>
-        <a href='<?= BASE_URL ?>/index.php?controller=OutController&accion=store'>📝 Registro de Usuario</a><br>
-        <a href='<?= BASE_URL ?>/index.php?controller=MainController&accion=about'>ℹ️ Sobre Nosotros</a><br>
-        <a href='<?= BASE_URL ?>/index.php?controller=OutController&accion=iniciarSesion'>Login de Usuario</a><br>
-        <a href='<?= BASE_URL ?>/index.php?controller=OutController&accion=logout'>Logout</a><br>
         <?php if (isset($isLoggedIn) && $isLoggedIn == true):?>
-            <h2>Sesión iniciada</h2>
-                <?php var_dump($currentUser); ?>
-            <?php if ($currentUser['tipo'] === 'COMERCIANTE'):?>
-                <h2>Es comerciante</h2>
+            <p>B1</p>
+            <p>B2</p>
+            <p>B3</p>
+            <?php if ($isAdmin):?>
+                <p>B4</p>    
             <?php endif; ?>
         <?php endif; ?>
-        </nav>
 
-    </main>
+        <img src="../img/lampara.png" alt="Boton de cambio de tema" class="lampara">
+
+    </header>
+    <hr>
+    <main>
         
+    <div class="card-anuncio">
+        <div class="div-tj-img">
+            <img src="../img/logo.png" alt="logo">
+            <!-- Imagen que tendrá src autogenerado y alt igual -->
+        </div>
+        <h2 id="titulo-anuncio" >Titulo 1</h2>
+        <p id="desc-anuncio">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus vero placeat reiciendis necessitatibus facilis reprehenderit nihil sunt omnis amet fuga assumenda, consequatur natus, blanditiis pariatur neque quam quas repellat qui!</p>
+    </div>
+
+        <div class="card-anuncio">
+        <div class="div-tj-img">
+            <img src="../img/logo.png" alt="logo">
+            <!-- Imagen que tendrá src autogenerado y alt igual -->
+        </div>
+        <h2 id="titulo-anuncio" >Titulo 1</h2>
+        <p id="desc-anuncio">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus vero placeat reiciendis necessitatibus facilis reprehenderit nihil sunt omnis amet fuga assumenda, consequatur natus, blanditiis pariatur neque quam quas repellat qui!</p>
+    </div>
+
+        <div class="card-anuncio">
+        <div class="div-tj-img">
+            <img src="../img/logo.png" alt="logo">
+            <!-- Imagen que tendrá src autogenerado y alt igual -->
+        </div>
+        <h2 id="titulo-anuncio" >Titulo 1</h2>
+        <p id="desc-anuncio">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus vero placeat reiciendis necessitatibus facilis reprehenderit nihil sunt omnis amet fuga assumenda, consequatur natus, blanditiis pariatur neque quam quas repellat qui!</p>
+    </div>
+
+        <div class="card-anuncio">
+        <div class="div-tj-img">
+            <img src="../img/logo.png" alt="logo">
+            <a href=""></a>
+            <!-- Imagen que tendrá src autogenerado y alt igual -->
+        </div>
+        <h2 id="titulo-anuncio" >Titulo 1</h2>
+        <p id="desc-anuncio">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus vero placeat reiciendis necessitatibus facilis reprehenderit nihil sunt omnis amet fuga assumenda, consequatur natus, blanditiis pariatur neque quam quas repellat qui!</p>
+    </div>
+
+    <script src="../js/index.js"></script>
+    </main>
 </body>
 </html>
