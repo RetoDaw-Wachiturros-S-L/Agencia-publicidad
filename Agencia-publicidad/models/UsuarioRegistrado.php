@@ -4,16 +4,18 @@ use DateTime;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
 
 class UsuarioRegistrado{
+    private ?int $id_usuario;
     private string $nombre;
-    private string $apellido;
+    private ?string $apellido;
     private string $email;
     private string $password;
-    private DateTime $fecha_inscripcion;
-    private string $foto_perfil;
+    private ?DateTime $fecha_inscripcion;
+    private ?string $foto_perfil;
     private TipoPersonaEnum $tipo; 
     // admin, comerciante, visitante
 
-    public function __construct(string $nombre, ?string $apellido, string $email, string  $password, DateTime $fecha_inscripcion, ?string $foto_perfil,TipoPersonaEnum $tipo) {
+    public function __construct(?int $id_usuario, string $nombre, ?string $apellido, string $email, string $password, ?DateTime $fecha_inscripcion, ?string $foto_perfil, TipoPersonaEnum $tipo) {
+        $this->id_usuario = $id_usuario;
         $this->nombre = $nombre;
         $this->apellido = $apellido ?? '';
         $this->email = $email;
@@ -21,6 +23,12 @@ class UsuarioRegistrado{
         $this->fecha_inscripcion = $fecha_inscripcion;
         $this->foto_perfil = $foto_perfil ?? '';
         $this->tipo = $tipo;
+    }
+    public function getIdUsuario(): ?int {
+         return $this->id_usuario; 
+    }
+    public function setIdUsuario(?int $id_usuario): void {
+         $this->id_usuario = $id_usuario; 
     }
 
     /**
