@@ -16,6 +16,11 @@
     <img src="../img/login.png" alt="Boton de login" class="boton" id="btnLogin">
     <img src="../img/lampara.png" alt="Boton de cambio de tema" class="lampara">
 </header>
+<main>
+
+
+
+</main>
 
 
 <script src="../js/index.js"></script>
