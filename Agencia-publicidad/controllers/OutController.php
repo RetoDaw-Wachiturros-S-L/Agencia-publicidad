@@ -28,6 +28,22 @@ class OutController {
     }
 
     public function store() {
+        // Verificar autenticación y permisos
+        require_once __DIR__ . '/../utils/auth_helper.php';
+        
+        if (!isset($currentUser) || empty($currentUser)) {
+            echo "Error: Usuario no autenticado";
+            require_once __DIR__ . '/../views/errors/403.php';
+            exit;
+        }
+
+        if ($currentUser['tipo'] !== 'ADMINISTRADOR') {
+            http_response_code(403);
+            echo "Error: No tienes permisos para registrar usuarios";
+            require_once __DIR__ . '/../views/errors/403.php';
+            exit;
+        }
+
         // Verificar que la petición sea POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
@@ -174,12 +190,12 @@ class OutController {
             } else {
                 // Mostrar errores
                 $mensaje_error = implode("<br>", $errores);
-                include 'Views/auth/register.php';
+                include 'views/auth/register.php';
             }
             
         } else {
             // Si no es POST, mostrar el formulario
-            include 'Views/auth/register.php';
+            include 'views/auth/register.php';
         }
     }
     
