@@ -126,7 +126,7 @@ class AnunciosDB{
     }
     public function delete(int $id):bool{
         $pdo = DBCon::getConnection();
-        $sql = $pdo->prepare("DELETE FROM ANUNCIOS WHERE ID = :ID");
+        $sql = $pdo->prepare("DELETE FROM anuncios WHERE ID = :ID");
         $sql->bindValue(":ID", $id);
         return $sql->execute();
     }
@@ -145,6 +145,13 @@ class AnunciosDB{
         
         return $sql->execute();
     }        
+    public function getAllByIdComerciante(int $idComerciante){
+        $pdo = DBCon::getConnection();
+        $sql = $pdo->prepare("SELECT id, titulo, detalles, fecha_publicacion FROM anuncios WHERE id_comerciante = :id_comerciante");
+        $sql->bindValue(":id_comerciante", $idComerciante);
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
 
 

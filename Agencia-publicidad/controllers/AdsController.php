@@ -41,6 +41,18 @@ class AdsController{
         echo var_dump($anuncio);
     }
 
+    public function showAllByIdComerciante(){
+        $idComerciante = $_SESSION['usuario']['id_comerciante'] ?? null;
+
+        if(!isset($idComerciante)){
+            echo "El id de comerciante no existe en la BD";
+            require "views/index.php";
+        } 
+        $anunciosPorIdComerciante = $this->dbFunctions->getAllByIdComerciante($idComerciante);
+
+        require "views/ads/ads.delete.php";
+    }
+
     public function edit(int $id, Anuncio $anuncio):bool {
         //no hace falta obtener el id comerciante xq se da por hecho que la sesion del admin o del comerciante ya lo tiene implicito
         $id = $_POST["id"] ?? null;
@@ -51,8 +63,8 @@ class AdsController{
         return $this->dbFunctions->update($id,$anuncio);
     }
 
-    public function delete(int $id):bool {
-        $id = $_POST["id"] ?? null;
+    public function delete():bool {
+        $id = $_POST["idAnuncio"] ?? null;
         if(!isset($id)) throw new \Exception("No se puede borrar un anuncio si no se proporciona un Id");
         return $this->dbFunctions->delete($id);
     }
