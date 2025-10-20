@@ -39,25 +39,74 @@ class OutController {
             $contrasena2 = $_POST['contrasena2'] ?? '';
             $fotoPerfil = $_POST['fotoPerfil'] ?? null;
             
-            // Validaciones básicas
-            // TODO Pasar validaciones a UTILS
             $errores = [];
+
+            // Validaciones nombre
             
             if (empty($nombre)) {
                 $errores[] = "El nombre es obligatorio";
             }
+
+            if (strlen($nombre) < 2) {
+                $errores[] = "El nombre debe tener al menos 2 caracteres";
+            }
+
+            if (strlen($nombre) > 100) {
+                $errores[] = "El nombre no puede exceder 100 caracteres";
+            }
+
+            if (!preg_match("/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s'-]+$/u", $nombre)) {
+                $errores[] = "El nombre solo puede contener letras, espacios, guiones y apóstrofes";
+            }
             
+            // Validaciones apellido
+
+            if (!empty($apellido) && strlen($apellido) < 2) {
+                $errores[] = "El apellido debe tener al menos 2 caracteres";
+            }
+
+            if (!empty($apellido) && strlen($apellido) > 100) {
+                $errores[] = "El apellido no puede exceder 100 caracteres";
+            }
+
+            if (!empty($apellido) && !preg_match("/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s'-]+$/u", $apellido)) {
+                $errores[] = "El apellido solo puede contener letras, espacios, guiones y apóstrofes";
+            }
+
+            // Validaciones email
+
             if (empty($email)) {
                 $errores[] = "El email es obligatorio";
             }
+
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errores[] = "El formato del email no es válido";
+            }
+
+            if (strlen($email) > 255) {
+                $errores[] = "El email no puede exceder 255 caracteres";
+            }
+
+            $email = strtolower(trim($email)); // Pasarlo todo a minúsculas sin espacios
             
+            // Validaciones contraseña
+
+            if (empty($contrasena)) {
+                $errores[] = "La contrasena es obligatoria";
+            }
+
             if (strlen($contrasena) < 6) {
                 $errores[] = "La contraseña debe tener al menos 6 caracteres";
+            }
+
+            if (strlen($contrasena) > 72) {
+                $errores[] = "La contraseña no puede exceder 72 caracteres";
             }
             
             if ($contrasena !== $contrasena2) {
                 $errores[] = "Las contraseñas no coinciden";
             }
+
             if (isset($_POST["es_comercio"]) && $_POST["es_comercio"]==1){
                 $nombreEmpresa = $_POST['nombreEmpresa'] ?? '';
                 $nifEmpresa = $_POST['nifEmpresa'] ?? '';
@@ -75,6 +124,8 @@ class OutController {
                 if (empty($comentarioEmpresa)) {
                     $errores[] = "El comentario sobre la empresa es obligatorio";
                 }
+
+                $comentarioEmpresa = strtolower(trim($comentarioEmpresa)); // Pasamos comentario empresa a minus y quitamos espacios
                 
                 if (empty($telefonoEmpresa)) {
                     $errores[] = "El teléfono de la empresa es obligatorio";
@@ -190,11 +241,9 @@ class OutController {
     } 
 
     public function logout() {
-        echo "Entra en logout";
         if (isset($_SESSION['usuario'])) {
             echo "Sesion cerrada";
             session_destroy();
-            header("Location: ../index.php?controller=mainController");
             exit;
         }
     }
