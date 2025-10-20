@@ -18,14 +18,14 @@
         <input type="text" class="search"> 
     </div>
 
-    <?php if (isset($isLoggedIn) && $isLoggedIn == true):?>
+    <?php if (isset($isLoggedIn) && $isLoggedIn == false):?>
         <?= $isLoggedIn ?>
         <a href="../index.php?controller=OutController&accion=iniciarSesion" class="login">
             <img src="../img/login.png" alt="Boton de login" id="btnLogin">
         </a>
     <?php endif; ?>
 
-    <?php if (isset($isLoggedIn) && $isLoggedIn == false):?>
+    <?php if (isset($isLoggedIn) && $isLoggedIn == true):?>
         <p>B1</p>
         <p>B2</p>
         <p>B3</p>
@@ -34,12 +34,12 @@
     <img src="../img/lampara.png" alt="Boton de cambio de tema" class="lampara">
 </header>
 <main>
-        <hr>
+    <hr>
 
 
 <div class="card-anuncio">
     <div class="div-tj-img">
-        <img src="../" alt="">
+        <img src="../img/logo.png" alt="logo">
         <!-- Imagen que tendrá src autogenerado y alt igual -->
     </div>
     <h2 id="titulo-anuncio" ><?php $anuncio['titulo'] ?? 'titulo anuncio generico' ?></h2>
