@@ -59,10 +59,34 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log('checkbox.checked =', checkbox.checked);
         if (checkbox.checked) {
             extraForm.style.display = 'block';
-            form.action = '/../../index.php?controller=OutController&accion=storeComercio';
+
+            const nombreEmpresa = document.getElementById("nombreEmpresa");
+            const nifEmpresa = document.getElementById("nifEmpresa");
+            const telefonoEmpresa = document.getElementById("telefonoEmpresa");
+
+            [nombreEmpresa, nifEmpresa, telefonoEmpresa,].forEach(limpiarError);
+
+            if (!validarVacio(nombreEmpresa.value)) {
+            mostrarError(nombreEmpresa, "El nombre de la empresa es obligatorio.");
+            valido = false;
+            }
+
+            if (!validarVacio(nombreEmpresa.value)) {
+            mostrarError(nombreEmpresa, "El nombre de la empresa es obligatorio.");
+            valido = false;
+            }
+
+            if (!validarNif(nifEmpresa)) {
+                mostrarError(nifEmpresa, "El NIF tiene que tener 8 dígitos y una letra");
+                valido = false;
+            }
+
+            if (!empty(telefonoEmpresa) && !validarLongitud(telefonoEmpresa,9,9)) {
+                mostrarError(telefonoEmpresa, "El numero de telefono tiene que tener 9 digitos");
+            }
+
         } else {
             extraForm.style.display = 'none';
-            form.action = '/../../index.php?controller=OutController&accion=store';
         }
     }
 
