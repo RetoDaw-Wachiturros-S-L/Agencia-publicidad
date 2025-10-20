@@ -22,7 +22,7 @@ require_once __DIR__ . "/../models/TipoPersonaEnum.php";
             'apellido' => $_SESSION['usuario']['apellido'] ?? null,
             'tipo' => $_SESSION['usuario']['tipo'] ?? TipoPersonaEnum::COMERCIANTE,
             'login_time' => time(),
-            'id_comerciante' => $_SESSION['usuario']['id_comerciante']
+            'id_comerciante' => $_SESSION['usuario']['id_comerciante'] ?? null
         ];
 
         $isAdmin = $currentUser['tipo'] == TipoPersonaEnum::ADMINISTRADOR;
