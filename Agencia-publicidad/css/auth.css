@@ -1,0 +1,281 @@
+/* Reset específico para eliminar el margen del body */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Mobile First - Grid Layout */
+main {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto auto;
+  place-items: center;
+  place-content: center;
+  gap: 2em;
+  padding: 1.5em;
+  background-color: #FFF5E6;
+}
+
+/* Título */
+h1 {
+  color: #154C7E;
+  font-size: 2em;
+  text-align: center;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Mensajes de error */
+.mensaje-error {
+  color: #F16849;
+  background-color: #FFCDC1;
+  border: 2px solid #F16849;
+  border-radius: 0.5em;
+  padding: 1em;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Contenedor del formulario */
+#form-container {
+  border-radius: 1em;
+  padding: 2em;
+  width: 100%;
+  max-width: 525px;
+  min-width: 350px;
+}
+
+/* Formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+
+legend {
+  display: none;
+}
+
+/* Contenedor de cada campo */
+form p {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+/* Labels */
+label {
+  color: #154C7E;
+  font-weight: 500;
+  font-size: 1em;
+  display: none; /* Ocultamos labels ya que usamos placeholders */
+}
+
+/* Inputs de texto, email, password, tel */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+  text-align: center;
+  background-color: #FFCDC1;
+  border: solid 2px #154C7E;
+  border-radius: 0.2em;
+  padding: 0.9em;
+  font-size: 1.3em;
+  box-shadow: 6px 6px 0 #154C7E;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  width: 100%;
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover,
+input[type="tel"]:hover,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus {
+  transform: scale(1.05);
+  box-shadow: 9px 9px 0 #154C7E;
+  outline: none;
+}
+
+/* Checkbox para "es comercio" */
+input[type="checkbox"] {
+  width: 1.5em;
+  height: 1.5em;
+  cursor: pointer;
+  accent-color: #154C7E;
+}
+
+form p:has(input[type="checkbox"]) {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.8em;
+  justify-content: center;
+}
+
+form p:has(input[type="checkbox"]) label {
+  display: inline;
+  margin: 0;
+  font-size: 1.1em;
+}
+
+/* Títulos dentro del formulario */
+h4 {
+  color: #154C7E;
+  font-size: 1.2em;
+  text-align: center;
+  margin: 0.5em 0;
+}
+
+/* Botón de submit */
+input[type="submit"],
+#btn-login {
+  color: #154C7E;
+  text-align: center;
+  background-color: rgba(241, 104, 73, 0.6);
+  border: solid 2px #154C7E;
+  border-radius: 0.2em;
+  padding: 0.9em;
+  font-size: 1.3em;
+  font-weight: 600;
+  box-shadow: 6px 6px 0 2px #F16849;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  width: 100%;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus,
+#btn-login:hover,
+#btn-login:focus {
+  transform: scale(1.05);
+  box-shadow: 9px 9px 0 2px #F16849;
+}
+
+/* Formulario extra (para comercios) */
+#formulario_extra {
+  display: none;
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 2px dashed #154C7E;
+}
+
+#formulario_extra.visible {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+
+/* Mensajes de error de validación */
+span.error {
+  display: none;
+  background: linear-gradient(135deg, #FFE5E0 0%, #FFCDC1 100%);
+  color: #C44230;
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  border-radius: 0.3em;
+  border-left: 4px solid #F16849;
+  text-align: left;
+  margin-top: 0.3em;
+  box-shadow: 0 2px 4px rgba(241, 104, 73, 0.2);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.input-error {
+  border-color: #F16849 !important;
+  box-shadow: 6px 6px 0 #F16849 !important;
+  background-color: #FFE5E0 !important;
+}
+
+/* Pantallas más grandes */
+@media screen and (min-width: 768px) {
+  main {
+    padding: 2em;
+  }
+
+  h1 {
+    font-size: 2.5em;
+    margin-top: 0.5em;
+  }
+
+  #form-container {
+    padding: 2.5em;
+    max-width: 750px;
+    min-width: 500px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"] {
+    padding: 1em;
+    font-size: 1.5em;
+    box-shadow: 9px 9px 0 #154C7E;
+  }
+
+  input[type="text"]:hover,
+  input[type="email"]:hover,
+  input[type="password"]:hover,
+  input[type="tel"]:hover,
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="tel"]:focus {
+    transform: scale(1.1);
+    box-shadow: 12px 12px 0 #154C7E;
+  }
+
+  input[type="submit"],
+  #btn-login {
+    padding: 1em;
+    font-size: 1.5em;
+    box-shadow: 9px 9px 0 2px #F16849;
+  }
+
+  input[type="submit"]:hover,
+  input[type="submit"]:focus,
+  #btn-login:hover,
+  #btn-login:focus {
+    transform: scale(1.1);
+    box-shadow: 12px 12px 0 2px #F16849;
+  }
+
+  h4 {
+    font-size: 1.4em;
+  }
+
+  span.error {
+    font-size: 0.95em;
+    padding: 0.6em 1.2em;
+  }
+}

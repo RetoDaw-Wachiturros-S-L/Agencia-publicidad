@@ -57,12 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Script de Koldo (desplegar opciones en caso de ser comercio) Variables declaradas arriba
-    extraForm.style.display = 'none';
+    extraForm.classList.remove('visible');
 
     function mostrarFormNuevo() {
         if (!checkbox) return;
         if (checkbox.checked) {
-            extraForm.style.display = 'block';
+            extraForm.classList.add('visible');
 
             const nombreEmpresa = document.getElementById("nombreEmpresa");
             const nifEmpresa = document.getElementById("nifEmpresa");
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (nifEmpresa) nifEmpresa.setAttribute('required', 'required');
             if (telefonoEmpresa) telefonoEmpresa.removeAttribute('required'); // opcional
         } else {
-            extraForm.style.display = 'none';
+            extraForm.classList.remove('visible');
 
             // quitar required al ocultar
             const nombreEmpresa = document.getElementById("nombreEmpresa");
