@@ -233,17 +233,17 @@ class OutController {
             } else {
                 // Mostrar errores
                 $mensaje_error = implode("<br>", $errores);
-                include 'Views/auth/login.php';
+                include 'views/auth/login.php';
             }
         } else {
-            include 'Views/auth/login.php';
+            include 'views/auth/login.php';
         }
     } 
 
     public function logout() {
         if (isset($_SESSION['usuario'])) {
-            echo "Sesion cerrada";
             session_destroy();
+            header('Location: ?index.php&controller=MainController&action=index');
             exit;
         }
     }
