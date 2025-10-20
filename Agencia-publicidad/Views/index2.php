@@ -24,9 +24,10 @@
         <?php endif; ?>
 
         <?php if (isset($isLoggedIn) && $isLoggedIn == true):?>
-            <p>B1</p>
-            <p>B2</p>
-            <p>B3</p>
+            <img src="../img/User.png" alt="persona">
+            <img src="../img/Bell.png" alt="campana">
+            <img src="../img/User.png" alt="corazon">
+            
         <?php endif; ?>
 
         <img src="../img/lampara.png" alt="Boton de cambio de tema" class="lampara">

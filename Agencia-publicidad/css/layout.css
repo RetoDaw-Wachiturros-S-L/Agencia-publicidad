@@ -27,6 +27,15 @@ header {
 
 
 }
+.login{
+    height: 2em;
+    width: auto;
+
+}
+#btnLogin{
+    height: 3.3em;
+    width: auto;
+}
 .lampara{
     height: 6em;
     width: auto;
@@ -34,8 +43,9 @@ header {
     top: -3em;
 }
 main{
+    margin-top: 2em;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 hr{
     margin: auto;
@@ -45,6 +55,11 @@ hr{
     border: none;
     background-color: rgb(116, 116, 116);
     filter: blur(2px);
+}
+.persona, .campana, .corazon{
+    height: 2em;
+    width: auto;
+
 }
 .search{
     border-radius: 50px;
@@ -56,7 +71,8 @@ hr{
     background-size: 2.5em;
     background-repeat: no-repeat;
     background-position: right 0.2em center;
-    }
+    padding-left: 1em;
+}
 .boton{
     height: 3.5em;
     width: auto;
