@@ -52,7 +52,10 @@
                 <img src="<?= BASE_URL ?>/img/Bell.png" alt="campana">
                 <img src="<?= BASE_URL ?>/img/Heart.png" alt="corazon">
                 <?php if ($isAdmin):?>
-                    <p>B4</p>    
+                    <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=store" class="admin-register-btn" title="Registrar nuevo usuario">
+                        <span class="admin-plus">+</span>
+                        <span class="admin-tag">admin</span>
+                    </a>
                 <?php endif; ?>
 
 
@@ -108,5 +111,6 @@
 
     <script src="<?= BASE_URL ?>/js/index.js"></script>
     </main>
+
 </body>
 </html>

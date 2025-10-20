@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Iniciar sesion</title>
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/auth.css">
 </head>
 <body>
     <main>
+        <h1>Iniciar sesión</h1>
 
         <?php
         // Si hay algún mensaje de error lo mostramos:
         if(isset($mensaje_error)) :?>
-            <p style='color:red;'><?= $mensaje_error ?></p>
+            <p class="mensaje-error"><?= $mensaje_error ?></p>
         <?php endif; ?>
 
         <div id="form-container">
