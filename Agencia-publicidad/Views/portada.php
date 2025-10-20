@@ -10,9 +10,8 @@
     <header></header>
     <main>
         <div class="titulo" >
-            <h1 >
+            <h1>
             OMERCIO VITORIA
-
             </h1>
 
         </div>
