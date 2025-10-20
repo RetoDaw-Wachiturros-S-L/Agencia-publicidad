@@ -12,7 +12,6 @@ function validarLongitud(valor, min, max) {
     return valor.length >= min && valor.length <= max;
 }
 
-//funcion porro
 function validarContrasena(pass) {
     //Una mayúscula, una minúscula, un número y un símbolo
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
@@ -23,6 +22,11 @@ function validarNif(nif) {
   const regex = /^[A-Z]\d{7}[A-Z0-9]$/;
   //aqui añadiir para mirar si la letra de control es correcta
   return regex.test(nif);
+}
+
+function validarEspecial(valor,regex) {
+  const regex = regex;
+  return regex.test(valor);
 }
 
 function mostrarError(input, mensaje) {
