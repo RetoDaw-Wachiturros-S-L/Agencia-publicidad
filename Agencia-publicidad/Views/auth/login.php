@@ -14,7 +14,7 @@ if(isset($mensaje_error)) :?>
     <p style='color:red;'><?= $mensaje_error ?></p>
 <?php endif; ?>
 
-<form action='../index.php?controller=OutController&accion=iniciarSesion' method='post' id="login">
+<form action='index.php?controller=OutController&accion=iniciarSesion' method='post' id="login">
     <fieldset>
         <legend>Inicio de sesion</legend>
     

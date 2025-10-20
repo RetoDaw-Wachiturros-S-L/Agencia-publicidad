@@ -30,6 +30,7 @@ main {
   box-sizing: border-box;
 }
 
+<<<<<<< HEAD
 .div-tj-img {
   display: flex;
   justify-content: center;
@@ -51,7 +52,126 @@ main {
     
 }
 
+=======
+>>>>>>> 52469c0a67cf4373ba5a43df6a6e74d740b0a87a
 .login:hover {
   background-color: #FFF5E6;
   transform: translateY(-4px);
+}
+
+/* Iconos del header cuando está logeado */
+header img[alt="persona"],
+header img[alt="campana"],
+header img[alt="corazon"] {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+header img[alt="persona"]:hover,
+header img[alt="campana"]:hover,
+header img[alt="corazon"]:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+/* Menú desplegable de usuario */
+.user-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.user-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.user-icon:hover {
+  transform: scale(1.1);
+}
+
+.user-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background-color: #FFF5E6;
+  border: 2px solid #0F3B61;
+  border-radius: 25px;
+  min-width: 250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  overflow: hidden;
+  padding: 8px 0;
+}
+
+.user-dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.menu-item {
+  display: block;
+  padding: 15px 25px;
+  color: #0F3B61;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  position: relative;
+  margin: 4px 0;
+}
+
+.menu-item:hover {
+  background-color: rgba(15, 59, 97, 0.1);
+}
+
+/* Item con notificación (Mis mensajes) */
+.menu-item-notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-badge {
+  width: 12px;
+  height: 12px;
+  background-color: #FF6B4A;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+/* Botón de cerrar sesión (destacado en rojo/naranja) */
+.menu-item-logout {
+  background-color: #FF6B4A;
+  color: white;
+  font-weight: 600;
+  border-radius: 0 0 23px 23px;
+}
+
+.menu-item-logout:hover {
+  background-color: #FF5439;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .user-dropdown-menu {
+    right: -20px;
+    min-width: 220px;
+  }
+  
+  .menu-item {
+    padding: 12px 20px;
+    font-size: 1em;
+  }
 }

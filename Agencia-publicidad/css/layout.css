@@ -107,24 +107,5 @@ body {
 
 /* ====== ESTILOS GENERALES ====== */
 
-.acceder {
-  text-decoration: none;
-  color: #154C7E;
-  font-weight: bolder;
-  font-size: 1.7em;
-  border: 2px solid #154C7E;
-  padding: 0.3em 4em;
-  max-width: 5em;
-  max-height: 1.3em;
-  background-color: #FFF5E6;
-  border-radius: 15px;
-  box-shadow: 8px 8px 0px #154C7E;
-  transition: all 0.2s ease-in-out;
-}
 
-.acceder:hover {
-  background-color: #fcf0de;
-  transform: translateY(-4px);
-  box-shadow: 10px 10px 0px #0F3B61;
-}
 
