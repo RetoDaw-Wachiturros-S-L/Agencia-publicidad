@@ -4,10 +4,17 @@
     box-sizing: border-box;
 
 }
+main{
+    height: 100vh;
+}
+
 .card-anuncio{
   display: flex;
+  flex-direction: column;
   border: #0F3B61 1px solid;
-  border-radius: 5%;
+  border-radius: 2em;
+  height: 40%;
+  width: auto;
   min-width: 35%;
   max-width: 45%;
   background-color: #FFCDC1;
@@ -15,11 +22,11 @@
 .div-tj-img{
     display: flex;
     background-color: #FFF0E7;
-    min-width: 90%;
+    min-width: 80%;
     min-height: 60%;
     max-height: 80%;
     border: #0F3B61 1px solid;
-    border-radius: 5%;
+    border-radius: .2em;
 }
 
 .login {
