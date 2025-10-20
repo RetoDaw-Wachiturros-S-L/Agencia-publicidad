@@ -1,25 +1,43 @@
+/* Reset específico para eliminar el margen del body */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Mobile First */
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Mobile First - Grid Layout */
 main {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto auto;
+  place-items: center;
+  place-content: center;
+  gap: 2em;
   padding: 1.5em;
   background-color: #FFF5E6;
 }
 
+/* Título */
+h1 {
+  color: #154C7E;
+  font-size: 2em;
+  text-align: center;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Contenedor del formulario */
 #form-container {
   border-radius: 1em;
   padding: 2em;
   width: 100%;
-  max-width: 420px;
-  min-width: 280px;
+  max-width: 525px;
+  min-width: 350px;
 }
 
 form {
@@ -68,13 +86,16 @@ input[type="submit"]:focus {
     padding: 2em;
   }
 
-  #form-container {
-    padding: 2.5em;
-    max-width: 600px;
-    min-width: 400px;
+  h1 {
+    font-size: 2.5em;
+    margin-top: 0.5em;
   }
 
-  input[type="email"],
+  #form-container {
+    padding: 2.5em;
+    max-width: 750px;
+    min-width: 500px;
+  }  input[type="email"],
   input[type="password"] {
     padding: 1em;
     font-size: 1.5em;
