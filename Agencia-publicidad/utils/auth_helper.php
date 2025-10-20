@@ -25,7 +25,7 @@ require_once __DIR__ . "/../models/TipoPersonaEnum.php";
             'id_comerciante' => $_SESSION['usuario']['id_comerciante'] ?? null
         ];
 
-        $isAdmin = $currentUser['tipo'] == TipoPersonaEnum::ADMINISTRADOR;
+        $isAdmin = $currentUser['tipo'] === 'ADMINISTRADOR';
     }
 
 ?>
