@@ -21,6 +21,36 @@ class DBUser {
         
         return $stmt->execute();
     }
+    public function guardarComerciante(Comerciante $usuario) {
+        $id= $this->sacarIdUsuario($usuario->getEmail());
+        $pdo = DBCon::getConnection();
+        $sql = "INSERT INTO comerciantes (id_usuario, nombre_empresa , nif_empresa , comentario_empresa, num_telefono, comerciante_desde) 
+                VALUES (:idUsuario, :nombrEmpresa, :nifEmpresa, :comentarioEmpresa, :numTelefono, :comercianteDesde)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':idUsuario', $id);
+        $stmt->bindValue(':nombrEmpresa', $usuario->getNombrEmpresa());
+        $stmt->bindValue(':nifEmpresa', $usuario->getNifEmpresa());
+        $stmt->bindValue(':comentarioEmpresa', $usuario->getComentarioEmpresa());
+        $stmt->bindValue(':numTelefono', $usuario->getNumeroEmpresa());
+        $stmt->bindValue(':comercianteDesde', $usuario->getFechaAltaComerciante()->format('Y-m-d H:i:s'));
+        
+        return $stmt->execute();
+    }
+
+    public function sacarIdUsuario($email){
+        $pdo = DBCon::getConnection();
+        $sql = "SELECT id FROM usuarios WHERE email = :email";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':email', $email);
+        $stmt->execute();
+        $usuario = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($usuario && isset($usuario['id'])) {
+            return $usuario['id'];
+        } else {
+            return null;
+        }
+    }
+    
 
     public function comprobarUsuario($email,$contrasena) {
         $pdo = DBCon::getConnection();

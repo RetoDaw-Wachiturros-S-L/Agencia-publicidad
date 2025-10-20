@@ -17,6 +17,11 @@ function validarContrasena(pass) {
     return regex.test(pass);
 }
 
+function validarNif(nif) {
+  const regex = /^[A-Z]\d{7}[A-Z0-9]$/;
+  return regex.test(nif);
+}
+
 function mostrarError(input, mensaje) {
   const errorSpan = input.nextElementSibling;
   if (errorSpan) {
