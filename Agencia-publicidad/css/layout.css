@@ -30,7 +30,6 @@ header {
 .lampara{
     height: 6em;
     width: auto;
-
 }
 .search{
     border-radius: 50px;
@@ -57,7 +56,7 @@ body {
 
 /* ====== ESTILOS GENERALES ====== */
 
-a {
+.acceder {
   text-decoration: none;
   color: #154C7E;
   font-weight: bolder;
@@ -72,7 +71,7 @@ a {
   transition: all 0.2s ease-in-out;
 }
 
-a:hover {
+.acceder:hover {
   background-color: #fcf0de;
   transform: translateY(-4px);
   box-shadow: 10px 10px 0px #0F3B61;

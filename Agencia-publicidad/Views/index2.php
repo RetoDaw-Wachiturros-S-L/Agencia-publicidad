@@ -22,6 +22,11 @@
     </a>
     <img src="../img/lampara.png" alt="Boton de cambio de tema" class="lampara">
 </header>
+<main>
+
+
+
+</main>
 
 <div class="card-anuncio">
     <div class="div-tj-img">
