@@ -30,6 +30,7 @@ main {
   box-sizing: border-box;
 }
 
+
 .div-tj-img {
   display: flex;
   justify-content: center;
@@ -45,10 +46,6 @@ main {
   max-width: 100%;
   height: auto;
   border-radius: 0.5em;
-}
-
-.login {
-    
 }
 
 .login:hover {
