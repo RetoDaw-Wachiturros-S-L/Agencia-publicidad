@@ -24,27 +24,33 @@
         <?php endif; ?>
 
         <?php if (isset($isLoggedIn) && $isLoggedIn == true):?>
-            <div class="user-menu-container">
-                <img src="<?= BASE_URL ?>/img/User.png" alt="persona" id="userMenuToggle" class="user-icon">
+            <div id="iconitos">
+                <div class="user-menu-container">
+                    <img src="<?= BASE_URL ?>/img/User.png" alt="persona" id="userMenuToggle" class="user-icon">
                 
-                <!-- Menú desplegable -->
-                <div id="userDropdownMenu" class="user-dropdown-menu">
-                    <a href="#" class="menu-item">Mis favoritos</a>
-                    <a href="#" class="menu-item menu-item-notification">
-                        Mis mensajes
-                        <span class="notification-badge"></span>
-                    </a>
-                    <a href="#" class="menu-item">Mis anuncios</a>
-                    <a href="#" class="menu-item">Mi perfil</a>
-                    <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=logout" class="menu-item menu-item-logout">Cerrar sesión</a>
+                    <!-- Menú desplegable -->
+                    <div id="userDropdownMenu" class="user-dropdown-menu">
+                        <a href="#" class="menu-item">Mis favoritos</a>
+                        <a href="#" class="menu-item menu-item-notification">
+                            Mis mensajes
+                            <span class="notification-badge"></span>
+                        </a>
+                        <a href="#" class="menu-item">Mis anuncios</a>
+                        <a href="#" class="menu-item">Mi perfil</a>
+                        <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=logout" class="menu-item menu-item-logout">Cerrar sesión</a>
+                    </div>
                 </div>
-            </div>
             
-            <img src="<?= BASE_URL ?>/img/Bell.png" alt="campana">
-            <img src="<?= BASE_URL ?>/img/User.png" alt="corazon">
-            <?php if ($isAdmin):?>
-                <p>B4</p>    
-            <?php endif; ?>
+                <img src="<?= BASE_URL ?>/img/Bell.png" alt="campana">
+                <img src="<?= BASE_URL ?>/img/Heart.png" alt="corazon">
+                <?php if ($isAdmin):?>
+                    <p>B4</p>    
+                <?php endif; ?>
+
+
+            </div>
+        
+            
         <?php endif; ?>
 
         <img src="<?= BASE_URL ?>/img/lampara.png" alt="Boton de cambio de tema" class="lampara">
