@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Formulario de inicio de sesion</title>
-    <link rel="stylesheet" href="slayout.css">
+    <link rel="stylesheet" href="../../css/layout.css">
 </head>
 <body>
 <h1>Formulario de inicio de sesion</h1>
