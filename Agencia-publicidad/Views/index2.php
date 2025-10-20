@@ -12,7 +12,6 @@
     <img src="../img/logo_SSombra.png" alt="Logo de comerciantes vitoria" class="logo">
     <div id="buscar">
         <input type="text" class="search"> 
-        <button>Buscar</button>
     </div>
     <img src="../img/login.png" alt="Boton de login" class="boton" id="btnLogin">
     <img src="../img/lampara.png" alt="Boton de cambio de tema" class="lampara">
