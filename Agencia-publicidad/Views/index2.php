@@ -17,6 +17,8 @@
     <img src="../img/lampara.png" alt="Boton de cambio de tema" class="lampara">
 </header>
 <main>
+        <hr>
+
 
 
 
