@@ -153,14 +153,13 @@ class OutController {
             }
             if(empty($errores)){
                 $comerciante = null;
-                //Comprobar usuario devuelve Usuario si es true y si no devuelve null
                 $usuario = $this->dbUser->comprobarUsuario($email, $contrasena);
-                if($usuario->getTipo() == TipoPersonaEnum::COMERCIANTE){
-                    $comerciante = $this->dbUser->usuarioComerciante($usuario);
-                }
-                if (!(empty($usuario) && empty($comerciante))) {
 
-                    $_SESSION['usuario'] = [
+                if (!(empty($usuario))) {
+
+                    if($usuario->getTipo() == TipoPersonaEnum::COMERCIANTE){
+                        $comerciante = $this->dbUser->usuarioComerciante($usuario);
+                        $_SESSION['usuario'] = [
                         'id' => $usuario->getIdUsuario(),
                         'email' => $usuario->getEmail(),
                         'nombre' => $usuario->getNombre(),
@@ -169,12 +168,16 @@ class OutController {
                         'login_time' => time(),
                         'id_comerciante' => $comerciante->getIdComerciante(),
                     ];
-
-                    // Mostrar el estado de la sesión DEBUG
-                    echo "<pre>Contenido de \$_SESSION['usuario']:\n";
-                    var_dump($_SESSION['usuario']);
-                    echo "</pre>";
-
+                    } else {
+                        $_SESSION['usuario'] = [
+                        'id' => $usuario->getIdUsuario(),
+                        'email' => $usuario->getEmail(),
+                        'nombre' => $usuario->getNombre(),
+                        'apellido' => $usuario->getApellido(),
+                        'tipo' => $usuario->getTipo()->value,
+                        'login_time' => time(),
+                    ];}
+                    echo "Iniciaste sesión correctamente";
                 } else { echo "Usuario o contraseña incorrectos"; }
             } else {
                 // Mostrar errores

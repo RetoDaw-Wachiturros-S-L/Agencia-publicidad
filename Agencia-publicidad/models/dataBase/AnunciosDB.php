@@ -78,15 +78,17 @@ class AnunciosDB{
 
         // Construir objetos con comprobaciones mínimas (ajusta constructores reales)
         $comerciante = null;
-        if (!empty($data['c_id'])) {
+        if (!empty((int)$data['c_id'])) {
             $comerciante = new Comerciante(
+                (int)$data['u_id'],
                 $data['u_nombre'] ?? '',
                 $data['u_apellido'] ?? '',
                 $data['u_email'] ?? '',
                 $data['u_password_hash'] ?? '',
                 isset($data['u_fecha_inscripcion']) ? new \DateTime($data['u_fecha_inscripcion']) : new \DateTime(),
                 $data['u_foto_perfil'] ?? null,
-                TipoPersonaEnum::COMERCIANTE, // ajustar según tu enum
+                TipoPersonaEnum::COMERCIANTE,
+                isset($data['c_id_comerciante']) ? (int)$data['c_id_comerciante'] : null, // ← Aquí debe ir el int
                 $data['c_nombre_empresa'] ?? '',
                 $data['c_nif_empresa'] ?? '',
                 $data['c_comentario_empresa'] ?? '',
