@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Comercio Vitoria</title>
   <link rel="stylesheet" href="../css/layout.css"/>
+  <link rel="stylesheet" href="../css/portada.css">
 </head>
 <body>
     <header></header>

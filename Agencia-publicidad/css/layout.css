@@ -10,57 +10,49 @@ html {
   
 }
 
-/* ====== MODO MÓVIL ====== */
-@media (max-width: 760px) {
-  body {
-    background: linear-gradient(#FFF5E6, #FFCDC1);
-    height: 100vh;
+header {
     display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 3em;
 
-  main {
-    display: grid;
-    grid-template-areas:
-      "titulo"
-      "foto"
-      "boton";
-    grid-template-rows: auto 1fr auto;
-    justify-items: center;
-    align-items: center;
-    text-align: center;
+}
+.logo{
+    height: 3em;
+    width: auto;
+}
+#buscar{
+    height: 2em;
+    width: 70vh;
 
-   
-    width: 90%;
-    max-width: 400px;
-    padding: 1.5em;
-    gap: 1.5em;
-  }
 
-  .titulo {
-    grid-area: titulo;
-  }
+}
+.lampara{
+    height: 6em;
+    width: auto;
 
-  .monumento {
-    grid-area: foto;
-    max-width: 100%;
-    height: auto;
-    border: 2px solid #154C7E;
-    border-radius: 8px;
-  }
+}
+.search{
+    border-radius: 50px;
+    border: 1px solid #154C7E;
+    background-color: #FFF5E6;
+    width: 100%;
+    height: 3em;
+}
+.boton{
+    height: 3.5em;
+    width: auto;
+}
+img{
+    width: auto;
 
-  .acceder {
-    grid-area: boton;
-  }
-
-  h1 {
-    margin: 0;
-    text-align: center;
-  }
+}
+body {
+  background-color: #FFF5E6;
 }
 
-/* ====== BOTÓN ====== */
+/* ====== ESTILOS GENERALES ====== */
+
 a {
   text-decoration: none;
   color: #154C7E;
@@ -82,81 +74,3 @@ a:hover {
   box-shadow: 10px 10px 0px #0F3B61;
 }
 
-
-/* ====== MODO ESCRITORIO ====== */
-@media (min-width: 760px) {
-    
-  body {
-    display: grid;
-    background-color: #FFF5E6;
-    grid-template-rows: 1fr 3fr 1fr;
-    grid-template-areas:
-      "header"
-      "main"
-      "footer";
-    height: 100vh;
-  }
-
-  header {
-    min-height: 2em;
-    background-color: #FFCDC1;
-    grid-area: header;
-  }
-
-  footer {
-    min-height: 2em;
-
-    background-color: #FFCDC1;
-    grid-area: footer;
-  }
-  main {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas:
-      "foto titulo"
-      "foto cosa";
-    grid-template-columns: 1fr 1fr;
-    height: 100%;
-    width: 100%;
-  }
-
-  .monumento {
-    grid-area: foto;
-    height: 110%;
-    width: 90%;
-    object-fit: cover;
-    border: none;
-    z-index: 1;
-    border: 4px solid #154C7E;
-  }
-
-  /* Contenedor derecho */
-  .titulo{
-    grid-area: titulo;
-    display: flex;
-    align-self: flex-end;
-    background-color: #FFF5E6;
-    text-align: center;
-    flex-direction: column;
-    justify-self: center;
-
-  }
-  .acceder {
-    grid-area: cosa;
-    display: flex;
-    align-self: flex-start;
-    justify-self: center;
-    background-color: #FFF5E6;
-    text-align: center;
-  }
-
-  .titulo h1 {
-    color: #154C7E;
-    font-size: 2.5em;
-    margin-bottom: 1em;
-  }
-
-  .acceder {
-    margin-top: 1em;
-  }
-}
