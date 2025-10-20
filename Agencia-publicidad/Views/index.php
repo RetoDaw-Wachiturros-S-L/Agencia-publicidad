@@ -13,7 +13,15 @@
         <img src="<?= BASE_URL ?>/img/logo_SSombra.png" alt="Logo de comerciantes vitoria" class="logo">
         
         <div id="buscar">
-            <input type="text" class="search"> 
+            <div class="search-container">
+                <input type="text" class="search" placeholder="Buscar...">
+                <select name="fruta" id="filtros">
+                    <option value="manzana">Manzana</option>
+                    <option value="banana">Banana</option>
+                    <option value="naranja">Naranja</option>
+                    <option value="kiwi">Kiwi</option>
+                </select>
+            </div>
         </div>
         
         <?php if (isset($isLoggedIn) && $isLoggedIn == false):?>
@@ -58,8 +66,8 @@
     </header>
     <hr>
     <main>
-        
-    <div class="card-anuncio">
+        <div class="cards-row">
+                <div class="card-anuncio">
         <div class="div-tj-img">
             <img src="<?= BASE_URL ?>/img/logo.png" alt="logo">
             <!-- Imagen que tendrá src autogenerado y alt igual -->
@@ -95,6 +103,8 @@
         <h2 id="titulo-anuncio" >Titulo 1</h2>
         <p id="desc-anuncio">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus vero placeat reiciendis necessitatibus facilis reprehenderit nihil sunt omnis amet fuga assumenda, consequatur natus, blanditiis pariatur neque quam quas repellat qui!</p>
     </div>
+        </div>
+                
 
     <script src="<?= BASE_URL ?>/js/index.js"></script>
     </main>

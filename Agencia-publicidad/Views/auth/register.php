@@ -1,3 +1,17 @@
+<?php
+require_once __DIR__ . '/../../utils/auth_helper.php';
+
+if (!isset($currentUser) || empty($currentUser)){    
+    echo "Error: Usuario no autenticado";
+    require_once __DIR__ . '/../errors/403.php';
+    exit;
+}
+
+if ($currentUser['tipo'] !== 'ADMINISTRADOR') {
+    http_response_code(403);
+    exit;
+}
+?>
 <!doctype html>
 <html lang="es">
 <head>
