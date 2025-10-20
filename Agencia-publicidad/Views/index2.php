@@ -27,6 +27,9 @@
             <p>B1</p>
             <p>B2</p>
             <p>B3</p>
+            <?php if ($isAdmin):?>
+                <p>B4</p>    
+            <?php endif; ?>
         <?php endif; ?>
 
         <img src="../img/lampara.png" alt="Boton de cambio de tema" class="lampara">
@@ -40,7 +43,7 @@
             <img src="../img/logo.png" alt="logo">
             <!-- Imagen que tendrá src autogenerado y alt igual -->
         </div>
-        <h2 id="titulo-anuncio" ><?php $anuncio['titulo'] ?? 'titulo anuncio generico' ?></h2>
+        <h2 id="titulo-anuncio" >Titulo 1</h2>
     </div>
 
     <script src="../js/index.js"></script>
