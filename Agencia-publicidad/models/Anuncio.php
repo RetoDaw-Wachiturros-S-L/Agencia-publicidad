@@ -1,18 +1,18 @@
 <?php 
-namespace Agenciapublicidad\Models;
+namespace AgenciaPublicidad\Models;
 
 use DateTime;
 
 class Anuncio{
-    private int $id;
+    private ?int $id;
     private string $titulo;
-    private array $urlFotos;
-    private string $descripcion;
-    private DateTime $fechaPublicacion;
-    private UsuarioRegistrado $anunciante;
-    private array $categorias;
+    private ?array $urlFotos;
+    private ?string $descripcion;
+    private ?DateTime $fechaPublicacion;
+    private ?Comerciante $anunciante;
+    private ?array $categorias;
     
-    public function __construct(int $id, string $titulo, ?array $urlFotos, ?string $descripcion, ?float $precio, DateTime $fechaPublicacion, UsuarioRegistrado $anunciante, ?array $categorias){
+    public function __construct(?int $id, string $titulo, ?array $urlFotos, ?string $descripcion, ?DateTime $fechaPublicacion, ?Comerciante $anunciante, ?array $categorias){
         $this->id = $id;
         $this->titulo = $titulo;
         $this->urlFotos = $urlFotos;
