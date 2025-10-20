@@ -9,9 +9,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css">
 </head>
-<body>
-        <h1>🎨 Bienvenido a Nuestra Agencia de Publicidad</h1>
+<body class="contenedor-principal">
+    <header class="header">Aquí va el header</header>
+    <main>
+        <p>Aquí va la generación dinamica de anuncios</p>
+
+    <h1>🎨 Bienvenido a Nuestra Agencia de Publicidad</h1>
         <p>Esta es la página principal de la agencia.</p>
         <nav>
         <a href='index.php?controller=OutController&accion=store'>📝 Registro de Usuario</a><br>
@@ -35,5 +40,8 @@
             <?php endif; ?>
         <?php endif; ?>
         </nav>
+
+    </main>
+        
 </body>
 </html>
