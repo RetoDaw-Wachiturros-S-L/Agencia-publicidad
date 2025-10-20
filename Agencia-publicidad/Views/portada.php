@@ -11,9 +11,8 @@
     <header></header>
     <main>
         <div class="titulo" >
-            <h1 >
+            <h1>
             OMERCIO VITORIA
-
             </h1>
 
         </div>
@@ -21,13 +20,7 @@
         <img src="../img/portada.png".png alt="" class="monumento">
         <div class="acceder">
             <a href="" class="acceder">Acceder</a>
-
         </div>
-        
-        
-        
-        
-        
     </main>
     
     <footer>
