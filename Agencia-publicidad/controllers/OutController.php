@@ -158,11 +158,6 @@ class OutController {
                 if($usuario->getTipo() == TipoPersonaEnum::COMERCIANTE){
                     $comerciante = $this->dbUser->usuarioComerciante($usuario);
                 }
-                echo "<pre>DEBUG - Usuario devuelto: ";
-                // var_dump($usuario);
-                var_dump($comerciante);
-                echo "</pre>";
-                //Si existe procedo a crear la sesion
                 if (!(empty($usuario) && empty($comerciante))) {
 
                     $_SESSION['usuario'] = [
