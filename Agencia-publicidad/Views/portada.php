@@ -19,13 +19,7 @@
         <img src="../img/portada.png".png alt="" class="monumento">
         <div class="acceder">
             <a href="" class="acceder">Acceder</a>
-
         </div>
-        
-        
-        
-        
-        
     </main>
     
     <footer>
