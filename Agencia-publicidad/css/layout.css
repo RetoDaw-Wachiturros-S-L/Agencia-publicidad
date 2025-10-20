@@ -18,7 +18,7 @@ header {
 
 }
 .logo{
-    height: 3em;
+    height: 4em;
     width: auto;
 }
 #buscar{
@@ -30,6 +30,21 @@ header {
 .lampara{
     height: 6em;
     width: auto;
+    position: relative;
+    top: -3em;
+}
+main{
+    display: flex;
+    flex-direction: row;
+}
+hr{
+    margin: auto;
+    display: flex;
+    width: 150vh;
+    height: 1px;
+    border: none;
+    background-color: rgb(116, 116, 116);
+    filter: blur(2px);
 }
 .search{
     border-radius: 50px;
