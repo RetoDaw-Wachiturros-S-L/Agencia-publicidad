@@ -30,7 +30,7 @@ main {
   box-sizing: border-box;
 }
 
-<<<<<<< HEAD
+
 .div-tj-img {
   display: flex;
   justify-content: center;
@@ -48,12 +48,6 @@ main {
   border-radius: 0.5em;
 }
 
-.login {
-    
-}
-
-=======
->>>>>>> 52469c0a67cf4373ba5a43df6a6e74d740b0a87a
 .login:hover {
   background-color: #FFF5E6;
   transform: translateY(-4px);
