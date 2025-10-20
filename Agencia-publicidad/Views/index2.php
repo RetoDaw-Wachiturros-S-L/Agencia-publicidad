@@ -1,6 +1,7 @@
 <?php
     //Comprobar session
     require_once __DIR__ . '/../utils/auth_helper.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -9,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina principal</title>
     <link rel="stylesheet" href="../css/layout.css"/>
+    <link rel="stylesheet" href="../css/index.css"/>
 </head>
 <body>
 
@@ -17,9 +19,19 @@
     <div id="buscar">
         <input type="text" class="search"> 
     </div>
-    <a href="../index.php?controller=OutController&accion=iniciarSesion">
-        <img src="../img/login.png" alt="Boton de login" id="btnLogin">
-    </a>
+
+    <?php if (isset($isLoggedIn) && $isLoggedIn == true):?>
+        <a href="../index.php?controller=OutController&accion=iniciarSesion" class="login">
+            <img src="../img/login.png" alt="Boton de login" id="btnLogin">
+        </a>
+    <?php endif; ?>
+
+    <?php if (isset($isLoggedIn) && $isLoggedIn == false):?>
+        <p>B1</p>
+        <p>B2</p>
+        <p>B3</p>
+    <?php endif; ?>
+
     <img src="../img/lampara.png" alt="Boton de cambio de tema" class="lampara">
 </header>
 <main>
