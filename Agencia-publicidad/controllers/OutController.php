@@ -184,8 +184,7 @@ class OutController {
                 }               
                 
                 // Redirigir o mostrar éxito
-                echo "Usuario registrado exitosamente";
-               
+                require "index.php";
                 
             } else {
                 // Mostrar errores
