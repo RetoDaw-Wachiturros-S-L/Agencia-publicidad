@@ -183,8 +183,8 @@ class OutController {
                     $this->dbUser->guardarComerciante($nuevoComerciante);
                 }               
                 
-                // Redirigir o mostrar éxito
-                require "index.php";
+                header("Location: index.php");
+                exit;
                 
             } else {
                 // Mostrar errores
@@ -243,7 +243,10 @@ class OutController {
                         'tipo' => $usuario->getTipo()->value,
                         'login_time' => time(),
                     ];}
-                    echo "Iniciaste sesión correctamente";
+                    
+                    header("Location: index.php");
+                    exit;
+
                 } else { echo "Usuario o contraseña incorrectos"; }
             } else {
                 // Mostrar errores
