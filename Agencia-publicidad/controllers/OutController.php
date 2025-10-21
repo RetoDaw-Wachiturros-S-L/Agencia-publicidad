@@ -151,6 +151,11 @@ class OutController {
             
             // Si no hay errores, procesar el registro
             if (empty($errores)) {
+
+                //Sanitizar datos
+                $nombre = htmlspecialchars(trim($_POST['nombre'] ?? ''), ENT_QUOTES, 'UTF-8');
+                $email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
+                
                 // Aquí guardarías en la base de datos
                 $nuevoUsuario = new UsuarioRegistrado(
                 null, // id_usuario (null para usuario nuevo)
