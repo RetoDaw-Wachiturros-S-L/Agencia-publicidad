@@ -12,14 +12,15 @@
     <main>
         <div class="titulo" >
             <h1>
-            OMERCIO VITORIA
+                <img src="../img/logo.png" alt="comersio" class="comercio">
+                OMERCIO VITORIA
             </h1>
 
         </div>
         
         <img src="../img/portada.png".png alt="" class="monumento">
         <div>
-            <a href="" class="acceder">Acceder</a>
+            <a href="../" class="acceder">Acceder</a>
         </div>
     </main>
     

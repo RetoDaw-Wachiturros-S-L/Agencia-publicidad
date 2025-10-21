@@ -44,7 +44,7 @@ h1 {
 
 /* Contenedor del formulario */
 #form-container {
-  border-radius: 1em;
+  border-radius: 3em;
   padding: 2em;
   width: 100%;
   max-width: 525px;
