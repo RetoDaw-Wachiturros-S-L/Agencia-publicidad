@@ -1,40 +1,43 @@
 <?php
 namespace AgenciaPublicidad\Models;
+
 use DateTime;
-use AgenciaPublicidad\Models\UsuarioRegistrado;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
 
-class Comerciante extends UsuarioRegistrado {
-    private string $nombreEmpresa;
-    private string $nifEmpresa;
-    private string $comentarioEmpresa;
-    private string $numeroEmpresa;
-    private DateTime $fechaAltaComerciante;
+// Cargar la clase padre si no existe autoloader
+require_once __DIR__ . '/UsuarioRegistrado.php';
+require_once __DIR__ . '/TipoPersonaEnum.php';
 
-    public function __construct(
-        string $nombre,
-        string $apellido,
-        string $email,
-        string $password,
-        DateTime $fechaInscripcion,
-        string $fotoPerfil,
-        TipoPersonaEnum $tipo,
-        string $nombreEmpresa,
-        string $nifEmpresa,
-        string $comentarioEmpresa,
-        string $numeroEmpresa,
-        DateTime $fechaAltaComerciante
-    ) {
+use AgenciaPublicidad\Models\UsuarioRegistrado;
+
+class Comerciante extends UsuarioRegistrado {
+    private ?int $idComerciante;
+    private ?string $nombreEmpresa;
+    private ?string $nifEmpresa;
+    private ?string $comentarioEmpresa;
+    private ?string $numeroEmpresa;
+    private ?DateTime $fechaAltaComerciante;
+
+    public function __construct(?int $idUsuario, string $nombre, ?string $apellido, string $email, string $password, ?DateTime $fechaInscripcion, ?string $fotoPerfil, TipoPersonaEnum $tipo, ?int $idComerciante,  ?string $nombreEmpresa, ?string $nifEmpresa, ?string $comentarioEmpresa, ?string $numeroEmpresa, ?DateTime $fechaAltaComerciante) {
         // Llamada al constructor padre con los parámetros de UsuarioRegistrado
-        parent::__construct($nombre, $apellido, $email, $password, $fechaInscripcion, $fotoPerfil, $tipo);
+        parent::__construct($idUsuario, $nombre, $apellido, $email, $password, $fechaInscripcion, $fotoPerfil, $tipo);
 
         // Inicializar campos específicos de Comerciante
+        $this->idComerciante = $idComerciante;
         $this->nombreEmpresa = $nombreEmpresa;
         $this->nifEmpresa = $nifEmpresa;
         $this->comentarioEmpresa = $comentarioEmpresa;
         $this->numeroEmpresa = $numeroEmpresa;
         $this->fechaAltaComerciante = $fechaAltaComerciante;
     }
+    public function getIdComerciante():int{
+        return $this->idComerciante;
+    }
+    
+    public function setIdComerciante($id):void{
+        $this->idComerciante = $id;
+    }
+
     public function getEmail(): string {
         return parent::getEmail();
     }

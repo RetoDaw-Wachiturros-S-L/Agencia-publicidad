@@ -1,6 +1,7 @@
 <?php 
 //CRUD de tabla usuarios
 namespace AgenciaPublicidad\Models;
+use AgenciaPublicidad\Models\dataBase\DBCon;
 
 require_once __DIR__ . '/DBCon.php';
 
@@ -52,22 +53,59 @@ class DBUser {
     }
     
 
-    public function comprobarUsuario($email,$contrasena) {
+    public function comprobarUsuario($email, $contrasena): ?UsuarioRegistrado {
         $pdo = DBCon::getConnection();
-        $sql = "SELECT * FROM usuarios WHERE email = :email";
+        $sql = "SELECT id, nombre, apellido, email, password_hash, fecha_inscripcion, foto_perfil, tipo_usuario FROM usuarios WHERE email = :email";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':email', $email);
         $stmt->execute();
         $usuario = $stmt->fetch(\PDO::FETCH_ASSOC);
+
         if ($usuario && isset($usuario['password_hash'])) {
-            if (password_verify($contrasena, $usuario['password_hash'])==1){
-                return $usuario;
-            } else {
-                return "";
+            if (password_verify($contrasena, $usuario['password_hash'])) {
+                return new UsuarioRegistrado(
+                    (int)$usuario['id'],
+                    $usuario['nombre'],
+                    $usuario['apellido'],
+                    $usuario['email'],
+                    $usuario['password_hash'],
+                    new \DateTime($usuario['fecha_inscripcion']),
+                    $usuario['foto_perfil'] ?? null,
+                    TipoPersonaEnum::from($usuario['tipo_usuario'])
+                );
             }
-        } else {
-            return "";
-        }
+        } 
+        return null;   
+    }
+
+    public function usuarioComerciante($usuarioRegistrado) :Comerciante|null{
+        $pdo = DBCon::getConnection();
+        $sql = "SELECT id AS id_comerciante, id_usuario, nombre_empresa, nif_empresa, comentario_empresa,
+        num_telefono, comerciante_desde FROM comerciantes WHERE id_usuario = :id_usuario";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":id_usuario", $usuarioRegistrado->getIdUsuario());
+        $stmt->execute();
+        
+        $comerciante = $stmt->fetch(\PDO::FETCH_ASSOC);
+        
+        if(!$comerciante) return null;
+        
+        return new Comerciante(
+            $usuarioRegistrado->getIdUsuario(),
+            $usuarioRegistrado->getNombre(),
+            $usuarioRegistrado->getApellido(),
+            $usuarioRegistrado->getEmail(),
+            $usuarioRegistrado->getPassword(),
+            $usuarioRegistrado->getFecha_inscripcion(),
+            $usuarioRegistrado->getFoto_perfil(),
+            $usuarioRegistrado->getTipo(),
+            $comerciante['id_comerciante'],
+            $comerciante['nombre_empresa'],
+            $comerciante['nif_empresa'],
+            $comerciante['comentario_empresa'],
+            $comerciante['num_telefono'],
+            new \DateTime($comerciante['comerciante_desde']),
+        );
     }
 
 }

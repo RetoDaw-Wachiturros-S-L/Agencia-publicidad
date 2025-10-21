@@ -1,0 +1,110 @@
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'DM Sans', sans-serif;
+  color: #154C7E;
+  
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 3em;
+
+}
+.logo{
+    height: 4em;
+    width: auto;
+}
+#buscar{
+    height: 2em;
+    width: 70vh;
+
+
+}
+.login{
+    height: 2em;
+    width: auto;
+
+}
+#btnLogin{
+    height: 3.3em;
+    width: auto;
+}
+.lampara{
+    height: 6em;
+    width: auto;
+    position: relative;
+    top: -3em;
+}
+main{
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+}
+hr{
+    margin: auto;
+    display: flex;
+    width: 150vh;
+    height: 1px;
+    border: none;
+    background-color: rgb(116, 116, 116);
+    filter: blur(2px);
+}
+.persona, .campana, .corazon{
+    height: 2em;
+    width: auto;
+
+}
+.search{
+    border-radius: 50px;
+    border: 1px solid #154C7E;
+    background-color: #FFF5E6;
+    width: 100%;
+    height: 3em;
+    background-image: url(../img/lupa.png);
+    background-size: 2.5em;
+    background-repeat: no-repeat;
+    background-position: right 0.2em center;
+    padding-left: 1em;
+}
+.boton{
+    height: 3.5em;
+    width: auto;
+}
+img{
+    width: auto;
+
+}
+body {
+  background-color: #FFF5E6;
+}
+
+/* ====== ESTILOS GENERALES ====== */
+
+.acceder {
+  text-decoration: none;
+  color: #154C7E;
+  font-weight: bolder;
+  font-size: 1.7em;
+  border: 2px solid #154C7E;
+  padding: 0.3em 4em;
+  max-width: 5em;
+  max-height: 1.3em;
+  background-color: #FFF5E6;
+  border-radius: 15px;
+  box-shadow: 8px 8px 0px #154C7E;
+  transition: all 0.2s ease-in-out;
+}
+
+.acceder:hover {
+  background-color: #fcf0de;
+  transform: translateY(-4px);
+  box-shadow: 10px 10px 0px #0F3B61;
+}
+

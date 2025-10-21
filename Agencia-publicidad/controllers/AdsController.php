@@ -1,29 +1,58 @@
 <?php 
-namespace Agenciapublicidad\Agenciapublicidad\Controllers;
-use Agenciapublicidad\Models\Anuncio;
+namespace AgenciaPublicidad\Controllers;
+
+use AgenciaPublicidad\Utils;
+
+require_once __DIR__ . '/../utils/auth_helper.php';
+require_once __DIR__ . '/../models/Anuncio.php';
+require_once __DIR__ . '/../models/dataBase/AnunciosDB.php';
+
+use AgenciaPublicidad\Models\Anuncio;
 use AgenciaPublicidad\Models\DataBase\AnunciosDB;
 
 class AdsController{
-    private AnunciosDB $dbFunctions;
+    private AnunciosDB  $dbFunctions;
     
     public function __construct(){
         $this->dbFunctions = new AnunciosDB();
     }
 
-    public function showAll():array {
-
-
-        return $this->dbFunctions->getAll();
+    public function showAll():void {
+        $anuncios = $this->dbFunctions->getAll();
+        // if($anuncios){
+        //     echo json_encode($anuncios);
+        // }else{
+        //     echo "anuncios nulos";
+        // }
+        require __DIR__ . '/../Views/ads/ads.view.php';
     }
 
-    public function show(int $id):Anuncio {
-        $id = $_POST["id"] ?? null;
+    //TODO todas las funciones deberian de devolver algo a la view de momento solo estamos depurando
+    public function show():void {
+
+        $id = $_POST["boton"] ?? null;
+        echo $id;
 
         if(!isset($id)) throw new \Exception("No se puede buscar por un id si no hay id");
         if($id == "" || $id <= 0) throw new \Exception("El id no puede ser menor a 0");
 
-        return $this->dbFunctions->getByID($id);
+		$anuncio = $this->dbFunctions->getById($id);
+
+        echo var_dump($anuncio);
     }
+
+    public function showAllByIdComerciante(){
+        $idComerciante = $_SESSION['usuario']['id_comerciante'] ?? null;
+
+        if(!isset($idComerciante)){
+            echo "El id de comerciante no existe en la BD";
+            require "views/index.php";
+        } 
+        $anunciosPorIdComerciante = $this->dbFunctions->getAllByIdComerciante($idComerciante);
+
+        require "views/ads/ads.delete.php";
+    }
+
     public function edit(int $id, Anuncio $anuncio):bool {
         //no hace falta obtener el id comerciante xq se da por hecho que la sesion del admin o del comerciante ya lo tiene implicito
         $id = $_POST["id"] ?? null;
@@ -33,6 +62,51 @@ class AdsController{
 
         return $this->dbFunctions->update($id,$anuncio);
     }
-}
 
-?>;
+    public function delete():bool {
+        $id = $_POST["idAnuncio"] ?? null;
+        if(!isset($id)) throw new \Exception("No se puede borrar un anuncio si no se proporciona un Id");
+        return $this->dbFunctions->delete($id);
+    }
+
+    public function create() {
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        
+            // Recibir todos los datos del formulario
+            $titulo = $_POST['titulo'];
+            $descripcion = $_POST['descripcion'] ?? '';
+            $urlFotos = $_POST['url_fotos'] ?? null;
+            $categorias = $_POST['categorias'] ?? null; 
+
+            // Validaciones
+
+            $errores = [];
+            
+            if (empty($titulo)) {
+                $errores[] = "El titulo es obligatorio";
+            }
+
+            // Si no hay errores, procesar el registro
+            if (empty($errores)) {
+                //crea un obj anuncio y lo manda a insert
+                $anuncio = new Anuncio(
+                    id: null, //id
+                    titulo: $titulo,
+                    urlFotos: $urlFotos,
+                    descripcion: $descripcion,
+                    fechaPublicacion: new \DateTime,
+                    anunciante: null, //usuario comerciante
+                    categorias: $categorias,                 
+                );
+
+                $this->dbFunctions->create($anuncio);
+            }
+        
+        }  else {
+            // Si no es POST, mostrar el formulario
+            include 'views/ads/ads.create.php';
+        }
+
+    }
+}

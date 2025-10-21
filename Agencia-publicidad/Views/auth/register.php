@@ -34,7 +34,7 @@ if(isset($mensaje_error)) :?>
         </p>
         <p>
             <label for='apellido'>Apellido</label>
-            <input type='text' id='apellido' name='apellido' required>
+            <input type='text' id='apellido' name='apellido'>
             <span class="error"></span>
         </p>
         <p>
@@ -88,8 +88,8 @@ if(isset($mensaje_error)) :?>
     </fieldset>
 </form>
 
-<script src="<?= BASE_URL ?>/js/register.js"></script>
 <script src="<?= BASE_URL ?>/js/validaciones.js"></script>
+<script src="<?= BASE_URL ?>/js/register.js"></script>
 
 </body>
 </html>

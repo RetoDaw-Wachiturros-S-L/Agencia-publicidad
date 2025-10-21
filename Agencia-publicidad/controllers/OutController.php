@@ -4,7 +4,7 @@ namespace AgenciaPublicidad\Controllers;
 
 use AgenciaPublicidad\Models\UsuarioRegistrado;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
-use AgenciaPublicidad\Models\DBFunctions;
+use AgenciaPublicidad\Models\dataBase\DBFunctions;
 use AgenciaPublicidad\Models\DBUser;
 use AgenciaPublicidad\Models\Comerciante;
 
@@ -37,26 +37,76 @@ class OutController {
             $email = $_POST['email'] ?? '';
             $contrasena = $_POST['contrasena'] ?? '';
             $contrasena2 = $_POST['contrasena2'] ?? '';
+            $fotoPerfil = $_POST['fotoPerfil'] ?? null;
             
-            // Validaciones básicas
-            // TODO Pasar validaciones a UTILS
             $errores = [];
+
+            // Validaciones nombre
             
             if (empty($nombre)) {
                 $errores[] = "El nombre es obligatorio";
             }
+
+            if (strlen($nombre) < 2) {
+                $errores[] = "El nombre debe tener al menos 2 caracteres";
+            }
+
+            if (strlen($nombre) > 100) {
+                $errores[] = "El nombre no puede exceder 100 caracteres";
+            }
+
+            if (!preg_match("/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s'-]+$/u", $nombre)) {
+                $errores[] = "El nombre solo puede contener letras, espacios, guiones y apóstrofes";
+            }
             
+            // Validaciones apellido
+
+            if (!empty($apellido) && strlen($apellido) < 2) {
+                $errores[] = "El apellido debe tener al menos 2 caracteres";
+            }
+
+            if (!empty($apellido) && strlen($apellido) > 100) {
+                $errores[] = "El apellido no puede exceder 100 caracteres";
+            }
+
+            if (!empty($apellido) && !preg_match("/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s'-]+$/u", $apellido)) {
+                $errores[] = "El apellido solo puede contener letras, espacios, guiones y apóstrofes";
+            }
+
+            // Validaciones email
+
             if (empty($email)) {
                 $errores[] = "El email es obligatorio";
             }
+
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errores[] = "El formato del email no es válido";
+            }
+
+            if (strlen($email) > 255) {
+                $errores[] = "El email no puede exceder 255 caracteres";
+            }
+
+            $email = strtolower(trim($email)); // Pasarlo todo a minúsculas sin espacios
             
+            // Validaciones contraseña
+
+            if (empty($contrasena)) {
+                $errores[] = "La contrasena es obligatoria";
+            }
+
             if (strlen($contrasena) < 6) {
                 $errores[] = "La contraseña debe tener al menos 6 caracteres";
+            }
+
+            if (strlen($contrasena) > 72) {
+                $errores[] = "La contraseña no puede exceder 72 caracteres";
             }
             
             if ($contrasena !== $contrasena2) {
                 $errores[] = "Las contraseñas no coinciden";
             }
+
             if (isset($_POST["es_comercio"]) && $_POST["es_comercio"]==1){
                 $nombreEmpresa = $_POST['nombreEmpresa'] ?? '';
                 $nifEmpresa = $_POST['nifEmpresa'] ?? '';
@@ -74,6 +124,8 @@ class OutController {
                 if (empty($comentarioEmpresa)) {
                     $errores[] = "El comentario sobre la empresa es obligatorio";
                 }
+
+                $comentarioEmpresa = strtolower(trim($comentarioEmpresa)); // Pasamos comentario empresa a minus y quitamos espacios
                 
                 if (empty($telefonoEmpresa)) {
                     $errores[] = "El teléfono de la empresa es obligatorio";
@@ -85,17 +137,18 @@ class OutController {
             if (empty($errores)) {
                 // Aquí guardarías en la base de datos
                 $nuevoUsuario = new UsuarioRegistrado(
+                null, // id_usuario (null para usuario nuevo)
                 $nombre,
                 $apellido,
                 $email,
                 $contrasena,
                 new \DateTime(),
-                null,
+                null, // foto_perfil
                 TipoPersonaEnum::VISITANTE); //se tiene que poner la opcion pero si no poner VISITANTE por defecto
                 $this->dbUser->guardarUsuario($nuevoUsuario);
                 
-                
-                TipoPersonaEnum::COMERCIANTE;
+                if (isset($_POST["es_comercio"]) && $_POST["es_comercio"]==1) {
+                    TipoPersonaEnum::COMERCIANTE;
                 $nuevoComerciante = new Comerciante(
                     $nombre,
                     $apellido,
@@ -112,7 +165,7 @@ class OutController {
                     );
 
                     $this->dbUser->guardarComerciante($nuevoComerciante);
-               
+                }               
                 
                 // Redirigir o mostrar éxito
                 echo "Usuario registrado exitosamente";
@@ -150,40 +203,32 @@ class OutController {
                 $errores[] = "La constraseña no puede estar vacia";
             }
             if(empty($errores)){
-                //Almaceno en usuarioData la información del usuario solicitado
-                $usuarioData = $this->dbUser->comprobarUsuario($email, $contrasena);
-                //Si existe procedo a crear la sesion
-                if (!empty($usuarioData)) {
-                    echo "Iniciaste sesión correctamente";
-                    $usuario = new UsuarioRegistrado(
-                        $usuarioData['nombre'],
-                        $usuarioData['apellido'],
-                        $usuarioData['email'],
-                        '', // No guardes la contraseña
-                        new \DateTime($usuarioData['fecha_inscripcion']), //La ia me recomienda almacenar la fecha asique pa dentro
-                        $usuarioData['foto_perfil'] ?? null, //No es para nada necesario asique tampoco lo guardamos
-                        TipoPersonaEnum::from($usuarioData['tipo_usuario'])
-                    );
+                $comerciante = null;
+                $usuario = $this->dbUser->comprobarUsuario($email, $contrasena);
 
-                    // Mostrar el estado del objeto UsuarioRegistrado DEBUG
-                    echo "<pre>Objeto UsuarioRegistrado:\n";
-                    var_dump($usuario);
-                    echo "</pre>";
+                if (!(empty($usuario))) {
 
-                    $_SESSION['usuario'] = [
-                        // 'id' => $usuarioData['id'], En cuanto se pueda, hacer función para obtener el id
-                        'email' => $usuarioData['email'],
-                        'nombre' => $usuarioData['nombre'],
-                        'apellido' => $usuarioData['apellido'],
-                        'tipo' => $usuarioData['tipo_usuario'],
-                        'login_time' => time()
+                    if($usuario->getTipo() == TipoPersonaEnum::COMERCIANTE){
+                        $comerciante = $this->dbUser->usuarioComerciante($usuario);
+                        $_SESSION['usuario'] = [
+                        'id' => $usuario->getIdUsuario(),
+                        'email' => $usuario->getEmail(),
+                        'nombre' => $usuario->getNombre(),
+                        'apellido' => $usuario->getApellido(),
+                        'tipo' => $usuario->getTipo()->value,
+                        'login_time' => time(),
+                        'id_comerciante' => $comerciante->getIdComerciante(),
                     ];
-
-                    // Mostrar el estado de la sesión DEBUG
-                    echo "<pre>Contenido de \$_SESSION['usuario']:\n";
-                    var_dump($_SESSION['usuario']);
-                    echo "</pre>";
-
+                    } else {
+                        $_SESSION['usuario'] = [
+                        'id' => $usuario->getIdUsuario(),
+                        'email' => $usuario->getEmail(),
+                        'nombre' => $usuario->getNombre(),
+                        'apellido' => $usuario->getApellido(),
+                        'tipo' => $usuario->getTipo()->value,
+                        'login_time' => time(),
+                    ];}
+                    echo "Iniciaste sesión correctamente";
                 } else { echo "Usuario o contraseña incorrectos"; }
             } else {
                 // Mostrar errores
@@ -196,7 +241,6 @@ class OutController {
     } 
 
     public function logout() {
-        echo "Entra en logout";
         if (isset($_SESSION['usuario'])) {
             echo "Sesion cerrada";
             session_destroy();

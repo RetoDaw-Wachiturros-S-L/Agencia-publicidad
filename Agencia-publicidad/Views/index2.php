@@ -9,24 +9,26 @@
     <link rel="stylesheet" href="../css/index.css"/>
 </head>
 <body>
-        <h1>🎨 Bienvenido a Nuestra Agencia de Publicidad</h1>
-        <p>Esta es la página principal de la agencia.</p>
-        <nav>
-        <a href='index.php?controller=OutController&accion=store'>📝 Registro de Usuario</a><br>
-        <a href='index.php?controller=MainController&accion=about'>ℹ️ Sobre Nosotros</a><br>
-        <a href='index.php?controller=OutController&accion=iniciarSesion'>Login de Usuario</a><br>
-        <a href='index.php?controller=OutController&accion=logout'>Logout</a><br>
-        <?php
-        if (isset($_SESSION['usuario'])) {
-                    echo "<pre>Contenido de \$_SESSION['usuario']:\n";
-                    var_dump($_SESSION['usuario']);
-                    echo "</pre>";
-        }
-        ?>
+    <header>
+        <img src="../img/logo_SSombra.png" alt="Logo de comerciantes vitoria" class="logo">
+        
+        <div id="buscar">
+            <input type="text" class="search"> 
+        </div>
+
+        <?php if (isset($isLoggedIn) && $isLoggedIn == false):?>
+            <?= $isLoggedIn ?>
+            <a href="../index.php?controller=OutController&accion=iniciarSesion" class="login">
+                <img src="../img/login.png" alt="Boton de login" id="btnLogin">
+            </a>
+        <?php endif; ?>
+
         <?php if (isset($isLoggedIn) && $isLoggedIn == true):?>
-            <p>B1</p>
-            <p>B2</p>
-            <p>B3</p>
+
+            <img src="../img/User.png" alt="persona">
+            <img src="../img/Bell.png" alt="campana">
+            <img src="../img/User.png" alt="corazon">
+
             <?php if ($isAdmin):?>
                 <p>B4</p>    
             <?php endif; ?>
@@ -68,7 +70,6 @@
         <div class="card-anuncio">
         <div class="div-tj-img">
             <img src="../img/logo.png" alt="logo">
-            <a href=""></a>
             <!-- Imagen que tendrá src autogenerado y alt igual -->
         </div>
         <h2 id="titulo-anuncio" >Titulo 1</h2>
