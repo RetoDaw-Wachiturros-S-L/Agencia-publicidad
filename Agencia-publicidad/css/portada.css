@@ -35,7 +35,7 @@
     height: 100%;
     width: 100%;
   }
-
+  
   .monumento {
     grid-area: foto;
     height: auto;
@@ -44,6 +44,7 @@
     border: none;
     border: 4px solid #154C7E;
   }
+ 
 
   /* Contenedor derecho */
   .titulo{

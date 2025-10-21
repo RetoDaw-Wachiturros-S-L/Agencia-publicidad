@@ -45,6 +45,37 @@ header {
     height: 3.3em;
     width: auto;
 }
+@media (max-width: 760px){
+  header{
+    justify-content: space-between;
+  }
+  #buscar{
+    height: 1.6em;
+    width: 22vh;
+  }
+  .logo{
+    height: 3em;
+    width: auto;  
+  }
+  #btnlogin{
+    max-width: 3em;
+
+  }
+  .login{
+    max-height: 0.5em;
+
+  }
+  .lampara{
+    max-height: 5em;
+    width: auto;
+    position: relative;
+    top: -3em;
+}
+
+
+
+
+}
 .lampara{
     height: 6em;
     width: auto;
