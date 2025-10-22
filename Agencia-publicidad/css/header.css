@@ -1,0 +1,10 @@
+header{
+    display: flex;
+    flex-direction: row;
+    color: #154C7E;
+    font-family: sans-serif;
+    min-height: 4em;
+}
+body{
+    background-color: #FFF5E6;
+}

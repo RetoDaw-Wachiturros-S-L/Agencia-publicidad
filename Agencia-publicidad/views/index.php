@@ -24,6 +24,7 @@
 </head>
 <body>
     <header>
+        <a href="<?= BASE_URL ?>/views/header.php">a</a>
         <img src="<?= BASE_URL ?>/img/logo_SSombra.png" alt="Logo de comerciantes vitoria" class="logo">
         
         <div id="buscar">
@@ -54,7 +55,7 @@
                             <span class="notification-badge"></span>
                         </a>
                         <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=verAnuncios" class="menu-item">Mis anuncios</a>
-                        <a href="#" class="menu-item">Mi perfil</a>
+                        <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=miPerfil" class="menu-item">Mi perfil</a>
                         <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=logout" class="menu-item menu-item-logout">Cerrar sesión</a>
                     </div>
                 </div>

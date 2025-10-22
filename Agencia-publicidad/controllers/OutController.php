@@ -296,5 +296,10 @@ class OutController {
         $anuncios = $this->dbUser->verMisAnuncios($id);
         require_once BASE_URL.'views/misAdds.php';
     }
+    public function miPerfil(){
+        $id=$_SESSION["usuario"]["id"];
+        $perfil = $this->dbUser->verMisAnuncios($id);
+        require_once BASE_URL.'views/misAdds.php';
+    }
 }
 ?>
