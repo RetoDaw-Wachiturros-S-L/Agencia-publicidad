@@ -265,8 +265,11 @@ class OutController {
     }
     public function favourites(){
         $id=$_SESSION["usuario"]["id"];
-        
+        $anuncios = $this->dbUser->sacarfavoritos($id);
+        require_once BASE_URL.'views/favourites.php';
+            
     }
+
     
     
 
