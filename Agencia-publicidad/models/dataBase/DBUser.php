@@ -122,10 +122,10 @@ class DBUser {
             WHERE f.id_usuario = :id_usuario";
 
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(":id_usuario", $id, PDO::PARAM_INT);
+    $stmt->bindValue(":id_usuario", $id, \PDO::PARAM_INT);
     $stmt->execute();
 
-    $anuncios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $anuncios = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
     return $anuncios;
 }
