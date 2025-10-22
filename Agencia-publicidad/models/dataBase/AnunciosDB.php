@@ -10,8 +10,9 @@ use AgenciaPublicidad\Utils;
 require_once __DIR__ . '/../../utils/auth_helper.php';
 require_once __DIR__ . '/DBCon.php';
 require_once __DIR__ . '/../Anuncio.php';
-require_once __DIR__ . '/../Comerciante.php';
 require_once __DIR__ . '/../TipoPersonaEnum.php';
+require_once __DIR__ . '/../UsuarioRegistrado.php';
+require_once __DIR__ . '/../Comerciante.php';
 
 class AnunciosDB{
     public function getAll():array{
@@ -80,20 +81,15 @@ class AnunciosDB{
         $comerciante = null;
         if (!empty((int)$data['c_id'])) {
             $comerciante = new Comerciante(
-                (int)$data['u_id'],
-                $data['u_nombre'] ?? '',
-                $data['u_apellido'] ?? '',
-                $data['u_email'] ?? '',
-                $data['u_password_hash'] ?? '',
-                isset($data['u_fecha_inscripcion']) ? new \DateTime($data['u_fecha_inscripcion']) : new \DateTime(),
-                $data['u_foto_perfil'] ?? null,
-                TipoPersonaEnum::COMERCIANTE,
-                isset($data['c_id_comerciante']) ? (int)$data['c_id_comerciante'] : null, // ← Aquí debe ir el int
-                $data['c_nombre_empresa'] ?? '',
-                $data['c_nif_empresa'] ?? '',
-                $data['c_comentario_empresa'] ?? '',
-                $data['c_num_telefono'] ?? '',
-                isset($data['c_comerciante_desde']) ? new \DateTime($data['c_comerciante_desde']) : new \DateTime()
+                isset($data['c_id']) ? (int)$data['c_id'] : null,           // idComerciante
+                isset($data['u_id']) ? (int)$data['u_id'] : null,           // id
+                $data['u_nombre'] ?? '',                                     // nombre
+                $data['u_apellido'] ?? null,                                 // apellido
+                $data['u_email'] ?? '',                                      // email
+                $data['u_password_hash'] ?? '',                              // contrasena
+                $data['u_foto_perfil'] ?? null,                              // fotoPerfil
+                $data['c_nombre_empresa'] ?? null,                           // nombreComercio
+                $data['c_comentario_empresa'] ?? null                        // rubro
             );
         }
 
