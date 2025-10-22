@@ -15,6 +15,7 @@ class Router {
     }
     
     private static function loadController($controllerName, $action){
+        define('ACCESSED_VIA_ROUTER', true); // Evita acceder directamente por url
         // Construir ruta del archivo del controlador
         $controllerFile = "./controllers/{$controllerName}.php";
 
