@@ -4,17 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Favoritos</title>
-<<<<<<< HEAD:Agencia-publicidad/Views/favoritos.php
-</head>
-<body>
-
-
-=======
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/index.css"/>
 </head>
 <body>
->>>>>>> feat/style-add:Agencia-publicidad/views/favoritos.php
 <main>
     <?php if (!empty($anuncios)): ?>
         <div class="cards-row">
@@ -23,13 +16,9 @@
                     <div class="div-tj-img">
                         <img src="<?= BASE_URL ?>/img/logo.png" alt="logo">
                     </div>
-<<<<<<< HEAD:Agencia-publicidad/Views/favoritos.php
-                    <h2 id="titulo-anuncio" ><?= $anuncio["titulo"]?></h2>
-                    <p id="desc-anuncio"><?= $anuncio["detalles"]?></p>
-=======
+
                     <h2 id="titulo-anuncio" ><?= $anuncio["a.titulo"]?></h2>
                     <p id="desc-anuncio"><?= $anuncio["a.detalles"]?></p>
->>>>>>> feat/style-add:Agencia-publicidad/views/favoritos.php
                 </div>
             <?php endforeach; ?>
         </div>
@@ -38,11 +27,7 @@
     <?php endif; ?>
 </main>
 
-<<<<<<< HEAD:Agencia-publicidad/Views/favoritos.php
-</body>
-</html>
-=======
+
 
 </body>
 </html>
->>>>>>> feat/style-add:Agencia-publicidad/views/favoritos.php
