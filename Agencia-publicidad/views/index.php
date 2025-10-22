@@ -1,4 +1,8 @@
-<?php require_once __DIR__ . '/../utils/auth_helper.php';?>
+<?php 
+    require_once __DIR__ . '/../utils/auth_helper.php';
+    require_once __DIR__ . '/../controllers/AdsController.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,13 +18,9 @@
         
         <div id="buscar">
             <div class="search-container">
-                <input type="text" class="search" placeholder="Buscar...">
-                <select name="fruta" id="filtros">
-                    <option value="manzana">Manzana</option>
-                    <option value="banana">Banana</option>
-                    <option value="naranja">Naranja</option>
-                    <option value="kiwi">Kiwi</option>
-                </select>
+                <form action="index.php?controller=AdsController&accion=buscarByPalabra" method="post">
+                    <input type="text" class="search" placeholder="Buscar..." name="buscar_palabra">
+                </form>    
             </div>
         </div>
         
@@ -51,6 +51,7 @@
             
                 <img src="<?= BASE_URL ?>/img/Bell.png" alt="campana">
                 <img src="<?= BASE_URL ?>/img/Heart.png" alt="corazon">
+                
                 <?php if ($isAdmin):?>
                     <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=store" class="admin-register-btn" title="Registrar nuevo usuario">
                         <span class="admin-plus">+</span>
@@ -58,10 +59,7 @@
                     </a>
                 <?php endif; ?>
 
-
-            </div>
-        
-            
+            </div>            
         <?php endif; ?>
 
         <img src="<?= BASE_URL ?>/img/lampara.png" alt="Boton de cambio de tema" class="lampara">
@@ -70,47 +68,20 @@
     <hr>
     <main>
         <div class="cards-row">
-                <div class="card-anuncio">
-        <div class="div-tj-img">
-            <img src="<?= BASE_URL ?>/img/logo.png" alt="logo">
-            <!-- Imagen que tendrá src autogenerado y alt igual -->
-        </div>
-        <h2 id="titulo-anuncio" >Titulo 1</h2>
-        <p id="desc-anuncio">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus vero placeat reiciendis necessitatibus facilis reprehenderit nihil sunt omnis amet fuga assumenda, consequatur natus, blanditiis pariatur neque quam quas repellat qui!</p>
-    </div>
-
-        <div class="card-anuncio">
-        <div class="div-tj-img">
-            <img src="<?= BASE_URL ?>/img/logo.png" alt="logo">
-            <!-- Imagen que tendrá src autogenerado y alt igual -->
-        </div>
-        <h2 id="titulo-anuncio" >Titulo 1</h2>
-        <p id="desc-anuncio">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus vero placeat reiciendis necessitatibus facilis reprehenderit nihil sunt omnis amet fuga assumenda, consequatur natus, blanditiis pariatur neque quam quas repellat qui!</p>
-    </div>
-
-        <div class="card-anuncio">
-        <div class="div-tj-img">
-            <img src="<?= BASE_URL ?>/img/logo.png" alt="logo">
-            <!-- Imagen que tendrá src autogenerado y alt igual -->
-        </div>
-        <h2 id="titulo-anuncio" >Titulo 1</h2>
-        <p id="desc-anuncio">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus vero placeat reiciendis necessitatibus facilis reprehenderit nihil sunt omnis amet fuga assumenda, consequatur natus, blanditiis pariatur neque quam quas repellat qui!</p>
-    </div>
-
-        <div class="card-anuncio">
-        <div class="div-tj-img">
-            <img src="<?= BASE_URL ?>/img/logo.png" alt="logo">
-            <a href=""></a>
-            <!-- Imagen que tendrá src autogenerado y alt igual -->
-        </div>
-        <h2 id="titulo-anuncio" >Titulo 1</h2>
-        <p id="desc-anuncio">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus vero placeat reiciendis necessitatibus facilis reprehenderit nihil sunt omnis amet fuga assumenda, consequatur natus, blanditiis pariatur neque quam quas repellat qui!</p>
-    </div>
-        </div>
+            <?php foreach($anuncios as $anuncio): ?>
+            <div class="card-anuncio">
+                <div class="div-tj-img">
+                    <img src="<?= BASE_URL ?>/img/logo.png" alt="logo">
+                    <!-- Imagen que tendrá src autogenerado y alt igual -->
+                </div>
+                <h2 id="titulo-anuncio" > <?= $anuncio['titulo'] ?> </h2>
+                <p id="desc-anuncio"> <?= $anuncio['detalles'] ?? '' ?> </p>
+            </div>
                 
-
+            
+                <?php endforeach; ?>
+        </div>
     <script src="<?= BASE_URL ?>/js/index.js"></script>
     </main>
-
 </body>
 </html>
