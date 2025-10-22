@@ -1,5 +1,5 @@
 <?php
-namespace AgenciaPublicidad\Models\DataBase;
+namespace AgenciaPublicidad\Models\dataBase;
 
 require_once __DIR__ . '/../../config/config.php';
 

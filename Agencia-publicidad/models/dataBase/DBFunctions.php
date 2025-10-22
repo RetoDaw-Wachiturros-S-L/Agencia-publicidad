@@ -1,9 +1,9 @@
 <?php 
 //CRUD de tabla usuarios
-namespace AgenciaPublicidad\Models\DataBase;
+namespace AgenciaPublicidad\Models\dataBase;
 
 use AgenciaPublicidad\Models\UsuarioRegistrado;
-use AgenciaPublicidad\Models\DataBase\DBCon;
+use AgenciaPublicidad\Models\dataBase\DBCon;
 
 require_once __DIR__ . '/DBCon.php';
 require_once __DIR__ . '/../UsuarioRegistrado.php';

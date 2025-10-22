@@ -6,7 +6,7 @@ require_once __DIR__ . '/../models/Anuncio.php';
 require_once __DIR__ . '/../models/dataBase/AnunciosDB.php';
 
 use AgenciaPublicidad\Models\Anuncio;
-use AgenciaPublicidad\Models\DataBase\AnunciosDB;
+use AgenciaPublicidad\Models\dataBase\AnunciosDB;
 
 class AdsController{
     private AnunciosDB  $dbFunctions;
@@ -98,7 +98,21 @@ class AdsController{
                     categorias: $categorias,                 
                 );
 
-                $this->dbFunctions->create($anuncio);
+                try {
+                    // Verificar que el usuario sea comerciante antes de intentar crear
+                    $currentUser = $_SESSION['usuario'] ?? null;
+                    if (!$currentUser || !$currentUser['tipo']=='ADMINISTRADOR' || !$currentUser['tipo']=='COMERCIANTE') {
+                        echo "<script>alert('ERROR: Solo los comerciantes pueden crear anuncios. Tu tipo de usuario es: " . ($currentUser['tipo'] ?? 'NO DEFINIDO') . "'); window.history.back();</script>";
+                        exit;
+                    }
+                    
+                    $this->dbFunctions->create($anuncio);
+                    echo "<script>alert('Anuncio creado con éxito'); window.location.href='index.php';</script>";
+                } catch (\Exception $e) {
+                    error_log("AdsController::create - Error: " . $e->getMessage());
+                    echo "<script>alert('ERROR: " . addslashes($e->getMessage()) . "'); window.history.back();</script>";
+                    exit;
+                }
             }
         
         }  else {

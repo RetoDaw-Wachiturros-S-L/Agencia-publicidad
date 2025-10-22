@@ -1,9 +1,17 @@
 <?php 
 //CRUD de tabla usuarios
-namespace AgenciaPublicidad\Models;
+namespace AgenciaPublicidad\Models\dataBase;
+
 use AgenciaPublicidad\Models\dataBase\DBCon;
+use AgenciaPublicidad\Models\UsuarioRegistrado;
+use AgenciaPublicidad\Models\Comerciante;
+use AgenciaPublicidad\Models\TipoPersonaEnum;
+use PDO;
 
 require_once __DIR__ . '/DBCon.php';
+require_once __DIR__ . '/../UsuarioRegistrado.php';
+require_once __DIR__ . '/../Comerciante.php';
+require_once __DIR__ . '/../TipoPersonaEnum.php';
 
 class DBUser {
     

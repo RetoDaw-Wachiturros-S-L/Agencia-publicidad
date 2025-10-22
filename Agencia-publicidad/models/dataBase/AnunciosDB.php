@@ -1,8 +1,8 @@
 <?php 
-namespace AgenciaPublicidad\Models\DataBase;
+namespace AgenciaPublicidad\Models\dataBase;
 
 use AgenciaPublicidad\Models\Comerciante;
-use AgenciaPublicidad\Models\DataBase\DBCon;
+use AgenciaPublicidad\Models\dataBase\DBCon;
 use AgenciaPublicidad\Models\Anuncio;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
 use AgenciaPublicidad\Utils;
@@ -129,13 +129,24 @@ class AnunciosDB{
 
     public function create(Anuncio $anuncio):bool{
         $currentUser = $_SESSION['usuario'] ?? null;
+        
+        // Validar que el usuario esté logueado y sea comerciante
+        if (!$currentUser) {
+            error_log("AnunciosDB::create - No hay usuario en sesión");
+            throw new \Exception("Debe iniciar sesión para crear anuncios");
+        }
+        
+        if (!isset($currentUser['id_comerciante'])) {
+            error_log("AnunciosDB::create - Usuario no es comerciante. SESSION: " . var_export($currentUser, true));
+            throw new \Exception("Solo los comerciantes pueden crear anuncios");
+        }
 
         $pdo = DBCon::getConnection();
         $sql = $pdo->prepare("INSERT INTO 
                                 anuncios(id_comerciante, titulo, detalles)
                                 VALUES(:id_comerciante, :titulo, :detalles)");
                                 //Aqi faltaria con añadir TAGS y FOTOS
-        $sql->bindValue(":id_comerciante",$currentUser['id_comerciante']);
+        $sql->bindValue(":id_comerciante", $currentUser['id_comerciante']);
         $sql->bindValue(":titulo", $anuncio->getTitulo());
         $sql->bindValue(":detalles", $anuncio->getDescripcion());        
         

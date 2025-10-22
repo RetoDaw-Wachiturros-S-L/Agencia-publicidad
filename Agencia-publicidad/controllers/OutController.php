@@ -4,7 +4,7 @@ namespace AgenciaPublicidad\Controllers;
 use AgenciaPublicidad\Models\UsuarioRegistrado;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
 use AgenciaPublicidad\Models\dataBase\DBFunctions;
-use AgenciaPublicidad\Models\DBUser;
+use AgenciaPublicidad\Models\dataBase\DBUser;
 use AgenciaPublicidad\Models\Comerciante;
 use Exception;
 
