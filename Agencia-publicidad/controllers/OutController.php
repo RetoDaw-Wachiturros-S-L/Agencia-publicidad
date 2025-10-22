@@ -269,6 +269,13 @@ class OutController {
         require_once BASE_URL.'views/favourites.php';
             
     }
+    public function misAnuncios(){
+        $id=$_SESSION["usuario"]["id"];
+        $anuncios = $this->dbUser->sacarAnuncios($id);
+        require_once BASE_URL.'views/misAdds.php';
+    }
+    public function miPerfil(){
+    }
 
     
     

@@ -107,7 +107,7 @@ class DBUser {
             new \DateTime($comerciante['comerciante_desde']),
         );
     }
-    public function sacarfavoritos($id) {
+    public function sacarFavoritos($id) {
     $pdo = DBCon::getConnection();
 
     $sql = "SELECT 
@@ -128,7 +128,27 @@ class DBUser {
     $anuncios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     return $anuncios;
-}
+    }
+    public function sacarAnuncios($id) {
+    $pdo = DBCon::getConnection();
+
+    $sql = "SELECT 
+                a.titulo, 
+                a.detalles, 
+                a.fecha_publicacion
+            FROM anuncios a
+            JOIN comerciantes c ON a.id_comerciante = c.id
+            JOIN usuarios u ON c.id_usuario = u.id
+            WHERE u.id = :id_usuario";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":id_usuario", $id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $anuncios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $anuncios;
+    }
 
 
 }

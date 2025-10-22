@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Favoritos</title>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/index.css"/>
 </head>
@@ -78,11 +77,12 @@
                     </div>
                     <h2 id="titulo-anuncio" ><?= $anuncio["a.titulo"]?></h2>
                     <p id="desc-anuncio"><?= $anuncio["a.detalles"]?></p>
+                    <p id="fecha-publicacion"><?= $anuncio["a.fecha_publicacion"]?></p>
                 </div>
             <?php endforeach; ?>
         </div>
     <?php else: ?>
-        <p>No tienes anuncios favoritos todavía.</p>
+        <p>No tienes anuncios todavía.</p>
     <?php endif; ?>
 </main>
 
