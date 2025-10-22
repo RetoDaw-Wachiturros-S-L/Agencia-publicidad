@@ -1,45 +1,34 @@
 <?php
+// Ahora declarar el namespace para las funciones
 namespace Agenciapublicidad\Utils;
 
 use AgenciaPublicidad\Models\TipoPersonaEnum;
 
+// Iniciar sesión UNA SOLA VEZ antes de todo
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Definir variables GLOBALES para las vistas (ANTES del namespace)
+$GLOBALS['currentUser'] = $_SESSION['usuario'] ?? null;
+$GLOBALS['isLoggedIn'] = !empty($_SESSION['usuario']);
+$GLOBALS['isAdmin'] = $GLOBALS['isLoggedIn'] && ($_SESSION['usuario']['tipo'] ?? '') === 'ADMINISTRADOR';
+
 require_once __DIR__ . "/../models/TipoPersonaEnum.php";
 
-    // Iniciar sesión una sola vez
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
+// Funciones para usar en controladores (con namespace)
+function isLoggedIn(): bool {
+    return !empty($_SESSION['usuario']);
+}
 
-    // Función para verificar si el usuario está logueado
-    function isLoggedIn(): bool {
-        return !empty($_SESSION['usuario']);
-    }
-    
-    // Función para verificar si es admin
-    function isAdmin(): bool {
-        return isLoggedin() && ($_SESSION['usuario']['tipo'] ?? '') === 'ADMINISTRADOR';
-    }
-    $currentUser = $_SESSION['usuario'] ?? null;
+function isAdmin(): bool {
+    return isLoggedIn() && ($_SESSION['usuario']['tipo'] ?? '') === 'ADMINISTRADOR';
+}
 
-    // Funcion para obtener usuario actual
-    function getCurrentUser(): ?array {
-        if (!isLoggedIn()) {
-            return null;
-        }
-        return [
-            'id'=> $_SESSION['usuario']['id'] ?? null,
-            'email' => $_SESSION['usuario']['email'] ?? null,
-            'nombre' => $_SESSION['usuario']['nombre'] ?? null,
-            'apellido' => $_SESSION['usuario']['apellido'] ?? null,
-            'tipo' => $_SESSION['usuario']['tipo'] ?? 'COMERCIANTE',
-            'login_time' => time(),
-            'id_comerciante' => $_SESSION['usuario']['id_comerciante'] ?? null
-        ];
+function getCurrentUser(): ?array {
+    if (!isLoggedIn()) {
+        return null;
     }
-
-    // Rellenando las variables
-    $isLoggedIn = isLoggedIn();
-    $isAdmin = isAdmin();
-    $currentUser = getCurrentUser();
-
+    return $_SESSION['usuario'];
+}
 ?>
