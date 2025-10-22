@@ -58,7 +58,7 @@ main {
 
 /* Iconos del header cuando está logeado */
 header img[alt="persona"],
-header img[alt="campana"],
+header img[alt="anuncios"],
 header img[alt="corazon"] {
   width: 32px;
   height: 32px;
@@ -68,7 +68,7 @@ header img[alt="corazon"] {
 }
 
 header img[alt="persona"]:hover,
-header img[alt="campana"]:hover,
+header img[alt="anuncios"]:hover,
 header img[alt="corazon"]:hover {
   transform: scale(1.1);
   opacity: 0.8;
@@ -158,61 +158,6 @@ header img[alt="corazon"]:hover {
 
 .menu-item-logout:hover {
   background-color: #FF5439;
-}
-
-/* Botón de registrar usuario para admin */
-.admin-register-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #154C7E 0%, #0F3B61 100%);
-  border: 2px solid #F16849;
-  border-radius: 30px;
-  padding: 0.3em 1em 0.3em 0.7em;
-  margin-left: 10px;
-  position: relative;
-  transition: all 0.2s ease;
-  color: #FFF;
-  font-weight: 700;
-  font-size: 1.5em;
-  gap: 0.5em;
-  box-shadow: 0 2px 8px rgba(21,76,126,0.08);
-}
-.admin-register-btn:hover {
-  background: linear-gradient(135deg, #F16849 0%, #FFCDC1 100%);
-  color: #154C7E;
-  border-color: #154C7E;
-}
-.admin-plus {
-  font-size: 2em;
-  font-weight: bold;
-  color: #FFF;
-  margin-right: 0.2em;
-  line-height: 1;
-  text-shadow: 0 2px 8px #154C7E33;
-}
-.admin-register-btn:hover .admin-plus {
-  color: #F16849;
-  text-shadow: 0 2px 8px #F16849;
-}
-.admin-tag {
-  background: #F16849;
-  color: #FFF;
-  font-size: 0.8em;
-  font-weight: 600;
-  border-radius: 12px;
-  padding: 0.2em 0.7em;
-  margin-left: 0.2em;
-  letter-spacing: 1px;
-  box-shadow: 0 1px 4px #F1684933;
-  text-transform: uppercase;
-  position: relative;
-  top: -2px;
-}
-.admin-register-btn:hover .admin-tag {
-  background: #FFF;
-  color: #F16849;
-  border: 1px solid #F16849;
 }
 
 /* Responsive */
