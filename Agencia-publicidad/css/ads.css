@@ -1,0 +1,434 @@
+/* Reset específico para eliminar el margen del body */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Mobile First - Grid Layout */
+main {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto auto;
+  place-items: center;
+  place-content: center;
+  gap: 2em;
+  padding: 1.5em;
+  background-color: #FFF5E6;
+}
+
+/* Título */
+h1 {
+  color: #154C7E;
+  font-size: 2em;
+  text-align: center;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Mensajes de error */
+.mensaje-error {
+  color: #F16849;
+  background-color: #FFCDC1;
+  border: 2px solid #F16849;
+  border-radius: 0.5em;
+  padding: 1em;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Contenedor del formulario */
+#form-container {
+  border-radius: 3em;
+  padding: 2em;
+  width: 100%;
+  max-width: 525px;
+  min-width: 350px;
+}
+
+/* Formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+
+legend {
+  display: none;
+}
+
+/* Contenedor de cada campo */
+form p {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+/* Labels */
+label {
+  color: #154C7E;
+  font-weight: 500;
+  font-size: 1em;
+  display: block; /* Mostramos labels para el formulario de anuncios */
+  margin-bottom: 0.3em;
+}
+
+/* Inputs de texto */
+input[type="text"] {
+  text-align: left;
+  background-color: #FFCDC1;
+  border: solid 2px #154C7E;
+  border-radius: 0.2em;
+  padding: 0.9em;
+  font-size: 1.3em;
+  box-shadow: none;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  width: 100%;
+}
+
+input[type="text"]:hover,
+input[type="text"]:focus {
+  transform: scale(1.05);
+  box-shadow: 9px 9px 0 #154C7E;
+  outline: none;
+}
+
+/* Textarea para descripción */
+textarea {
+  text-align: left;
+  background-color: #FFCDC1;
+  border: solid 2px #154C7E;
+  border-radius: 0.2em;
+  padding: 0.9em;
+  font-size: 1.1em;
+  font-family: inherit;
+  box-shadow: 6px 6px 0 #154C7E;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  width: 100%;
+  min-height: 200px;
+  resize: vertical;
+}
+
+textarea:hover,
+textarea:focus {
+  transform: scale(1.02);
+  box-shadow: 9px 9px 0 #154C7E;
+  outline: none;
+}
+
+/* Botón de submit */
+input[type="submit"] {
+  color: #154C7E;
+  text-align: center;
+  background-color: rgba(241, 104, 73, 0.6);
+  border: solid 2px #154C7E;
+  border-radius: 0.2em;
+  padding: 0.9em;
+  font-size: 1.3em;
+  font-weight: 600;
+  box-shadow: 6px 6px 0 2px #F16849;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1em;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+  transform: scale(1.05);
+  box-shadow: 9px 9px 0 2px #F16849;
+}
+
+/* Mensajes de error de validación */
+span.error {
+  display: none;
+  background: linear-gradient(135deg, #FFE5E0 0%, #FFCDC1 100%);
+  color: #C44230;
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  border-radius: 0.3em;
+  border-left: 4px solid #F16849;
+  text-align: left;
+  margin-top: 0.3em;
+  box-shadow: 0 2px 4px rgba(241, 104, 73, 0.2);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.input-error {
+  border-color: #F16849 !important;
+  box-shadow: 6px 6px 0 #F16849 !important;
+  background-color: #FFE5E0 !important;
+}
+
+/* Pantallas más grandes */
+@media screen and (min-width: 768px) {
+  main {
+    padding: 2em;
+  }
+
+  h1 {
+    font-size: 2.5em;
+    margin-top: 0.5em;
+  }
+
+  #form-container {
+    padding: 2.5em;
+    max-width: 800px;
+    min-width: 600px;
+  }
+
+  input[type="text"] {
+    padding: 1em;
+    font-size: 1.5em;
+    box-shadow: 9px 9px 0 #154C7E;
+  }
+
+  input[type="text"]:hover,
+  input[type="text"]:focus {
+    transform: scale(1.05);
+    box-shadow: 12px 12px 0 #154C7E;
+  }
+
+  textarea {
+    padding: 1em;
+    font-size: 1.3em;
+    min-height: 250px;
+    box-shadow: 9px 9px 0 #154C7E;
+  }
+
+  textarea:hover,
+  textarea:focus {
+    transform: scale(1.02);
+    box-shadow: 12px 12px 0 #154C7E;
+  }
+
+  input[type="submit"] {
+    padding: 1em;
+    font-size: 1.5em;
+    box-shadow: 9px 9px 0 2px #F16849;
+  }
+
+  input[type="submit"]:hover,
+  input[type="submit"]:focus {
+    transform: scale(1.05);
+    box-shadow: 12px 12px 0 2px #F16849;
+  }
+
+  label {
+    font-size: 1.2em;
+  }
+
+  span.error {
+    font-size: 0.95em;
+    padding: 0.6em 1.2em;
+  }
+}
+
+/* ============================================
+   Estilos personalizados para Summernote
+   ============================================ */
+
+/* Contenedor principal de Summernote */
+.note-editor {
+  border: 2px solid #154C7E !important;
+  border-radius: 0.2em !important;
+  box-shadow: 6px 6px 0 #154C7E !important;
+  transition: box-shadow 0.3s ease-in-out !important;
+  outline: none !important;
+}
+
+.note-editor:hover,
+.note-editor.note-frame:focus-within {
+  box-shadow: 9px 9px 0 #154C7E !important;
+  outline: none !important;
+}
+
+/* Eliminar sombras de Bootstrap que causan duplicación */
+.note-editor.note-frame,
+.note-editor .note-editing-area {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.note-editor .note-editable:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Barra de herramientas */
+.note-toolbar {
+  background-color: #FFF5E6 !important;
+  border-bottom: 2px solid #154C7E !important;
+  padding: 10px !important;
+}
+
+/* Botones de la barra de herramientas */
+.note-btn {
+  background-color: #FFCDC1 !important;
+  border: 1px solid #154C7E !important;
+  color: #154C7E !important;
+  border-radius: 0.2em !important;
+  margin: 2px !important;
+  transition: background-color 0.2s ease, color 0.2s ease !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.note-btn:hover,
+.note-btn:focus {
+  background-color: #F16849 !important;
+  color: white !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.note-btn.active {
+  background-color: #154C7E !important;
+  color: white !important;
+  box-shadow: none !important;
+}
+
+/* Grupos de botones */
+.note-btn-group {
+  margin-right: 8px !important;
+}
+
+/* Área de edición */
+.note-editable {
+  background-color: #FFCDC1 !important;
+  color: #154C7E !important;
+  padding: 15px !important;
+  min-height: 200px !important;
+  font-size: 1.1em !important;
+}
+
+.note-editable:focus {
+  background-color: #FFCDC1 !important;
+}
+
+/* Placeholder */
+.note-placeholder {
+  color: rgba(21, 76, 126, 0.5) !important;
+  font-style: italic !important;
+}
+
+/* Barra de estado - OCULTA */
+.note-statusbar {
+  display: none !important;
+}
+
+.note-status-output {
+  display: none !important;
+}
+
+.note-resizebar {
+  display: none !important;
+}
+
+/* Dropdowns y modales */
+.note-dropdown-menu {
+  background-color: #FFF5E6 !important;
+  border: 2px solid #154C7E !important;
+  border-radius: 0.2em !important;
+}
+
+.note-dropdown-item:hover {
+  background-color: #FFCDC1 !important;
+  color: #154C7E !important;
+}
+
+/* Modal de Summernote */
+.note-modal .modal-content {
+  background-color: #FFF5E6 !important;
+  border: 2px solid #154C7E !important;
+  border-radius: 0.5em !important;
+}
+
+.note-modal .modal-header {
+  background-color: #FFCDC1 !important;
+  border-bottom: 2px solid #154C7E !important;
+}
+
+.note-modal .modal-title {
+  color: #154C7E !important;
+  font-weight: 600 !important;
+}
+
+.note-modal .btn-primary {
+  background-color: #F16849 !important;
+  border-color: #154C7E !important;
+  color: white !important;
+}
+
+.note-modal .btn-primary:hover {
+  background-color: #154C7E !important;
+}
+
+/* Evitar parpadeos en el modal */
+.note-modal,
+.note-modal-backdrop,
+.modal-backdrop {
+  transition: none !important;
+  animation: none !important;
+}
+
+.note-modal.fade .modal-dialog {
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Inputs dentro del modal sin efectos que causen parpadeo */
+.note-modal input[type="text"],
+.note-modal input[type="url"] {
+  transition: border-color 0.2s ease !important;
+  transform: none !important;
+}
+
+.note-modal input[type="text"]:focus,
+.note-modal input[type="url"]:focus {
+  transform: none !important;
+}
+
+/* Pantallas más grandes */
+@media screen and (min-width: 768px) {
+  .note-editor {
+    box-shadow: 9px 9px 0 #154C7E !important;
+  }
+
+  .note-editor:hover,
+  .note-editor.note-frame:focus-within {
+    box-shadow: 12px 12px 0 #154C7E !important;
+  }
+
+  .note-editable {
+    font-size: 1.2em !important;
+    padding: 20px !important;
+  }
+}
