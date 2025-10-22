@@ -287,6 +287,8 @@ class OutController {
     public function verAnuncios(){
         $id=$_SESSION["usuario"]["id"];
         $anuncios = $this->dbUser->verMisAnuncios($id);
+        require_once BASE_URL.'views/misAdds.php';
+
         
 
     }
