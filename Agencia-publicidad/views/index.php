@@ -69,13 +69,13 @@
     <main>
         <div class="cards-row">
             <?php foreach($anuncios as $anuncio): ?>
-            <div class="card-anuncio">
+            <div class="card-anuncio" action="index.php?controller=AdsController&accion=show">
                 <div class="div-tj-img">
                     <img src="<?= BASE_URL ?>/img/logo.png" alt="logo">
                     <!-- Imagen que tendrá src autogenerado y alt igual -->
                 </div>
                 <h2 id="titulo-anuncio" > <?= $anuncio['titulo'] ?> </h2>
-                <p id="desc-anuncio"> <?= $anuncio['detalles'] ?? '' ?> </p>
+                <p id="desc-anuncio"> <?= $anuncio['detalles'] ?? 'Sin detalles' ?> </p>
             </div>
                 
             
