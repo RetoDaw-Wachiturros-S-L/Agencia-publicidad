@@ -64,7 +64,7 @@
                 
                     <!-- Menú desplegable de anuncios -->
                     <div id="adsDropdownMenu" class="ads-dropdown-menu">
-                        <a href="#" class="menu-item">Crear anuncio</a>
+                        <a href="<?= BASE_URL ?>/index.php?controller=AdsController&accion=create" class="menu-item">Crear anuncio</a>
                         <a href="#" class="menu-item">Editar mis anuncios</a>
                     </div>
                 </div>
