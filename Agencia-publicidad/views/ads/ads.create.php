@@ -31,7 +31,7 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
         
         <div id="form-container">
             <form 
-                action="../../index.php?controller=AdsController&accion=create" 
+                action="index.php?controller=AdsController&accion=create" 
                 method="post"
                 id="register"
             >
