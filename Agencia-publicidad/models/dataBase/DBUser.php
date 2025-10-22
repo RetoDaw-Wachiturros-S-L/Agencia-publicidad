@@ -30,6 +30,7 @@ class DBUser {
         
         return $stmt->execute();
     }
+
     public function guardarComerciante(Comerciante $usuario) {
         // Primero guardar como usuario normal
         $this->guardarUsuario($usuario);

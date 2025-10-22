@@ -13,7 +13,7 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
 </head>
 <body>
     <main>
-        <h1>Formulario de registro</h1>
+        <h1>Formulario de registro de nuevo usuario</h1>
 
         <?php
         // Si hay algún mensaje de error lo mostramos:
@@ -28,13 +28,13 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
                     
                     <p>
                         <label for='nombre'>Nombre</label>
-                        <input type='text' id='nombre' name='nombre' placeholder="Nombre*" required>
+                        <input type='text' id='nombre' name='nombre' placeholder="Nombre*" required maxlength="50">
                         <span class="error"></span>
                     </p>
                     
                     <p>
                         <label for='apellido'>Apellido</label>
-                        <input type='text' id='apellido' name='apellido' placeholder="Apellido">
+                        <input type='text' id='apellido' name='apellido' placeholder="Apellido" maxlength="50">
                         <span class="error"></span>
                     </p>
                     
@@ -56,7 +56,11 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
                         <span class="error"></span>
                     </p>
                     
-                    <h4>Subir foto</h4>
+                    <p>
+                        <label for="url_foto">Subir foto</label>
+                        <!-- <input type="file" name="url_fotos"> -->
+                    </p>
+                    
                     
                     <p>
                         <label for="es_comercio">¿Eres un comercio?</label>
@@ -65,14 +69,14 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
                     
                     <div id="formulario_extra">
                         <p>
-                            <label for="nombreEmpresa">Nombre de la empresa:</label>
-                            <input type="text" id="nombreEmpresa" name="nombreEmpresa" placeholder="Nombre de la empresa">
+                            <label for="nombreEmpresa">Nombre de la empresa:*</label>
+                            <input type="text" id="nombreEmpresa" name="nombreEmpresa" placeholder="Nombre de la empresa" maxlength="50" required>
                             <span class="error"></span>
                         </p>
                         
                         <p>
-                            <label for="nifEmpresa">NIF de la empresa:</label>
-                            <input type="text" id="nifEmpresa" name="nifEmpresa" placeholder="NIF de la empresa">
+                            <label for="nifEmpresa">NIF de la empresa:*</label>
+                            <input type="text" id="nifEmpresa" name="nifEmpresa" placeholder="NIF de la empresa" minlength="9" maxlength="9" required>
                             <span class="error"></span>
                         </p>
                         
