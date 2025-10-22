@@ -109,13 +109,13 @@ class AdsController{
     }
     public function buscarByPalabra(){
         $palabras = $_POST['buscar_palabra'] ?? null;
-        $ads = [];
 
         if($palabras){
             //Si el campo buscar_palabra tiene algo hará la consulta, si no hará la select de todo
-            $ads = $this->dbFunctions->getByPalabra($palabras);
+            $anuncios = $this->dbFunctions->getByPalabra($palabras);
+        }else{
+            $anuncios = $this->dbFunctions->getAll();
         }
-        $ads =$this->dbFunctions->getAll();
-        return $ads;
+        require __DIR__ . '/../views/ads/ads.view.php';
     }
 }

@@ -19,14 +19,8 @@
         <div id="buscar">
             <div class="search-container">
                 <form action="index.php?controller=AdsController&accion=buscarByPalabra" method="post">
-                    <input type="text" class="search" placeholder="Buscar..." value="">
+                    <input type="text" class="search" placeholder="Buscar..." name="buscar_palabra">
                 </form>    
-                <!-- <select name="fruta" id="filtros">
-                    <option value="manzana">Manzana</option>
-                    <option value="banana">Banana</option>
-                    <option value="naranja">Naranja</option>
-                    <option value="kiwi">Kiwi</option>
-                </select> -->
             </div>
         </div>
         
@@ -57,12 +51,14 @@
             
                 <img src="<?= BASE_URL ?>/img/Bell.png" alt="campana">
                 <img src="<?= BASE_URL ?>/img/Heart.png" alt="corazon">
+                
                 <?php if ($isAdmin):?>
                     <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=store" class="admin-register-btn" title="Registrar nuevo usuario">
                         <span class="admin-plus">+</span>
                         <span class="admin-tag">admin</span>
                     </a>
                 <?php endif; ?>
+
             </div>            
         <?php endif; ?>
 
