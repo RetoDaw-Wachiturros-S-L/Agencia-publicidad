@@ -19,10 +19,10 @@ class Router {
         // Construir ruta del archivo del controlador
         $controllerFile = "./controllers/{$controllerName}.php";
 
-        /* DEBUG: Mostrar qué archivo está buscando
-        echo "Buscando: " . $controllerFile . "<br>";
-        echo "¿Existe? " . (file_exists($controllerFile) ? "SÍ" : "NO") . "<br>";
-        */
+        // DEBUG: Mostrar qué archivo está buscando
+        // echo "Buscando: " . $controllerFile . "<br>";
+        // echo "¿Existe? " . (file_exists($controllerFile) ? "SÍ" : "NO") . "<br>";
+        //
 
         require_once $controllerFile;
         
