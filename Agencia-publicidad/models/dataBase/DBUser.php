@@ -116,55 +116,27 @@ class DBUser {
         );
     }
     public function sacarfavoritos($id) {
-    $pdo = DBCon::getConnection();
+        $pdo = DBCon::getConnection();
 
-    $sql = "SELECT 
-                a.id, 
-                a.id_comerciante, 
-                a.titulo, 
-                a.detalles, 
-                a.fecha_publicacion
-            FROM anuncios a
-            JOIN favoritos f ON a.id = f.id_anuncio
-            JOIN usuarios u ON f.id_usuario = u.id
-            WHERE f.id_usuario = :id_usuario";
+        $sql = "SELECT 
+                    a.id, 
+                    a.id_comerciante, 
+                    a.titulo, 
+                    a.detalles, 
+                    a.fecha_publicacion
+                FROM anuncios a
+                JOIN favoritos f ON a.id = f.id_anuncio
+                JOIN usuarios u ON f.id_usuario = u.id
+                WHERE f.id_usuario = :id_usuario";
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(":id_usuario", $id, PDO::PARAM_INT);
-    $stmt->execute();
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":id_usuario", $id, PDO::PARAM_INT);
+        $stmt->execute();
 
-    $anuncios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $anuncios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    return $anuncios;
-}
-
-
-    public function sacarfavoritos($id) {
-    $pdo = DBCon::getConnection();
-
-
-    $sql = "SELECT
-                a.id,
-                a.id_comerciante,
-                a.titulo,
-                a.detalles,
-                a.fecha_publicacion
-            FROM anuncios a
-            JOIN favoritos f ON a.id = f.id_anuncio
-            JOIN usuarios u ON f.id_usuario = u.id
-            WHERE f.id_usuario = :id_usuario";
-
-
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(":id_usuario", $id, \PDO::PARAM_INT);
-    $stmt->execute();
-
-
-    $anuncios = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
-
-    return $anuncios;
-   }
+        return $anuncios;
+    }
 
 
     public function verMisAnuncios($id) {
