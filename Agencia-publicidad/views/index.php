@@ -59,7 +59,16 @@
                     </div>
                 </div>
             
-                <img src="<?= BASE_URL ?>/img/ad.png" alt="anuncios">
+                <div class="ads-menu-container">
+                    <img src="<?= BASE_URL ?>/img/ad.png" alt="anuncios" id="adsMenuToggle" class="ads-icon">
+                
+                    <!-- Menú desplegable de anuncios -->
+                    <div id="adsDropdownMenu" class="ads-dropdown-menu">
+                        <a href="#" class="menu-item">Crear anuncio</a>
+                        <a href="#" class="menu-item">Editar mis anuncios</a>
+                    </div>
+                </div>
+
                 <img src="<?= BASE_URL ?>/img/Heart.png" alt="corazon">
                 
                 <?php if ($isAdmin):?>

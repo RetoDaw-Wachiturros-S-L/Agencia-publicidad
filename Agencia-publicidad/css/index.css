@@ -159,9 +159,51 @@ header img[alt="corazon"]:hover {
   background-color: #FF5439;
 }
 
+/* Menú desplegable de anuncios (idéntico al de usuario) */
+.ads-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.ads-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.ads-icon:hover {
+  transform: scale(1.1);
+}
+
+.ads-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background-color: #FFF5E6;
+  border: 2px solid #0F3B61;
+  border-radius: 25px;
+  min-width: 250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.ads-dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
-  .user-dropdown-menu {
+  .user-dropdown-menu,
+  .ads-dropdown-menu {
     right: -20px;
     min-width: 220px;
   }
