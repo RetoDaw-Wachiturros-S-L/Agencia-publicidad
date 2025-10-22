@@ -1,6 +1,16 @@
-<?php 
+<?php
     require_once __DIR__ . '/../utils/auth_helper.php';
     require_once __DIR__ . '/../controllers/AdsController.php';
+    
+    // Extraer variables globales al scope local
+    $currentUser = $GLOBALS['currentUser'] ?? null;
+    $isLoggedIn = $GLOBALS['isLoggedIn'] ?? false;
+    $isAdmin = $GLOBALS['isAdmin'] ?? false;
+    
+    // DEBUG TEMPORAL - Eliminar después
+    echo "<!-- DEBUG: isLoggedIn = " . var_export($isLoggedIn, true) . " -->";
+    echo "<!-- DEBUG: isAdmin = " . var_export($isAdmin, true) . " -->";
+    echo "<!-- DEBUG: SESSION = " . var_export($_SESSION['usuario'] ?? 'NO HAY', true) . " -->";
 ?>
 
 <!DOCTYPE html>
