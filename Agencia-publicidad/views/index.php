@@ -1,4 +1,8 @@
-<?php require_once __DIR__ . '/../utils/auth_helper.php';?>
+<?php 
+    require_once __DIR__ . '/../utils/auth_helper.php';
+    require_once __DIR__ . '/../controllers/AdsController.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,13 +18,15 @@
         
         <div id="buscar">
             <div class="search-container">
-                <input type="text" class="search" placeholder="Buscar...">
-                <select name="fruta" id="filtros">
+                <form action="index.php?controller=AdsController&accion=buscarByPalabra" method="post">
+                    <input type="text" class="search" placeholder="Buscar..." value="">
+                </form>    
+                <!-- <select name="fruta" id="filtros">
                     <option value="manzana">Manzana</option>
                     <option value="banana">Banana</option>
                     <option value="naranja">Naranja</option>
                     <option value="kiwi">Kiwi</option>
-                </select>
+                </select> -->
             </div>
         </div>
         
@@ -66,59 +72,20 @@
     <hr>
     <main>
         <div class="cards-row">
+            <?php foreach($anuncios as $anuncio): ?>
             <div class="card-anuncio">
                 <div class="div-tj-img">
                     <img src="<?= BASE_URL ?>/img/logo.png" alt="logo">
                     <!-- Imagen que tendrá src autogenerado y alt igual -->
                 </div>
-                <h2 id="titulo-anuncio" >Titulo 1</h2>
-                <p id="desc-anuncio">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus vero placeat reiciendis necessitatibus facilis reprehenderit nihil sunt omnis amet fuga assumenda, consequatur natus, blanditiis pariatur neque quam quas repellat qui!</p>
+                <h2 id="titulo-anuncio" > <?= $anuncio['titulo'] ?> </h2>
+                <p id="desc-anuncio"> <?= $anuncio['detalles'] ?? '' ?> </p>
             </div>
-            <div class="card-anuncio">
-    <div class="div-tj-img">
-        <img src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1" alt="Creative workspace">
-    </div>
-    <h2 id="titulo-anuncio">Diseño que Inspira</h2>
-    <p id="desc-anuncio">Transforma tu marca con diseños que capturan emociones. Nuestro equipo convierte ideas en experiencias visuales inolvidables.</p>
-</div>
-
-<div class="card-anuncio">
-    <div class="div-tj-img">
-        <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2" alt="Marketing strategy">
-    </div>
-    <h2 id="titulo-anuncio">Estrategias que Venden</h2>
-    <p id="desc-anuncio">Impulsa tus ventas con campañas publicitarias pensadas para conectar con tu audiencia. Resultados medibles desde el primer día.</p>
-</div>
-
-<div class="card-anuncio">
-    <div class="div-tj-img">
-        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" alt="Social media team">
-    </div>
-    <h2 id="titulo-anuncio">Redes Sociales al Máximo</h2>
-    <p id="desc-anuncio">Gestionamos tus redes con contenido atractivo y estrategias de crecimiento. Conecta, fideliza y convierte seguidores en clientes.</p>
-</div>
-
-<div class="card-anuncio">
-    <div class="div-tj-img">
-        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="Web development">
-    </div>
-    <h2 id="titulo-anuncio">Tu Web, Tu Mundo</h2>
-    <p id="desc-anuncio">Creamos sitios web modernos, rápidos y adaptados a tu negocio. Diseño responsive, optimización SEO y experiencia de usuario impecable.</p>
-</div>
-
-<div class="card-anuncio">
-    <div class="div-tj-img">
-        <img src="https://images.unsplash.com/photo-1559027615-5d5c6a1a3b4d" alt="Brand identity">
-    </div>
-    <h2 id="titulo-anuncio">Identidad de Marca Única</h2>
-    <p id="desc-anuncio">Construimos marcas con personalidad. Desde el logo hasta el tono de voz, cada detalle comunica quién eres y qué representas.</p>
-</div>
-
-        </div>
                 
-
+            
+                <?php endforeach; ?>
+        </div>
     <script src="<?= BASE_URL ?>/js/index.js"></script>
     </main>
-
 </body>
 </html>
