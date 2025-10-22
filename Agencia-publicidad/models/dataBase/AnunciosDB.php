@@ -152,6 +152,15 @@ class AnunciosDB{
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function getByPalabra(string $palabras) :array {
+        $pdo = DBcon::getConnection();
+        $sql = $pdo->prepare("SELECT id, id_comerciante, titulo, detalles, fecha_publicacion FROM anuncios WHERE titulo LIKE :palabra");
+        $sql->bindValue(":palabra", '%' .  $palabras . '%', \PDO::PARAM_STR);
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_ASSOC);
+    }
+        
 }
 
 

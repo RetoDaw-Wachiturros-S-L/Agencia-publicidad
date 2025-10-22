@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17232e9b-d86a-418d-b839-90fb80c0604c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6a45183e-809a-47a4-b6eb-552b6de71b93.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6a45183e-809a-47a4-b6eb-552b6de71b93/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6a45183e-809a-47a4-b6eb-552b6de71b93/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6a45183e-809a-47a4-b6eb-552b6de71b93/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6a45183e-809a-47a4-b6eb-552b6de71b93/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/controllers/AdsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/controllers/AdsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Agencia-publicidad/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/models/dataBase/AnunciosDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/models/dataBase/AnunciosDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/views/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/views/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,21 +31,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feat/style-add",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/nani"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/style-add&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/nani&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="17232e9b-d86a-418d-b839-90fb80c0604c" name="Changes" comment="" />
