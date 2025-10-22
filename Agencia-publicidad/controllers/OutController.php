@@ -1,20 +1,19 @@
 <?php
 namespace AgenciaPublicidad\Controllers;
 
-
 use AgenciaPublicidad\Models\UsuarioRegistrado;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
 use AgenciaPublicidad\Models\dataBase\DBFunctions;
 use AgenciaPublicidad\Models\DBUser;
 use AgenciaPublicidad\Models\Comerciante;
+use Exception;
 
-// Cargas directas para entornos sin autoloader
 require_once __DIR__ . '/../models/UsuarioRegistrado.php';
 require_once __DIR__ . '/../models/TipoPersonaEnum.php';
 require_once __DIR__ . '/../models/dataBase/DBFunctions.php';
 require_once __DIR__ . '/../models/dataBase/DBUser.php';
 require_once __DIR__ . '/../models/Comerciante.php';
-
+require_once __DIR__ . '/../utils/auth_helper.php';
 
 class OutController {
     
@@ -24,20 +23,18 @@ class OutController {
     public function __construct() {
         $this->dbFunctions = new DBFunctions();
         $this->dbUser = new DBUser();
-        session_start();
     }
 
     public function store() {
-        // Verificar autenticación y permisos
-        require_once __DIR__ . '/../utils/auth_helper.php';
-        
-        if (!isset($currentUser) || empty($currentUser)) {
+        // Usar las funciones del auth_helper
+        if (!\Agenciapublicidad\Utils\isLoggedIn()) {
+            http_response_code(403);
             echo "Error: Usuario no autenticado";
             require_once __DIR__ . '/../views/errors/403.php';
             exit;
         }
 
-        if ($currentUser['tipo'] !== 'ADMINISTRADOR') {
+        if (!\Agenciapublicidad\Utils\isAdmin()) {
             http_response_code(403);
             echo "Error: No tienes permisos para registrar usuarios";
             require_once __DIR__ . '/../views/errors/403.php';
@@ -58,7 +55,6 @@ class OutController {
             $errores = [];
 
             // Validaciones nombre
-            
             if (empty($nombre)) {
                 $errores[] = "El nombre es obligatorio";
             }
@@ -76,7 +72,6 @@ class OutController {
             }
             
             // Validaciones apellido
-
             if (!empty($apellido) && strlen($apellido) < 2) {
                 $errores[] = "El apellido debe tener al menos 2 caracteres";
             }
@@ -90,7 +85,6 @@ class OutController {
             }
 
             // Validaciones email
-
             if (empty($email)) {
                 $errores[] = "El email es obligatorio";
             }
@@ -103,12 +97,11 @@ class OutController {
                 $errores[] = "El email no puede exceder 255 caracteres";
             }
 
-            $email = strtolower(trim($email)); // Pasarlo todo a minúsculas sin espacios
+            $email = strtolower(trim($email));
             
             // Validaciones contraseña
-
             if (empty($contrasena)) {
-                $errores[] = "La contrasena es obligatoria";
+                $errores[] = "La contraseña es obligatoria";
             }
 
             if (strlen($contrasena) < 6) {
@@ -123,74 +116,76 @@ class OutController {
                 $errores[] = "Las contraseñas no coinciden";
             }
 
-            if (isset($_POST["es_comercio"]) && $_POST["es_comercio"]==1){
+            // Validaciones para comerciante
+            $esComercio = isset($_POST["es_comercio"]) && $_POST["es_comercio"] == 1;
+            $nombreEmpresa = null;
+            $comentarioEmpresa = null;
+
+            if ($esComercio) {
                 $nombreEmpresa = $_POST['nombreEmpresa'] ?? '';
-                $nifEmpresa = $_POST['nifEmpresa'] ?? '';
                 $comentarioEmpresa = $_POST['comentarioEmpresa'] ?? '';
-                $telefonoEmpresa = $_POST['telefonoEmpresa'] ?? '';
 
                 if (empty($nombreEmpresa)) {
                     $errores[] = "El nombre de la empresa es obligatorio";
-                }  
-                
-                if (empty($nifEmpresa)) {
-                    $errores[] = "El NIF de la empresa es obligatorio";
                 }
                 
                 if (empty($comentarioEmpresa)) {
-                    $errores[] = "El comentario sobre la empresa es obligatorio";
+                    $errores[] = "El rubro/comentario sobre la empresa es obligatorio";
                 }
 
-                $comentarioEmpresa = strtolower(trim($comentarioEmpresa)); // Pasamos comentario empresa a minus y quitamos espacios
-                
-                if (empty($telefonoEmpresa)) {
-                    $errores[] = "El teléfono de la empresa es obligatorio";
-                }
-
+                $comentarioEmpresa = htmlspecialchars(trim($comentarioEmpresa), ENT_QUOTES, 'UTF-8');
             }
             
             // Si no hay errores, procesar el registro
             if (empty($errores)) {
-
-                //Sanitizar datos
-                $nombre = htmlspecialchars(trim($_POST['nombre'] ?? ''), ENT_QUOTES, 'UTF-8');
-                $email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
-                
-                // Aquí guardarías en la base de datos
-                $nuevoUsuario = new UsuarioRegistrado(
-                null, // id_usuario (null para usuario nuevo)
-                $nombre,
-                $apellido,
-                $email,
-                $contrasena,
-                new \DateTime(),
-                null, // foto_perfil
-                TipoPersonaEnum::VISITANTE); //se tiene que poner la opcion pero si no poner VISITANTE por defecto
-                $this->dbUser->guardarUsuario($nuevoUsuario);
-                
-                if (isset($_POST["es_comercio"]) && $_POST["es_comercio"]==1) {
-                    TipoPersonaEnum::COMERCIANTE;
-                $nuevoComerciante = new Comerciante(
-                    $nombre,
-                    $apellido,
-                    $email,
-                    $contrasena,
-                    new \DateTime(),
-                    "",
-                    TipoPersonaEnum::COMERCIANTE,
-                    $nombreEmpresa,
-                    $nifEmpresa,
-                    $comentarioEmpresa,
-                    $telefonoEmpresa,
-                    new \DateTime(),
-                    );
-
-                    $this->dbUser->guardarComerciante($nuevoComerciante);
-                }               
-                
-                header("Location: index.php");
-                exit;
-                
+                try {
+                    // Sanitizar datos
+                    $nombre = htmlspecialchars(trim($nombre), ENT_QUOTES, 'UTF-8');
+                    $apellido = htmlspecialchars(trim($apellido), ENT_QUOTES, 'UTF-8');
+                    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+                    
+                    // Determinar el tipo de usuario
+                    $tipoUsuario = $esComercio ? TipoPersonaEnum::COMERCIANTE : TipoPersonaEnum::VISITANTE;
+                    
+                    // Si es comerciante, crear directamente como Comerciante
+                    if ($esComercio) {
+                        $nuevoComerciante = new Comerciante(
+                            null,               // idComerciante (será generado por la BD)
+                            null,               // id (será generado por la BD)
+                            $nombre,
+                            $apellido,
+                            $email,
+                            $contrasena,
+                            $fotoPerfil,
+                            $nombreEmpresa,     // nombreComercio
+                            $comentarioEmpresa 
+                        );
+                        
+                        $this->dbUser->guardarComerciante($nuevoComerciante);
+                    } else {
+                        // Si es visitante normal
+                        $nuevoUsuario = new UsuarioRegistrado(
+                            null,
+                            $nombre,
+                            $apellido,
+                            $email,
+                            $contrasena,
+                            $tipoUsuario,
+                            $fotoPerfil
+                        );
+                        
+                        $this->dbUser->guardarUsuario($nuevoUsuario);
+                    }
+                    
+                    // Redirigir o mostrar éxito
+                    header('Location: index.php?success=Usuario registrado exitosamente');
+                    exit;
+                    
+                } catch (Exception $e) {
+                    $errores[] = "Error al guardar el usuario: " . $e->getMessage();
+                    $mensaje_error = implode("<br>", $errores);
+                    include 'views/auth/register.php';
+                }
             } else {
                 // Mostrar errores
                 $mensaje_error = implode("<br>", $errores);
@@ -202,59 +197,64 @@ class OutController {
             include 'views/auth/register.php';
         }
     }
-    
-    private function guardarUsuario($nuevoUsuario) {
-        $this->dbUser->guardarUsuario($nuevoUsuario);
-    }
 
-    public function iniciarSesion(){
+    public function iniciarSesion() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
             $email = $_POST['email'] ?? '';
             $contrasena = $_POST['contrasena'] ?? '';
             $errores = [];
-
 
             if (empty($email)) {
                 $errores[] = "El email es obligatorio";
             }
             
             if (empty($contrasena)) {
-                $errores[] = "La constraseña no puede estar vacia";
+                $errores[] = "La contraseña no puede estar vacía";
             }
-            if(empty($errores)){
-                $comerciante = null;
-                $usuario = $this->dbUser->comprobarUsuario($email, $contrasena);
+            
+            if (empty($errores)) {
+                try {
+                    $usuario = $this->dbUser->comprobarUsuario($email, $contrasena);
 
-                if (!(empty($usuario))) {
+                    if (!empty($usuario)) {
+                        // Iniciar sesión
+                        if (session_status() === PHP_SESSION_NONE) {
+                            session_start();
+                        }
 
-                    if($usuario->getTipo() == TipoPersonaEnum::COMERCIANTE){
-                        $comerciante = $this->dbUser->usuarioComerciante($usuario);
                         $_SESSION['usuario'] = [
-                        'id' => $usuario->getIdUsuario(),
-                        'email' => $usuario->getEmail(),
-                        'nombre' => $usuario->getNombre(),
-                        'apellido' => $usuario->getApellido(),
-                        'tipo' => $usuario->getTipo()->value,
-                        'login_time' => time(),
-                        'id_comerciante' => $comerciante->getIdComerciante(),
-                    ];
-                    } else {
-                        $_SESSION['usuario'] = [
-                        'id' => $usuario->getIdUsuario(),
-                        'email' => $usuario->getEmail(),
-                        'nombre' => $usuario->getNombre(),
-                        'apellido' => $usuario->getApellido(),
-                        'tipo' => $usuario->getTipo()->value,
-                        'login_time' => time(),
-                    ];}
-                    
-                    header("Location: index.php");
-                    exit;
+                            'id' => $usuario->getIdUsuario(),
+                            'email' => $usuario->getEmail(),
+                            'nombre' => $usuario->getNombre(),
+                            'apellido' => $usuario->getApellido(),
+                            'tipo' => $usuario->getTipo()->value,
+                            'login_time' => time(),
+                        ];
 
-                } else { echo "Usuario o contraseña incorrectos"; }
+                        // Si es comerciante, obtener datos adicionales
+                        if ($usuario->getTipo()->value === 'COMERCIANTE') {
+                            $comerciante = $this->dbUser->usuarioComerciante($usuario);
+                            
+                            if ($comerciante && $comerciante->getIdComerciante()) {
+                                $_SESSION['usuario']['id_comerciante'] = $comerciante->getIdComerciante();
+                                $_SESSION['usuario']['nombre_comercio'] = $comerciante->getNombreComercio();
+                                $_SESSION['usuario']['rubro'] = $comerciante->getRubro();
+                            }
+                        }
+                        
+                        header('Location: index.php');
+                        exit;
+                    } else { 
+                        $errores[] = "Usuario o contraseña incorrectos";
+                        $mensaje_error = implode("<br>", $errores);
+                        include 'views/auth/login.php';
+                    }
+                } catch (Exception $e) {
+                    $errores[] = "Error al iniciar sesión: " . $e->getMessage();
+                    $mensaje_error = implode("<br>", $errores);
+                    include 'views/auth/login.php';
+                }
             } else {
-                // Mostrar errores
                 $mensaje_error = implode("<br>", $errores);
                 include 'views/auth/login.php';
             }
@@ -264,13 +264,33 @@ class OutController {
     } 
 
     public function logout() {
-        if (isset($_SESSION['usuario'])) {
-            session_destroy();
-            header('Location: ?index.php&controller=MainController&action=index');
-            exit;
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
+        
+        session_unset();
+        session_destroy();
+        
+        // Regenerar ID de sesión por seguridad
+        session_start();
+        session_regenerate_id(true);
+        
+        header('Location: index.php');
+        exit;
+    }
+    public function favourites(){
+        $id=$_SESSION["usuario"]["id"];
+        $anuncios = $this->dbUser->sacarfavoritos($id);
+        require_once BASE_URL.'views/favourites.php';
+           
+    }
+    public function verAnuncios(){
+        $id=$_SESSION["usuario"]["id"];
+        $anuncios = $this->dbUser->verMisAnuncios($id);
+        
+
     }
 
-}
 
+}
 ?>

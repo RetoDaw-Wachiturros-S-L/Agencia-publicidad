@@ -1,3 +1,9 @@
+<?php
+if (!defined('ACCESSED_VIA_ROUTER')) {
+    http_response_code(403);
+    die('Acceso directo no permitido');
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
