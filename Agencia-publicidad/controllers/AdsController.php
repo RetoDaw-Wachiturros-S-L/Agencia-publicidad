@@ -24,7 +24,7 @@ class AdsController{
         // }else{
         //     echo "anuncios nulos";
         // }
-        require __DIR__ . '/../Views/ads/ads.view.php';
+        require __DIR__ . '/../views/ads/ads.view.php';
     }
 
     //TODO todas las funciones deberian de devolver algo a la view de momento solo estamos depurando
