@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("register");
-    //Aqui va la inicializacion para las imagenes
 
     form.addEventListener("submit", (e) => {
 
@@ -41,3 +40,48 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+document.getElementById('fotos').addEventListener('change', function(e) {
+    const files = e.target.files;
+    const previewContainer = document.getElementById('preview-container');
+    previewContainer.innerHTML = '';
+    
+    if (files.length > 5) {
+        alert('Máximo 5 imágenes permitidas');
+        this.value = '';
+        return;
+    }
+    
+    Array.from(files).forEach((file, index) => {
+        if (file.size > 5 * 1024 * 1024) {
+            alert(`La imagen ${file.name} excede 5MB`);
+            return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const div = document.createElement('div');
+            div.className = 'preview-item';
+            div.innerHTML = `
+                <img src="${e.target.result}" alt="Preview ${index}">
+                <button type="button" onclick="setAsPortada(${index})">
+                    Usar como portada
+                </button>
+                <span class="portada-badge" style="display: ${index === 0 ? 'block' : 'none'}">
+                    Portada
+                </span>
+            `;
+            previewContainer.appendChild(div);
+        };
+        reader.readAsDataURL(file);
+    });
+});
+
+function setAsPortada(index) {
+    document.getElementById('foto_portada').value = index;
+    
+    // Actualizar indicadores visuales
+    document.querySelectorAll('.portada-badge').forEach((badge, i) => {
+        badge.style.display = i === index ? 'block' : 'none';
+    });
+}

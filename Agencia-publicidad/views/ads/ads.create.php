@@ -33,6 +33,7 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
             <form 
                 action="index.php?controller=AdsController&accion=create" 
                 method="post"
+                enctype="multipart/form-data"
                 id="register"
             >
 
@@ -47,18 +48,32 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
                     <span class="error"></span>
 
                 </p>
-                <!-- <p>
-                    <label for="fotos">Fotos para el anuncio:</label>
-                    <img src="#" id="imgPreview" alt="Previsualizacion" width="300">
-                    <input type="file" accept="image/"></input>
+                <p>
+                    <label for="fotos">Fotos para el anuncio (máximo 5):</label>
+                    <input 
+                        type="file" 
+                        name="fotos[]" 
+                        id="fotos" 
+                        accept="image/jpeg,image/png,image/webp"
+                        multiple
+                    >
+                    <span class="help-text">Formatos: JPG, PNG, WEBP. Tamaño máximo: 5MB por imagen.</span>
                     <span class="error"></span>
                 </p>
+                <!-- Vista previa de imágenes -->
+                <div id="preview-container" class="preview-container"></div>
+    
+                <!-- Campo oculto para marcar cuál es la portada -->
+                <input type="hidden" name="foto_portada" id="foto_portada" value="0">
+                
+                <!--
                 <p>
                      Pensaba separar x comas o si no que si hay espacio ponerle una para luego añadir a un array y desde ahi hacer la insert 
                     <label for="tags">Palabras clave del anuncio:</label>
                     <input type="text" id="tags" name="tags"></input>
                     <span class="error"></span>
-                </p> -->
+                </p>
+                -->
                 <p>
                     <input type="submit" name="enviar" value="Crear Anuncio">
                 </p>
@@ -97,6 +112,54 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
                 }
             });
         });
+    </script>
+
+    <!-- Preview de imágenes -->
+    <script>
+        document.getElementById('fotos').addEventListener('change', function(e) {
+            const files = e.target.files;
+            const previewContainer = document.getElementById('preview-container');
+            previewContainer.innerHTML = '';
+            
+            if (files.length > 5) {
+                alert('Máximo 5 imágenes permitidas');
+                this.value = '';
+                return;
+            }
+            
+            Array.from(files).forEach((file, index) => {
+                if (file.size > 5 * 1024 * 1024) {
+                    alert(`La imagen ${file.name} excede 5MB`);
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const div = document.createElement('div');
+                    div.className = 'preview-item';
+                    div.innerHTML = `
+                        <img src="${e.target.result}" alt="Preview ${index}">
+                        <button type="button" onclick="setAsPortada(${index})">
+                            Usar como portada
+                        </button>
+                        <span class="portada-badge" style="display: ${index === 0 ? 'block' : 'none'}">
+                            Portada
+                        </span>
+                    `;
+                    previewContainer.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+        function setAsPortada(index) {
+            document.getElementById('foto_portada').value = index;
+            
+            // Actualizar indicadores visuales
+            document.querySelectorAll('.portada-badge').forEach((badge, i) => {
+                badge.style.display = i === index ? 'block' : 'none';
+            });
+        }
     </script>
     
 <script src="../../js/create.js"></script>

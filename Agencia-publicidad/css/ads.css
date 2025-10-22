@@ -251,6 +251,101 @@ span.error {
   }
 }
 
+/* Preview de imágenes en formulario */
+.preview-container {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    margin-top: 1em;
+}
+
+.preview-item {
+    position: relative;
+    width: 150px;
+    border: 2px solid #154C7E;
+    border-radius: 0.5em;
+    padding: 0.5em;
+}
+
+.preview-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 0.3em;
+}
+
+.preview-item button {
+    width: 100%;
+    margin-top: 0.5em;
+    padding: 0.5em;
+    background-color: #FFCDC1;
+    border: 1px solid #154C7E;
+    border-radius: 0.3em;
+    cursor: pointer;
+}
+
+.preview-item button:hover {
+    background-color: #F16849;
+    color: white;
+}
+
+.portada-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #F16849;
+    color: white;
+    padding: 0.3em 0.6em;
+    border-radius: 0.3em;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.help-text {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 0.3em;
+}
+
+/* Galería en vista de anuncio */
+.galeria-anuncio {
+    margin: 2em 0;
+}
+
+.foto-principal {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 1em;
+}
+
+.foto-principal img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5em;
+    box-shadow: 6px 6px 0 #154C7E;
+}
+
+.fotos-miniatura {
+    display: flex;
+    gap: 0.5em;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.fotos-miniatura img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 2px solid #154C7E;
+    border-radius: 0.3em;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.fotos-miniatura img:hover {
+    transform: scale(1.1);
+}
+
 /* ============================================
    Estilos personalizados para Summernote
    ============================================ */
@@ -430,5 +525,103 @@ span.error {
   .note-editable {
     font-size: 1.2em !important;
     padding: 20px !important;
+  }
+}
+
+/* ============================================
+   Estilos para Preview de Imágenes
+   ============================================ */
+
+/* Input de archivo */
+input[type="file"] {
+  background-color: #FFCDC1;
+  border: solid 2px #154C7E;
+  border-radius: 0.2em;
+  padding: 0.9em;
+  font-size: 1em;
+  width: 100%;
+  cursor: pointer;
+}
+
+input[type="file"]:hover {
+  background-color: #FFF5E6;
+}
+
+.help-text {
+  font-size: 0.85em;
+  color: #154C7E;
+  margin-top: 0.3em;
+  display: block;
+  font-style: italic;
+}
+
+/* Preview de imágenes en formulario */
+.preview-container {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  margin-top: 1em;
+  padding: 1em 0;
+}
+
+.preview-item {
+  position: relative;
+  width: 150px;
+  border: 2px solid #154C7E;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  background-color: #FFF5E6;
+  box-shadow: 3px 3px 0 #154C7E;
+}
+
+.preview-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 0.3em;
+  border: 1px solid #154C7E;
+}
+
+.preview-item button {
+  width: 100%;
+  margin-top: 0.5em;
+  padding: 0.5em;
+  background-color: #FFCDC1;
+  border: 1px solid #154C7E;
+  border-radius: 0.3em;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #154C7E;
+  transition: all 0.2s ease;
+}
+
+.preview-item button:hover {
+  background-color: #F16849;
+  color: white;
+  transform: scale(1.05);
+}
+
+.portada-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #F16849;
+  color: white;
+  padding: 0.3em 0.6em;
+  border-radius: 0.3em;
+  font-size: 0.8em;
+  font-weight: bold;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive para preview */
+@media screen and (min-width: 768px) {
+  .preview-item {
+    width: 180px;
+  }
+
+  .preview-item img {
+    height: 180px;
   }
 }
