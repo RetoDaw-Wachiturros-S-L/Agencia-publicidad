@@ -1,31 +1,34 @@
 <?php
+// Ahora declarar el namespace para las funciones
 namespace Agenciapublicidad\Utils;
 
 use AgenciaPublicidad\Models\TipoPersonaEnum;
 
+// Iniciar sesión UNA SOLA VEZ antes de todo
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Definir variables GLOBALES para las vistas (ANTES del namespace)
+$GLOBALS['currentUser'] = $_SESSION['usuario'] ?? null;
+$GLOBALS['isLoggedIn'] = !empty($_SESSION['usuario']);
+$GLOBALS['isAdmin'] = $GLOBALS['isLoggedIn'] && ($_SESSION['usuario']['tipo'] ?? '') === 'ADMINISTRADOR';
+
 require_once __DIR__ . "/../models/TipoPersonaEnum.php";
 
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
+// Funciones para usar en controladores (con namespace)
+function isLoggedIn(): bool {
+    return !empty($_SESSION['usuario']);
+}
+
+function isAdmin(): bool {
+    return isLoggedIn() && ($_SESSION['usuario']['tipo'] ?? '') === 'ADMINISTRADOR';
+}
+
+function getCurrentUser(): ?array {
+    if (!isLoggedIn()) {
+        return null;
     }
-
-    $isLoggedIn = !empty($_SESSION['usuario']);
-    $currentUser = $_SESSION['usuario'] ?? null;
-
-    $isAdmin = false;
-
-    if ($isLoggedIn) {
-        $currentUser = [
-            'id'=> $_SESSION['usuario']['id'] ?? null,
-            'email' => $_SESSION['usuario']['email'] ?? null,
-            'nombre' => $_SESSION['usuario']['nombre'] ?? null,
-            'apellido' => $_SESSION['usuario']['apellido'] ?? null,
-            'tipo' => $_SESSION['usuario']['tipo'] ?? TipoPersonaEnum::COMERCIANTE,
-            'login_time' => time(),
-            'id_comerciante' => $_SESSION['usuario']['id_comerciante']
-        ];
-
-        $isAdmin = $currentUser['tipo'] == TipoPersonaEnum::ADMINISTRADOR;
-    }
-
+    return $_SESSION['usuario'];
+}
 ?>
