@@ -104,5 +104,58 @@ class DBUser {
         );
     }
 
+    public function sacarfavoritos($id) {
+    $pdo = DBCon::getConnection();
+
+
+    $sql = "SELECT
+                a.id,
+                a.id_comerciante,
+                a.titulo,
+                a.detalles,
+                a.fecha_publicacion
+            FROM anuncios a
+            JOIN favoritos f ON a.id = f.id_anuncio
+            JOIN usuarios u ON f.id_usuario = u.id
+            WHERE f.id_usuario = :id_usuario";
+
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":id_usuario", $id, PDO::PARAM_INT);
+    $stmt->execute();
+
+
+    $anuncios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+    return $anuncios;
+   }
+
+
+    public function verMisAnuncios($id) {
+        $pdo = DBCon::getConnection();
+
+
+        $sql = "SELECT 
+                    a.titulo,
+                    a.detalles,
+                    a.fecha_publicacion 
+                FROM anuncios a
+                JOIN comerciantes c ON a.id_comerciante = c.id
+                JOIN usuarios u ON c.id_usuario  =  u.id";
+
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":id_usuario", $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+
+        $anuncios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+        return $anuncios;
+    }
+
+
 }
 ?>

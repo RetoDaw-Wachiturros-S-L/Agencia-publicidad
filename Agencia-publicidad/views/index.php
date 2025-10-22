@@ -48,12 +48,12 @@
                 
                     <!-- Menú desplegable -->
                     <div id="userDropdownMenu" class="user-dropdown-menu">
-                        <a href="#" class="menu-item">Mis favoritos</a>
+                        <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=favourites" class="menu-item">Mis favoritos</a>
                         <a href="#" class="menu-item menu-item-notification">
                             Mis mensajes
                             <span class="notification-badge"></span>
                         </a>
-                        <a href="#" class="menu-item">Mis anuncios</a>
+                        <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=verAnuncios" class="menu-item">Mis anuncios</a>
                         <a href="#" class="menu-item">Mi perfil</a>
                         <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=logout" class="menu-item menu-item-logout">Cerrar sesión</a>
                     </div>
