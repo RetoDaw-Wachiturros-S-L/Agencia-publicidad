@@ -43,6 +43,7 @@
 
         <?php if (isset($isLoggedIn) && $isLoggedIn == true):?>
             <div id="iconitos">
+                </p>
                 <div class="user-menu-container">
                     <img src="<?= BASE_URL ?>/img/User.png" alt="persona" id="userMenuToggle" class="user-icon">
                 
