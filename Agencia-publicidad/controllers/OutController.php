@@ -268,6 +268,19 @@ class OutController {
             exit;
         }
     }
+    public function favourites(){
+        $id=$_SESSION["usuario"]["id"];
+        $anuncios = $this->dbUser->sacarfavoritos($id);
+        require_once BASE_URL.'views/favourites.php';
+           
+    }
+    public function verAnuncios(){
+        $id=$_SESSION["usuario"]["id"];
+        $anuncios = $this->dbUser->verMisAnuncios($id);
+        
+
+    }
+
 
 }
 
