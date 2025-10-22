@@ -285,6 +285,7 @@ class OutController {
         header('Location: index.php');
         exit;
     }
+
     public function favourites(){
         $id=$_SESSION["usuario"]["id"];
         $anuncios = $this->dbUser->sacarfavoritos($id);
@@ -294,7 +295,7 @@ class OutController {
     public function verAnuncios(){
         $id=$_SESSION["usuario"]["id"];
         $anuncios = $this->dbUser->verMisAnuncios($id);
-        require_once BASE_URL.'views/misAdds.php';
+        require_once __DIR__.'/../views/misAdds.php';
     }
 }
 ?>

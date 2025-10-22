@@ -28,7 +28,7 @@ class AdsController{
     //TODO todas las funciones deberian de devolver algo a la view de momento solo estamos depurando
     public function show():?Anuncio {
 
-        $id = $_POST["boton"] ?? null;
+        $id = $_GET["id"] ?? null;
         echo $id;
 
         if(!isset($id)) throw new \Exception("No se puede buscar por un id si no hay id");

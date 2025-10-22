@@ -12,9 +12,12 @@
     <?php if (!empty($anuncios)): ?>
         <div class="cards-row">
             <?php foreach ($anuncios as $anuncio): ?>
+                
                 <div class="card-anuncio">
                     <div class="div-tj-img">
-                        <img src="<?= BASE_URL ?>/img/logo.png" alt="logo">
+                        <a href="index.php?controller=AdsController&accion=show" name=<?= $anuncio['id'] ?>>
+                            <img src="<?= BASE_URL ?>/img/logo.png" alt="logo">
+                        </a>
                     </div>
 
                     <h2 id="titulo-anuncio" ><?= $anuncio["a.titulo"]?></h2>

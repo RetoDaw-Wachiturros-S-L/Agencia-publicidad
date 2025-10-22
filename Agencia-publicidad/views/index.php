@@ -79,17 +79,16 @@
     <main>
         <div class="cards-row">
             <?php foreach($anuncios as $anuncio): ?>
-            <div class="card-anuncio" action="index.php?controller=AdsController&accion=show">
-                <div class="div-tj-img">
-                    <img src="<?= BASE_URL ?>/img/logo.png" alt="logo">
-                    <!-- Imagen que tendrá src autogenerado y alt igual -->
+                <div class="card-anuncio">
+                    <div class="div-tj-img">
+                        <a href="index.php?controller=AdsController&accion=show&id=<?= $anuncio['id'] ?>">
+                            <img src="<?= $anuncio['url_foto'] ?? BASE_URL . '/img/logo.png' ?>" alt="logo">
+                        </a>
+                    </div>
+                    <h2 id="titulo-anuncio"><?= htmlspecialchars($anuncio['titulo']) ?></h2>
+                    <p id="desc-anuncio"><?= htmlspecialchars($anuncio['detalles'] ?? 'Sin detalles') ?></p>
                 </div>
-                <h2 id="titulo-anuncio" > <?= $anuncio['titulo'] ?> </h2>
-                <p id="desc-anuncio"> <?= $anuncio['detalles'] ?? 'Sin detalles' ?> </p>
-            </div>
-                
-            
-                <?php endforeach; ?>
+            <?php endforeach; ?>
         </div>
     <script src="<?= BASE_URL ?>/js/index.js"></script>
     </main>
