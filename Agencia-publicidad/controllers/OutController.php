@@ -158,7 +158,7 @@ class OutController {
                             $contrasena,
                             $fotoPerfil,
                             $nombreEmpresa,     // nombreComercio
-                            $comentarioEmpresa  
+                            $comentarioEmpresa 
                         );
                         
                         $this->dbUser->guardarComerciante($nuevoComerciante);
