@@ -1,8 +1,7 @@
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 main {
   height: 100vh;
@@ -10,33 +9,221 @@ main {
   flex-direction: column;
   overflow-y: auto; 
   padding: 1em;
-  gap: 1em; 
-}
-
-.cards-container {
-  display: flex;
-  flex-direction: column;
   gap: 1em;
 }
 
-/* Card individual */
+.cards-row {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 1em; 
+  margin-bottom: 1em;
+}
+
 .card-anuncio {
+  flex: 1 1 48%; /* ocupa 48% de la vp con espacio entre ellas para que sea mas estetico */
   display: flex;
   flex-direction: column;
   padding: 1em;
-  border: #0F3B61 1px solid;
+  border: 1px solid #0F3B61;
   border-radius: 0.7em;
   background-color: #FFCDC1;
-  width: 100%;
   box-sizing: border-box;
 }
 
 
-.login {
-    
+.div-tj-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFF0E7;
+  border: 1px solid #0F3B61;
+  border-radius: 0.7em;
+  margin-bottom: 1em;
+  height: 200px; 
+  /* Da altura fija para que las fotod no hagan overflow */
+  overflow: hidden; 
+}
+
+.div-tj-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5em;
 }
 
 .login:hover {
   background-color: #FFF5E6;
   transform: translateY(-4px);
+}
+
+/* Iconos del header cuando está logeado */
+header img[alt="persona"],
+header img[alt="campana"],
+header img[alt="corazon"] {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+header img[alt="persona"]:hover,
+header img[alt="campana"]:hover,
+header img[alt="corazon"]:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+/* Menú desplegable de usuario */
+.user-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.user-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.user-icon:hover {
+  transform: scale(1.1);
+}
+
+.user-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background-color: #FFF5E6;
+  border: 2px solid #0F3B61;
+  border-radius: 25px;
+  min-width: 250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  overflow: hidden;
+  padding: 8px 0;
+}
+
+.user-dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.menu-item {
+  display: block;
+  padding: 15px 25px;
+  color: #0F3B61;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  position: relative;
+  margin: 4px 0;
+}
+
+.menu-item:hover {
+  background-color: rgba(15, 59, 97, 0.1);
+}
+
+/* Item con notificación (Mis mensajes) */
+.menu-item-notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-badge {
+  width: 12px;
+  height: 12px;
+  background-color: #FF6B4A;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+/* Botón de cerrar sesión (destacado en rojo/naranja) */
+.menu-item-logout {
+  background-color: #FF6B4A;
+  color: white;
+  font-weight: 600;
+  border-radius: 0 0 23px 23px;
+}
+
+.menu-item-logout:hover {
+  background-color: #FF5439;
+}
+
+/* Botón de registrar usuario para admin */
+.admin-register-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #154C7E 0%, #0F3B61 100%);
+  border: 2px solid #F16849;
+  border-radius: 30px;
+  padding: 0.3em 1em 0.3em 0.7em;
+  margin-left: 10px;
+  position: relative;
+  transition: all 0.2s ease;
+  color: #FFF;
+  font-weight: 700;
+  font-size: 1.5em;
+  gap: 0.5em;
+  box-shadow: 0 2px 8px rgba(21,76,126,0.08);
+}
+.admin-register-btn:hover {
+  background: linear-gradient(135deg, #F16849 0%, #FFCDC1 100%);
+  color: #154C7E;
+  border-color: #154C7E;
+}
+.admin-plus {
+  font-size: 2em;
+  font-weight: bold;
+  color: #FFF;
+  margin-right: 0.2em;
+  line-height: 1;
+  text-shadow: 0 2px 8px #154C7E33;
+}
+.admin-register-btn:hover .admin-plus {
+  color: #F16849;
+  text-shadow: 0 2px 8px #F16849;
+}
+.admin-tag {
+  background: #F16849;
+  color: #FFF;
+  font-size: 0.8em;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 0.2em 0.7em;
+  margin-left: 0.2em;
+  letter-spacing: 1px;
+  box-shadow: 0 1px 4px #F1684933;
+  text-transform: uppercase;
+  position: relative;
+  top: -2px;
+}
+.admin-register-btn:hover .admin-tag {
+  background: #FFF;
+  color: #F16849;
+  border: 1px solid #F16849;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .user-dropdown-menu {
+    right: -20px;
+    min-width: 220px;
+  }
+  
+  .menu-item {
+    padding: 12px 20px;
+    font-size: 1em;
+  }
 }

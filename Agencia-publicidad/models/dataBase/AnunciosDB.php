@@ -1,8 +1,8 @@
 <?php 
-namespace AgenciaPublicidad\Models\DataBase;
+namespace AgenciaPublicidad\Models\dataBase;
 
 use AgenciaPublicidad\Models\Comerciante;
-use AgenciaPublicidad\Models\DataBase\DBCon;
+use AgenciaPublicidad\Models\dataBase\DBCon;
 use AgenciaPublicidad\Models\Anuncio;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
 use AgenciaPublicidad\Utils;
@@ -10,8 +10,9 @@ use AgenciaPublicidad\Utils;
 require_once __DIR__ . '/../../utils/auth_helper.php';
 require_once __DIR__ . '/DBCon.php';
 require_once __DIR__ . '/../Anuncio.php';
-require_once __DIR__ . '/../Comerciante.php';
 require_once __DIR__ . '/../TipoPersonaEnum.php';
+require_once __DIR__ . '/../UsuarioRegistrado.php';
+require_once __DIR__ . '/../Comerciante.php';
 
 class AnunciosDB{
     public function getAll():array{
@@ -80,20 +81,15 @@ class AnunciosDB{
         $comerciante = null;
         if (!empty((int)$data['c_id'])) {
             $comerciante = new Comerciante(
-                (int)$data['u_id'],
-                $data['u_nombre'] ?? '',
-                $data['u_apellido'] ?? '',
-                $data['u_email'] ?? '',
-                $data['u_password_hash'] ?? '',
-                isset($data['u_fecha_inscripcion']) ? new \DateTime($data['u_fecha_inscripcion']) : new \DateTime(),
-                $data['u_foto_perfil'] ?? null,
-                TipoPersonaEnum::COMERCIANTE,
-                isset($data['c_id_comerciante']) ? (int)$data['c_id_comerciante'] : null, // ← Aquí debe ir el int
-                $data['c_nombre_empresa'] ?? '',
-                $data['c_nif_empresa'] ?? '',
-                $data['c_comentario_empresa'] ?? '',
-                $data['c_num_telefono'] ?? '',
-                isset($data['c_comerciante_desde']) ? new \DateTime($data['c_comerciante_desde']) : new \DateTime()
+                isset($data['c_id']) ? (int)$data['c_id'] : null,           // idComerciante
+                isset($data['u_id']) ? (int)$data['u_id'] : null,           // id
+                $data['u_nombre'] ?? '',                                     // nombre
+                $data['u_apellido'] ?? null,                                 // apellido
+                $data['u_email'] ?? '',                                      // email
+                $data['u_password_hash'] ?? '',                              // contrasena
+                $data['u_foto_perfil'] ?? null,                              // fotoPerfil
+                $data['c_nombre_empresa'] ?? null,                           // nombreComercio
+                $data['c_comentario_empresa'] ?? null                        // rubro
             );
         }
 
@@ -133,13 +129,24 @@ class AnunciosDB{
 
     public function create(Anuncio $anuncio):bool{
         $currentUser = $_SESSION['usuario'] ?? null;
+        
+        // Validar que el usuario esté logueado y sea comerciante
+        if (!$currentUser) {
+            error_log("AnunciosDB::create - No hay usuario en sesión");
+            throw new \Exception("Debe iniciar sesión para crear anuncios");
+        }
+        
+        if (!isset($currentUser['id_comerciante'])) {
+            error_log("AnunciosDB::create - Usuario no es comerciante. SESSION: " . var_export($currentUser, true));
+            throw new \Exception("Solo los comerciantes pueden crear anuncios");
+        }
 
         $pdo = DBCon::getConnection();
         $sql = $pdo->prepare("INSERT INTO 
                                 anuncios(id_comerciante, titulo, detalles)
                                 VALUES(:id_comerciante, :titulo, :detalles)");
                                 //Aqi faltaria con añadir TAGS y FOTOS
-        $sql->bindValue(":id_comerciante",$currentUser['id_comerciante']);
+        $sql->bindValue(":id_comerciante", $currentUser['id_comerciante']);
         $sql->bindValue(":titulo", $anuncio->getTitulo());
         $sql->bindValue(":detalles", $anuncio->getDescripcion());        
         
@@ -152,6 +159,15 @@ class AnunciosDB{
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function getByPalabra(string $palabras) :array {
+        $pdo = DBcon::getConnection();
+        $sql = $pdo->prepare("SELECT id, id_comerciante, titulo, detalles, fecha_publicacion FROM anuncios WHERE titulo LIKE :palabra");
+        $sql->bindValue(":palabra", '%' .  $palabras . '%', \PDO::PARAM_STR);
+        $sql->execute();
+        return $sql->fetchAll(\PDO::FETCH_ASSOC);
+    }
+        
 }
 
 

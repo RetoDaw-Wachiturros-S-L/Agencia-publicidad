@@ -1,9 +1,9 @@
 <?php 
 //CRUD de tabla usuarios
-namespace AgenciaPublicidad\Models\DataBase;
+namespace AgenciaPublicidad\Models\dataBase;
 
 use AgenciaPublicidad\Models\UsuarioRegistrado;
-use AgenciaPublicidad\Models\DataBase\DBCon;
+use AgenciaPublicidad\Models\dataBase\DBCon;
 
 require_once __DIR__ . '/DBCon.php';
 require_once __DIR__ . '/../UsuarioRegistrado.php';
@@ -60,9 +60,9 @@ class DBFunctions {
         $sql->bindValue(':NOMBRE', $usuario->getNombre(), \PDO::PARAM_STR);
         $sql->bindValue(':APELLIDO', $usuario->getApellido() ??null, \PDO::PARAM_STR);
         $sql->bindValue(':EMAIL', $usuario->getEmail() ??null, \PDO::PARAM_STR);
-        $sql->bindValue(':PASSWORD_HASH', password_hash($usuario->getPassword() ?? '', PASSWORD_BCRYPT), \PDO::PARAM_STR);
-        $sql->bindValue(':FOTO_PERFIL', $usuario->getFoto_perfil() ??null, \PDO::PARAM_STR);
-        $sql->bindValue(':TIPO_USUARIO', $usuario->getTipo(), \PDO::PARAM_STR);
+        $sql->bindValue(':PASSWORD_HASH', password_hash($usuario->getContrasena() ?? '', PASSWORD_BCRYPT), \PDO::PARAM_STR);
+        $sql->bindValue(':FOTO_PERFIL', $usuario->getFotoPerfil() ??null, \PDO::PARAM_STR);
+        $sql->bindValue(':TIPO_USUARIO', $usuario->getTipo()->value, \PDO::PARAM_STR);
         $sql->bindValue(':ID', $id);
         return $sql->execute();
     }               

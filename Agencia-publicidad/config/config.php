@@ -1,11 +1,20 @@
 <?php 
 // Configuración de conexión a la base de datos
-// Ajusta estos valores según tu entorno
 
-define('HOST', 'wachiturros-do-user-18805607-0.m.db.ondigitalocean.com');
-define('DB_NAME', 'marketplace');
-define('USER', 'doadmin');
-define('PASS', 'AVNS_T7F5ypei-vq0X2smLnX');
+if (file_exists(__DIR__ . '/../../.env')) {
+    $lines = file(__DIR__ . '/../../.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos($line, '=') !== false && strpos($line, '#') !== 0) {
+            putenv($line);
+        }
+    }
+}
+
+define('HOST', getenv('DB_HOST'));
+define('PORT', getenv('DB_PORT') ?: '3306'); // Puerto por defecto 3306
+define('DB_NAME', getenv('DB_NAME'));
+define('USER', getenv('DB_USER'));
+define('PASS', getenv('DB_PASS'));
 
 // Obtener la carpeta del proyecto relativo a DocumentRoot
 $scriptName = $_SERVER['SCRIPT_NAME']; // /Agencia-publicidad/index.php

@@ -15,12 +15,14 @@ class Router {
     }
     
     private static function loadController($controllerName, $action){
+        define('ACCESSED_VIA_ROUTER', true); // Evita acceder directamente por url
         // Construir ruta del archivo del controlador
         $controllerFile = "./controllers/{$controllerName}.php";
 
         // DEBUG: Mostrar qué archivo está buscando
-        echo "Buscando: " . $controllerFile . "<br>";
-        echo "¿Existe? " . (file_exists($controllerFile) ? "SÍ" : "NO") . "<br>";
+        // echo "Buscando: " . $controllerFile . "<br>";
+        // echo "¿Existe? " . (file_exists($controllerFile) ? "SÍ" : "NO") . "<br>";
+        //
 
         require_once $controllerFile;
         

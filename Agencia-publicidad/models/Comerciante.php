@@ -1,76 +1,91 @@
 <?php
 namespace AgenciaPublicidad\Models;
 
-use DateTime;
-use AgenciaPublicidad\Models\TipoPersonaEnum;
-
-// Cargar la clase padre si no existe autoloader
-require_once __DIR__ . '/UsuarioRegistrado.php';
-require_once __DIR__ . '/TipoPersonaEnum.php';
-
 use AgenciaPublicidad\Models\UsuarioRegistrado;
+use AgenciaPublicidad\Models\TipoPersonaEnum;
 
 class Comerciante extends UsuarioRegistrado {
     private ?int $idComerciante;
-    private ?string $nombreEmpresa;
+    private ?string $nombreComercio;
     private ?string $nifEmpresa;
-    private ?string $comentarioEmpresa;
-    private ?string $numeroEmpresa;
-    private ?DateTime $fechaAltaComerciante;
+    private ?string $rubro;
 
-    public function __construct(?int $idUsuario, string $nombre, ?string $apellido, string $email, string $password, ?DateTime $fechaInscripcion, ?string $fotoPerfil, TipoPersonaEnum $tipo, ?int $idComerciante,  ?string $nombreEmpresa, ?string $nifEmpresa, ?string $comentarioEmpresa, ?string $numeroEmpresa, ?DateTime $fechaAltaComerciante) {
-        // Llamada al constructor padre con los parámetros de UsuarioRegistrado
-        parent::__construct($idUsuario, $nombre, $apellido, $email, $password, $fechaInscripcion, $fotoPerfil, $tipo);
-
-        // Inicializar campos específicos de Comerciante
+    public function __construct(
+        ?int $idComerciante = null,
+        ?int $id = null,
+        string $nombre = '',
+        ?string $apellido = null,
+        string $email = '',
+        string $contrasena = '',
+        ?string $fotoPerfil = null,
+        ?string $nombreComercio = null,
+        ?string $nifEmpresa = '',
+        ?string $rubro = null
+    ) {
+        // Llamar al constructor padre PRIMERO
+        parent::__construct(
+            $id,
+            $nombre,
+            $apellido,
+            $email,
+            $contrasena,
+            TipoPersonaEnum::COMERCIANTE,
+            $fotoPerfil
+        );
+        
+        // Luego inicializar las propiedades de Comerciante
         $this->idComerciante = $idComerciante;
-        $this->nombreEmpresa = $nombreEmpresa;
+        $this->nombreComercio = $nombreComercio;
         $this->nifEmpresa = $nifEmpresa;
-        $this->comentarioEmpresa = $comentarioEmpresa;
-        $this->numeroEmpresa = $numeroEmpresa;
-        $this->fechaAltaComerciante = $fechaAltaComerciante;
+        $this->rubro = $rubro;
     }
-    public function getIdComerciante():int{
+
+    // Getters
+    public function getIdComerciante(): ?int {
         return $this->idComerciante;
     }
-    
-    public function setIdComerciante($id):void{
-        $this->idComerciante = $id;
+
+    public function getNombreComercio(): ?string {
+        return $this->nombreComercio;
     }
 
-    public function getEmail(): string {
-        return parent::getEmail();
+    public function getRubro(): ?string {
+        return $this->rubro;
     }
-    public function getNombrEmpresa(): string {
-        return $this->nombreEmpresa;
+
+    // Setters
+    public function setIdComerciante(?int $idComerciante): void {
+        $this->idComerciante = $idComerciante;
     }
-    public function setNombrEmpresa(string $nombrEmpresa): void {
-        $this->nombreEmpresa = $nombrEmpresa;
-    }
-    public function getNifEmpresa(): string{
+    public function getNifEmpresa():?string{
         return $this->nifEmpresa;
     }
-    public function setNifEmpresa(string $nifEmpresa):void{
-        $this->nifEmpresa = $nifEmpresa;
-    }
-    public function getComentarioEmpresa(): string{
-        return $this->comentarioEmpresa;
-    }
-    public function setComentarioEmpresa(string $comentarioEmpresa): void{
-        $this->comentarioEmpresa = $comentarioEmpresa;
-    }
-    public function getNumeroEmpresa(): string{
-        return $this->numeroEmpresa;
-    }
-    public function setNumeroEmpresa(string $numeroEmpresa): void{
-        $this->numeroEmpresa = $numeroEmpresa;
-    }
-    public function getFechaAltaComerciante(): DateTime{
-        return $this->fechaAltaComerciante;
+
+    public function setNifEmpresa(?string $nifEmpersa):void{
+        $this->nifEmpresa = $nifEmpersa;
     }
 
+    public function setNombreComercio(?string $nombreComercio): void {
+        $this->nombreComercio = $nombreComercio;
+    }
 
+    public function setRubro(?string $rubro): void {
+        $this->rubro = $rubro;
+    }
 
+    // Método para obtener información completa
+    public function toArray(): array {
+        return [
+            'idComerciante' => $this->idComerciante,
+            'id' => $this->getId(),
+            'nombre' => $this->getNombre(),
+            'apellido' => $this->getApellido(),
+            'email' => $this->getEmail(),
+            'tipo' => $this->getTipo()->value,
+            'fotoPerfil' => $this->getFotoPerfil(),
+            'nombreComercio' => $this->nombreComercio,
+            'nifEmpresa'=>$this->nifEmpresa,
+            'rubro' => $this->rubro
+        ];
+    }
 }
-
-?>

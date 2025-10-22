@@ -24,9 +24,9 @@ function validarNif(nif) {
   return regex.test(nif);
 }
 
-function validarEspecial(valor,regex) {
-  const regex = regex;
-  return regex.test(valor);
+function validarEspecial(valor, regex) {
+  const regexp = regex;
+  return regexp.test(valor);
 }
 
 function mostrarError(input, mensaje) {

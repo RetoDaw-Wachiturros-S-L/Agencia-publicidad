@@ -1,14 +1,12 @@
 <?php 
 namespace AgenciaPublicidad\Controllers;
 
-use AgenciaPublicidad\Utils;
-
 require_once __DIR__ . '/../utils/auth_helper.php';
 require_once __DIR__ . '/../models/Anuncio.php';
 require_once __DIR__ . '/../models/dataBase/AnunciosDB.php';
 
 use AgenciaPublicidad\Models\Anuncio;
-use AgenciaPublicidad\Models\DataBase\AnunciosDB;
+use AgenciaPublicidad\Models\dataBase\AnunciosDB;
 
 class AdsController{
     private AnunciosDB  $dbFunctions;
@@ -17,18 +15,18 @@ class AdsController{
         $this->dbFunctions = new AnunciosDB();
     }
 
-    public function showAll():void {
+    public function showAll():array {
         $anuncios = $this->dbFunctions->getAll();
         // if($anuncios){
         //     echo json_encode($anuncios);
         // }else{
         //     echo "anuncios nulos";
         // }
-        require __DIR__ . '/../Views/ads/ads.view.php';
+        return $anuncios;
     }
 
     //TODO todas las funciones deberian de devolver algo a la view de momento solo estamos depurando
-    public function show():void {
+    public function show():?Anuncio {
 
         $id = $_POST["boton"] ?? null;
         echo $id;
@@ -37,8 +35,8 @@ class AdsController{
         if($id == "" || $id <= 0) throw new \Exception("El id no puede ser menor a 0");
 
 		$anuncio = $this->dbFunctions->getById($id);
-
-        echo var_dump($anuncio);
+        
+        return $anuncio;
     }
 
     public function showAllByIdComerciante(){
@@ -100,7 +98,21 @@ class AdsController{
                     categorias: $categorias,                 
                 );
 
-                $this->dbFunctions->create($anuncio);
+                try {
+                    // Verificar que el usuario sea comerciante antes de intentar crear
+                    $currentUser = $_SESSION['usuario'] ?? null;
+                    if (!$currentUser || !$currentUser['tipo']=='ADMINISTRADOR' || !$currentUser['tipo']=='COMERCIANTE') {
+                        echo "<script>alert('ERROR: Solo los comerciantes pueden crear anuncios. Tu tipo de usuario es: " . ($currentUser['tipo'] ?? 'NO DEFINIDO') . "'); window.history.back();</script>";
+                        exit;
+                    }
+                    
+                    $this->dbFunctions->create($anuncio);
+                    echo "<script>alert('Anuncio creado con éxito'); window.location.href='index.php';</script>";
+                } catch (\Exception $e) {
+                    error_log("AdsController::create - Error: " . $e->getMessage());
+                    echo "<script>alert('ERROR: " . addslashes($e->getMessage()) . "'); window.history.back();</script>";
+                    exit;
+                }
             }
         
         }  else {
@@ -108,5 +120,16 @@ class AdsController{
             include 'views/ads/ads.create.php';
         }
 
+    }
+    public function buscarByPalabra(){
+        $palabras = $_POST['buscar_palabra'] ?? null;
+
+        if($palabras){
+            //Si el campo buscar_palabra tiene algo hará la consulta, si no hará la select de todo
+            $anuncios = $this->dbFunctions->getByPalabra($palabras);
+        }else{
+            $anuncios = $this->dbFunctions->getAll();
+        }
+        require __DIR__ . '/../views/ads/ads.view.php';
     }
 }
