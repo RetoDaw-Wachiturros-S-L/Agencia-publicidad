@@ -7,6 +7,7 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
 class Comerciante extends UsuarioRegistrado {
     private ?int $idComerciante;
     private ?string $nombreComercio;
+    private ?string $nifEmpresa;
     private ?string $rubro;
 
     public function __construct(
@@ -18,6 +19,7 @@ class Comerciante extends UsuarioRegistrado {
         string $contrasena = '',
         ?string $fotoPerfil = null,
         ?string $nombreComercio = null,
+        ?string $nifEmpresa = '',
         ?string $rubro = null
     ) {
         // Llamar al constructor padre PRIMERO
@@ -34,6 +36,7 @@ class Comerciante extends UsuarioRegistrado {
         // Luego inicializar las propiedades de Comerciante
         $this->idComerciante = $idComerciante;
         $this->nombreComercio = $nombreComercio;
+        $this->nifEmpresa = $nifEmpresa;
         $this->rubro = $rubro;
     }
 
@@ -53,6 +56,13 @@ class Comerciante extends UsuarioRegistrado {
     // Setters
     public function setIdComerciante(?int $idComerciante): void {
         $this->idComerciante = $idComerciante;
+    }
+    public function getNifEmpresa():?string{
+        return $this->nifEmpresa;
+    }
+
+    public function setNifEmpresa(?string $nifEmpersa):void{
+        $this->nifEmpresa = $nifEmpersa;
     }
 
     public function setNombreComercio(?string $nombreComercio): void {
@@ -74,6 +84,7 @@ class Comerciante extends UsuarioRegistrado {
             'tipo' => $this->getTipo()->value,
             'fotoPerfil' => $this->getFotoPerfil(),
             'nombreComercio' => $this->nombreComercio,
+            'nifEmpresa'=>$this->nifEmpresa,
             'rubro' => $this->rubro
         ];
     }

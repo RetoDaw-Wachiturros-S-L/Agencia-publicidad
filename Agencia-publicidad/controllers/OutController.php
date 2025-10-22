@@ -119,14 +119,20 @@ class OutController {
             // Validaciones para comerciante
             $esComercio = isset($_POST["es_comercio"]) && $_POST["es_comercio"] == 1;
             $nombreEmpresa = null;
+            $nifEmpresa = null;
             $comentarioEmpresa = null;
 
             if ($esComercio) {
                 $nombreEmpresa = $_POST['nombreEmpresa'] ?? '';
+                $nifEmpresa = $_POST['nifEmpresa'] ?? '';
                 $comentarioEmpresa = $_POST['comentarioEmpresa'] ?? '';
 
                 if (empty($nombreEmpresa)) {
                     $errores[] = "El nombre de la empresa es obligatorio";
+                }
+                
+                if(empty($nifEmpresa)){
+                    $errores[] = 'El nif de la empresa no puede estar vacío si eres un comercio';
                 }
                 
                 if (empty($comentarioEmpresa)) {
@@ -158,6 +164,7 @@ class OutController {
                             $contrasena,
                             $fotoPerfil,
                             $nombreEmpresa,     // nombreComercio
+                            $nifEmpresa,
                             $comentarioEmpresa 
                         );
                         
@@ -247,7 +254,7 @@ class OutController {
                     } else { 
                         $errores[] = "Usuario o contraseña incorrectos";
                         $mensaje_error = implode("<br>", $errores);
-                        include 'views/auth/login.php';
+                        include '/views/auth/login.php';
                     }
                 } catch (Exception $e) {
                     $errores[] = "Error al iniciar sesión: " . $e->getMessage();
@@ -281,7 +288,7 @@ class OutController {
     public function favourites(){
         $id=$_SESSION["usuario"]["id"];
         $anuncios = $this->dbUser->sacarfavoritos($id);
-        require_once BASE_URL.'views/favourites.php';
+        require_once __DIR__ . '/../views/favoritos.php';
            
     }
     public function verAnuncios(){

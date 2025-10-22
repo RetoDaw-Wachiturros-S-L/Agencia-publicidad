@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17232e9b-d86a-418d-b839-90fb80c0604c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6a45183e-809a-47a4-b6eb-552b6de71b93.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6a45183e-809a-47a4-b6eb-552b6de71b93/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6a45183e-809a-47a4-b6eb-552b6de71b93/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6a45183e-809a-47a4-b6eb-552b6de71b93/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6a45183e-809a-47a4-b6eb-552b6de71b93/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/controllers/AdsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/controllers/AdsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/css/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/models/dataBase/AnunciosDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/models/dataBase/AnunciosDB.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/views/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/views/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/controllers/OutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/controllers/OutController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/models/Comerciante.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/models/Comerciante.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/models/dataBase/DBUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/models/dataBase/DBUser.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

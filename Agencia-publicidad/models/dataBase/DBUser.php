@@ -30,11 +30,14 @@ class DBUser {
         $id = $this->sacarIdUsuario($usuario->getEmail());
         
         $pdo = DBCon::getConnection();
-        $sql = "INSERT INTO comerciantes (id_usuario, nombre_empresa, comentario_empresa) 
-                VALUES (:idUsuario, :nombreEmpresa, :comentarioEmpresa)";
+        $sql = "INSERT INTO comerciantes (id_usuario, nombre_empresa, nif_empresa, comentario_empresa) 
+                VALUES (:idUsuario, :nombreEmpresa, :nifEmpresa, :comentarioEmpresa)";
+        
         $stmt = $pdo->prepare($sql);
+
         $stmt->bindValue(':idUsuario', $id);
         $stmt->bindValue(':nombreEmpresa', $usuario->getNombreComercio());
+        $stmt->bindValue(':nifEmpresa', $usuario->getNifEmpresa());
         $stmt->bindValue(':comentarioEmpresa', $usuario->getRubro());
         
         return $stmt->execute();
@@ -121,11 +124,11 @@ class DBUser {
 
 
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(":id_usuario", $id, PDO::PARAM_INT);
+    $stmt->bindValue(":id_usuario", $id, \PDO::PARAM_INT);
     $stmt->execute();
 
 
-    $anuncios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $anuncios = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
 
     return $anuncios;
@@ -146,11 +149,11 @@ class DBUser {
 
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(":id_usuario", $id, PDO::PARAM_INT);
+        $stmt->bindValue(":id_usuario", $id, \PDO::PARAM_INT);
         $stmt->execute();
 
 
-        $anuncios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $anuncios = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
 
         return $anuncios;
