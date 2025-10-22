@@ -44,7 +44,7 @@
                     </div>
                 </div>
             
-                <img src="<?= BASE_URL ?>/img/Bell.png" alt="campana">
+                <img src="<?= BASE_URL ?>/img/Bell.png" alt="anuncios">
                 <img src="<?= BASE_URL ?>/img/Heart.png" alt="corazon">
                 
                 <?php if ($isAdmin):?>
