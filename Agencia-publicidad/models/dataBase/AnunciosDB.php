@@ -127,7 +127,7 @@ class AnunciosDB{
         return $sql->execute();
     }
 
-    public function create(Anuncio $anuncio):bool{
+    public function create(Anuncio $anuncio): int {
         $currentUser = $_SESSION['usuario'] ?? null;
         
         // Validar que el usuario esté logueado y sea comerciante
@@ -150,7 +150,10 @@ class AnunciosDB{
         $sql->bindValue(":titulo", $anuncio->getTitulo());
         $sql->bindValue(":detalles", $anuncio->getDescripcion());        
         
-        return $sql->execute();
+        $sql->execute();
+        
+        // Retornar el ID del anuncio recién creado
+        return (int)$pdo->lastInsertId();
     }        
     public function getAllByIdComerciante(int $idComerciante){
         $pdo = DBCon::getConnection();
