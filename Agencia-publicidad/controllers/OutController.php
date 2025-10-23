@@ -298,8 +298,8 @@ class OutController {
     }
     public function miPerfil(){
         $id=$_SESSION["usuario"]["id"];
-        $perfil = $this->dbUser->verMisAnuncios($id);
-        require_once BASE_URL.'views/misAdds.php';
+        $perfil = $this->dbUser->verMiPerfil($id);
+        require_once BASE_URL.'views/miPerfil.php';
     }
 }
 ?>
