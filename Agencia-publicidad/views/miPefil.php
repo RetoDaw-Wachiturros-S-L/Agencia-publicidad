@@ -26,9 +26,9 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
         <div class="contenido">
             <aside>
                 <ul>
-                    <li><b>Nombre: <?=$currentUser["nombre"]?></b></li>
-                    <li><b>Apellido: <?=$currentUser["apellido"]?></b></li>
-                    <li><b>Email: <?=$currentUser["email"]?></b></li>
+                    <li><b>Nombre: <?=$perfil["u.nombre"]?></b></li>
+                    <li><b>Apellido: <?=$perfil["u.apellido"]?></b></li>
+                    <li><b>Email: <?=$perfil["u.email"]?></b></li>
                     <?php if($currentUser["tipo"]==TipoPersonaEnum::COMERCIANTE):?>
 
                         <li><b>Nombre empresa:</b> <?=$perfil["c.nombre_empresa"]?></li>
