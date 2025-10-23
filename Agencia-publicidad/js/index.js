@@ -41,3 +41,47 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Menú desplegable de anuncios (idéntico al de usuario)
+document.addEventListener('DOMContentLoaded', () => {
+    const adsMenuToggle = document.getElementById('adsMenuToggle');
+    const adsDropdownMenu = document.getElementById('adsDropdownMenu');
+
+    if (adsMenuToggle && adsDropdownMenu) {
+        // Toggle del menú al hacer clic
+        adsMenuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            adsDropdownMenu.classList.toggle('show');
+        });
+
+        // Mostrar menú al pasar el ratón (hover)
+        adsMenuToggle.addEventListener('mouseenter', () => {
+            adsDropdownMenu.classList.add('show');
+        });
+
+        // Mantener el menú abierto cuando el ratón está sobre él
+        adsDropdownMenu.addEventListener('mouseenter', () => {
+            adsDropdownMenu.classList.add('show');
+        });
+
+        // Cerrar el menú cuando el ratón sale del contenedor
+        const adsMenuContainer = document.querySelector('.ads-menu-container');
+        if (adsMenuContainer) {
+            adsMenuContainer.addEventListener('mouseleave', () => {
+                adsDropdownMenu.classList.remove('show');
+            });
+        }
+
+        // Cerrar el menú si se hace clic fuera
+        document.addEventListener('click', (e) => {
+            if (!adsMenuContainer.contains(e.target)) {
+                adsDropdownMenu.classList.remove('show');
+            }
+        });
+
+        // Evitar que los clics dentro del menú lo cierren
+        adsDropdownMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+});
