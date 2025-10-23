@@ -1,7 +1,7 @@
 <?php
     require_once __DIR__ . '/../utils/auth_helper.php';
     require_once __DIR__ . '/../controllers/AdsController.php';
-    
+    //require_once 'views/header.php';
     // Extraer variables globales al scope local
     $currentUser = $GLOBALS['currentUser'] ?? null;
     $isLoggedIn = $GLOBALS['isLoggedIn'] ?? false;
@@ -24,7 +24,6 @@
 </head>
 <body>
     <header>
-        <a href="<?= BASE_URL ?>/views/header.php">a</a>
         <img src="<?= BASE_URL ?>/img/logo_SSombra.png" alt="Logo de comerciantes vitoria" class="logo">
         
         <div id="buscar">

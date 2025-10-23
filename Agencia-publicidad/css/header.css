@@ -1,10 +1,63 @@
-header{
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #FFF5E6;
+    margin: 0;
+}
+
+header {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    
+    
+    align-items: center;
+
     color: #154C7E;
     font-family: sans-serif;
+
     min-height: 4em;
+    max-height: 10em;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 1em;
+
+    /* Aquí va el fondo del header */
+    background-color: #FFF5E6; /* o pon otro color para probar */
 }
-body{
-    background-color: #FFF5E6;
+
+
+.logo {
+    max-height: 2.5rem;
+    width: auto;
 }
+
+.lampara {
+    height: 6em;
+}
+
+.flecha {
+    height: 4em;
+    width: auto;
+}
+
+#derecha {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5em;
+}
+
+hr {
+    width: 80%;
+    margin: 0 auto;
+    border: none;
+    border-top: 1px solid #154C7E;
+    background-color: rgb(116, 116, 116);
+    filter: blur(2px);
+}
+
