@@ -254,7 +254,7 @@ class OutController {
                     } else { 
                         $errores[] = "Usuario o contraseña incorrectos";
                         $mensaje_error = implode("<br>", $errores);
-                        include '/views/auth/login.php';
+                        include './views/auth/login.php';
                     }
                 } catch (Exception $e) {
                     $errores[] = "Error al iniciar sesión: " . $e->getMessage();
