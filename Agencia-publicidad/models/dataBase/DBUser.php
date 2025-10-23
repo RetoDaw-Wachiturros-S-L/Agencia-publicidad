@@ -142,26 +142,24 @@ class DBUser {
     public function verMisAnuncios($id) {
         $pdo = DBCon::getConnection();
 
-
         $sql = "SELECT 
                     a.titulo,
                     a.detalles,
                     a.fecha_publicacion 
                 FROM anuncios a
                 JOIN comerciantes c ON a.id_comerciante = c.id
-                JOIN usuarios u ON c.id_usuario  =  u.id";
-
+                JOIN usuarios u ON c.id_usuario = u.id
+                WHERE u.id = :id_usuario";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(":id_usuario", $id, \PDO::PARAM_INT);
         $stmt->execute();
 
-
         $anuncios = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
 
         return $anuncios;
     }
+
     public function verMiPerfil($id){
     $pdo = DBCon::getConnection();
     $sql ="
