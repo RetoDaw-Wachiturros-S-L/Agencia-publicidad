@@ -22,7 +22,7 @@ class AnunciosDB{
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function getById(int $id): Anuncio|null {
+    public function getById(int $id): ?Anuncio {
         $pdo = DBCon::getConnection();
 
         $sql = $pdo->prepare("

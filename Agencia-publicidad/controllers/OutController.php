@@ -121,11 +121,13 @@ class OutController {
             $nombreEmpresa = null;
             $nifEmpresa = null;
             $comentarioEmpresa = null;
+            $numTelefono = null;
 
             if ($esComercio) {
                 $nombreEmpresa = $_POST['nombreEmpresa'] ?? '';
                 $nifEmpresa = $_POST['nifEmpresa'] ?? '';
                 $comentarioEmpresa = $_POST['comentarioEmpresa'] ?? '';
+                $numTelefono = $_POST['telefonoEmpresa'] ?? '';
 
                 if (empty($nombreEmpresa)) {
                     $errores[] = "El nombre de la empresa es obligatorio";
@@ -134,12 +136,8 @@ class OutController {
                 if(empty($nifEmpresa)){
                     $errores[] = 'El nif de la empresa no puede estar vacío si eres un comercio';
                 }
-                
-                if (empty($comentarioEmpresa)) {
-                    $errores[] = "El rubro/comentario sobre la empresa es obligatorio";
-                }
 
-                $comentarioEmpresa = htmlspecialchars(trim($comentarioEmpresa), ENT_QUOTES, 'UTF-8');
+                $comentarioEmpresa = htmlspecialchars(trim($comentarioEmpresa), ENT_QUOTES, 'UTF-8') ?? '';
             }
             
             // Si no hay errores, procesar el registro
@@ -165,7 +163,8 @@ class OutController {
                             $fotoPerfil,
                             $nombreEmpresa,     // nombreComercio
                             $nifEmpresa,
-                            $comentarioEmpresa 
+                            $comentarioEmpresa,
+                            $numTelefono,
                         );
                         
                         $this->dbUser->guardarComerciante($nuevoComerciante);
@@ -239,13 +238,14 @@ class OutController {
                         ];
 
                         // Si es comerciante, obtener datos adicionales
-                        if ($usuario->getTipo()->value === 'COMERCIANTE') {
+                        if ($usuario->getTipo()->value == TipoPersonaEnum::COMERCIANTE) {
                             $comerciante = $this->dbUser->usuarioComerciante($usuario);
                             
                             if ($comerciante && $comerciante->getIdComerciante()) {
                                 $_SESSION['usuario']['id_comerciante'] = $comerciante->getIdComerciante();
                                 $_SESSION['usuario']['nombre_comercio'] = $comerciante->getNombreComercio();
                                 $_SESSION['usuario']['rubro'] = $comerciante->getRubro();
+                                $_SESSION['usuario']['num_telefono'] = $comerciante->getNumTelefono();
                             }
                         }
                         
@@ -254,7 +254,7 @@ class OutController {
                     } else { 
                         $errores[] = "Usuario o contraseña incorrectos";
                         $mensaje_error = implode("<br>", $errores);
-                        include '/views/auth/login.php';
+                        include './views/auth/login.php';
                     }
                 } catch (Exception $e) {
                     $errores[] = "Error al iniciar sesión: " . $e->getMessage();
