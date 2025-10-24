@@ -85,3 +85,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Función para acceder a la vista única del anuncio
+document.addEventListener('DOMContentLoaded', () => {
+    // Obtener TODOS los cards
+    const cards = document.querySelectorAll('.card-anuncio');
+    
+    console.log('Cards encontrados:', cards.length); // DEBUG
+    
+    // Añadir listener a CADA card individualmente
+    cards.forEach(card => {
+        // Añadir cursor pointer
+        card.style.cursor = 'pointer';
+        
+        // Obtener el ID desde el atributo data
+        const idAnuncio = card.getAttribute('data-id-anuncio');
+        
+        // Añadir event listener
+        card.addEventListener('click', function() {
+            
+            if (idAnuncio) {
+                // Obtener la URL base de forma más confiable
+                // Extraer el base URL desde la ubicación actual
+                const protocol = window.location.protocol; // http: o https:
+                const host = window.location.host; // localhost o dominio
+                const pathname = window.location.pathname; // /Wachiturros/Agencia-publicidad/Agencia-publicidad/index.php
+                
+                // Extraer el directorio base (todo antes de index.php)
+                const basePath = pathname.substring(0, pathname.lastIndexOf('/'));
+                const baseUrl = `${protocol}//${host}${basePath}`;
+                
+                // Construir la URL
+                const url = `${baseUrl}/index.php?controller=AdsController&accion=show&id=${idAnuncio}`;
+                
+                console.log('Redirigiendo a:', url); // DEBUG
+                
+                // Redirigir
+                window.location.href = url;
+            } else {
+                console.error('No se encontró ID del anuncio');
+            }
+        });
+    });
+});
