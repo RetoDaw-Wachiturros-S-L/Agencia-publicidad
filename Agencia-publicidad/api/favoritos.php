@@ -5,7 +5,6 @@ use PDOException;
 use AgenciaPublicidad\Models\dataBase\DBCon;
 
 require_once "models/dataBase/DBCon.php";
-session_start(); // Asegúrate de iniciar la sesión
 header('Content-Type: application/json');
 
 $data = json_decode(file_get_contents("php://input"), true);
@@ -39,7 +38,8 @@ class Favoritos {
             $stmt->bindValue(':id_anuncio', $anuncioId);
             $stmt->execute();
 
-            echo json_encode(['success' => true]);
+            return json_encode(['success' => true]);
+
         } catch (PDOException $ex) {
             http_response_code(500);
             echo json_encode(['error' => $ex->getMessage()]);
@@ -53,7 +53,7 @@ class Favoritos {
             $stmt->bindValue(':idUsuario', $usuarioId);
             $stmt->execute();
 
-            echo json_encode(['success' => true]);
+            return json_encode(['success' => true]);
         } catch (PDOException $ex) {
             http_response_code(500);
             echo json_encode(['error' => $ex->getMessage()]);
@@ -61,7 +61,6 @@ class Favoritos {
     }
 }
 
-// Ejecutar según método HTTP
 $favoritos = new Favoritos();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

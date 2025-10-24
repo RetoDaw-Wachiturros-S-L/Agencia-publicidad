@@ -62,13 +62,16 @@
 
                     <div class="div-icons">
                         <img 
-                            src=" <?= BASE_URL ?>/img/Heart.png" alt="Favorito"
+                            src="<?= BASE_URL ?>./img/Heart.png" 
+                            alt="Favorito"
                             class="favorito-icono"
-                            data-id="heart-icon" 
+                            data-id="<?= $anuncio->getId() ?>"
                         >
+
                         <img 
-                        src="<?= BASE_URL?>/img/mensaje.png" 
-                        alt="Bell">
+                            src="<?= BASE_URL?>/img/mensaje.png" 
+                            alt="Bell"
+                        >
                     </div>
                 </div>
                   

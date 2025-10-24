@@ -3,12 +3,15 @@ function guardarEnCache(anuncio){
     anunciosDeCache[anuncio.id] = anuncio;
     localStorage.setItem("anuncios", JSON.stringify(anunciosDeCache));
 }
-function borrarDeCache(id){
+
+function eliminarDeCache(id){
+    console.log("id para borrar: " +id)
     const anunciosDeCache = JSON.parse(localStorage.getItem("anuncios")) || {};
     
     if(anunciosDeCache.hasOwnProperty(id)){
         delete anunciosDeCache[id];
         localStorage.setItem("anuncios", JSON.stringify(anunciosDeCache));
+        console.log("Borrado correctamente");
     }
     
 }
@@ -31,21 +34,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const fotos = icono.getAttribute("src");
 
     const anuncio = {
-    id: anuncioId,
-    titulo: titulo,
-    fotos: fotos,
-    descripcion: descripcion,
-    fechaPublicacion: fecha
+        id: anuncioId,
+        titulo: titulo,
+        fotos: fotos,
+        descripcion: descripcion,
+        fechaPublicacion: fecha
     };
+    console.log(anuncio);
 
     try {
         //Mira si tiene la clase de favorito y si es true hace la await POST para meterla en favoritos y la guarda en caché
     if (!esFavorito) {
         const res = await axios.post(baseUrl + "/api/favoritos.php", { anuncioId });
+        
         if (res.status === 200) {
-        icono.classList.add("favorito-activo");
-        icono.src = baseUrl + "/img/favorito-activo.png";
-        guardarEnCache(anuncio);
+            icono.classList.add("favorito-activo");
+            icono.src = baseUrl + "/img/favorito-activo.png";
+            guardarEnCache(anuncio);
         }
         //En otro caso hace await DELETE y la quita de caché(en caso de que esté)
     } else {
