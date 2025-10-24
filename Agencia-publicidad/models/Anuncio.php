@@ -6,13 +6,13 @@ use DateTime;
 class Anuncio{
     private ?int $id;
     private string $titulo;
-    private ?array $urlFotos;
+    private ?string $urlFotos;  // Cambiado de array a string
     private ?string $descripcion;
     private ?DateTime $fechaPublicacion;
     private ?Comerciante $anunciante;
     private ?array $categorias;
     
-    public function __construct(?int $id, string $titulo, ?array $urlFotos, ?string $descripcion, ?DateTime $fechaPublicacion, ?Comerciante $anunciante, ?array $categorias){
+    public function __construct(?int $id, string $titulo, ?string $urlFotos, ?string $descripcion, ?DateTime $fechaPublicacion, ?Comerciante $anunciante, ?array $categorias){
         $this->id = $id;
         $this->titulo = $titulo;
         $this->urlFotos = $urlFotos;
@@ -45,11 +45,11 @@ class Anuncio{
         $this->titulo = $nombre;
     }
 
-    public function getUrlFotos(): ?array {
+    public function getUrlFotos(): ?string {
         return $this->urlFotos;
     }
 
-    public function setUrlFotos(?array $urlFotos): void {
+    public function setUrlFotos(?string $urlFotos): void {
         $this->urlFotos = $urlFotos;
     }
 
