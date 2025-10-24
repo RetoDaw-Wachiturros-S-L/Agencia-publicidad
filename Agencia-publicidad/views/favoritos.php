@@ -46,7 +46,7 @@
             <?php endforeach; ?>
         </div>
     <?php else: ?>
-        <p>No tienes anuncios favoritos todavía.</p>
+        <h2>No tienes anuncios favoritos todavía.</h2>
     <?php endif; ?>
 </main>
 

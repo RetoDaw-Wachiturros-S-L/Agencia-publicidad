@@ -130,7 +130,7 @@ class DBUser {
                 FROM anuncios a
                 JOIN favoritos f ON a.id = f.id_anuncio
                 JOIN usuarios u ON f.id_usuario = u.id
-                WHERE f.id_usuario = :id_usuario";
+                WHERE u.id = :id_usuario";
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(":id_usuario", $id, \PDO::PARAM_INT);
@@ -152,7 +152,7 @@ class DBUser {
                 FROM anuncios a
                 JOIN comerciantes c ON a.id_comerciante = c.id
                 JOIN usuarios u ON c.id_usuario  =  u.id 
-                WHERE c.id = :id";
+                WHERE .id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(":id", $id);
         $stmt->execute();

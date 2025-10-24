@@ -2,7 +2,8 @@
 
 use AgenciaPublicidad\Models\TipoPersonaEnum;
     require_once __DIR__ . '/../utils/auth_helper.php';
-    require_once __DIR__ . '/../TipoPersonaEnum.php';
+    require_once __DIR__ . '/../models/TipoPersonaEnum.php';
+     
 
 
 ?>
@@ -17,6 +18,9 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
 
 </head>
 <body>
+    <header>
+
+    </header>
 
 
 
@@ -27,17 +31,23 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
 
         <div class="contenido">
             <aside>
+                
                 <ul>
-                    <li><b>Nombre: <?=$perfil["u.nombre"]?></b></li>
-                    <li><b>Apellido: <?=$perfil["u.apellido"]?></b></li>
-                    <li><b>Email: <?=$perfil["u.email"]?></b></li>
-                    <?php if($currentUser["tipo"]==TipoPersonaEnum::COMERCIANTE):?>
+                    <li><b>Nombre: <?=$perfil["nombre"]?></b></li>
+                    <li><b>Apellido: <?=$perfil["apellido"]?></b></li>
+                    <li><b>Email: <?=$perfil["email"]?></b></li>
+                    
+                    
+                    <?php if($_SESSION["usuario"]["tipo"]=="COMERCIANTE"):?>
+                      
+                      
+                      
 
-                        <li><b>Nombre empresa:</b> <?=$perfil["c.nombre_empresa"]?></li>
-                        <li><b>Nif empresa:</b><?=$perfil["c.nif_empresa"]?></li>
-                        <li><b>Detalles de la empresa:</b><?=$perfil["c.comentario_empresa"]?></li>
-                        <li><b>Telefonno de la empresa:</b><?=$perfil["c.num_telefono"]?></li>
-                        <li><b>Comerciante desde:</b><?=$perfil["c.comerciante_desde"]?></li>
+                        <li><b>Nombre empresa: </b> <?=$perfil["nombre_empresa"]?></li>
+                        <li><b>Nif empresa: </b><?=$perfil["nif_empresa"]?></li>
+                        <li><b>Detalles de la empresa: </b><?=$perfil["comentario_empresa"]?></li>
+                        <li><b>Telefonno de la empresa: </b><?=$perfil["num_telefono"]?></li>
+                        <li><b>Comerciante desde: </b><?=$perfil["comerciante_desde"]?></li>
                     <?php endif?>
 
 
