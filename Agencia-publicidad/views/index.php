@@ -1,7 +1,7 @@
 <?php
     require_once __DIR__ . '/../utils/auth_helper.php';
     require_once __DIR__ . '/../controllers/AdsController.php';
-    
+    //require_once 'views/header.php';
     // Extraer variables globales al scope local
     $currentUser = $GLOBALS['currentUser'] ?? null;
     $isLoggedIn = $GLOBALS['isLoggedIn'] ?? false;
@@ -76,7 +76,7 @@
                             <span class="notification-badge"></span>
                         </a>
                         <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=verAnuncios" class="menu-item">Mis anuncios</a>
-                        <a href="#" class="menu-item">Mi perfil</a>
+                        <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=miPerfil" class="menu-item">Mi perfil</a>
                         <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=logout" class="menu-item menu-item-logout">Cerrar sesión</a>
                     </div>
                 </div>
