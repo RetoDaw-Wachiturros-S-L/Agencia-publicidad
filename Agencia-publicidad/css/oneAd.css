@@ -7,7 +7,7 @@ main {
   display: flex;
   flex-direction: column;
   width: 90%;
-  min-height: 100%;
+  height: auto; /* Cambiado de min-height: 100% a height: auto */
   align-items: center;
   align-self: center;
 }
@@ -29,15 +29,18 @@ main {
   border: 1px solid #0F3B61;
   border-radius: 0.7em;
   margin-bottom: 1em;
-  height: 60%;
+  width: 100%;
+  height: auto; /* Cambiado de height: 60% a auto */
+  max-height: 1024px;
   overflow: hidden;
 }
 
-.div-tj-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.div-tj-img-unico img {
+  width: 100%; /* Se ajusta al ancho del contenedor */
+  height: auto; /* Altura automática manteniendo proporción */
+  object-fit: cover; /* Recorta si es necesario */
   border-radius: 0.5em;
+  display: block; /* Elimina espacio debajo de la imagen */
 }
 
 .container-div-info {

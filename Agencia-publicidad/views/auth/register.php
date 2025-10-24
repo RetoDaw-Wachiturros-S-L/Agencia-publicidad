@@ -9,31 +9,11 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
 <head>
     <meta charset="UTF-8">
     <title>Formulario de registro</title>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/auth.css">
-    <script>
-    (function (m, a, z, e) {
-      var s, t;
-      try {
-        t = m.sessionStorage.getItem('maze-us');
-      } catch (err) {}
-
-      if (!t) {
-        t = new Date().getTime();
-        try {
-          m.sessionStorage.setItem('maze-us', t);
-        } catch (err) {}
-      }
-
-      s = a.createElement('script');
-      s.src = z + '?apiKey=' + e;
-      s.async = true;
-      a.getElementsByTagName('head')[0].appendChild(s);
-      m.mazeUniversalSnippetApiKey = e;
-    })(window, document, 'https://snippet.maze.co/maze-universal-loader.js', 'e76390a3-92da-44e0-9412-672022d0d84d');
-    </script>
 </head>
 <body>
-    <main>
+    <main class="auth-main">
         <h1>Formulario de registro de nuevo usuario</h1>
 
         <?php
@@ -123,6 +103,7 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
 
         <script src="<?= BASE_URL ?>/js/validaciones.js"></script>
         <script src="<?= BASE_URL ?>/js/register.js"></script>
+        <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
     </main>
 </body>
 </html>

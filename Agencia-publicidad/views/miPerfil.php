@@ -1,19 +1,28 @@
 <?php 
-
-use AgenciaPublicidad\Models\TipoPersonaEnum;
+    use AgenciaPublicidad\Models\TipoPersonaEnum;
+    
     require_once __DIR__ . '/../utils/auth_helper.php';
     require_once __DIR__ . '/../models/TipoPersonaEnum.php';
+    
+    // Extraer variables globales al scope local
+    $currentUser = $GLOBALS['currentUser'] ?? null;
+    $isLoggedIn = $GLOBALS['isLoggedIn'] ?? false;
+    $isAdmin = $GLOBALS['isAdmin'] ?? false;
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/perfil.css"/>
-    <title>Document</title>
+    <title>Mi Perfil</title>
 </head>
 <body>
-     <main>
+    <?php include __DIR__ . '/components/header.php'; ?>
+    
+    <main>
         <div class="contenido">
             <aside>
                 <ul>
@@ -39,5 +48,6 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
             </section>
         </div>
     </main>
+    <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
 </body>
 </html>

@@ -3,18 +3,30 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
     http_response_code(403);
     die('Acceso directo no permitido');
 }
+
+require_once __DIR__ . '/../../utils/auth_helper.php';
+
+// Extraer variables globales al scope local
+$currentUser = $GLOBALS['currentUser'] ?? null;
+$isLoggedIn = $GLOBALS['isLoggedIn'] ?? false;
+$isAdmin = $GLOBALS['isAdmin'] ?? false;
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/ads.css">
     <title>Crear Anuncio</title> 
 
     <!-- Editor de texto enriquecido - Summernote -->
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- CSS propios - DESPUÉS de Bootstrap para sobrescribir estilos -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/ads.css">
+    
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -26,6 +38,8 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/lang/summernote-es-ES.min.js"></script>
 </head>
 <body>
+    <?php include __DIR__ . '/../components/header.php'; ?>
+    
     <main>
         <h1>Crear Nuevo Anuncio</h1>
         
@@ -117,5 +131,6 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
     <!-- Scripts externos (incluyen preview de imágenes) -->
     <script src="<?= BASE_URL ?>/js/create.js"></script>
     <script src="<?= BASE_URL ?>/js/validaciones.js"></script>
+    <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
 </body>
 </html>

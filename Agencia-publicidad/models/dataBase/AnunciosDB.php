@@ -17,7 +17,17 @@ require_once __DIR__ . '/../Comerciante.php';
 class AnunciosDB{
     public function getAll():array{
         $pdo = DBCon::getConnection();
-        $sql = $pdo->prepare("SELECT id, id_comerciante, titulo, detalles, fecha_publicacion FROM anuncios");
+        $sql = $pdo->prepare("
+            SELECT 
+                a.id, 
+                a.id_comerciante, 
+                a.titulo, 
+                a.detalles, 
+                a.fecha_publicacion,
+                f.url_foto
+            FROM anuncios a
+            LEFT JOIN fotos_anuncios f ON a.id = f.id_anuncio AND f.es_portada = TRUE
+        ");
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -44,10 +54,12 @@ class AnunciosDB{
                 u.password_hash AS u_password_hash,
                 u.fecha_inscripcion AS u_fecha_inscripcion,
                 u.foto_perfil AS u_foto_perfil,
-                u.tipo_usuario AS u_tipo_usuario
+                u.tipo_usuario AS u_tipo_usuario,
+                f.url_foto AS f_url_foto
             FROM anuncios a
             INNER JOIN comerciantes c ON a.id_comerciante = c.id
             INNER JOIN usuarios u ON c.id_usuario = u.id
+            LEFT JOIN fotos_anuncios f ON a.id = f.id_anuncio AND f.es_portada = TRUE
             WHERE a.id = :ID
             LIMIT 1
         ");
