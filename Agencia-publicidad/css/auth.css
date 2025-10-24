@@ -5,13 +5,14 @@
   box-sizing: border-box;
 }
 
-body {
+/* Body solo para páginas de autenticación */
+body:has(.auth-main) {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-/* Mobile First - Grid Layout */
-main {
+/* Mobile First - Grid Layout - Solo para páginas de autenticación */
+.auth-main {
   min-height: 100vh;
   display: grid;
   grid-template-rows: auto auto;
@@ -19,12 +20,12 @@ main {
   place-content: center;
   gap: 2em;
   padding: 1.5em;
-  background-color: #FFF5E6;
+  background-color: var(--color-bg-primary);
 }
 
 /* Título */
-h1 {
-  color: #154C7E;
+.auth-main h1 {
+  color: var(--color-text-primary);
   font-size: 2em;
   text-align: center;
   font-weight: 600;
@@ -33,9 +34,9 @@ h1 {
 
 /* Mensajes de error */
 .mensaje-error {
-  color: #F16849;
-  background-color: #FFCDC1;
-  border: 2px solid #F16849;
+  color: var(--color-error);
+  background-color: var(--color-error-bg);
+  border: 2px solid var(--color-error-border);
   border-radius: 0.5em;
   padding: 1em;
   text-align: center;
@@ -52,13 +53,13 @@ h1 {
 }
 
 /* Formulario */
-form {
+#form-container form {
   display: flex;
   flex-direction: column;
   gap: 1.2em;
 }
 
-fieldset {
+#form-container fieldset {
   border: none;
   padding: 0;
   margin: 0;
@@ -67,12 +68,12 @@ fieldset {
   gap: 1.2em;
 }
 
-legend {
+#form-container legend {
   display: none;
 }
 
 /* Contenedor de cada campo */
-form p {
+#form-container form p {
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -80,94 +81,104 @@ form p {
 }
 
 /* Labels */
-label {
-  color: #154C7E;
+#form-container label {
+  color: var(--color-text-primary);
   font-weight: 500;
   font-size: 1em;
   display: none; /* Ocultamos labels ya que usamos placeholders */
 }
 
-/* Inputs de texto, email, password, tel */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="tel"] {
+/* Inputs de texto, email, password, tel - SOLO dentro del formulario de auth */
+#form-container input[type="text"],
+#form-container input[type="email"],
+#form-container input[type="password"],
+#form-container input[type="tel"] {
   text-align: center;
-  background-color: #FFCDC1;
-  border: solid 2px #154C7E;
+  background-color: var(--color-bg-secondary);
+  border: solid 2px var(--color-border);
   border-radius: 0.2em;
   padding: 0.9em;
   font-size: 1.3em;
-  box-shadow: 6px 6px 0 #154C7E;
+  color: var(--color-input-text);
+  box-shadow: 6px 6px 0 var(--color-border);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   width: 100%;
 }
 
-input[type="text"]:hover,
-input[type="email"]:hover,
-input[type="password"]:hover,
-input[type="tel"]:hover,
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="tel"]:focus {
+#form-container input[type="text"]:hover,
+#form-container input[type="email"]:hover,
+#form-container input[type="password"]:hover,
+#form-container input[type="tel"]:hover,
+#form-container input[type="text"]:focus,
+#form-container input[type="email"]:focus,
+#form-container input[type="password"]:focus,
+#form-container input[type="tel"]:focus {
   transform: scale(1.05);
-  box-shadow: 9px 9px 0 #154C7E;
+  box-shadow: 9px 9px 0 var(--color-border);
   outline: none;
 }
 
+/* Placeholders de los inputs */
+#form-container input[type="text"]::placeholder,
+#form-container input[type="email"]::placeholder,
+#form-container input[type="password"]::placeholder,
+#form-container input[type="tel"]::placeholder {
+  color: var(--color-text-secondary);
+  opacity: 0.7;
+}
+
 /* Checkbox para "es comercio" */
-input[type="checkbox"] {
+#form-container input[type="checkbox"] {
   width: 1.5em;
   height: 1.5em;
   cursor: pointer;
-  accent-color: #154C7E;
+  accent-color: var(--color-border);
 }
 
-form p:has(input[type="checkbox"]) {
+#form-container form p:has(input[type="checkbox"]) {
   flex-direction: row;
   align-items: center;
   gap: 0.8em;
   justify-content: center;
 }
 
-form p:has(input[type="checkbox"]) label {
+#form-container form p:has(input[type="checkbox"]) label {
   display: inline;
   margin: 0;
   font-size: 1.1em;
 }
 
 /* Títulos dentro del formulario */
-h4 {
-  color: #154C7E;
+#form-container h4 {
+  color: var(--color-text-primary);
   font-size: 1.2em;
   text-align: center;
   margin: 0.5em 0;
 }
 
 /* Botón de submit */
-input[type="submit"],
-#btn-login {
-  color: #154C7E;
+#form-container input[type="submit"],
+#form-container #btn-login {
+  color: var(--color-text-primary);
   text-align: center;
-  background-color: rgba(241, 104, 73, 0.6);
-  border: solid 2px #154C7E;
+  background-color: var(--color-accent-secondary);
+  border: solid 2px var(--color-border);
   border-radius: 0.2em;
   padding: 0.9em;
   font-size: 1.3em;
   font-weight: 600;
-  box-shadow: 6px 6px 0 2px #F16849;
+  box-shadow: 6px 6px 0 2px var(--color-accent-primary);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   cursor: pointer;
   width: 100%;
 }
 
-input[type="submit"]:hover,
-input[type="submit"]:focus,
-#btn-login:hover,
-#btn-login:focus {
+#form-container input[type="submit"]:hover,
+#form-container input[type="submit"]:focus,
+#form-container #btn-login:hover,
+#form-container #btn-login:focus {
   transform: scale(1.05);
-  box-shadow: 9px 9px 0 2px #F16849;
+  box-shadow: 9px 9px 0 2px var(--color-accent-primary);
 }
 
 /* Formulario extra (para comercios) */
@@ -175,7 +186,7 @@ input[type="submit"]:focus,
   display: none;
   margin-top: 1em;
   padding-top: 1em;
-  border-top: 2px dashed #154C7E;
+  border-top: 2px dashed var(--color-separator);
 }
 
 #formulario_extra.visible {
@@ -187,13 +198,13 @@ input[type="submit"]:focus,
 /* Mensajes de error de validación */
 span.error {
   display: none;
-  background: linear-gradient(135deg, #FFE5E0 0%, #FFCDC1 100%);
-  color: #C44230;
+  background: var(--color-error-bg);
+  color: var(--color-error);
   font-size: 0.85em;
   font-weight: 600;
   padding: 0.5em 1em;
   border-radius: 0.3em;
-  border-left: 4px solid #F16849;
+  border-left: 4px solid var(--color-error-border);
   text-align: left;
   margin-top: 0.3em;
   box-shadow: 0 2px 4px rgba(241, 104, 73, 0.2);
@@ -212,18 +223,18 @@ span.error {
 }
 
 .input-error {
-  border-color: #F16849 !important;
-  box-shadow: 6px 6px 0 #F16849 !important;
-  background-color: #FFE5E0 !important;
+  border-color: var(--color-error-border) !important;
+  box-shadow: 6px 6px 0 var(--color-error-border) !important;
+  background-color: var(--color-error-bg) !important;
 }
 
 /* Pantallas más grandes */
 @media screen and (min-width: 768px) {
-  main {
+  .auth-main {
     padding: 2em;
   }
 
-  h1 {
+  .auth-main h1 {
     font-size: 2.5em;
     margin-top: 0.5em;
   }
@@ -234,43 +245,43 @@ span.error {
     min-width: 500px;
   }
 
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="tel"] {
+  #form-container input[type="text"],
+  #form-container input[type="email"],
+  #form-container input[type="password"],
+  #form-container input[type="tel"] {
     padding: 1em;
     font-size: 1.5em;
-    box-shadow: 9px 9px 0 #154C7E;
+    box-shadow: 9px 9px 0 var(--color-border);
   }
 
-  input[type="text"]:hover,
-  input[type="email"]:hover,
-  input[type="password"]:hover,
-  input[type="tel"]:hover,
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  input[type="password"]:focus,
-  input[type="tel"]:focus {
+  #form-container input[type="text"]:hover,
+  #form-container input[type="email"]:hover,
+  #form-container input[type="password"]:hover,
+  #form-container input[type="tel"]:hover,
+  #form-container input[type="text"]:focus,
+  #form-container input[type="email"]:focus,
+  #form-container input[type="password"]:focus,
+  #form-container input[type="tel"]:focus {
     transform: scale(1.1);
-    box-shadow: 12px 12px 0 #154C7E;
+    box-shadow: 12px 12px 0 var(--color-border);
   }
 
-  input[type="submit"],
-  #btn-login {
+  #form-container input[type="submit"],
+  #form-container #btn-login {
     padding: 1em;
     font-size: 1.5em;
-    box-shadow: 9px 9px 0 2px #F16849;
+    box-shadow: 9px 9px 0 2px var(--color-accent-primary);
   }
 
-  input[type="submit"]:hover,
-  input[type="submit"]:focus,
-  #btn-login:hover,
-  #btn-login:focus {
+  #form-container input[type="submit"]:hover,
+  #form-container input[type="submit"]:focus,
+  #form-container #btn-login:hover,
+  #form-container #btn-login:focus {
     transform: scale(1.1);
-    box-shadow: 12px 12px 0 2px #F16849;
+    box-shadow: 12px 12px 0 2px var(--color-accent-primary);
   }
 
-  h4 {
+  #form-container h4 {
     font-size: 1.4em;
   }
 
