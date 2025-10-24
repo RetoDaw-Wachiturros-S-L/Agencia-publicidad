@@ -26,17 +26,17 @@ class AdsController{
     }
 
     //TODO todas las funciones deberian de devolver algo a la view de momento solo estamos depurando
-    public function show():?Anuncio {
-
-        $id = $_POST["boton"] ?? null;
-        echo $id;
+    public function show() {
+        $id = $_GET["id"] ?? null;
 
         if(!isset($id)) throw new \Exception("No se puede buscar por un id si no hay id");
+        
         if($id == "" || $id <= 0) throw new \Exception("El id no puede ser menor a 0");
 
 		$anuncio = $this->dbFunctions->getById($id);
+        $fechaFormateada = $anuncio->getFechaPublicacion()->format('Y-m-d H:i');
         
-        return $anuncio;
+        require "views/ads/one.add.view.php";
     }
 
     public function showAllByIdComerciante(){

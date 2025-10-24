@@ -6,27 +6,7 @@
     <title>Pagina principal</title>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/index.css"/>
-    <script>
-    (function (m, a, z, e) {
-      var s, t;
-      try {
-        t = m.sessionStorage.getItem('maze-us');
-      } catch (err) {}
-
-      if (!t) {
-        t = new Date().getTime();
-        try {
-          m.sessionStorage.setItem('maze-us', t);
-        } catch (err) {}
-      }
-
-      s = a.createElement('script');
-      s.src = z + '?apiKey=' + e;
-      s.async = true;
-      a.getElementsByTagName('head')[0].appendChild(s);
-      m.mazeUniversalSnippetApiKey = e;
-    })(window, document, 'https://snippet.maze.co/maze-universal-loader.js', 'e76390a3-92da-44e0-9412-672022d0d84d');
-    </script>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/oneAd.css"/>
 </head>
 <body>
     <header>
@@ -40,7 +20,11 @@
             </div>
         </div>
         
-        <?php if (isset($isLoggedIn) && $isLoggedIn == false):?>
+        <?php
+
+                    use AgenciaPublicidad\Models\Anuncio;
+
+ if (isset($isLoggedIn) && $isLoggedIn == false):?>
             <?= $isLoggedIn ?>
             <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=iniciarSesion" class="login">
                 <img src="<?= BASE_URL ?>/img/login.png" alt="Boton de login" id="btnLogin">
@@ -65,7 +49,7 @@
                     </div>
                 </div>
             
-                <img src="<?= BASE_URL ?>/img/Bell.png" alt="anuncios">
+                <img src="<?= BASE_URL ?>/img/Bell.png" alt="campana">
                 <img src="<?= BASE_URL ?>/img/Heart.png" alt="corazon">
                 
                 <?php if ($isAdmin):?>
@@ -81,22 +65,48 @@
         <img src="<?= BASE_URL ?>/img/lampara.png" alt="Boton de cambio de tema" class="lampara">
 
     </header>
-    <hr>
+
+
     <main>
-        <div class="cards-row">
-            <?php foreach($anuncios as $anuncio): ?>
+        <div class="una-sola-card">            
             
-                <div class="card-anuncio">
-                    <div class="div-tj-img">
-                        <img src=<?= $anuncio['url_foto'] ?? BASE_URL.'/img/logo.png' ?> alt=<?= $anuncio['titulo'] ?>>
-                    </div>
-                    <h2 id="titulo-anuncio" > <?= $anuncio['titulo'] ?> </h2>
-                    <p id="desc-anuncio"> <?= $anuncio['detalles'] ?? '' ?> </p>
+            <div class="card-anuncio">
+                <!-- Estilo para la foto solo -->
+                <div class="div-tj-img-unico">
+                        <img src=<?= $anuncio->getUrlFotos() ?? BASE_URL.'/img/logo.png' ?> alt=<?= $anuncio->getTitulo() ?>>
                 </div>
-                 
-            <?php endforeach; ?>
+                <div class="container-div-info">
+                    <div class="info-div">
+                        <h2 id="titulo-anuncio" > <?= $anuncio->getTitulo() ?> </h2>
+                        <p id="desc-anuncio"> <?= $anuncio->getDescripcion() ?? 'Sin detalles' ?> </p>
+                    
+                    </div>
+                    <div class="info-div">
+                        <h2 id="titulo-anuncio" >Datos de la empresa:</h2>
+                            <ul id="desc-anuncio">
+                                <li>
+                                    <?= $anuncio->getAnunciante()->getNombreComercio() ?? 'sin detalles' ?>
+                                </li>
+                                <li>
+                                    Mail: <?= $anuncio->getAnunciante()->getEmail() ?? 'Sin detalles' ?> 
+                                </li>
+                                <li>
+                                    Tel: <?= $anuncio->getAnunciante()->getNumTelefono() ?? 'Sin detalles' ?>
+                                </li>
+                            </ul>    
+                            <p><span class="fecha-formateada">Publicado en: <?= $fechaFormateada ?></span></p> 
+                    </div>              
+
+                    <div class="div-icons">
+                        <img id="heart-icon" src="<?= BASE_URL?>/img/Heart.png" alt="Favorito">
+                        <img src="<?= BASE_URL?>/img/mensaje.png" alt="Bell">
+                    </div>
+                </div>
+                  
+            </div>
         </div>
     <script src="<?= BASE_URL ?>/js/index.js"></script>
+    <script src="<?= BASE_URL ?>/js/one.ad.js"></script>
     </main>
 </body>
 </html>

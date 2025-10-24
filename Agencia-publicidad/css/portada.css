@@ -113,8 +113,6 @@
       "foto"
       "boton";
     grid-template-rows: auto 1fr auto;
-
-   
     width: 90%;
     max-width: 400px;
     padding: 1.5em;
