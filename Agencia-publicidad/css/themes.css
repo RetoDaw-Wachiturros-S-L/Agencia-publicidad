@@ -1,0 +1,102 @@
+/* ====== SISTEMA DE TEMAS ====== */
+
+/* Tema por defecto (claro) */
+:root {
+  /* Colores de fondo */
+  --color-bg-primary: #FFF5E6;
+  --color-bg-secondary: #FFCDC1;
+  --color-bg-tertiary: #FFF0E7;
+  
+  /* Colores de texto */
+  --color-text-primary: #154C7E;
+  --color-text-secondary: #0F3B61;
+  --color-text-light: #ffffff;
+  --color-input-text: #154C7E;
+  
+  /* Colores de acento */
+  --color-accent-primary: #F16849;
+  --color-accent-secondary: #FF6B4A;
+  --color-accent-hover: #FF5439;
+  
+  /* Bordes */
+  --color-border: #154C7E;
+  --color-border-light: rgba(21, 76, 126, 0.3);
+  
+  /* Sombras */
+  --shadow-light: rgba(21, 76, 126, 0.1);
+  --shadow-medium: rgba(21, 76, 126, 0.15);
+  --shadow-strong: rgba(21, 76, 126, 0.3);
+  
+  /* Overlays */
+  --overlay-light: rgba(15, 59, 97, 0.1);
+  
+  /* Colores específicos de elementos */
+  --color-error: #F16849;
+  --color-error-bg: #FFCDC1;
+  --color-error-border: #F16849;
+  
+  /* Separadores */
+  --color-separator: rgb(116, 116, 116);
+  
+  /* Imágenes */
+  --icon-search: url(../img/lupa.png);
+  --icon-lamp: url(../img/lampara.png);
+  --logo-img: url(../img/logo_SSombra.png);
+  --icon-user: url(../img/User.png);
+  --icon-ad: url(../img/ad.png);
+  --icon-heart: url(../img/Heart.png);
+  --icon-login: url(../img/login.png);
+}
+
+/* Tema oscuro */
+[data-theme="dark"] {
+  /* Colores de fondo */
+  --color-bg-primary: #101828;
+  --color-bg-secondary: #02304D;
+  --color-bg-tertiary: #0f3460;
+  
+  /* Colores de texto */
+  --color-text-primary: #FFCF70;
+  --color-text-secondary: #b0b0b0;
+  --color-text-light: #ffffff;
+  --color-input-text: #FFCF70;
+  
+  /* Colores de acento */
+  --color-accent-primary: #782fd8;
+  --color-accent-secondary: #9348f6;
+  --color-accent-hover: #6329ae;
+  
+  /* Bordes */
+  --color-border: #FFCF70;
+  --color-border-light: rgba(100, 181, 246, 0.3);
+  
+  /* Sombras */
+  --shadow-light: rgba(0, 0, 0, 0.3);
+  --shadow-medium: rgba(0, 0, 0, 0.5);
+  --shadow-strong: rgba(0, 0, 0, 0.7);
+  
+  /* Overlays */
+  --overlay-light: rgba(255, 255, 255, 0.1);
+  
+  /* Colores específicos de elementos */
+  --color-error: #ff6b6b;
+  --color-error-bg: #3d1f1f;
+  --color-error-border: #ff6b6b;
+  
+  /* Separadores */
+  --color-separator: rgb(80, 80, 80);
+  
+  /* Imágenes */
+  --icon-search: url(../img/lupa_b.png);
+  --icon-lamp: url(../img/lampara_b.png);
+  --logo-img: url(../img/logo_b.png);
+  --icon-user: url(../img/User_b.png);
+  --icon-ad: url(../img/ad.png);
+  --icon-heart: url(../img/Heart_b.png);
+  --icon-login: url(../img/login_b.png);
+}
+
+/* Transición suave al cambiar de tema */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, background-image 0.3s ease;
+}
