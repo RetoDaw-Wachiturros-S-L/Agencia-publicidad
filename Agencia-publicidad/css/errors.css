@@ -1,0 +1,196 @@
+/* Estilos para páginas de error */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2em;
+  text-align: center;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.error-code {
+  font-size: 8em;
+  font-weight: bold;
+  margin: 0;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  animation: fadeInDown 0.6s ease-out;
+}
+
+.error-title {
+  font-size: 2em;
+  margin: 0.5em 0;
+  color: var(--color-text-primary);
+  animation: fadeIn 0.8s ease-out 0.2s backwards;
+}
+
+.error-message {
+  font-size: 1.2em;
+  margin: 1em 0 2em;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  line-height: 1.6;
+  animation: fadeIn 0.8s ease-out 0.4s backwards;
+}
+
+.error-icon {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 2em;
+  opacity: 0.8;
+  animation: fadeInScale 0.8s ease-out;
+}
+
+.error-actions {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeIn 0.8s ease-out 0.6s backwards;
+}
+
+.error-btn {
+  padding: 1em 2em;
+  font-size: 1em;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.error-btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.error-btn-primary:hover {
+  background-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.error-btn-secondary {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-border);
+}
+
+.error-btn-secondary:hover {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.error-details {
+  margin-top: 3em;
+  padding: 1.5em;
+  background-color: var(--color-bg-secondary);
+  border-radius: 8px;
+  border-left: 4px solid var(--color-primary);
+  max-width: 600px;
+  text-align: left;
+  animation: fadeIn 0.8s ease-out 0.8s backwards;
+}
+
+.error-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  -webkit-user-select: none;
+  user-select: none;
+  padding: 0.5em 0;
+}
+
+.error-details summary:hover {
+  color: var(--color-primary);
+}
+
+.error-details p {
+  margin: 0.5em 0;
+  color: var(--color-text-secondary);
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+.error-details code {
+  background-color: var(--color-bg-primary);
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  color: var(--color-accent);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .error-code {
+    font-size: 5em;
+  }
+
+  .error-title {
+    font-size: 1.5em;
+  }
+
+  .error-message {
+    font-size: 1em;
+  }
+
+  .error-icon {
+    width: 150px;
+    height: 150px;
+  }
+
+  .error-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .error-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
