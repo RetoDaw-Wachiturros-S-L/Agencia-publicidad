@@ -103,14 +103,20 @@
                     </div>              
 
                     <div class="div-icons">
-                        <img id="heart-icon" src="<?= BASE_URL?>/img/Heart.png" alt="Favorito">
-                        <img src="<?= BASE_URL?>/img/mensaje.png" alt="Bell">
+                        <img 
+                            src=" <?= BASE_URL ?>/img/Heart.png" alt="Favorito"
+                            class="favorito-icono"
+                            data-id="heart-icon" 
+                        >
+                        <img 
+                        src="<?= BASE_URL?>/img/mensaje.png" 
+                        alt="Bell">
                     </div>
                 </div>
                   
             </div>
         </div>
-    <script src="https :// cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <script src="<?= BASE_URL ?>/js/one.ad.js"></script>
     </main>
 </body>

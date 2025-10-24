@@ -61,6 +61,16 @@ main {
   padding: 1%;
 }
 
+.favorito-icono {
+  cursor: pointer;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.favorito-activo {
+  opacity: 0.9;
+}
+
+
 .fecha-formateada {
     display: inline-block;
     opacity: 0.5;

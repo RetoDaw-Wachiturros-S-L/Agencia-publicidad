@@ -1,48 +1,64 @@
-function guardarEnCache(){
-    //Si llega hasta aqui es por que toodo el flujo yha funcionado bien (asi que el obj existe)
-    const anuncioCard = document.querySelectorAll("card-anuncio").forEach(card =>{
-        const img = card.querySelector(".favorito-icono");
-        const titulo = card.querySelector("#titulo-anuncio").textContent.trim();
-        const descripcion = card.querySelector("#desc-anuncio")?.textContent?.trim();
-        const fecha = card.querySelector(".fecha-formateada").textContent.replace("Publicado en: ", "").trim();
-
-    });
-    const anuncio = {
-        id: img.dataset.id, //Coge el id de la imagen del anucio
-        titulo: titulo,
-        fotos: img.getAttribute("src"),
-        descripcion: descripcion,
-        fechaPublicacion: fecha
+function guardarEnCache(anuncio){
+    const anunciosDeCache = JSON.parse(localStorage.getItem("anuncios")) || {};
+    anunciosDeCache[anuncio.id] = anuncio;
+    localStorage.setItem("anuncios", JSON.stringify(anunciosDeCache));
+}
+function borrarDeCache(id){
+    const anunciosDeCache = JSON.parse(localStorage.getItem("anuncios")) || {};
+    
+    if(anunciosDeCache.hasOwnProperty(id)){
+        delete anunciosDeCache[id];
+        localStorage.setItem("anuncios", JSON.stringify(anunciosDeCache));
     }
     
-    console.log(anuncio);
-
-    //si no existe "favoritos" crea la instancia en cache
-    let anunciosDeCache = JSON.parse(localStorage.getItem("anuncios")) || {};
-    anunciosDeCache[anuncio.id] = anuncio;
-    localStorage.setItem("anuncios", JSON.stringify(anunciosDeCache))
 }
 
 
 document.addEventListener("DOMContentLoaded", () => {
+  const baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'))}`;
+
   document.querySelectorAll(".favorito-icono").forEach(icono => {
     icono.addEventListener("click", async () => {
-      const anuncioId = icono.dataset.id;
+    //Al hacer click sobre el icono fav coge el id del anuncio(que esta en el icono por php) y mira si tiene en el css la class (favorito-activo=>bool)  
+    const anuncioId = icono.dataset.id;
+    const esFavorito = icono.classList.contains("favorito-activo");
 
-      try {
-        const res = await axios.post("/api/favoritos.php", {
-          anuncioId: anuncioId
-        });
+    //busca la card por css y obtiene el nodo para luego construir el Obj anuncio
+    const card = icono.closest(".card-anuncio");
+    const titulo = card.querySelector("#titulo-anuncio")?.textContent?.trim();
+    const descripcion = card.querySelector("#desc-anuncio")?.textContent?.trim();
+    const fecha = card.querySelector(".fecha-formateada")?.textContent?.replace("Publicado en: ", "").trim();
+    const fotos = icono.getAttribute("src");
 
+    const anuncio = {
+    id: anuncioId,
+    titulo: titulo,
+    fotos: fotos,
+    descripcion: descripcion,
+    fechaPublicacion: fecha
+    };
+
+    try {
+        //Mira si tiene la clase de favorito y si es true hace la await POST para meterla en favoritos y la guarda en caché
+    if (!esFavorito) {
+        const res = await axios.post(baseUrl + "/api/favoritos.php", { anuncioId });
         if (res.status === 200) {
-          icono.classList.add("favorito-activo");
-          icono.src = "favorito-activo.png"; // cambia a tu icono activo
-          
-          guardarEnCache();
+        icono.classList.add("favorito-activo");
+        icono.src = baseUrl + "/img/favorito-activo.png";
+        guardarEnCache(anuncio);
         }
-      } catch (err) {
-        console.log("Error: " + err);
-      }
+        //En otro caso hace await DELETE y la quita de caché(en caso de que esté)
+    } else {
+        const res = await axios.delete(baseUrl + "/api/favoritos.php", { data: { anuncioId } });
+        if (res.status === 200) {
+        icono.classList.remove("favorito-activo");
+        icono.src = baseUrl + "/img/Heart.png";
+        eliminarDeCache(anuncioId);
+        }
+    }
+    } catch (err) {
+    console.log("Error: " + err);
+    }
     });
   });
 });
