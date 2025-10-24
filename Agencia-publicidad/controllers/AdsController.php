@@ -82,7 +82,7 @@ class AdsController{
             // Recibir todos los datos del formulario
             $titulo = $_POST['titulo'];
             $descripcion = $_POST['descripcion'] ?? '';
-            $urlFotos = $_POST['url_fotos'] ?? null;
+            $fotoPortadaIndex = (int)($_POST['foto_portada'] ?? 0);
             $categorias = $_POST['categorias'] ?? null; 
 
             // Validaciones
@@ -99,7 +99,7 @@ class AdsController{
                 $anuncio = new Anuncio(
                     id: null, //id
                     titulo: $titulo,
-                    urlFotos: $urlFotos,
+                    urlFotos: null,
                     descripcion: $descripcion,
                     fechaPublicacion: new \DateTime,
                     anunciante: null, //usuario comerciante
@@ -109,12 +109,46 @@ class AdsController{
                 try {
                     // Verificar que el usuario sea comerciante antes de intentar crear
                     $currentUser = $_SESSION['usuario'] ?? null;
-                    if (!$currentUser || !$currentUser['tipo']=='COMERCIANTE') {
+                    if (!$currentUser || $currentUser['tipo'] != 'COMERCIANTE') {
                         echo "<script>alert('ERROR: Solo los comerciantes pueden crear anuncios. Tu tipo de usuario es: " . ($currentUser['tipo'] ?? 'NO DEFINIDO') . "'); window.history.back();</script>";
                         exit;
                     }
                     
-                    $this->dbFunctions->create($anuncio);
+                    // Crear anuncio y obtener el ID
+                    $idAnuncio = $this->dbFunctions->create($anuncio);
+
+                    // Procesar imágenes si existen
+                    if (!empty($_FILES['fotos']['name'][0])) {
+                        require_once __DIR__ . '/../models/dataBase/FotosDB.php';
+                        require_once __DIR__ . '/../utils/ImageUploader.php';
+                        
+                        $fotosDB = new \AgenciaPublicidad\Models\dataBase\FotosDB();
+                        
+                        $totalFiles = count($_FILES['fotos']['name']);
+                        
+                        for ($i = 0; $i < $totalFiles && $i < 5; $i++) {
+                            $file = [
+                                'name' => $_FILES['fotos']['name'][$i],
+                                'type' => $_FILES['fotos']['type'][$i],
+                                'tmp_name' => $_FILES['fotos']['tmp_name'][$i],
+                                'error' => $_FILES['fotos']['error'][$i],
+                                'size' => $_FILES['fotos']['size'][$i]
+                            ];
+                            
+                            $result = \AgenciaPublicidad\Utils\ImageUploader::uploadImage($file, $idAnuncio);
+                            
+                            if ($result['success']) {
+                                $esPortada = ($i === $fotoPortadaIndex);
+                                $fotosDB->guardarFoto(
+                                    $idAnuncio,
+                                    $result['data']['medium'],
+                                    $i,
+                                    $esPortada
+                                );
+                            }
+                        }
+                    }
+
                     echo "<script>alert('Anuncio creado con éxito'); window.location.href='index.php';</script>";
                 } catch (\Exception $e) {
                     error_log("AdsController::create - Error: " . $e->getMessage());

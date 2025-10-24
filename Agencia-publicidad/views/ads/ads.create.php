@@ -9,7 +9,7 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/ads.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/ads.css">
     <title>Crear Anuncio</title> 
 
     <!-- Editor de texto enriquecido - Summernote -->
@@ -33,6 +33,7 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
             <form 
                 action="index.php?controller=AdsController&accion=create" 
                 method="post"
+                enctype="multipart/form-data"
                 id="register"
             >
 
@@ -47,18 +48,32 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
                     <span class="error"></span>
 
                 </p>
-                <!-- <p>
-                    <label for="fotos">Fotos para el anuncio:</label>
-                    <img src="#" id="imgPreview" alt="Previsualizacion" width="300">
-                    <input type="file" accept="image/"></input>
+                <p>
+                    <label for="fotos">Fotos para el anuncio (máximo 5):</label>
+                    <input 
+                        type="file" 
+                        name="fotos[]" 
+                        id="fotos" 
+                        accept="image/jpeg,image/png,image/webp"
+                        multiple
+                    >
+                    <span class="help-text">Formatos: JPG, PNG, WEBP. Tamaño máximo: 5MB por imagen.</span>
                     <span class="error"></span>
                 </p>
+                <!-- Vista previa de imágenes -->
+                <div id="preview-container" class="preview-container"></div>
+    
+                <!-- Campo oculto para marcar cuál es la portada -->
+                <input type="hidden" name="foto_portada" id="foto_portada" value="0">
+                
+                <!--
                 <p>
                      Pensaba separar x comas o si no que si hay espacio ponerle una para luego añadir a un array y desde ahi hacer la insert 
                     <label for="tags">Palabras clave del anuncio:</label>
                     <input type="text" id="tags" name="tags"></input>
                     <span class="error"></span>
-                </p> -->
+                </p>
+                -->
                 <p>
                     <input type="submit" name="enviar" value="Crear Anuncio">
                 </p>
@@ -99,20 +114,8 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
         });
     </script>
     
-<script src="../../js/create.js"></script>
-<script src="../../js/validaciones.js"></script>
-
-    <?php
-    echo "<pre>DEBUG - Función create():\n";
-        echo "Sesión completa:\n";
-        var_dump($_SESSION);
-        echo "\nUsuario actual:\n";
-        var_dump($currentUser);
-        echo "\nDatos del anuncio:\n";
-        echo "Título: " . $anuncio->getTitulo() . "\n";
-        echo "Descripción: " . $anuncio->getDescripcion() . "\n";
-        echo "ID del comerciante que se usará: " . ($currentUser['id'] ?? 'NO DEFINIDO') . "\n";
-        echo "</pre>";
-    ?>
+    <!-- Scripts externos (incluyen preview de imágenes) -->
+    <script src="<?= BASE_URL ?>/js/create.js"></script>
+    <script src="<?= BASE_URL ?>/js/validaciones.js"></script>
 </body>
 </html>

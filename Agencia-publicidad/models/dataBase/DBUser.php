@@ -162,6 +162,36 @@ class DBUser {
         return $anuncios;
     }
 
+    public function verMiPerfil($id){
+    $pdo = DBCon::getConnection();
+    $sql ="
+        SELECT 
+            u.id,
+            u.nombre,
+            u.apellido,
+            u.email,
+            u.fecha_inscripcion,
+            u.foto_perfil,
+            u.tipo_usuario,
+            c.nombre_empresa,
+            c.nif_empresa,
+            c.comentario_empresa,
+            c.num_telefono,
+            c.comerciante_desde
+        FROM usuarios u
+        LEFT JOIN comerciantes c ON u.id = c.id_usuario
+        WHERE u.id = :id
+    ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":id", $id, \PDO::PARAM_INT);
+    $stmt->execute();
+
+    $perfil = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+    return $perfil;
+}
+
+
 
 }
 ?>

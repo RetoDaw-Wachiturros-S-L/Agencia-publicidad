@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("register");
-    //Aqui va la inicializacion para las imagenes
 
     form.addEventListener("submit", (e) => {
 
@@ -40,4 +39,57 @@ document.addEventListener("DOMContentLoaded", () => {
             form.submit();
         }
     });
+
+    // ===== PREVIEW DE IMÁGENES =====
+    const fotosInput = document.getElementById('fotos');
+    
+    if (fotosInput) {
+        fotosInput.addEventListener('change', function(e) {
+            const files = e.target.files;
+            const previewContainer = document.getElementById('preview-container');
+            previewContainer.innerHTML = '';
+            
+            if (files.length > 5) {
+                alert('Máximo 5 imágenes permitidas');
+                this.value = '';
+                return;
+            }
+            
+            Array.from(files).forEach((file, index) => {
+                if (file.size > 5 * 1024 * 1024) {
+                    alert(`La imagen ${file.name} excede 5MB`);
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const div = document.createElement('div');
+                    div.className = 'preview-item';
+                    div.setAttribute('data-index', index);
+                    div.innerHTML = `
+                        <img src="${e.target.result}" alt="Preview ${index}">
+                        <button type="button" onclick="setAsPortada(${index})">
+                            Usar como portada
+                        </button>
+                        <span class="portada-badge" data-index="${index}" style="display: ${index === 0 ? 'block' : 'none'}">
+                            Portada
+                        </span>
+                    `;
+                    previewContainer.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+    }
 });
+
+// ===== FUNCIÓN GLOBAL PARA BOTONES DE PORTADA =====
+function setAsPortada(index) {
+    document.getElementById('foto_portada').value = index;
+    
+    // Actualizar indicadores visuales usando data-index
+    document.querySelectorAll('.portada-badge').forEach((badge) => {
+        const badgeIndex = parseInt(badge.getAttribute('data-index'));
+        badge.style.display = badgeIndex === index ? 'block' : 'none';
+    });
+}

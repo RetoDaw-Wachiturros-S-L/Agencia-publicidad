@@ -1,7 +1,7 @@
 <?php
     require_once __DIR__ . '/../utils/auth_helper.php';
     require_once __DIR__ . '/../controllers/AdsController.php';
-    
+    //require_once 'views/header.php';
     // Extraer variables globales al scope local
     $currentUser = $GLOBALS['currentUser'] ?? null;
     $isLoggedIn = $GLOBALS['isLoggedIn'] ?? false;
@@ -76,7 +76,7 @@
                             <span class="notification-badge"></span>
                         </a>
                         <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=verAnuncios" class="menu-item">Mis anuncios</a>
-                        <a href="#" class="menu-item">Mi perfil</a>
+                        <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=miPerfil" class="menu-item">Mi perfil</a>
                         <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=logout" class="menu-item menu-item-logout">Cerrar sesión</a>
                     </div>
                 </div>
@@ -109,19 +109,24 @@
     <hr>
     <main>
         <div class="cards-row">
-            <?php foreach($anuncios as $anuncio): ?>
-                <div class="card-anuncio">
-                    <div class="div-tj-img">
-                        <a href="index.php?controller=AdsController&accion=show&id=<?= $anuncio['id'] ?>">
-                            <img src="<?= $anuncio['url_foto'] ?? BASE_URL . '/img/logo.png' ?>" alt="logo">
-                        </a>
-                    </div>
-                    <h2 id="titulo-anuncio"><?= htmlspecialchars($anuncio['titulo']) ?></h2>
-                    <p id="desc-anuncio"><?= htmlspecialchars($anuncio['detalles'] ?? 'Sin detalles') ?></p>
+            <?php
+            require_once __DIR__ . '/../models/dataBase/FotosDB.php';
+            $fotosDB = new \AgenciaPublicidad\Models\dataBase\FotosDB();
+            
+            foreach($anuncios as $anuncio): 
+                $fotoPortada = $fotosDB->getFotoPortada($anuncio['id']);
+                $imagenUrl = $fotoPortada ? BASE_URL . '/' . $fotoPortada['url_foto'] : BASE_URL . '/img/logo.png';
+            ?>
+            <div class="card-anuncio">
+                <div class="div-tj-img">
+                    <img src="<?= $imagenUrl ?>" alt="<?= htmlspecialchars($anuncio['titulo']) ?>">
                 </div>
+                <h2 id="titulo-anuncio"><?= htmlspecialchars($anuncio['titulo']) ?></h2>
+                <p id="desc-anuncio"><?= htmlspecialchars($anuncio['detalles'] ?? 'Sin detalles') ?></p>
+            </div>
             <?php endforeach; ?>
         </div>
-    <script src="<?= BASE_URL ?>/js/index.js"></script>
+        <script src="<?= BASE_URL ?>/js/index.js"></script>
     </main>
 </body>
 </html>
