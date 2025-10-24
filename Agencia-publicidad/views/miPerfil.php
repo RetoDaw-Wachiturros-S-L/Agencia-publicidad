@@ -1,16 +1,17 @@
 <?php 
-    use AgenciaPublicidad\Models\TipoPersonaEnum;
-    
+
+use AgenciaPublicidad\Models\TipoPersonaEnum;
     require_once __DIR__ . '/../utils/auth_helper.php';
     require_once __DIR__ . '/../models/TipoPersonaEnum.php';
-    
-    // Extraer variables globales al scope local
+ // Extraer variables globales al scope local
     $currentUser = $GLOBALS['currentUser'] ?? null;
     $isLoggedIn = $GLOBALS['isLoggedIn'] ?? false;
-    $isAdmin = $GLOBALS['isAdmin'] ?? false;
+    $isAdmin = $GLOBALS['isAdmin'] ?? false;     
+
+
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,34 +22,38 @@
     <title>Comerciantes Vitoria</title>
 </head>
 <body>
-    <?php include __DIR__ . '/components/header.php'; ?>
-    
-    <main>
+    <header>
+    </header>
+     <main>
         <div class="contenido">
-            <aside>
+            <aside>               
                 <ul>
-                    <li><b>Nombre: <?=$perfil["u.nombre"]?></b></li>
-                    <li><b>Apellido: <?=$perfil["u.apellido"]?></b></li>
-                    <li><b>Email: <?=$perfil["u.email"]?></b></li>
-                    <?php if($currentUser["tipo"]==TipoPersonaEnum::COMERCIANTE):?>
-                        <li><b>Nombre empresa:</b> <?=$perfil["c.nombre_empresa"]?></li>
-                        <li><b>Nif empresa:</b><?=$perfil["c.nif_empresa"]?></li>
-                        <li><b>Detalles de la empresa:</b><?=$perfil["c.comentario_empresa"]?></li>
-                        <li><b>Telefonno de la empresa:</b><?=$perfil["c.num_telefono"]?></li>
-                        <li><b>Comerciante desde:</b><?=$perfil["c.comerciante_desde"]?></li>
+                    <li><b>Nombre: <?=$perfil["nombre"]?></b></li>
+                    <li><b>Apellido: <?=$perfil["apellido"]?></b></li>
+                    <li><b>Email: <?=$perfil["email"]?></b></li>
+                    <?php if($_SESSION["usuario"]["tipo"]=="COMERCIANTE"):?>
+                        <li><b>Nombre empresa: </b> <?=$perfil["nombre_empresa"]?></li>
+                        <li><b>Nif empresa: </b><?=$perfil["nif_empresa"]?></li>
+                        <li><b>Detalles de la empresa: </b><?=$perfil["comentario_empresa"]?></li>
+                        <li><b>Telefonno de la empresa: </b><?=$perfil["num_telefono"]?></li>
+                        <li><b>Comerciante desde: </b><?=$perfil["comerciante_desde"]?></li>
                     <?php endif?>
                 </ul>
             </aside>
             <div id="perfil">
-             <h2><img src="" alt="foto de perfil">Pako</h2>
+                <?php if(empty($perfil["foto_perfil"])):?>
+                    <h2><img src="<?= BASE_URL ?>/img/fotoperfil.png" alt="foto de perfil">  <?=$perfil["nombre"]?></h2>
+                <?php else: ?>
+                    <h2><img src="" alt="foto de perfil">  <?=$perfil["nombre"]?></h2>
+                <?php endif?> 
             </div>
             <section>
-                <a href="">Editar perfil</a>
-                <a href="">Mis anuncios</a>
-                <a href="" class="cerrar">Cerrar sesion</a>
+                <a href="../views/editarperfil.php">Editar perfil</a>
+                <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=verAnuncios">Mis anuncios</a>
+                <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=logout" class="cerrar">Cerrar sesion</a>
             </section>
         </div>
     </main>
-    <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
+ 
 </body>
 </html>
