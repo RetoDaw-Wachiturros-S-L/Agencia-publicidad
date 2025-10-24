@@ -96,7 +96,7 @@ hr{
     background-color: rgb(116, 116, 116);
     filter: blur(2px);
 }
-.persona, .campana, .corazon{
+.persona, .anuncios, .corazon{
     height: 2em;
     width: auto;
 

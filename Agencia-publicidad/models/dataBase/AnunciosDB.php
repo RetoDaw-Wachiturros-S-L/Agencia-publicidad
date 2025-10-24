@@ -22,7 +22,7 @@ class AnunciosDB{
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function getById(int $id): Anuncio|null {
+    public function getById(int $id): ?Anuncio {
         $pdo = DBCon::getConnection();
 
         $sql = $pdo->prepare("
@@ -127,7 +127,7 @@ class AnunciosDB{
         return $sql->execute();
     }
 
-    public function create(Anuncio $anuncio):bool{
+    public function create(Anuncio $anuncio): int {
         $currentUser = $_SESSION['usuario'] ?? null;
         
         // Validar que el usuario esté logueado y sea comerciante
@@ -135,12 +135,12 @@ class AnunciosDB{
             error_log("AnunciosDB::create - No hay usuario en sesión");
             throw new \Exception("Debe iniciar sesión para crear anuncios");
         }
-        
+        /* Esta validación ya se hace en el controlador
         if (!isset($currentUser['id_comerciante'])) {
             error_log("AnunciosDB::create - Usuario no es comerciante. SESSION: " . var_export($currentUser, true));
             throw new \Exception("Solo los comerciantes pueden crear anuncios");
         }
-
+        */
         $pdo = DBCon::getConnection();
         $sql = $pdo->prepare("INSERT INTO 
                                 anuncios(id_comerciante, titulo, detalles)
@@ -150,7 +150,10 @@ class AnunciosDB{
         $sql->bindValue(":titulo", $anuncio->getTitulo());
         $sql->bindValue(":detalles", $anuncio->getDescripcion());        
         
-        return $sql->execute();
+        $sql->execute();
+        
+        // Retornar el ID del anuncio recién creado
+        return (int)$pdo->lastInsertId();
     }        
     public function getAllByIdComerciante(int $idComerciante){
         $pdo = DBCon::getConnection();

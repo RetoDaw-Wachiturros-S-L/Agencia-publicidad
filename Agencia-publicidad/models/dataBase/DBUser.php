@@ -39,8 +39,8 @@ class DBUser {
         $id = $this->sacarIdUsuario($usuario->getEmail());
         
         $pdo = DBCon::getConnection();
-        $sql = "INSERT INTO comerciantes (id_usuario, nombre_empresa, nif_empresa, comentario_empresa) 
-                VALUES (:idUsuario, :nombreEmpresa, :nifEmpresa, :comentarioEmpresa)";
+        $sql = "INSERT INTO comerciantes (id_usuario, nombre_empresa, nif_empresa, comentario_empresa, num_telefono) 
+                VALUES (:idUsuario, :nombreEmpresa, :nifEmpresa, :comentarioEmpresa, :numTelefono)";
         
         $stmt = $pdo->prepare($sql);
 
@@ -48,6 +48,7 @@ class DBUser {
         $stmt->bindValue(':nombreEmpresa', $usuario->getNombreComercio());
         $stmt->bindValue(':nifEmpresa', $usuario->getNifEmpresa());
         $stmt->bindValue(':comentarioEmpresa', $usuario->getRubro());
+        $stmt->bindValue(':numTelefono', $usuario->getNumTelefono());
         
         return $stmt->execute();
     }
@@ -109,10 +110,12 @@ class DBUser {
             $usuarioRegistrado->getNombre(),       // nombre
             $usuarioRegistrado->getApellido(),     // apellido
             $usuarioRegistrado->getEmail(),        // email
-            $usuarioRegistrado->getContrasena(),   // contrasena
+            $usuarioRegistrado->getTipo(),   // ::COMERCIANTE
             $usuarioRegistrado->getFotoPerfil(),   // fotoPerfil
             $comerciante['nombre_empresa'],        // nombreComercio
-            $comerciante['comentario_empresa']     // rubro
+            $comerciante['nif_empresa'],
+            $comerciante['comentario_empresa'],     // rubro
+            $comerciante['num_telefono'],
         );
     }
     public function sacarfavoritos($id) {
@@ -135,7 +138,7 @@ class DBUser {
 
     $anuncios = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        return $anuncios;
+    return $anuncios;
     }
 
 
@@ -148,11 +151,10 @@ class DBUser {
                     a.fecha_publicacion 
                 FROM anuncios a
                 JOIN comerciantes c ON a.id_comerciante = c.id
-                JOIN usuarios u ON c.id_usuario = u.id
-                WHERE u.id = :id_usuario";
-
+                JOIN usuarios u ON c.id_usuario  =  u.id 
+                WHERE c.id = :id";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(":id_usuario", $id, \PDO::PARAM_INT);
+        $stmt->bindValue(":id", $id);
         $stmt->execute();
 
         $anuncios = $stmt->fetchAll(\PDO::FETCH_ASSOC);

@@ -3,12 +3,14 @@ namespace AgenciaPublicidad\Models;
 
 use AgenciaPublicidad\Models\UsuarioRegistrado;
 use AgenciaPublicidad\Models\TipoPersonaEnum;
+use Stringable;
 
 class Comerciante extends UsuarioRegistrado {
     private ?int $idComerciante;
     private ?string $nombreComercio;
     private ?string $nifEmpresa;
     private ?string $rubro;
+    private ?string $numTelefono;
 
     public function __construct(
         ?int $idComerciante = null,
@@ -20,7 +22,8 @@ class Comerciante extends UsuarioRegistrado {
         ?string $fotoPerfil = null,
         ?string $nombreComercio = null,
         ?string $nifEmpresa = '',
-        ?string $rubro = null
+        ?string $rubro = null,
+        ?string $numTelefono = null
     ) {
         // Llamar al constructor padre PRIMERO
         parent::__construct(
@@ -38,6 +41,7 @@ class Comerciante extends UsuarioRegistrado {
         $this->nombreComercio = $nombreComercio;
         $this->nifEmpresa = $nifEmpresa;
         $this->rubro = $rubro;
+        $this->numTelefono = $numTelefono;
     }
 
     // Getters
@@ -72,6 +76,13 @@ class Comerciante extends UsuarioRegistrado {
     public function setRubro(?string $rubro): void {
         $this->rubro = $rubro;
     }
+    public function getNumTelefono():?string{
+        return $this->numTelefono;
+    }
+    public function setNumTelefono(?string $numTelefono):void{
+        $this->numTelefono = $numTelefono;
+    }
+    
 
     // Método para obtener información completa
     public function toArray(): array {
@@ -85,7 +96,8 @@ class Comerciante extends UsuarioRegistrado {
             'fotoPerfil' => $this->getFotoPerfil(),
             'nombreComercio' => $this->nombreComercio,
             'nifEmpresa'=>$this->nifEmpresa,
-            'rubro' => $this->rubro
+            'rubro' => $this->rubro,
+            'numTelefono' => $this->numTelefono,
         ];
     }
 }
