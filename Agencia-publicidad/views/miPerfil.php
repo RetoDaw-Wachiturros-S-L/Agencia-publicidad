@@ -47,7 +47,7 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
                 <?php endif?> 
             </div>
             <section>
-                <a href="../views/editarperfil.php">Editar perfil</a>
+                <a href="<?= BASE_URL ?>/views/editarPerfil.php">Editar perfil</a>
                 <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=verAnuncios">Mis anuncios</a>
                 <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=logout" class="cerrar">Cerrar sesion</a>
             </section>

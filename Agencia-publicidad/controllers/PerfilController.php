@@ -32,5 +32,6 @@ class PerfilController {
         
         require_once __DIR__ . '/../views/miPerfil.php';
     }
+
 }
 ?>
