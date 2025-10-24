@@ -152,7 +152,7 @@ class DBUser {
                 FROM anuncios a
                 JOIN comerciantes c ON a.id_comerciante = c.id
                 JOIN usuarios u ON c.id_usuario  =  u.id 
-                WHERE c.id = :id";
+                WHERE u.id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(":id", $id);
         $stmt->execute();
