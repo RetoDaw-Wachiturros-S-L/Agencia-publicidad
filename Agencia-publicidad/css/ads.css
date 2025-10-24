@@ -19,12 +19,12 @@ main {
   place-content: center;
   gap: 2em;
   padding: 1.5em;
-  background-color: #FFF5E6;
+  background-color: var(--color-bg-primary);
 }
 
 /* Título */
 h1 {
-  color: #154C7E;
+  color: var(--color-text-primary);
   font-size: 2em;
   text-align: center;
   font-weight: 600;
@@ -33,9 +33,9 @@ h1 {
 
 /* Mensajes de error */
 .mensaje-error {
-  color: #F16849;
-  background-color: #FFCDC1;
-  border: 2px solid #F16849;
+  color: var(--color-error);
+  background-color: var(--color-error-bg);
+  border: 2px solid var(--color-error-border);
   border-radius: 0.5em;
   padding: 1em;
   text-align: center;
@@ -52,13 +52,13 @@ h1 {
 }
 
 /* Formulario */
-form {
+#form-container form {
   display: flex;
   flex-direction: column;
   gap: 1.2em;
 }
 
-fieldset {
+#form-container fieldset {
   border: none;
   padding: 0;
   margin: 0;
@@ -67,12 +67,12 @@ fieldset {
   gap: 1.2em;
 }
 
-legend {
+#form-container legend {
   display: none;
 }
 
 /* Contenedor de cada campo */
-form p {
+#form-container form p {
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -80,8 +80,8 @@ form p {
 }
 
 /* Labels */
-label {
-  color: #154C7E;
+#form-container label {
+  color: var(--color-text-primary);
   font-weight: 500;
   font-size: 1em;
   display: block; /* Mostramos labels para el formulario de anuncios */
@@ -89,81 +89,90 @@ label {
 }
 
 /* Inputs de texto */
-input[type="text"] {
+#form-container input[type="text"] {
   text-align: left;
-  background-color: #FFCDC1;
-  border: solid 2px #154C7E;
+  background-color: var(--color-bg-secondary);
+  border: solid 2px var(--color-border);
   border-radius: 0.2em;
   padding: 0.9em;
   font-size: 1.3em;
+  color: var(--color-input-text);
   box-shadow: none;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   width: 100%;
 }
 
-input[type="text"]:hover,
-input[type="text"]:focus {
+#form-container input[type="text"]:hover,
+#form-container input[type="text"]:focus {
   transform: scale(1.05);
-  box-shadow: 9px 9px 0 #154C7E;
+  box-shadow: 9px 9px 0 var(--color-border);
   outline: none;
 }
 
 /* Textarea para descripción */
-textarea {
+#form-container textarea {
   text-align: left;
-  background-color: #FFCDC1;
-  border: solid 2px #154C7E;
+  background-color: var(--color-bg-secondary);
+  border: solid 2px var(--color-border);
   border-radius: 0.2em;
   padding: 0.9em;
   font-size: 1.1em;
   font-family: inherit;
-  box-shadow: 6px 6px 0 #154C7E;
+  color: var(--color-input-text);
+  box-shadow: 6px 6px 0 var(--color-border);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   width: 100%;
   min-height: 200px;
   resize: vertical;
 }
 
-textarea:hover,
-textarea:focus {
-  transform: scale(1.02);
-  box-shadow: 9px 9px 0 #154C7E;
+#form-container textarea:hover,
+#form-container textarea:focus {
+  transform: scale(1.05);
+  box-shadow: 9px 9px 0 var(--color-border);
   outline: none;
 }
 
+/* Placeholder styles */
+#form-container input[type="text"]::placeholder,
+#form-container textarea::placeholder {
+  color: var(--color-text-secondary);
+  opacity: 0.7;
+}
+
 /* Botón de submit */
-input[type="submit"] {
-  color: #154C7E;
+#form-container input[type="submit"] {
+  color: var(--color-text-primary);
   text-align: center;
-  background-color: rgba(241, 104, 73, 0.6);
-  border: solid 2px #154C7E;
+  background-color: var(--color-accent-secondary);
+  border: solid 2px var(--color-border);
   border-radius: 0.2em;
   padding: 0.9em;
   font-size: 1.3em;
   font-weight: 600;
-  box-shadow: 6px 6px 0 2px #F16849;
+  box-shadow: 6px 6px 0 2px var(--color-accent-primary);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   cursor: pointer;
   width: 100%;
   margin-top: 1em;
 }
 
-input[type="submit"]:hover,
-input[type="submit"]:focus {
+#form-container input[type="submit"]:hover,
+#form-container input[type="submit"]:focus {
   transform: scale(1.05);
-  box-shadow: 9px 9px 0 2px #F16849;
+  box-shadow: 9px 9px 0 2px var(--color-accent-primary);
 }
 
 /* Mensajes de error de validación */
 span.error {
   display: none;
-  background: linear-gradient(135deg, #FFE5E0 0%, #FFCDC1 100%);
-  color: #C44230;
+  background: var(--color-error-bg);
+  color: var(--color-error);
   font-size: 0.85em;
   font-weight: 600;
   padding: 0.5em 1em;
   border-radius: 0.3em;
-  border-left: 4px solid #F16849;
+  border-left: 4px solid var(--color-error-border);
   text-align: left;
   margin-top: 0.3em;
   box-shadow: 0 2px 4px rgba(241, 104, 73, 0.2);
@@ -182,9 +191,9 @@ span.error {
 }
 
 .input-error {
-  border-color: #F16849 !important;
-  box-shadow: 6px 6px 0 #F16849 !important;
-  background-color: #FFE5E0 !important;
+  border-color: var(--color-error-border) !important;
+  box-shadow: 6px 6px 0 var(--color-error-border) !important;
+  background-color: var(--color-error-bg) !important;
 }
 
 /* Pantallas más grandes */
@@ -204,44 +213,44 @@ span.error {
     min-width: 600px;
   }
 
-  input[type="text"] {
+  #form-container input[type="text"] {
     padding: 1em;
     font-size: 1.5em;
-    box-shadow: 9px 9px 0 #154C7E;
+    box-shadow: 9px 9px 0 var(--color-border);
   }
 
-  input[type="text"]:hover,
-  input[type="text"]:focus {
+  #form-container input[type="text"]:hover,
+  #form-container input[type="text"]:focus {
     transform: scale(1.05);
-    box-shadow: 12px 12px 0 #154C7E;
+    box-shadow: 12px 12px 0 var(--color-border);
   }
 
-  textarea {
+  #form-container textarea {
     padding: 1em;
     font-size: 1.3em;
     min-height: 250px;
-    box-shadow: 9px 9px 0 #154C7E;
+    box-shadow: 9px 9px 0 var(--color-border);
   }
 
-  textarea:hover,
-  textarea:focus {
+  #form-container textarea:hover,
+  #form-container textarea:focus {
     transform: scale(1.02);
-    box-shadow: 12px 12px 0 #154C7E;
+    box-shadow: 12px 12px 0 var(--color-border);
   }
 
-  input[type="submit"] {
+  #form-container input[type="submit"] {
     padding: 1em;
     font-size: 1.5em;
-    box-shadow: 9px 9px 0 2px #F16849;
+    box-shadow: 9px 9px 0 2px var(--color-accent-primary);
   }
 
-  input[type="submit"]:hover,
-  input[type="submit"]:focus {
+  #form-container input[type="submit"]:hover,
+  #form-container input[type="submit"]:focus {
     transform: scale(1.05);
-    box-shadow: 12px 12px 0 2px #F16849;
+    box-shadow: 12px 12px 0 2px var(--color-accent-primary);
   }
 
-  label {
+  #form-container label {
     font-size: 1.2em;
   }
 
@@ -262,7 +271,7 @@ span.error {
 .preview-item {
     position: relative;
     width: 150px;
-    border: 2px solid #154C7E;
+    border: 2px solid var(--color-border);
     border-radius: 0.5em;
     padding: 0.5em;
 }
@@ -278,14 +287,14 @@ span.error {
     width: 100%;
     margin-top: 0.5em;
     padding: 0.5em;
-    background-color: #FFCDC1;
-    border: 1px solid #154C7E;
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
     border-radius: 0.3em;
     cursor: pointer;
 }
 
 .preview-item button:hover {
-    background-color: #F16849;
+    background-color: var(--color-accent-primary);
     color: white;
 }
 
@@ -293,7 +302,7 @@ span.error {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #F16849;
+    background-color: var(--color-accent-primary);
     color: white;
     padding: 0.3em 0.6em;
     border-radius: 0.3em;
@@ -322,7 +331,7 @@ span.error {
     width: 100%;
     height: auto;
     border-radius: 0.5em;
-    box-shadow: 6px 6px 0 #154C7E;
+    box-shadow: 6px 6px 0 var(--color-border);
 }
 
 .fotos-miniatura {
@@ -336,7 +345,7 @@ span.error {
     width: 100px;
     height: 100px;
     object-fit: cover;
-    border: 2px solid #154C7E;
+    border: 2px solid var(--color-border);
     border-radius: 0.3em;
     cursor: pointer;
     transition: transform 0.2s;
@@ -352,16 +361,16 @@ span.error {
 
 /* Contenedor principal de Summernote */
 .note-editor {
-  border: 2px solid #154C7E !important;
+  border: 2px solid var(--color-border) !important;
   border-radius: 0.2em !important;
-  box-shadow: 6px 6px 0 #154C7E !important;
+  box-shadow: 6px 6px 0 var(--color-border) !important;
   transition: box-shadow 0.3s ease-in-out !important;
   outline: none !important;
 }
 
 .note-editor:hover,
 .note-editor.note-frame:focus-within {
-  box-shadow: 9px 9px 0 #154C7E !important;
+  box-shadow: 9px 9px 0 var(--color-border) !important;
   outline: none !important;
 }
 
@@ -379,16 +388,16 @@ span.error {
 
 /* Barra de herramientas */
 .note-toolbar {
-  background-color: #FFF5E6 !important;
-  border-bottom: 2px solid #154C7E !important;
+  background-color: var(--color-bg-primary) !important;
+  border-bottom: 2px solid var(--color-border) !important;
   padding: 10px !important;
 }
 
 /* Botones de la barra de herramientas */
 .note-btn {
-  background-color: #FFCDC1 !important;
-  border: 1px solid #154C7E !important;
-  color: #154C7E !important;
+  background-color: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text-primary) !important;
   border-radius: 0.2em !important;
   margin: 2px !important;
   transition: background-color 0.2s ease, color 0.2s ease !important;
@@ -398,15 +407,15 @@ span.error {
 
 .note-btn:hover,
 .note-btn:focus {
-  background-color: #F16849 !important;
-  color: white !important;
+  background-color: var(--color-accent-primary) !important;
+  color: var(--color-text-light) !important;
   box-shadow: none !important;
   outline: none !important;
 }
 
 .note-btn.active {
-  background-color: #154C7E !important;
-  color: white !important;
+  background-color: var(--color-text-primary) !important;
+  color: var(--color-text-light) !important;
   box-shadow: none !important;
 }
 
@@ -417,15 +426,15 @@ span.error {
 
 /* Área de edición */
 .note-editable {
-  background-color: #FFCDC1 !important;
-  color: #154C7E !important;
+  background-color: var(--color-bg-secondary) !important;
+  color: var(--color-input-text) !important;
   padding: 15px !important;
   min-height: 200px !important;
   font-size: 1.1em !important;
 }
 
 .note-editable:focus {
-  background-color: #FFCDC1 !important;
+  background-color: var(--color-bg-secondary) !important;
 }
 
 /* Placeholder */
@@ -449,41 +458,41 @@ span.error {
 
 /* Dropdowns y modales */
 .note-dropdown-menu {
-  background-color: #FFF5E6 !important;
-  border: 2px solid #154C7E !important;
+  background-color: var(--color-bg-primary) !important;
+  border: 2px solid var(--color-border) !important;
   border-radius: 0.2em !important;
 }
 
 .note-dropdown-item:hover {
-  background-color: #FFCDC1 !important;
-  color: #154C7E !important;
+  background-color: var(--color-bg-secondary) !important;
+  color: var(--color-text-primary) !important;
 }
 
 /* Modal de Summernote */
 .note-modal .modal-content {
-  background-color: #FFF5E6 !important;
-  border: 2px solid #154C7E !important;
+  background-color: var(--color-bg-primary) !important;
+  border: 2px solid var(--color-border) !important;
   border-radius: 0.5em !important;
 }
 
 .note-modal .modal-header {
-  background-color: #FFCDC1 !important;
-  border-bottom: 2px solid #154C7E !important;
+  background-color: var(--color-bg-secondary) !important;
+  border-bottom: 2px solid var(--color-border) !important;
 }
 
 .note-modal .modal-title {
-  color: #154C7E !important;
+  color: var(--color-text-primary) !important;
   font-weight: 600 !important;
 }
 
 .note-modal .btn-primary {
-  background-color: #F16849 !important;
-  border-color: #154C7E !important;
-  color: white !important;
+  background-color: var(--color-accent-primary) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-text-light) !important;
 }
 
 .note-modal .btn-primary:hover {
-  background-color: #154C7E !important;
+  background-color: var(--color-text-primary) !important;
 }
 
 /* Evitar parpadeos en el modal */
@@ -514,12 +523,12 @@ span.error {
 /* Pantallas más grandes */
 @media screen and (min-width: 768px) {
   .note-editor {
-    box-shadow: 9px 9px 0 #154C7E !important;
+    box-shadow: 9px 9px 0 var(--color-border) !important;
   }
 
   .note-editor:hover,
   .note-editor.note-frame:focus-within {
-    box-shadow: 12px 12px 0 #154C7E !important;
+    box-shadow: 12px 12px 0 var(--color-border) !important;
   }
 
   .note-editable {
@@ -534,8 +543,8 @@ span.error {
 
 /* Input de archivo */
 input[type="file"] {
-  background-color: #FFCDC1;
-  border: solid 2px #154C7E;
+  background-color: var(--color-bg-secondary);
+  border: solid 2px var(--color-border);
   border-radius: 0.2em;
   padding: 0.9em;
   font-size: 1em;
@@ -544,12 +553,12 @@ input[type="file"] {
 }
 
 input[type="file"]:hover {
-  background-color: #FFF5E6;
+  background-color: var(--color-bg-primary);
 }
 
 .help-text {
   font-size: 0.85em;
-  color: #154C7E;
+  color: var(--color-text-primary);
   margin-top: 0.3em;
   display: block;
   font-style: italic;
@@ -567,11 +576,11 @@ input[type="file"]:hover {
 .preview-item {
   position: relative;
   width: 150px;
-  border: 2px solid #154C7E;
+  border: 2px solid var(--color-border);
   border-radius: 0.5em;
   padding: 0.5em;
-  background-color: #FFF5E6;
-  box-shadow: 3px 3px 0 #154C7E;
+  background-color: var(--color-bg-primary);
+  box-shadow: 3px 3px 0 var(--color-border);
 }
 
 .preview-item img {
@@ -579,26 +588,26 @@ input[type="file"]:hover {
   height: 150px;
   object-fit: cover;
   border-radius: 0.3em;
-  border: 1px solid #154C7E;
+  border: 1px solid var(--color-border);
 }
 
 .preview-item button {
   width: 100%;
   margin-top: 0.5em;
   padding: 0.5em;
-  background-color: #FFCDC1;
-  border: 1px solid #154C7E;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
   border-radius: 0.3em;
   cursor: pointer;
   font-size: 0.9em;
   font-weight: 500;
-  color: #154C7E;
+  color: var(--color-text-primary);
   transition: all 0.2s ease;
 }
 
 .preview-item button:hover {
-  background-color: #F16849;
-  color: white;
+  background-color: var(--color-accent-primary);
+  color: var(--color-text-light);
   transform: scale(1.05);
 }
 
@@ -606,13 +615,13 @@ input[type="file"]:hover {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #F16849;
-  color: white;
+  background-color: var(--color-accent-primary);
+  color: var(--color-text-light);
   padding: 0.3em 0.6em;
   border-radius: 0.3em;
   font-size: 0.8em;
   font-weight: bold;
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 0 var(--shadow-medium);
 }
 
 /* Responsive para preview */

@@ -1,14 +1,13 @@
-/* 📱 Mobile First */
 main {
-  height: 80vh;
+  height: 100vh;
   min-width: 301px;
 }
 
 .una-sola-card {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  min-height: 100%;
+  width: 90%;
+  height: auto; /* Cambiado de min-height: 100% a height: auto */
   align-items: center;
   align-self: center;
 }
@@ -16,9 +15,9 @@ main {
 .card-anuncio {
   height: auto;
   width: 100%;
-  border: 1px solid #0F3B61;
+  border: 1px solid var(--color-text-secondary);
   border-radius: 0.7em;
-  background-color: #FFCDC1;
+  background-color: var(--color-bg-secondary);
   box-sizing: border-box;
 }
 
@@ -26,19 +25,22 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #FFF0E7;
-  border: 1px solid #0F3B61;
+  background-color: var(--color-bg-tertiary);
+  border: 1px solid var(--color-text-secondary);
   border-radius: 0.7em;
   margin-bottom: 1em;
-  height: 60%;
+  width: 100%;
+  height: auto; /* Cambiado de height: 60% a auto */
+  max-height: 1024px;
   overflow: hidden;
 }
 
-.div-tj-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.div-tj-img-unico img {
+  width: 100%; /* Se ajusta al ancho del contenedor */
+  height: auto; /* Altura automática manteniendo proporción */
+  object-fit: cover; /* Recorta si es necesario */
   border-radius: 0.5em;
+  display: block; /* Elimina espacio debajo de la imagen */
 }
 
 .container-div-info {
@@ -62,10 +64,20 @@ main {
   padding: 1%;
 }
 
+.favorito-icono {
+  cursor: pointer;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.favorito-activo {
+  opacity: 0.9;
+}
+
+
 .fecha-formateada {
     display: inline-block;
     opacity: 0.5;
-    border-bottom: 1px solid #0F3B61;
+    border-bottom: 1px solid var(--color-text-secondary);
 }
 
 ul{
