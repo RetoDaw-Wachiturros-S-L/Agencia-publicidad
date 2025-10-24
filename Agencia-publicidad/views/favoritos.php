@@ -15,6 +15,29 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/index.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/tituloVacio.css"/>
+
+    <script>
+    (function (m, a, z, e) {
+      var s, t;
+      try {
+        t = m.sessionStorage.getItem('maze-us');
+      } catch (err) {}
+
+      if (!t) {
+        t = new Date().getTime();
+        try {
+          m.sessionStorage.setItem('maze-us', t);
+        } catch (err) {}
+      }
+
+      s = a.createElement('script');
+      s.src = z + '?apiKey=' + e;
+      s.async = true;
+      a.getElementsByTagName('head')[0].appendChild(s);
+      m.mazeUniversalSnippetApiKey = e;
+    })(window, document, 'https://snippet.maze.co/maze-universal-loader.js', 'e76390a3-92da-44e0-9412-672022d0d84d');
+    </script>
 </head>
 <body>
 <?php include __DIR__ . '/components/header.php'; ?>
@@ -36,7 +59,7 @@
             <?php endforeach; ?>
         </div>
     <?php else: ?>
-        <p>No tienes anuncios favoritos todavía.</p>
+        <h2>No tienes anuncios favoritos todavía.</h2>
     <?php endif; ?>
 </main>
 
