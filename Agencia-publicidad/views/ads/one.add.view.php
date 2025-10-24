@@ -111,7 +111,6 @@
             </div>
         </div>
     <script src="https :// cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="<?= BASE_URL ?>/js/index.js"></script>
     <script src="<?= BASE_URL ?>/js/one.ad.js"></script>
     </main>
 </body>
