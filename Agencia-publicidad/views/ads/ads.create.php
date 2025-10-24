@@ -9,7 +9,7 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/ads.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/ads.css">
     <title>Crear Anuncio</title> 
 
     <!-- Editor de texto enriquecido - Summernote -->
@@ -113,69 +113,9 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
             });
         });
     </script>
-
-    <!-- Preview de imágenes -->
-    <script>
-        document.getElementById('fotos').addEventListener('change', function(e) {
-            const files = e.target.files;
-            const previewContainer = document.getElementById('preview-container');
-            previewContainer.innerHTML = '';
-            
-            if (files.length > 5) {
-                alert('Máximo 5 imágenes permitidas');
-                this.value = '';
-                return;
-            }
-            
-            Array.from(files).forEach((file, index) => {
-                if (file.size > 5 * 1024 * 1024) {
-                    alert(`La imagen ${file.name} excede 5MB`);
-                    return;
-                }
-                
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const div = document.createElement('div');
-                    div.className = 'preview-item';
-                    div.innerHTML = `
-                        <img src="${e.target.result}" alt="Preview ${index}">
-                        <button type="button" onclick="setAsPortada(${index})">
-                            Usar como portada
-                        </button>
-                        <span class="portada-badge" style="display: ${index === 0 ? 'block' : 'none'}">
-                            Portada
-                        </span>
-                    `;
-                    previewContainer.appendChild(div);
-                };
-                reader.readAsDataURL(file);
-            });
-        });
-
-        function setAsPortada(index) {
-            document.getElementById('foto_portada').value = index;
-            
-            // Actualizar indicadores visuales
-            document.querySelectorAll('.portada-badge').forEach((badge, i) => {
-                badge.style.display = i === index ? 'block' : 'none';
-            });
-        }
-    </script>
     
-<script src="../../js/create.js"></script>
-<script src="../../js/validaciones.js"></script>
-
-    <?php
-    echo "<pre>DEBUG - Función create():\n";
-        echo "Sesión completa:\n";
-        var_dump($_SESSION);
-        echo "\nUsuario actual:\n";
-        var_dump($currentUser);
-        echo "\nDatos del anuncio:\n";
-        echo "Título: " . $anuncio->getTitulo() . "\n";
-        echo "Descripción: " . $anuncio->getDescripcion() . "\n";
-        echo "ID del comerciante que se usará: " . ($currentUser['id'] ?? 'NO DEFINIDO') . "\n";
-        echo "</pre>";
-    ?>
+    <!-- Scripts externos (incluyen preview de imágenes) -->
+    <script src="<?= BASE_URL ?>/js/create.js"></script>
+    <script src="<?= BASE_URL ?>/js/validaciones.js"></script>
 </body>
 </html>
