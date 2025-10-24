@@ -11,7 +11,12 @@ class Router {
         $action = $_GET['accion'] ?? 'index';
         
         // Cargar y ejecutar controlador
-        self::loadController($controllerName, $action);
+        try {
+            self::loadController($controllerName, $action);
+        } catch (Exception $e) {
+            // Si hay un error, mostrar la página 404 personalizada
+            self::show404();
+        }
     }
     
     private static function loadController($controllerName, $action){
@@ -19,10 +24,11 @@ class Router {
         // Construir ruta del archivo del controlador
         $controllerFile = "./controllers/{$controllerName}.php";
 
-        // DEBUG: Mostrar qué archivo está buscando
-        // echo "Buscando: " . $controllerFile . "<br>";
-        // echo "¿Existe? " . (file_exists($controllerFile) ? "SÍ" : "NO") . "<br>";
-        //
+        // Verificar si el archivo del controlador existe
+        if (!file_exists($controllerFile)) {
+            self::show404();
+            return;
+        }
 
         require_once $controllerFile;
         
@@ -33,12 +39,25 @@ class Router {
         } elseif (class_exists($controllerName)) {
             $controller = new $controllerName();
         } else {
-            throw new Exception("No se encontró la clase del controlador: {$controllerName}");
+            self::show404();
+            return;
+        }
+
+        // Verificar si el método existe
+        if (!method_exists($controller, $action)) {
+            self::show404();
+            return;
         }
 
         // Ejecutar método
         $controller->$action();
     }
     
+    private static function show404() {
+        http_response_code(404);
+        define('BASE_URL', '/Agencia-publicidad/Agencia-publicidad');
+        require_once __DIR__ . '/views/errors/404.php';
+        exit;
+    }
 
 }

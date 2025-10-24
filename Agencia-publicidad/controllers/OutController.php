@@ -300,5 +300,36 @@ class OutController {
         $perfil = $this->dbUser->verMiPerfil($id);
         require_once __DIR__. '/../views/miPerfil.php';
     }
+
+    // Métodos para manejar errores HTTP
+    public function error403() {
+        http_response_code(403);
+        require_once __DIR__ . '/../views/errors/403.php';
+        exit;
+    }
+
+    public function error404() {
+        http_response_code(404);
+        require_once __DIR__ . '/../views/errors/404.php';
+        exit;
+    }
+
+    public function error500() {
+        http_response_code(500);
+        require_once __DIR__ . '/../views/errors/500.php';
+        exit;
+    }
+
+    public function error503() {
+        http_response_code(503);
+        require_once __DIR__ . '/../views/errors/503.php';
+        exit;
+    }
+
+    public function error() {
+        http_response_code(500);
+        require_once __DIR__ . '/../views/errors/error.php';
+        exit;
+    }
 }
 ?>
