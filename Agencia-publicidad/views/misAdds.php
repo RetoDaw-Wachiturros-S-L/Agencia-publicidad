@@ -1,34 +1,24 @@
+<?php
+    require_once __DIR__ . '/../utils/auth_helper.php';
+    
+    // Extraer variables globales al scope local
+    $currentUser = $GLOBALS['currentUser'] ?? null;
+    $isLoggedIn = $GLOBALS['isLoggedIn'] ?? false;
+    $isAdmin = $GLOBALS['isAdmin'] ?? false;
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Favoritos</title>
+    <title>Mis Anuncios</title>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/index.css"/>
-    <script>
-    (function (m, a, z, e) {
-      var s, t;
-      try {
-        t = m.sessionStorage.getItem('maze-us');
-      } catch (err) {}
-
-      if (!t) {
-        t = new Date().getTime();
-        try {
-          m.sessionStorage.setItem('maze-us', t);
-        } catch (err) {}
-      }
-
-      s = a.createElement('script');
-      s.src = z + '?apiKey=' + e;
-      s.async = true;
-      a.getElementsByTagName('head')[0].appendChild(s);
-      m.mazeUniversalSnippetApiKey = e;
-    })(window, document, 'https://snippet.maze.co/maze-universal-loader.js', 'e76390a3-92da-44e0-9412-672022d0d84d');
-    </script>
 </head>
 <body>
+<?php include __DIR__ . '/components/header.php'; ?>
+
 <main>
     <?php if (!empty($anuncios)): ?>
         <div class="cards-row">
@@ -48,6 +38,6 @@
     <?php endif; ?>
 </main>
 
-
+<script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
 </body>
 </html>
