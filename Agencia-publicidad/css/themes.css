@@ -34,6 +34,7 @@
   --color-error: #F16849;
   --color-error-bg: #FFCDC1;
   --color-error-border: #F16849;
+  --shadow-error: rgba(241, 104, 73, 0.2);
   
   /* Separadores */
   --color-separator: rgb(116, 116, 116);
@@ -82,6 +83,7 @@
   --color-error: #ff6b6b;
   --color-error-bg: #3d1f1f;
   --color-error-border: #ff6b6b;
+  --shadow-error: rgba(255, 107, 107, 0.3);
   
   /* Separadores */
   --color-separator: rgb(80, 80, 80);

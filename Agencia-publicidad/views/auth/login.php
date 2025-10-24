@@ -8,7 +8,8 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Iniciar sesion</title>
+    <title>Comerciantes Vitoria</title>
+    <link rel="icon" type="image/png" href="img/logo_SSombra.png">
     <link rel="stylesheet" href="css/themes.css">
     <link rel="stylesheet" href="css/auth.css">
 </head>

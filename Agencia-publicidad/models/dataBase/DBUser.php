@@ -133,7 +133,7 @@ class DBUser {
                 FROM anuncios a
                 JOIN favoritos f ON a.id = f.id_anuncio
                 JOIN usuarios u ON f.id_usuario = u.id
-                WHERE f.id_usuario = :id_usuario";
+                WHERE u.id = :id_usuario";
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(":id_usuario", $id, \PDO::PARAM_INT);
@@ -169,6 +169,7 @@ class DBUser {
     $pdo = DBCon::getConnection();
     $sql ="
         SELECT 
+            u.foto_perfil,
             u.id,
             u.nombre,
             u.apellido,

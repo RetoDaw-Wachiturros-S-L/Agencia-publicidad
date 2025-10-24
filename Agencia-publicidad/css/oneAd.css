@@ -15,9 +15,9 @@ main {
 .card-anuncio {
   height: auto;
   width: 100%;
-  border: 1px solid #0F3B61;
+  border: 1px solid var(--color-text-secondary);
   border-radius: 0.7em;
-  background-color: #FFCDC1;
+  background-color: var(--color-bg-secondary);
   box-sizing: border-box;
 }
 
@@ -25,8 +25,8 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #FFF0E7;
-  border: 1px solid #0F3B61;
+  background-color: var(--color-bg-tertiary);
+  border: 1px solid var(--color-text-secondary);
   border-radius: 0.7em;
   margin-bottom: 1em;
   width: 100%;
@@ -147,7 +147,7 @@ main {
 .fecha-formateada {
     display: inline-block;
     opacity: 0.5;
-    border-bottom: 1px solid #0F3B61;
+    border-bottom: 1px solid var(--color-text-secondary);
 }
 
 /* Estilos para la información de la empresa */
