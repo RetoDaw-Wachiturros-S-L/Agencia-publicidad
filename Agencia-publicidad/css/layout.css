@@ -202,13 +202,13 @@ hr{
   border: none;
   background-color: transparent;
   background-image: var(--icon-search);
-  background-size: 2.2em;
+  background-size: 3em;
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
   transition: transform 0.2s ease, background-image 0.3s ease;
   flex-shrink: 0;
-  padding: 0;
+  padding: 0 0.5em 0 0;
 }
 
 .search-button:hover {

@@ -14,10 +14,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>/img/logo_SSombra.png">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/perfil.css"/>
-    <title>Mi Perfil</title>
+    <title>Comerciantes Vitoria</title>
 </head>
 <body>
     <?php include __DIR__ . '/components/header.php'; ?>

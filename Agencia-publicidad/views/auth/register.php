@@ -8,7 +8,8 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Formulario de registro</title>
+    <title>Comerciantes Vitoria</title>
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>/img/logo_SSombra.png">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/auth.css">
 </head>
