@@ -4,11 +4,11 @@ RewriteEngine On
 # Establecer la base de reescritura
 RewriteBase /Agencia-publicidad/Agencia-publicidad/
 
-# Páginas de error personalizadas
-ErrorDocument 403 /Agencia-publicidad/Agencia-publicidad/index.php?controller=OutController&accion=error403
-ErrorDocument 404 /Agencia-publicidad/Agencia-publicidad/index.php?controller=OutController&accion=error404
-ErrorDocument 500 /Agencia-publicidad/Agencia-publicidad/index.php?controller=OutController&accion=error500
-ErrorDocument 503 /Agencia-publicidad/Agencia-publicidad/index.php?controller=OutController&accion=error503
+# Páginas de error personalizadas (rutas relativas)
+ErrorDocument 403 index.php?controller=OutController&accion=error403
+ErrorDocument 404 index.php?controller=OutController&accion=error404
+ErrorDocument 500 index.php?controller=OutController&accion=error500
+ErrorDocument 503 index.php?controller=OutController&accion=error503
 
 # Permitir acceso a archivos estáticos
 RewriteCond %{REQUEST_FILENAME} -f [OR]

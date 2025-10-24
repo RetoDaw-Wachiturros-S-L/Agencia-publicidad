@@ -71,8 +71,9 @@
 }
 
 .error-btn-primary {
-  background-color: var(--color-primary);
-  color: white;
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-border);
 }
 
 .error-btn-primary:hover {

@@ -55,7 +55,10 @@ class Router {
     
     private static function show404() {
         http_response_code(404);
-        define('BASE_URL', '/Agencia-publicidad/Agencia-publicidad');
+        // BASE_URL ya está definido en config.php incluido desde index.php
+        if (!defined('BASE_URL')) {
+            define('BASE_URL', '/Agencia-publicidad/Agencia-publicidad');
+        }
         require_once __DIR__ . '/views/errors/404.php';
         exit;
     }
