@@ -78,14 +78,17 @@ class DBUser {
 
         if ($usuario && isset($usuario['password_hash'])) {
             if (password_verify($contrasena, $usuario['password_hash'])) {
+                $fecha = new \DateTime($usuario['fecha_inscripcion']) ?? new \DateTime();
                 return new UsuarioRegistrado(
                     (int)$usuario['id'],
                     $usuario['nombre'],
                     $usuario['apellido'],
                     $usuario['email'],
                     $usuario['password_hash'],
+                    $fecha,
+                    $usuario['foto_perfil'] ?? null,
                     TipoPersonaEnum::from($usuario['tipo_usuario']),
-                    $usuario['foto_perfil'] ?? null
+
                 );
             }
         } 

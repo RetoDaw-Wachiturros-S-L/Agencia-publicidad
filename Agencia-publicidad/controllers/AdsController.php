@@ -36,6 +36,12 @@ class AdsController{
 		$anuncio = $this->dbFunctions->getById($id);
         $fechaFormateada = $anuncio->getFechaPublicacion()->format('Y-m-d H:i');
         
+        // Verificar si el anuncio está en favoritos del usuario actual
+        $esFavorito = false;
+        if (isset($_SESSION['usuario']['id'])) {
+            $esFavorito = $this->dbFunctions->isFavorito($id, $_SESSION['usuario']['id']);
+        }
+        
         require "views/ads/one.add.view.php";
     }
 

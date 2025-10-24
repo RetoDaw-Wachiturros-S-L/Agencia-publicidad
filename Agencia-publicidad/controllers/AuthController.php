@@ -15,7 +15,7 @@ require_once __DIR__ . '/../models/dataBase/DBUser.php';
 require_once __DIR__ . '/../models/Comerciante.php';
 require_once __DIR__ . '/../utils/auth_helper.php';
 
-class OutController {
+class AuthController {
     
     private DBFunctions $dbFunctions;
     private DBUser $dbUser;
@@ -176,8 +176,9 @@ class OutController {
                             $apellido,
                             $email,
                             $contrasena,
+                            $fechaInscripcion,
+                            $fotoPerfil,
                             $tipoUsuario,
-                            $fotoPerfil
                         );
                         
                         $this->dbUser->guardarUsuario($nuevoUsuario);
