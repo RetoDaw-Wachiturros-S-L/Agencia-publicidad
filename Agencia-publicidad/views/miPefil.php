@@ -11,6 +11,8 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/perfil.css"/>
+
     <title>Document</title>
 
 </head>
@@ -48,7 +50,7 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
 
             </aside>
             <div id="perfil">
-             <h2><img src="Component 12.png" alt="foto de perfil">Pako</h2>
+             <h2><img src="" alt="foto de perfil">Pako</h2>
             </div>
             <section>
                 <a href="">Editar perfil</a>
