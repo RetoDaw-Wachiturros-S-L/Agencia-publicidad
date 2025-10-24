@@ -1,11 +1,20 @@
-document.addEventListener("DOMContentLoaded", ()=>{
-    const corazon = document.getElementById("heart-icon");
-    console.log(corazon);
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".favorito-icono").forEach(icono => {
+    icono.addEventListener("click", async () => {
+      const anuncioId = icono.dataset.id;
 
-    // Sería lo suyo poner un bool aqui para mandarlo luego a BD utilizando el id de session
+      try {
+        const res = await axios.post("/api/favoritos.php", {
+          anuncioId: anuncioId
+        });
 
-    //mirar si existe una sesión
-
-    //cuando esté todo hecho guardarlo en caché para que no tenga que hacer acceso a BD key,value(id_usuario, id_anuncio)
-    
+        if (res.status === 200) {
+          icono.classList.add("favorito-activo");
+          icono.src = "favorito-activo.png"; // cambia a tu icono activo
+        }
+      } catch (err) {
+        console.log("Error: " + err);
+      }
+    });
+  });
 });

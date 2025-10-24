@@ -73,7 +73,12 @@
             <div class="card-anuncio">
                 <!-- Estilo para la foto solo -->
                 <div class="div-tj-img-unico">
-                        <img src=<?= $anuncio->getUrlFotos() ?? BASE_URL.'/img/logo.png' ?> alt=<?= $anuncio->getTitulo() ?>>
+                    <img 
+                        src="<?= $anuncio->getUrlFotos() ?? BASE_URL.'/img/logo.png' ?>" 
+                        alt="<?= $anuncio->getTitulo() ?>" 
+                        class="favorito-icono" 
+                        data-id="<?= $anuncio->getId() ?>"
+                    >
                 </div>
                 <div class="container-div-info">
                     <div class="info-div">
@@ -105,6 +110,7 @@
                   
             </div>
         </div>
+    <script src="https :// cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="<?= BASE_URL ?>/js/index.js"></script>
     <script src="<?= BASE_URL ?>/js/one.ad.js"></script>
     </main>
