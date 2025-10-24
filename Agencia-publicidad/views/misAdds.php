@@ -6,6 +6,8 @@
     <title>Mis Favoritos</title>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/index.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/tituloVacio.css"/>
+
     <script>
     (function (m, a, z, e) {
       var s, t;
@@ -45,6 +47,7 @@
         </div>
     <?php else: ?>
         <h2>No tienes anuncios todavía.</h2>
+        <a href="index.php">Volver</a>
     <?php endif; ?>
 </main>
 

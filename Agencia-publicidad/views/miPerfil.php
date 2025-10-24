@@ -60,12 +60,17 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
 
             </aside>
             <div id="perfil">
-             <h2><img src="" alt="foto de perfil">Pako</h2>
+                <?php if(empty($perfil["foto_perfil"])):?>
+                    <h2><img src="<?= BASE_URL ?>/img/fotoperfil.png" alt="foto de perfil">  <?=$perfil["nombre"]?></h2>
+                <?php else: ?>
+                    <h2><img src="" alt="foto de perfil">  <?=$perfil["nombre"]?></h2>
+                <?php endif?>
+             
             </div>
             <section>
-                <a href="">Editar perfil</a>
-                <a href="">Mis anuncios</a>
-                <a href="" class="cerrar">Cerrar sesion</a>
+                <a href="../views/editarperfil.php">Editar perfil</a>
+                <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=verAnuncios">Mis anuncios</a>
+                <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=logout" class="cerrar">Cerrar sesion</a>
 
 
             </section>

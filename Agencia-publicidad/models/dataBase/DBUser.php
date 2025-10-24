@@ -152,7 +152,7 @@ class DBUser {
                 FROM anuncios a
                 JOIN comerciantes c ON a.id_comerciante = c.id
                 JOIN usuarios u ON c.id_usuario  =  u.id 
-                WHERE .id = :id";
+                WHERE u.id = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(":id", $id);
         $stmt->execute();
@@ -166,6 +166,7 @@ class DBUser {
     $pdo = DBCon::getConnection();
     $sql ="
         SELECT 
+            u.foto_perfil,
             u.id,
             u.nombre,
             u.apellido,
