@@ -235,6 +235,7 @@ class OutController {
                             'apellido' => $usuario->getApellido(),
                             'tipo' => $usuario->getTipo()->value,
                             'login_time' => time(),
+                            "foto_perfil"=> $usuario->getFotoPerfil(),
                         ];
 
                         // Si es comerciante, obtener datos adicionales
