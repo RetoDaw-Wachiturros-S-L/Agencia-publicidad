@@ -1,7 +1,7 @@
 <?php
     require_once __DIR__ . '/../utils/auth_helper.php';
     
-    // Extraer variables globales al scope local
+    // Extraer variables globales al scope
     $currentUser = $GLOBALS['currentUser'] ?? null;
     $isLoggedIn = $GLOBALS['isLoggedIn'] ?? false;
     $isAdmin = $GLOBALS['isAdmin'] ?? false;

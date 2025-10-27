@@ -139,15 +139,59 @@ document.addEventListener('DOMContentLoaded', () => {
     
     botonesFavorito.forEach(boton => {
         boton.addEventListener('click', async function(e) {
-            e.stopPropagation(); // Evitar que se active el clic del card
+            e.stopPropagation(); 
+            // PAra que la card y el boton sean eventos distintos y no se 'contagien'
             
             const anuncioId = this.getAttribute('data-anuncio-id');
             const esFavorito = this.getAttribute('data-es-favorito') === '1';
             const isLoggedIn = this.getAttribute('data-is-logged-in') === '1';
             const icono = this.querySelector('.heart-icon');
             
-            // Si el usuario no está logueado, redirigir a login
-            if (!isLoggedIn) {
+            if (isLoggedIn) {
+                try {
+                    // Obtener la URL base
+                    const protocol = window.location.protocol;
+                    const host = window.location.host;
+                    const pathname = window.location.pathname;
+                    const basePath = pathname.substring(0, pathname.lastIndexOf('/'));
+                    const baseUrl = `${protocol}//${host}${basePath}`;
+                    
+                    const url = `${baseUrl}/api/favoritos.php`;
+                    
+                    const response = await fetch(url, {
+                        method: esFavorito ? 'DELETE' : 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            anuncioId: parseInt(anuncioId)
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        // Actualizar el estado visual
+                        const nuevoEstado = !esFavorito;
+                        this.setAttribute('data-es-favorito', nuevoEstado ? '1' : '0');
+                        
+                        // Cambiar la imagen
+                        const nuevaImagen = nuevoEstado ? 'favorito-activo.png' : 'Heart.png';
+                        icono.src = `${baseUrl}/img/${nuevaImagen}`;
+                        
+                        // Actualizar el título
+                        this.title = nuevoEstado ? 'Quitar de favoritos' : 'Agregar a favoritos';
+                        
+                        console.log('Favorito actualizado:', data);
+                    } else {
+                        console.error('Error al actualizar favorito:', data);
+                        alert('Error al actualizar favorito: ' + (data.error || 'Error desconocido'));
+                    }
+                } catch (error) {
+                    console.error('Error de red:', error);
+                    alert('Error de conexión. Inténtalo de nuevo.');
+                }
+            }else{
                 const protocol = window.location.protocol;
                 const host = window.location.host;
                 const pathname = window.location.pathname;
@@ -156,52 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const loginUrl = `${baseUrl}/index.php?controller=AuthController&accion=iniciarSesion`;
                 window.location.href = loginUrl;
-                return;
-            }
-            
-            try {
-                // Obtener la URL base
-                const protocol = window.location.protocol;
-                const host = window.location.host;
-                const pathname = window.location.pathname;
-                const basePath = pathname.substring(0, pathname.lastIndexOf('/'));
-                const baseUrl = `${protocol}//${host}${basePath}`;
-                
-                const url = `${baseUrl}/api/favoritos.php`;
-                
-                const response = await fetch(url, {
-                    method: esFavorito ? 'DELETE' : 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        anuncioId: parseInt(anuncioId)
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    // Actualizar el estado visual
-                    const nuevoEstado = !esFavorito;
-                    this.setAttribute('data-es-favorito', nuevoEstado ? '1' : '0');
-                    
-                    // Cambiar la imagen
-                    const nuevaImagen = nuevoEstado ? 'favorito-activo.png' : 'Heart.png';
-                    icono.src = `${baseUrl}/img/${nuevaImagen}`;
-                    
-                    // Actualizar el título
-                    this.title = nuevoEstado ? 'Quitar de favoritos' : 'Agregar a favoritos';
-                    
-                    console.log('Favorito actualizado:', data);
-                } else {
-                    console.error('Error al actualizar favorito:', data);
-                    alert('Error al actualizar favorito: ' + (data.error || 'Error desconocido'));
-                }
-            } catch (error) {
-                console.error('Error de red:', error);
-                alert('Error de conexión. Inténtalo de nuevo.');
-            }
+            } 
         });
     });
 });

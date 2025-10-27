@@ -6,7 +6,7 @@ function guardarEnCache(anuncio){
 
 function eliminarDeCache(id){
     const anunciosDeCache = JSON.parse(sessionStorage.getItem("anuncios")) || {};
-    //busca sobre la localStorage
+    //busca sobre la sessionstorage(Que se borra cuando se cierra el navegador)
     if(anunciosDeCache.hasOwnProperty(id)){
         delete anunciosDeCache[id];
         sessionStorage.setItem("anuncios", JSON.stringify(anunciosDeCache));
@@ -18,12 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".favorito-icono").forEach(icono => {
     icono.addEventListener("click", async () => {
-      // Obtener datos del anuncio desde los atributos data
       const anuncioId = icono.dataset.id;
       const esFavorito = icono.dataset.esFavorito === '1';
       const isLoggedIn = icono.dataset.isLoggedIn === '1';
       
-      // Si el usuario no está logueado, redirigir a login
+      // No se como ordenar el doc para hacer la direccion para que no haga return en duro
       if (!isLoggedIn) {
         const protocol = window.location.protocol;
         const host = window.location.host;
@@ -54,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const url = `${baseUrl}/api/favoritos.php`;
         
         if (!esFavorito) {
-            console.log("Agregando a favoritos - ID anuncio: " + anuncioId);
+            // console.log("Agregando a favoritos - ID anuncio: " + anuncioId);
 
             const response = await fetch(url, {
                 method: 'POST',
@@ -68,18 +67,18 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("Respuesta POST:", data);
 
             if (response.ok) {
-                // Actualizar estado visual
+                // Actualizar el toggle para dar la info al usuario
                 icono.classList.add("favorito-activo");
                 icono.src = baseUrl + "/img/favorito-activo.png";
                 icono.dataset.esFavorito = '1';
                 icono.title = 'Quitar de favoritos';
                 guardarEnCache(anuncio);
             } else {
-                console.error('Error al agregar favorito:', data);
+                // console.error('Error al agregar favorito:', data);
                 alert('Error al agregar favorito: ' + (data.error || 'Error desconocido'));
             }
         } else {
-            console.log("Eliminando de favoritos - ID anuncio: " + anuncioId);
+            // console.log("Eliminando de favoritos - ID anuncio: " + anuncioId);
 
             const response = await fetch(url, {
                 method: 'DELETE',
@@ -90,17 +89,16 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             const data = await response.json();
-            console.log("Respuesta DELETE:", data);
+            // console.log("Respuesta DELETE:", data);
 
             if (response.ok) {
-                // Actualizar estado visual
                 icono.classList.remove("favorito-activo");
                 icono.src = baseUrl + "/img/Heart.png";
                 icono.dataset.esFavorito = '0';
                 icono.title = 'Agregar a favoritos';
                 eliminarDeCache(anuncioId);
             } else {
-                console.error('Error al eliminar favorito:', data);
+                // console.error('Error al eliminar favorito:', data);
                 alert('Error al eliminar favorito: ' + (data.error || 'Error desconocido'));
             }
         }

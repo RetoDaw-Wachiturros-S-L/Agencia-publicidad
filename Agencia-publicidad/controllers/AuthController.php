@@ -236,7 +236,7 @@ class AuthController {
                             'login_time' => time(),
                         ];
 
-                        // Si es comerciante, obtener datos adicionales
+                        // Si es comerciante, obtenemos los datos adicionales
                         if ($usuario->getTipo()->value == TipoPersonaEnum::COMERCIANTE) {
                             $comerciante = $this->dbUser->usuarioComerciante($usuario);
                             
@@ -288,6 +288,7 @@ class AuthController {
     public function favourites(){
         $id=$_SESSION["usuario"]["id"];
         $anuncios = $this->dbUser->sacarfavoritos($id);
+        //Lo hacemos asi para que el array de anuncios se pueda iterar en favoritos.php
         require_once __DIR__ . '/../views/favoritos.php';
            
     }

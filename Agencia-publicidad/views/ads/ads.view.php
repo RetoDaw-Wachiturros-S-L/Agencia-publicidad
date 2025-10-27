@@ -1,7 +1,6 @@
 <?php
     require_once __DIR__ . '/../../utils/auth_helper.php';
     
-    // Extraer variables globales al scope local
     $currentUser = $GLOBALS['currentUser'] ?? null;
     $isLoggedIn = $GLOBALS['isLoggedIn'] ?? false;
     $isAdmin = $GLOBALS['isAdmin'] ?? false;
@@ -23,6 +22,7 @@
     <main>
         <div class="cards-row">
             <?php foreach($anuncios as $anuncio): ?>
+                <!-- Cuando se clicka en la card manda el id anuncio para la view (Y consecuentemente si se le quiere dar a like o quitarlo) -->
                 <div class="card-anuncio" data-id-anuncio="<?= $anuncio['id'] ?>">
                     <div class="div-tj-img">
                         <?php
@@ -31,7 +31,7 @@
                                 $rutaCompleta = BASE_URL . '/' . $anuncio['url_foto'];
                                 echo "<img src='{$rutaCompleta}' alt='{$anuncio['titulo']}'>";
                             } else {
-                                // Imagen por defecto
+                                //Si no se sustituye por una genérica
                                 echo "<img src='" . BASE_URL . "/img/logo.png' alt='Sin imagen'>";
                             }
                         ?>
