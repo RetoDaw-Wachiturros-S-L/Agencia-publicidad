@@ -60,10 +60,12 @@
   .acceder {
     grid-area: cosa;
     display: flex;
-    align-self: flex-start;
+    flex: none;
+    text-align: center;
+    min-height: fit-content;
+    min-width: fit-content;
     justify-self: center;
     background-color: var(--color-bg-primary);
-    text-align: center;
   }
 
   .titulo h1 {
@@ -112,7 +114,7 @@
       "titulo"
       "foto"
       "boton";
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows:  1fr ;
     width: 90%;
     max-width: 400px;
     padding: 1.5em;
@@ -128,7 +130,13 @@
     max-width: 80%;
     height: auto;
     border: 2px solid #154C7E;
-  
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    
+  }
+  header{
+    display: none;
   }
 
   .acceder {
