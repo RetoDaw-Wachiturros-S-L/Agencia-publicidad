@@ -93,12 +93,15 @@ main {
   padding: 12px;
   border-radius: 12px;
   background: transparent;
-  object-fit: contain;
+  background-image: var(--icon-heart); /* Usa la variable del tema */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .favorito-icono:hover {
   transform: scale(1.08);
-  background: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -107,6 +110,7 @@ main {
 }
 
 .favorito-activo {
+  background-image: var(--icon-heart-active) !important; /* Usa la variable del tema para favorito activo */
   opacity: 1;
   filter: brightness(1.1);
 }

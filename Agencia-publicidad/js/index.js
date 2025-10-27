@@ -86,6 +86,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Menú desplegable de administrador (idéntico a los anteriores)
+document.addEventListener('DOMContentLoaded', () => {
+    const adminMenuToggle = document.getElementById('adminMenuToggle');
+    const adminDropdownMenu = document.getElementById('adminDropdownMenu');
+
+    if (adminMenuToggle && adminDropdownMenu) {
+        // Toggle del menú al hacer clic
+        adminMenuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            adminDropdownMenu.classList.toggle('show');
+        });
+
+        // Mostrar menú al pasar el ratón (hover)
+        adminMenuToggle.addEventListener('mouseenter', () => {
+            adminDropdownMenu.classList.add('show');
+        });
+
+        // Mantener el menú abierto cuando el ratón está sobre él
+        adminDropdownMenu.addEventListener('mouseenter', () => {
+            adminDropdownMenu.classList.add('show');
+        });
+
+        // Cerrar el menú cuando el ratón sale del contenedor
+        const adminMenuContainer = document.querySelector('.admin-menu-container');
+        if (adminMenuContainer) {
+            adminMenuContainer.addEventListener('mouseleave', () => {
+                adminDropdownMenu.classList.remove('show');
+            });
+        }
+
+        // Cerrar el menú si se hace clic fuera
+        document.addEventListener('click', (e) => {
+            if (!adminMenuContainer.contains(e.target)) {
+                adminDropdownMenu.classList.remove('show');
+            }
+        });
+
+        // Evitar que los clics dentro del menú lo cierren
+        adminDropdownMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+});
+
 // Función para acceder a la vista única del anuncio
 document.addEventListener('DOMContentLoaded', () => {
     // Obtener TODOS los cards
@@ -175,9 +219,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         const nuevoEstado = !esFavorito;
                         this.setAttribute('data-es-favorito', nuevoEstado ? '1' : '0');
                         
-                        // Cambiar la imagen
-                        const nuevaImagen = nuevoEstado ? 'favorito-activo.png' : 'Heart.png';
-                        icono.src = `${baseUrl}/img/${nuevaImagen}`;
+                        // Cambiar la clase para actualizar el icono
+                        if (nuevoEstado) {
+                            this.classList.add('favorito-activo');
+                        } else {
+                            this.classList.remove('favorito-activo');
+                        }
                         
                         // Actualizar el título
                         this.title = nuevoEstado ? 'Quitar de favoritos' : 'Agregar a favoritos';

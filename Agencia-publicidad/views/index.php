@@ -43,14 +43,12 @@
                             }
                         ?>
                         <!-- Botón de corazón para favoritos -->
-                        <button class="btn-favorito" 
+                        <button class="btn-favorito <?= $anuncio['es_favorito'] ? 'favorito-activo' : '' ?>" 
                                 data-anuncio-id="<?= $anuncio['id'] ?>" 
                                 data-es-favorito="<?= $anuncio['es_favorito'] ?>"
                                 data-is-logged-in="<?= $isLoggedIn ? '1' : '0' ?>"
                                 title="<?= $isLoggedIn ? ($anuncio['es_favorito'] ? 'Quitar de favoritos' : 'Agregar a favoritos') : 'Iniciar sesión para agregar a favoritos' ?>">
-                            <img src="<?= BASE_URL ?>/img/<?= $anuncio['es_favorito'] ? 'favorito-activo.png' : 'Heart.png' ?>" 
-                                 alt="Favorito" 
-                                 class="heart-icon">
+                            <div class="heart-icon"></div>
                         </button>
                     </div>
                     <h2 id="titulo-anuncio"><?= htmlspecialchars($anuncio['titulo']) ?></h2>

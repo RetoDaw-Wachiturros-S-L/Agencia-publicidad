@@ -436,10 +436,44 @@ body {
   letter-spacing: 0.5px;
 }
 
+/* Menú desplegable de administrador */
+.admin-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.admin-menu-container .admin-register-btn {
+  cursor: pointer;
+}
+
+.admin-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background-color: var(--color-bg-primary);
+  border: 2px solid var(--color-border);
+  border-radius: 25px;
+  min-width: 250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.admin-dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
 /* Responsive - Header */
 @media (max-width: 768px) {
   .user-dropdown-menu,
-  .ads-dropdown-menu {
+  .ads-dropdown-menu,
+  .admin-dropdown-menu {
     right: -20px;
     min-width: 220px;
   }
