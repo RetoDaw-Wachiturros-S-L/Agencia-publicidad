@@ -17,7 +17,7 @@
             y está trabajando para solucionar el problema lo antes posible.
         </p>
         <div class="error-actions">
-            <a href="../../index.php" class="error-btn error-btn-primary">
+            <a href="../../index.php?accion=index" class="error-btn error-btn-primary">
                 🏠 Volver al inicio
             </a>
             <button onclick="location.reload()" class="error-btn error-btn-secondary">

@@ -17,7 +17,7 @@
             Por favor, intenta de nuevo o contacta con nosotros si el problema persiste.
         </p>
         <div class="error-actions">
-            <a href="../../index.php" class="error-btn error-btn-primary">
+            <a href="../../index.php?accion=index" class="error-btn error-btn-primary">
                 🏠 Ir al inicio
             </a>
             <button onclick="history.back()" class="error-btn error-btn-secondary">

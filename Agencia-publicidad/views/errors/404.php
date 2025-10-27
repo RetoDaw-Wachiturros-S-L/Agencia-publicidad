@@ -17,7 +17,7 @@
             ¿Quizás te perdiste en el camino?
         </p>
         <div class="error-actions">
-            <a href="../../index.php" class="error-btn error-btn-primary">
+            <a href="../../index.php?accion=index" class="error-btn error-btn-primary">
                 🏠 Ir al inicio
             </a>
             <button onclick="history.back()" class="error-btn error-btn-secondary">
