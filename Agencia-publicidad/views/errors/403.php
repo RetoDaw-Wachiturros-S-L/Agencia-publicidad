@@ -1,18 +1,12 @@
-<?php
-// Cargar configuración si no está definida
-if (!defined('BASE_URL')) {
-    require_once __DIR__ . '/../../config/config.php';
-}
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>403 - Acceso Denegado | Comerciantes Vitoria</title>
-    <link rel="icon" type="image/png" href="<?= BASE_URL ?>/img/logo_SSombra.png">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/errors.css">
+    <link rel="icon" type="image/png" href="../../img/logo_SSombra.png">
+    <link rel="stylesheet" href="../../css/themes.css">
+    <link rel="stylesheet" href="../../css/errors.css">
 </head>
 <body>
     <div class="error-container">
@@ -23,7 +17,7 @@ if (!defined('BASE_URL')) {
             Si crees que esto es un error, por favor contacta con el administrador.
         </p>
         <div class="error-actions">
-            <a href="<?= BASE_URL ?>/" class="error-btn error-btn-primary">
+            <a href="../../index.php" class="error-btn error-btn-primary">
                 ← Volver al inicio
             </a>
             <button onclick="history.back()" class="error-btn error-btn-secondary">
@@ -39,6 +33,6 @@ if (!defined('BASE_URL')) {
             </p>
         </details>
     </div>
-    <script src="<?= BASE_URL ?>/js/theme-switcher.js"></script>
+    <script src="../../js/theme-switcher.js"></script>
 </body>
 </html>
