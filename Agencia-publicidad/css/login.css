@@ -19,12 +19,12 @@ main {
   place-content: center;
   gap: 2em;
   padding: 1.5em;
-  background-color: #FFF5E6;
+  background-color: var(--color-bg-primary);
 }
 
 /* Título */
 h1 {
-  color: #154C7E;
+  color: var(--color-text-primary);
   font-size: 2em;
   text-align: center;
   font-weight: 600;
@@ -49,12 +49,13 @@ form {
 input[type="email"],
 input[type="password"] {
   text-align: center;
-  background-color: #FFCDC1;
-  border: solid 2px #154C7E;
+  background-color: var(--color-bg-secondary);
+  border: solid 2px var(--color-border);
   border-radius: 0.2em;
   padding: 0.9em;
   font-size: 1.3em;
-  box-shadow: 6px 6px 0 #154C7E;
+  color: var(--color-input-text);
+  box-shadow: 6px 6px 0 var(--color-border);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
@@ -65,18 +66,18 @@ input[type="password"]:focus,
 input[type="submit"]:hover,
 input[type="submit"]:focus {
   transform: scale(1.05);
-  box-shadow: 9px 9px 0 #154C7E;
+  box-shadow: 9px 9px 0 var(--color-border);
 }
 
 #btn-login {
-  color: #154C7E;
+  color: var(--color-text-primary);
   text-align: center;
-  background-color: rgba(241, 104, 73, 0.6);
-  border: solid 2px #154C7E;
+  background-color: var(--color-accent-secondary);
+  border: solid 2px var(--color-border);
   border-radius: 0.2em;
   padding: 0.9em;
   font-size: 1.3em;
-  box-shadow: 6px 6px 0 2px #F16849;
+  box-shadow: 6px 6px 0 2px var(--color-accent-primary);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
@@ -99,7 +100,7 @@ input[type="submit"]:focus {
   input[type="password"] {
     padding: 1em;
     font-size: 1.5em;
-    box-shadow: 9px 9px 0 #154C7E;
+    box-shadow: 9px 9px 0 var(--color-border);
   }
 
   input[type="email"]:hover,
@@ -109,12 +110,12 @@ input[type="submit"]:focus {
   input[type="submit"]:hover,
   input[type="submit"]:focus {
     transform: scale(1.1);
-    box-shadow: 12px 12px 0 #154C7E;
+    box-shadow: 12px 12px 0 var(--color-border);
   }
 
   #btn-login {
     padding: 1em;
     font-size: 1.5em;
-    box-shadow: 9px 9px 0 2px #F16849;
+    box-shadow: 9px 9px 0 2px var(--color-accent-primary);
   }
 }
