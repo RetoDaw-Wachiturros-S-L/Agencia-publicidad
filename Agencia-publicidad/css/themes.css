@@ -46,6 +46,9 @@
   --icon-ad: url(../img/ad.png);
   --icon-heart: url(../img/Heart.png);
   --icon-login: url(../img/login.png);
+  --icon-message: url(../img/mensaje.png);
+  --icon-create: url(../img/ad.png);
+  --icon-logout: url(../img/login.png);
 }
 
 /* Tema oscuro */
@@ -94,6 +97,9 @@
   --icon-ad: url(../img/ad.png);
   --icon-heart: url(../img/Heart_b.png);
   --icon-login: url(../img/login_b.png);
+  --icon-message: url(../img/mensaje.png);
+  --icon-create: url(../img/ad.png);
+  --icon-logout: url(../img/login_b.png);
 }
 
 /* Transición suave al cambiar de tema */

@@ -197,7 +197,7 @@ span.error {
 }
 
 /* Pantallas más grandes */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 750px) {
   main {
     padding: 2em;
   }
@@ -521,7 +521,7 @@ span.error {
 }
 
 /* Pantallas más grandes */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 750px) {
   .note-editor {
     box-shadow: 9px 9px 0 #154C7E !important;
   }

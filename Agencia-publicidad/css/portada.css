@@ -1,6 +1,6 @@
 
 /* ====== MODO ESCRITORIO ====== */
-@media (min-width: 760px) {
+@media (min-width: 750px) {
     
   body {
     display: grid;
@@ -97,7 +97,7 @@
   box-shadow: 10px 10px 0px #0F3B61;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 750px) {
   body {
     background: linear-gradient(#FFF5E6, #FFCDC1);
     height: 100vh;

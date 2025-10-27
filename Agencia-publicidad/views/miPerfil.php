@@ -48,6 +48,7 @@
             </section>
         </div>
     </main>
+    <script src="<?= BASE_URL ?>/js/burger.js"></script>
     <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
 </body>
 </html>

@@ -40,6 +40,7 @@
                 </div>
             <?php endforeach; ?>
         </div>
+    <script src="<?= BASE_URL ?>/js/burger.js"></script>
     <script src="<?= BASE_URL ?>/js/index.js"></script>
     </main>
     <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
