@@ -1,133 +1,57 @@
-// Menú desplegable de usuario
+// Menús desplegables (usuario, anuncios y administrador)
 document.addEventListener('DOMContentLoaded', () => {
-    const userMenuToggle = document.getElementById('userMenuToggle');
-    const userDropdownMenu = document.getElementById('userDropdownMenu');
+    // Función genérica para manejar menús desplegables con hover
+    function setupDropdownMenu(toggleId, menuId, containerClass) {
+        const toggle = document.getElementById(toggleId);
+        const menu = document.getElementById(menuId);
+        const container = document.querySelector(`.${containerClass}`);
 
-    if (userMenuToggle && userDropdownMenu) {
-        // Toggle del menú al hacer clic
-        userMenuToggle.addEventListener('click', (e) => {
+        if (!toggle || !menu || !container) return;
+
+        let hideTimeout = null;
+
+        // Mostrar menú al hacer hover sobre el toggle
+        toggle.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimeout);
+            menu.classList.add('show');
+        });
+
+        // Mantener el menú visible cuando el mouse está sobre él
+        menu.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimeout);
+            menu.classList.add('show');
+        });
+
+        // Ocultar menú cuando el mouse sale del contenedor (con pequeño delay)
+        container.addEventListener('mouseleave', () => {
+            hideTimeout = setTimeout(() => {
+                menu.classList.remove('show');
+            }, 100); // 100ms de delay para evitar cierres accidentales
+        });
+
+        // Toggle al hacer clic
+        toggle.addEventListener('click', (e) => {
             e.stopPropagation();
-            userDropdownMenu.classList.toggle('show');
-        });
-
-        // Mostrar menú al pasar el ratón (hover)
-        userMenuToggle.addEventListener('mouseenter', () => {
-            userDropdownMenu.classList.add('show');
-        });
-
-        // Mantener el menú abierto cuando el ratón está sobre él
-        userDropdownMenu.addEventListener('mouseenter', () => {
-            userDropdownMenu.classList.add('show');
-        });
-
-        // Cerrar el menú cuando el ratón sale del contenedor
-        const userMenuContainer = document.querySelector('.user-menu-container');
-        if (userMenuContainer) {
-            userMenuContainer.addEventListener('mouseleave', () => {
-                userDropdownMenu.classList.remove('show');
-            });
-        }
-
-        // Cerrar el menú si se hace clic fuera
-        document.addEventListener('click', (e) => {
-            if (!userMenuContainer.contains(e.target)) {
-                userDropdownMenu.classList.remove('show');
-            }
+            menu.classList.toggle('show');
         });
 
         // Evitar que los clics dentro del menú lo cierren
-        userDropdownMenu.addEventListener('click', (e) => {
+        menu.addEventListener('click', (e) => {
             e.stopPropagation();
         });
-    }
-});
-
-// Menú desplegable de anuncios (idéntico al de usuario)
-document.addEventListener('DOMContentLoaded', () => {
-    const adsMenuToggle = document.getElementById('adsMenuToggle');
-    const adsDropdownMenu = document.getElementById('adsDropdownMenu');
-
-    if (adsMenuToggle && adsDropdownMenu) {
-        // Toggle del menú al hacer clic
-        adsMenuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            adsDropdownMenu.classList.toggle('show');
-        });
-
-        // Mostrar menú al pasar el ratón (hover)
-        adsMenuToggle.addEventListener('mouseenter', () => {
-            adsDropdownMenu.classList.add('show');
-        });
-
-        // Mantener el menú abierto cuando el ratón está sobre él
-        adsDropdownMenu.addEventListener('mouseenter', () => {
-            adsDropdownMenu.classList.add('show');
-        });
-
-        // Cerrar el menú cuando el ratón sale del contenedor
-        const adsMenuContainer = document.querySelector('.ads-menu-container');
-        if (adsMenuContainer) {
-            adsMenuContainer.addEventListener('mouseleave', () => {
-                adsDropdownMenu.classList.remove('show');
-            });
-        }
 
         // Cerrar el menú si se hace clic fuera
         document.addEventListener('click', (e) => {
-            if (!adsMenuContainer.contains(e.target)) {
-                adsDropdownMenu.classList.remove('show');
+            if (!container.contains(e.target)) {
+                menu.classList.remove('show');
             }
         });
-
-        // Evitar que los clics dentro del menú lo cierren
-        adsDropdownMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
     }
-});
 
-// Menú desplegable de administrador (idéntico a los anteriores)
-document.addEventListener('DOMContentLoaded', () => {
-    const adminMenuToggle = document.getElementById('adminMenuToggle');
-    const adminDropdownMenu = document.getElementById('adminDropdownMenu');
-
-    if (adminMenuToggle && adminDropdownMenu) {
-        // Toggle del menú al hacer clic
-        adminMenuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            adminDropdownMenu.classList.toggle('show');
-        });
-
-        // Mostrar menú al pasar el ratón (hover)
-        adminMenuToggle.addEventListener('mouseenter', () => {
-            adminDropdownMenu.classList.add('show');
-        });
-
-        // Mantener el menú abierto cuando el ratón está sobre él
-        adminDropdownMenu.addEventListener('mouseenter', () => {
-            adminDropdownMenu.classList.add('show');
-        });
-
-        // Cerrar el menú cuando el ratón sale del contenedor
-        const adminMenuContainer = document.querySelector('.admin-menu-container');
-        if (adminMenuContainer) {
-            adminMenuContainer.addEventListener('mouseleave', () => {
-                adminDropdownMenu.classList.remove('show');
-            });
-        }
-
-        // Cerrar el menú si se hace clic fuera
-        document.addEventListener('click', (e) => {
-            if (!adminMenuContainer.contains(e.target)) {
-                adminDropdownMenu.classList.remove('show');
-            }
-        });
-
-        // Evitar que los clics dentro del menú lo cierren
-        adminDropdownMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
-    }
+    // Configurar los tres menús
+    setupDropdownMenu('userMenuToggle', 'userDropdownMenu', 'user-menu-container');
+    setupDropdownMenu('adsMenuToggle', 'adsDropdownMenu', 'ads-menu-container');
+    setupDropdownMenu('adminMenuToggle', 'adminDropdownMenu', 'admin-menu-container');
 });
 
 // Función para acceder a la vista única del anuncio
