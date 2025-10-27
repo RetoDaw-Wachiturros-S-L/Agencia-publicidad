@@ -1,3 +1,9 @@
+<?php
+// Cargar configuración si no está definida
+if (!defined('BASE_URL')) {
+    require_once __DIR__ . '/../../config/config.php';
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
