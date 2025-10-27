@@ -32,7 +32,7 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
             <form class="botones" method="post" action="index.php?controller=perfilController&accion=" enctype="multipart/form-data">
                 <input type="text" placeholder="Nombre" name="nombre"/>
                 <input type="text" placeholder="Apellido" name="apellido"/>
-                <input type="password" placeholder="Contrasña" name="contrasena"/>
+                <input type="password" placeholder="Contraseña" name="contrasena"/>
                 
                 <!-- Input file personalizado -->
                 <div class="custom-file">
@@ -43,7 +43,7 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
                 <?php if($_SESSION["usuario"]["tipo"]=="COMERCIANTE"):?>
                     <input type="text" placeholder="Nombre de la empresa" name="nombre_empresa"/>
                     <input type="text" placeholder="Comentario de la empresa" name="comentario_empresa"/>
-                    <input type="text" placeholder="Número de teléfono" name="telefono_empresa"/>
+                    <input type="text" placeholder="Número de telefono" name="telefono_empresa"/>
                     <input type="text" placeholder="NIF de la empresa" name="nif_empresa"/>
                 <?php endif?>
                 
