@@ -1,4 +1,3 @@
-/* Reset específico para eliminar el margen del body */
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +9,7 @@ body {
   padding: 0 !important;
 }
 
-/* Mobile First - Grid Layout */
+/* Mobile First */
 main {
   min-height: 100vh;
   display: grid;
@@ -22,7 +21,6 @@ main {
   background-color: var(--color-bg-primary);
 }
 
-/* Título */
 h1 {
   color: var(--color-text-primary);
   font-size: 2em;
@@ -42,7 +40,6 @@ h1 {
   font-weight: 500;
 }
 
-/* Contenedor del formulario */
 #form-container {
   border-radius: 3em;
   padding: 2em;
@@ -625,7 +622,24 @@ input[type="file"]:hover {
 }
 
 /* Responsive para preview */
+/* Pantallas medianas y grandes (≥768px) */
 @media screen and (min-width: 768px) {
+  /* Summernote */
+  .note-editor {
+    box-shadow: 9px 9px 0 var(--color-border) !important;
+  }
+
+  .note-editor:hover,
+  .note-editor.note-frame:focus-within {
+    box-shadow: 12px 12px 0 var(--color-border) !important;
+  }
+
+  .note-editable {
+    font-size: 1.2em !important;
+    padding: 20px !important;
+  }
+
+  /* Preview de imágenes */
   .preview-item {
     width: 180px;
   }

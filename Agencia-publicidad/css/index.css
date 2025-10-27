@@ -11,17 +11,16 @@ main {
   min-height: calc(100vh - 8em);
 }
 
-/* Contenedor principal de las cards de anuncios */
 .cards-row {
   display: flex;
-  flex-wrap: wrap; /* Permite que las cards se envuelvan a la siguiente fila */
-  gap: 1em; /* Espacio entre cards */
+  flex-wrap: wrap; 
+  gap: 1em; 
   margin-bottom: 1em;
 }
 
-/* Estilo individual de cada card de anuncio */
 .card-anuncio {
-  flex: 1 1 calc(50% - 0.5em); /* 2 cards por fila en móvil (50% - gap) */
+  /* Pone 2 cards por cada fila calculando un gap y un ancho que ocupe */
+  flex: 1 1 calc(50% - 0.5em); 
   display: flex;
   flex-direction: column;
   padding: 1em;
@@ -29,14 +28,13 @@ main {
   border-radius: 0.7em;
   background-color: var(--color-bg-secondary);
   box-sizing: border-box;
-  height: 320px; /* Altura fija para uniformidad visual (aumentada para mejor proporción) */
+  height: 320px; 
   overflow: hidden; /* Evita que el contenido se desborde de la card */
 }
 
 
-/* Contenedor de la imagen del anuncio */
 .div-tj-img {
-  position: relative; /* Necesario para posicionar el botón de favorito */
+  position: relative; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,24 +43,22 @@ main {
   border-radius: 0.7em;
   margin-bottom: 1em;
   height: 180px; /* Altura fija para consistencia visual (ajustada para mejor proporción) */
-  overflow: hidden; /* Evita que las imágenes se desborden */
+  overflow: hidden; 
 }
 
-/* Estilo de las imágenes dentro de las cards */
 .div-tj-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Mantiene proporción y recorta si es necesario */
+  object-fit: cover; 
   border-radius: 0.5em;
 }
 
-/* Estilos para el contenido de texto de las cards */
+/* Estilos para el contenido de texto de las cards, lo trunca si es muy largi */
 #titulo-anuncio {
   font-size: 1.1em;
   font-weight: bold;
   margin-bottom: 0.5em;
   line-height: 1.2;
-  /* Truncar título si es muy largo */
   display: -webkit-box;
   -webkit-line-clamp: 2; /* Máximo 2 líneas */
   -webkit-box-orient: vertical;
@@ -73,52 +69,48 @@ main {
   font-size: 0.9em;
   color: var(--color-text-secondary, #666);
   line-height: 1.3;
-  /* Truncar descripción a una sola línea */
+  /* Trunca la descripcion sustituyendo las n lineas que tanga con (...) y luego la deja como invisible */
   display: -webkit-box;
-  -webkit-line-clamp: 1; /* Solo 1 línea */
+  -webkit-line-clamp: 1; 
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis; /* Puntos suspensivos (...) */
-  white-space: nowrap; /* No permite salto de línea */
+  white-space: nowrap; 
 }
 
-/* Estilos para el botón de favorito */
 .btn-favorito {
-  position: absolute; /* Posicionado sobre la imagen */
+  position: absolute; 
   top: 10px;
   right: 10px;
   background: rgba(255, 255, 255, 0.9);
   border: none;
-  border-radius: 50%; /* Forma circular */
+  border-radius: 50%; 
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease; /* Transiciones suaves */
+  transition: all 0.3s ease; 
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  z-index: 10; /* Por encima de otros elementos */
+  z-index: 10; /* Para que se pueda ver por encima de las cards */
 }
 
-/* Efectos hover del botón de favorito */
 .btn-favorito:hover {
   background: rgba(255, 255, 255, 1);
-  transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+  transform: scale(1.1); 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Efecto al hacer clic en el botón */
 .btn-favorito:active {
-  transform: scale(0.95); /* Se reduce ligeramente */
+  transform: scale(0.95); 
 }
 
-/* Estilo del icono de corazón dentro del botón */
 .heart-icon {
   width: 24px;
   height: 24px;
   transition: all 0.3s ease;
-  object-fit: contain; /* Mantiene proporción sin distorsión */
+  object-fit: contain; 
 }
 
 /* Media queries para diseño responsivo */
