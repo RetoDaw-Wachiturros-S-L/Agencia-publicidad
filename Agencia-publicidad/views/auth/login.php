@@ -9,7 +9,7 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
 <head>
     <meta charset="UTF-8">
     <title>Comerciantes Vitoria</title>
-    <link rel="icon" type="image/png" href="img/logo_SSombra.png">
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>/img/logo_SSombra.png">
     <link rel="stylesheet" href="css/themes.css">
     <link rel="stylesheet" href="css/auth.css">
 </head>

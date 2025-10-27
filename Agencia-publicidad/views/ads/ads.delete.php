@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comerciantes Vitoria</title>
-    <link rel="icon" type="image/png" href="img/logo_SSombra.png">
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>/img/logo_SSombra.png">
 </head>
 <body>
 
