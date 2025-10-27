@@ -54,8 +54,8 @@
                             <img src="<?= BASE_URL ?>/img/logo.png" alt="logo">
                         </a>
                     </div>
-                    <h2 id="titulo-anuncio" ><?= $anuncio["a.titulo"]?></h2>
-                    <p id="desc-anuncio"><?= $anuncio["a.detalles"]?></p>
+                    <h2 id="titulo-anuncio" ><?= $anuncio["titulo"]?></h2>
+                    <p id="desc-anuncio"><?= $anuncio["detalles"]?></p>
                 </div>
             <?php endforeach; ?>
         </div>
