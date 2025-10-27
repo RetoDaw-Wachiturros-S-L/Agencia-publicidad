@@ -298,5 +298,10 @@ class AuthController {
         $anuncios = $this->dbUser->verMisAnuncios($id);
         require_once __DIR__.'/../views/misAdds.php';
     }
+    public function miPerfil(){
+        $id=$_SESSION["usuario"]["id"];
+        $perfil = $this->dbUser->verMiPerfil($id);
+        require_once __DIR__. '/../views/miPerfil.php';
+    }
 }
 ?>

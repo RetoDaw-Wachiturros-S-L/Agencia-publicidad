@@ -397,7 +397,7 @@ span.error {
 .note-btn {
   background-color: var(--color-bg-secondary) !important;
   border: 1px solid var(--color-border) !important;
-  color: #154C7E !important;
+  color: var(--color-text-primary) !important;
   border-radius: 0.2em !important;
   margin: 2px !important;
   transition: background-color 0.2s ease, color 0.2s ease !important;
@@ -407,15 +407,15 @@ span.error {
 
 .note-btn:hover,
 .note-btn:focus {
-  background-color: #F16849 !important;
-  color: white !important;
+  background-color: var(--color-accent-primary) !important;
+  color: var(--color-text-light) !important;
   box-shadow: none !important;
   outline: none !important;
 }
 
 .note-btn.active {
-  background-color: #154C7E !important;
-  color: white !important;
+  background-color: var(--color-text-primary) !important;
+  color: var(--color-text-light) !important;
   box-shadow: none !important;
 }
 
@@ -426,15 +426,15 @@ span.error {
 
 /* Área de edición */
 .note-editable {
-  background-color: #FFCDC1 !important;
-  color: #154C7E !important;
+  background-color: var(--color-bg-secondary) !important;
+  color: var(--color-input-text) !important;
   padding: 15px !important;
   min-height: 200px !important;
   font-size: 1.1em !important;
 }
 
 .note-editable:focus {
-  background-color: #FFCDC1 !important;
+  background-color: var(--color-bg-secondary) !important;
 }
 
 /* Placeholder */
@@ -458,41 +458,41 @@ span.error {
 
 /* Dropdowns y modales */
 .note-dropdown-menu {
-  background-color: #FFF5E6 !important;
-  border: 2px solid #154C7E !important;
+  background-color: var(--color-bg-primary) !important;
+  border: 2px solid var(--color-border) !important;
   border-radius: 0.2em !important;
 }
 
 .note-dropdown-item:hover {
-  background-color: #FFCDC1 !important;
-  color: #154C7E !important;
+  background-color: var(--color-bg-secondary) !important;
+  color: var(--color-text-primary) !important;
 }
 
 /* Modal de Summernote */
 .note-modal .modal-content {
-  background-color: #FFF5E6 !important;
-  border: 2px solid #154C7E !important;
+  background-color: var(--color-bg-primary) !important;
+  border: 2px solid var(--color-border) !important;
   border-radius: 0.5em !important;
 }
 
 .note-modal .modal-header {
-  background-color: #FFCDC1 !important;
-  border-bottom: 2px solid #154C7E !important;
+  background-color: var(--color-bg-secondary) !important;
+  border-bottom: 2px solid var(--color-border) !important;
 }
 
 .note-modal .modal-title {
-  color: #154C7E !important;
+  color: var(--color-text-primary) !important;
   font-weight: 600 !important;
 }
 
 .note-modal .btn-primary {
-  background-color: #F16849 !important;
-  border-color: #154C7E !important;
-  color: white !important;
+  background-color: var(--color-accent-primary) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-text-light) !important;
 }
 
 .note-modal .btn-primary:hover {
-  background-color: #154C7E !important;
+  background-color: var(--color-text-primary) !important;
 }
 
 /* Evitar parpadeos en el modal */
@@ -523,12 +523,12 @@ span.error {
 /* Pantallas más grandes */
 @media screen and (min-width: 768px) {
   .note-editor {
-    box-shadow: 9px 9px 0 #154C7E !important;
+    box-shadow: 9px 9px 0 var(--color-border) !important;
   }
 
   .note-editor:hover,
   .note-editor.note-frame:focus-within {
-    box-shadow: 12px 12px 0 #154C7E !important;
+    box-shadow: 12px 12px 0 var(--color-border) !important;
   }
 
   .note-editable {
@@ -543,8 +543,8 @@ span.error {
 
 /* Input de archivo */
 input[type="file"] {
-  background-color: #FFCDC1;
-  border: solid 2px #154C7E;
+  background-color: var(--color-bg-secondary);
+  border: solid 2px var(--color-border);
   border-radius: 0.2em;
   padding: 0.9em;
   font-size: 1em;
@@ -553,12 +553,12 @@ input[type="file"] {
 }
 
 input[type="file"]:hover {
-  background-color: #FFF5E6;
+  background-color: var(--color-bg-primary);
 }
 
 .help-text {
   font-size: 0.85em;
-  color: #154C7E;
+  color: var(--color-text-primary);
   margin-top: 0.3em;
   display: block;
   font-style: italic;
@@ -576,11 +576,11 @@ input[type="file"]:hover {
 .preview-item {
   position: relative;
   width: 150px;
-  border: 2px solid #154C7E;
+  border: 2px solid var(--color-border);
   border-radius: 0.5em;
   padding: 0.5em;
-  background-color: #FFF5E6;
-  box-shadow: 3px 3px 0 #154C7E;
+  background-color: var(--color-bg-primary);
+  box-shadow: 3px 3px 0 var(--color-border);
 }
 
 .preview-item img {
@@ -588,26 +588,26 @@ input[type="file"]:hover {
   height: 150px;
   object-fit: cover;
   border-radius: 0.3em;
-  border: 1px solid #154C7E;
+  border: 1px solid var(--color-border);
 }
 
 .preview-item button {
   width: 100%;
   margin-top: 0.5em;
   padding: 0.5em;
-  background-color: #FFCDC1;
-  border: 1px solid #154C7E;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
   border-radius: 0.3em;
   cursor: pointer;
   font-size: 0.9em;
   font-weight: 500;
-  color: #154C7E;
+  color: var(--color-text-primary);
   transition: all 0.2s ease;
 }
 
 .preview-item button:hover {
-  background-color: #F16849;
-  color: white;
+  background-color: var(--color-accent-primary);
+  color: var(--color-text-light);
   transform: scale(1.05);
 }
 
@@ -615,13 +615,13 @@ input[type="file"]:hover {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #F16849;
-  color: white;
+  background-color: var(--color-accent-primary);
+  color: var(--color-text-light);
   padding: 0.3em 0.6em;
   border-radius: 0.3em;
   font-size: 0.8em;
   font-weight: bold;
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 0 var(--shadow-medium);
 }
 
 /* Responsive para preview */
