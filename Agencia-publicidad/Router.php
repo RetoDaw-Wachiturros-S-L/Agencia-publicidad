@@ -7,8 +7,8 @@ class Router {
         // Determinar controlador (por defecto EmpleadoController)
         $controllerName = $_GET['controller'] ?? 'MainController';
         
-        // Determinar acción (por defecto index)
-        $action = $_GET['accion'] ?? 'index';
+        // Determinar acción (por defecto portada)
+        $action = $_GET['accion'] ?? 'portada';
         
         // Cargar y ejecutar controlador
         self::loadController($controllerName, $action);
