@@ -102,7 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const idAnuncio = card.getAttribute('data-id-anuncio');
         
         // Añadir event listener
-        card.addEventListener('click', function() {
+        card.addEventListener('click', function(e) {
+            // Evitar que el clic en el botón de favorito redirija
+            if (e.target.closest('.btn-favorito')) {
+                return;
+            }
             
             if (idAnuncio) {
                 // Obtener la URL base de forma más confiable
@@ -124,6 +128,79 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = url;
             } else {
                 console.error('No se encontró ID del anuncio');
+            }
+        });
+    });
+});
+
+// Función para manejar favoritos
+document.addEventListener('DOMContentLoaded', () => {
+    const botonesFavorito = document.querySelectorAll('.btn-favorito');
+    
+    botonesFavorito.forEach(boton => {
+        boton.addEventListener('click', async function(e) {
+            e.stopPropagation(); // Evitar que se active el clic del card
+            
+            const anuncioId = this.getAttribute('data-anuncio-id');
+            const esFavorito = this.getAttribute('data-es-favorito') === '1';
+            const isLoggedIn = this.getAttribute('data-is-logged-in') === '1';
+            const icono = this.querySelector('.heart-icon');
+            
+            // Si el usuario no está logueado, redirigir a login
+            if (!isLoggedIn) {
+                const protocol = window.location.protocol;
+                const host = window.location.host;
+                const pathname = window.location.pathname;
+                const basePath = pathname.substring(0, pathname.lastIndexOf('/'));
+                const baseUrl = `${protocol}//${host}${basePath}`;
+                
+                const loginUrl = `${baseUrl}/index.php?controller=AuthController&accion=iniciarSesion`;
+                window.location.href = loginUrl;
+                return;
+            }
+            
+            try {
+                // Obtener la URL base
+                const protocol = window.location.protocol;
+                const host = window.location.host;
+                const pathname = window.location.pathname;
+                const basePath = pathname.substring(0, pathname.lastIndexOf('/'));
+                const baseUrl = `${protocol}//${host}${basePath}`;
+                
+                const url = `${baseUrl}/api/favoritos.php`;
+                
+                const response = await fetch(url, {
+                    method: esFavorito ? 'DELETE' : 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        anuncioId: parseInt(anuncioId)
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Actualizar el estado visual
+                    const nuevoEstado = !esFavorito;
+                    this.setAttribute('data-es-favorito', nuevoEstado ? '1' : '0');
+                    
+                    // Cambiar la imagen
+                    const nuevaImagen = nuevoEstado ? 'favorito-activo.png' : 'Heart.png';
+                    icono.src = `${baseUrl}/img/${nuevaImagen}`;
+                    
+                    // Actualizar el título
+                    this.title = nuevoEstado ? 'Quitar de favoritos' : 'Agregar a favoritos';
+                    
+                    console.log('Favorito actualizado:', data);
+                } else {
+                    console.error('Error al actualizar favorito:', data);
+                    alert('Error al actualizar favorito: ' + (data.error || 'Error desconocido'));
+                }
+            } catch (error) {
+                console.error('Error de red:', error);
+                alert('Error de conexión. Inténtalo de nuevo.');
             }
         });
     });

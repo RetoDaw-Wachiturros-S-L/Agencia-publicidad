@@ -23,7 +23,7 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
         <?php endif; ?>
 
         <div id="form-container">
-            <form action="index.php?controller=OutController&accion=iniciarSesion" method="post" id="login">
+            <form action="index.php?controller=AuthController&accion=iniciarSesion" method="post" id="login">
             <input type="email" id="email" name="email" required placeholder="Email*">
             <span class="error"></span>
 

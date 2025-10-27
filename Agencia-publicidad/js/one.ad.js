@@ -1,64 +1,113 @@
 function guardarEnCache(anuncio){
-    const anunciosDeCache = JSON.parse(localStorage.getItem("anuncios")) || {};
+    const anunciosDeCache = JSON.parse(sessionStorage.getItem("anuncios")) || {};
     anunciosDeCache[anuncio.id] = anuncio;
-    localStorage.setItem("anuncios", JSON.stringify(anunciosDeCache));
-}
-function borrarDeCache(id){
-    const anunciosDeCache = JSON.parse(localStorage.getItem("anuncios")) || {};
-    
-    if(anunciosDeCache.hasOwnProperty(id)){
-        delete anunciosDeCache[id];
-        localStorage.setItem("anuncios", JSON.stringify(anunciosDeCache));
-    }
-    
+    sessionStorage.setItem("anuncios", JSON.stringify(anunciosDeCache));
 }
 
+function eliminarDeCache(id){
+    const anunciosDeCache = JSON.parse(sessionStorage.getItem("anuncios")) || {};
+    //busca sobre la localStorage
+    if(anunciosDeCache.hasOwnProperty(id)){
+        delete anunciosDeCache[id];
+        sessionStorage.setItem("anuncios", JSON.stringify(anunciosDeCache));
+    }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'))}`;
 
   document.querySelectorAll(".favorito-icono").forEach(icono => {
     icono.addEventListener("click", async () => {
-    //Al hacer click sobre el icono fav coge el id del anuncio(que esta en el icono por php) y mira si tiene en el css la class (favorito-activo=>bool)  
-    const anuncioId = icono.dataset.id;
-    const esFavorito = icono.classList.contains("favorito-activo");
+      // Obtener datos del anuncio desde los atributos data
+      const anuncioId = icono.dataset.id;
+      const esFavorito = icono.dataset.esFavorito === '1';
+      const isLoggedIn = icono.dataset.isLoggedIn === '1';
+      
+      // Si el usuario no está logueado, redirigir a login
+      if (!isLoggedIn) {
+        const protocol = window.location.protocol;
+        const host = window.location.host;
+        const pathname = window.location.pathname;
+        const basePath = pathname.substring(0, pathname.lastIndexOf('/'));
+        const baseUrl = `${protocol}//${host}${basePath}`;
+        
+        const loginUrl = `${baseUrl}/index.php?controller=AuthController&accion=iniciarSesion`;
+        window.location.href = loginUrl;
+        return;
+      }
 
-    //busca la card por css y obtiene el nodo para luego construir el Obj anuncio
-    const card = icono.closest(".card-anuncio");
-    const titulo = card.querySelector("#titulo-anuncio")?.textContent?.trim();
-    const descripcion = card.querySelector("#desc-anuncio")?.textContent?.trim();
-    const fecha = card.querySelector(".fecha-formateada")?.textContent?.replace("Publicado en: ", "").trim();
-    const fotos = icono.getAttribute("src");
+      // Busca la card por CSS y obtiene el nodo para luego construir el objeto anuncio
+      const card = icono.closest(".card-anuncio");
+      const titulo = card.querySelector("#titulo-anuncio")?.textContent?.trim();
+      const descripcion = card.querySelector("#desc-anuncio")?.textContent?.trim();
+      const fecha = card.querySelector(".fecha-formateada")?.textContent?.replace("Publicado en: ", "").trim();
 
-    const anuncio = {
-    id: anuncioId,
-    titulo: titulo,
-    fotos: fotos,
-    descripcion: descripcion,
-    fechaPublicacion: fecha
-    };
+      const anuncio = {
+        id: anuncioId,
+        titulo: titulo,
+        fotos: icono.src,
+        descripcion: descripcion,
+        fechaPublicacion: fecha
+      };
 
-    try {
-        //Mira si tiene la clase de favorito y si es true hace la await POST para meterla en favoritos y la guarda en caché
-    if (!esFavorito) {
-        const res = await axios.post(baseUrl + "/api/favoritos.php", { anuncioId });
-        if (res.status === 200) {
-        icono.classList.add("favorito-activo");
-        icono.src = baseUrl + "/img/favorito-activo.png";
-        guardarEnCache(anuncio);
+      try {
+        const url = `${baseUrl}/api/favoritos.php`;
+        
+        if (!esFavorito) {
+            console.log("Agregando a favoritos - ID anuncio: " + anuncioId);
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ anuncioId: parseInt(anuncioId) })
+            });
+
+            const data = await response.json();
+            console.log("Respuesta POST:", data);
+
+            if (response.ok) {
+                // Actualizar estado visual
+                icono.classList.add("favorito-activo");
+                icono.src = baseUrl + "/img/favorito-activo.png";
+                icono.dataset.esFavorito = '1';
+                icono.title = 'Quitar de favoritos';
+                guardarEnCache(anuncio);
+            } else {
+                console.error('Error al agregar favorito:', data);
+                alert('Error al agregar favorito: ' + (data.error || 'Error desconocido'));
+            }
+        } else {
+            console.log("Eliminando de favoritos - ID anuncio: " + anuncioId);
+
+            const response = await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ anuncioId: parseInt(anuncioId) })
+            });
+
+            const data = await response.json();
+            console.log("Respuesta DELETE:", data);
+
+            if (response.ok) {
+                // Actualizar estado visual
+                icono.classList.remove("favorito-activo");
+                icono.src = baseUrl + "/img/Heart.png";
+                icono.dataset.esFavorito = '0';
+                icono.title = 'Agregar a favoritos';
+                eliminarDeCache(anuncioId);
+            } else {
+                console.error('Error al eliminar favorito:', data);
+                alert('Error al eliminar favorito: ' + (data.error || 'Error desconocido'));
+            }
         }
-        //En otro caso hace await DELETE y la quita de caché(en caso de que esté)
-    } else {
-        const res = await axios.delete(baseUrl + "/api/favoritos.php", { data: { anuncioId } });
-        if (res.status === 200) {
-        icono.classList.remove("favorito-activo");
-        icono.src = baseUrl + "/img/Heart.png";
-        eliminarDeCache(anuncioId);
-        }
-    }
-    } catch (err) {
-    console.log("Error: " + err);
-    }
+      } catch (err) {
+        console.error("Error de red:", err);
+        alert('Error de conexión. Inténtalo de nuevo.');
+      }
     });
   });
 });

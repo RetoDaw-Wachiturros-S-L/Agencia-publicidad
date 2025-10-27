@@ -22,7 +22,7 @@
     </div>
     
     <?php if (isset($isLoggedIn) && $isLoggedIn == false):?>
-        <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=iniciarSesion" class="login">
+        <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=iniciarSesion" class="login">
             <div class="login-icon" role="img" aria-label="Botón de login"></div>
         </a>
     <?php endif; ?>
@@ -34,14 +34,14 @@
             
                 <!-- Menú desplegable de usuario -->
                 <div id="userDropdownMenu" class="user-dropdown-menu">
-                    <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=favourites" class="menu-item">Mis favoritos</a>
+                    <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=favourites" class="menu-item">Mis favoritos</a>
                     <a href="#" class="menu-item menu-item-notification">
                         Mis mensajes
                         <span class="notification-badge"></span>
                     </a>
-                    <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=verAnuncios" class="menu-item">Mis anuncios</a>
+                    <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=verAnuncios" class="menu-item">Mis anuncios</a>
                     <a href="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=miPerfil" class="menu-item">Mi perfil</a>
-                    <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=logout" class="menu-item menu-item-logout">Cerrar sesión</a>
+                    <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=logout" class="menu-item menu-item-logout">Cerrar sesión</a>
                 </div>
             </div>
         
@@ -58,7 +58,7 @@
             <div class="heart-icon" role="button" aria-label="Favoritos" tabindex="0"></div>
             
             <?php if ($isAdmin):?>
-                <a href="<?= BASE_URL ?>/index.php?controller=OutController&accion=store" class="admin-register-btn" title="Registrar nuevo usuario">
+                <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=store" class="admin-register-btn" title="Registrar nuevo usuario">
                     <span class="admin-plus">+</span>
                     <span class="admin-tag">admin</span>
                 </a>

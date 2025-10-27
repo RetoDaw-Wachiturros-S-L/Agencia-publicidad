@@ -17,17 +17,42 @@ require_once __DIR__ . '/../Comerciante.php';
 class AnunciosDB{
     public function getAll():array{
         $pdo = DBCon::getConnection();
-        $sql = $pdo->prepare("
-            SELECT 
-                a.id, 
-                a.id_comerciante, 
-                a.titulo, 
-                a.detalles, 
-                a.fecha_publicacion,
-                f.url_foto
-            FROM anuncios a
-            LEFT JOIN fotos_anuncios f ON a.id = f.id_anuncio AND f.es_portada = TRUE
-        ");
+        
+        // Obtener el ID del usuario actual si está logueado
+        $usuarioId = $_SESSION['usuario']['id'] ?? null;
+        
+        if ($usuarioId) {
+            // Si hay usuario logueado, incluir información de favoritos
+            $sql = $pdo->prepare("
+                SELECT 
+                    a.id, 
+                    a.id_comerciante, 
+                    a.titulo, 
+                    a.detalles, 
+                    a.fecha_publicacion,
+                    f.url_foto,
+                    CASE WHEN fav.id_anuncio IS NOT NULL THEN 1 ELSE 0 END as es_favorito
+                FROM anuncios a
+                LEFT JOIN fotos_anuncios f ON a.id = f.id_anuncio AND f.es_portada = TRUE
+                LEFT JOIN favoritos fav ON a.id = fav.id_anuncio AND fav.id_usuario = :usuario_id
+            ");
+            $sql->bindValue(':usuario_id', $usuarioId, \PDO::PARAM_INT);
+        } else {
+            // Si no hay usuario logueado, no incluir información de favoritos
+            $sql = $pdo->prepare("
+                SELECT 
+                    a.id, 
+                    a.id_comerciante, 
+                    a.titulo, 
+                    a.detalles, 
+                    a.fecha_publicacion,
+                    f.url_foto,
+                    0 as es_favorito
+                FROM anuncios a
+                LEFT JOIN fotos_anuncios f ON a.id = f.id_anuncio AND f.es_portada = TRUE
+            ");
+        }
+        
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -101,7 +126,9 @@ class AnunciosDB{
                 $data['u_password_hash'] ?? '',                              // contrasena
                 $data['u_foto_perfil'] ?? null,                              // fotoPerfil
                 $data['c_nombre_empresa'] ?? null,                           // nombreComercio
-                $data['c_comentario_empresa'] ?? null                        // rubro
+                $data['c_nif_empresa'] ?? null,                              // nifEmpresa
+                $data['c_comentario_empresa'] ?? null,                       // rubro
+                $data['c_num_telefono'] ?? null                             // numTelefono
             );
         }
 
@@ -181,6 +208,19 @@ class AnunciosDB{
         $sql->bindValue(":palabra", '%' .  $palabras . '%', \PDO::PARAM_STR);
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Verifica si un anuncio está en favoritos del usuario actual
+     */
+    public function isFavorito(int $anuncioId, int $usuarioId): bool {
+        $pdo = DBCon::getConnection();
+        $sql = $pdo->prepare("SELECT COUNT(*) FROM favoritos WHERE id_anuncio = :anuncio_id AND id_usuario = :usuario_id");
+        $sql->bindValue(':anuncio_id', $anuncioId, \PDO::PARAM_INT);
+        $sql->bindValue(':usuario_id', $usuarioId, \PDO::PARAM_INT);
+        $sql->execute();
+        
+        return $sql->fetchColumn() > 0;
     }
         
 }

@@ -23,7 +23,7 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
         <?php endif; ?>
 
         <div id="form-container">
-            <form action='index.php?controller=OutController&accion=store' method='post' id="registro">
+            <form action='index.php?controller=AuthController&accion=store' method='post' id="registro">
                 <fieldset>
                     <legend>Registro</legend>
                     

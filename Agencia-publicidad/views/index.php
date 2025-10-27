@@ -41,6 +41,16 @@
                                 echo "<img src='" . BASE_URL . "/img/logo.png' alt='Sin imagen'>";
                             }
                         ?>
+                        <!-- Botón de corazón para favoritos -->
+                        <button class="btn-favorito" 
+                                data-anuncio-id="<?= $anuncio['id'] ?>" 
+                                data-es-favorito="<?= $anuncio['es_favorito'] ?>"
+                                data-is-logged-in="<?= $isLoggedIn ? '1' : '0' ?>"
+                                title="<?= $isLoggedIn ? ($anuncio['es_favorito'] ? 'Quitar de favoritos' : 'Agregar a favoritos') : 'Iniciar sesión para agregar a favoritos' ?>">
+                            <img src="<?= BASE_URL ?>/img/<?= $anuncio['es_favorito'] ? 'favorito-activo.png' : 'Heart.png' ?>" 
+                                 alt="Favorito" 
+                                 class="heart-icon">
+                        </button>
                     </div>
                     <h2 id="titulo-anuncio"><?= htmlspecialchars($anuncio['titulo']) ?></h2>
                     <p id="desc-anuncio"><?= htmlspecialchars($anuncio['detalles'] ?? 'Sin detalles') ?></p>
