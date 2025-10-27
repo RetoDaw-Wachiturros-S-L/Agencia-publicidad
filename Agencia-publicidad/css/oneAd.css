@@ -93,7 +93,7 @@ main {
   border-radius: 12px;
   background-color: transparent;
   background-image: var(--icon-heart); /* Usa la variable del tema */
-  background-size: 40px 40px; /* Tamaño del icono dentro del contenedor */
+  background-size: 50px 50px; /* Tamaño del icono dentro del contenedor */
   background-repeat: no-repeat;
   background-position: center;
 }
