@@ -1,7 +1,8 @@
 <?php
 if (!defined('ACCESSED_VIA_ROUTER')) {
     http_response_code(403);
-    die('Acceso directo no permitido');
+    require_once __DIR__ . '/../../views/errors/403.php';
+    exit;
 }
 
 require_once __DIR__ . '/../../utils/auth_helper.php';
@@ -16,7 +17,8 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Anuncio</title> 
+    <title>Comerciantes Vitoria</title> 
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>/img/logo_SSombra.png">
 
     <!-- Editor de texto enriquecido - Summernote -->
     <!-- include libraries(jQuery, bootstrap) -->

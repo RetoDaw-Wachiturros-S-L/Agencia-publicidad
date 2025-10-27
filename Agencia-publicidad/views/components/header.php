@@ -15,63 +15,16 @@ if (!isset($header_css_included)) {
 ?>
 
 <header>
-    <?php if (isset($isLoggedIn) && $isLoggedIn == true):?>
-    <!-- Menú hamburguesa para móvil - IZQUIERDA -->
-    <div class="mobile-menu-container">
-        <input type="checkbox" id="burger-input" class="burger-input">
-        <label for="burger-input" class="burger-menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-        
-        <!-- Menú desplegable móvil -->
-        <div class="mobile-dropdown-menu">
-            <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=favourites" class="mobile-menu-item">
-                <span class="mobile-menu-icon heart-icon"></span>
-                Mis favoritos
-            </a>
-            <a href="#" class="mobile-menu-item mobile-menu-item-notification">
-                <span class="mobile-menu-icon message-icon"></span>
-                Mis mensajes
-                <span class="notification-badge"></span>
-            </a>
-            <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=verAnuncios" class="mobile-menu-item">
-                <span class="mobile-menu-icon ads-icon"></span>
-                Mis anuncios
-            </a>
-            <a href="<?= BASE_URL ?>/index.php?controller=AdsController&accion=create" class="mobile-menu-item">
-                <span class="mobile-menu-icon create-icon"></span>
-                Crear anuncio
-            </a>
-            <a href="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=miPerfil" class="mobile-menu-item">
-                <span class="mobile-menu-icon user-icon"></span>
-                Mi perfil
-            </a>
-            <?php if ($isAdmin):?>
-            <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=store" class="mobile-menu-item mobile-menu-item-admin">
-                <span class="mobile-menu-icon admin-icon">+</span>
-                Registrar usuario
-            </a>
-            <?php endif; ?>
-            <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=logout" class="mobile-menu-item mobile-menu-item-logout">
-                <span class="mobile-menu-icon logout-icon"></span>
-                Cerrar sesión
-            </a>
-        </div>
-    </div>
-    <?php endif; ?>
-
-    <!-- Logo - Solo visible en desktop -->
-    <a href="<?= BASE_URL ?>/index.php" class="logo-link">
+    <a href="<?= BASE_URL ?>/index.php?accion=index" class="logo-link">
         <div class="logo" role="img" aria-label="Logo de comerciantes vitoria"></div>
     </a>
     
     <!-- Barra de búsqueda - CENTRO -->
     <div id="buscar">
         <div class="search-container">
-            <form action="index.php?controller=AdsController&accion=buscarByPalabra" method="post">
+            <form action="index.php?controller=AdsController&accion=buscarByPalabra" method="post" id="searchForm">
                 <input type="text" class="search" placeholder="Buscar..." name="buscar_palabra">
+                <button type="submit" class="search-button" aria-label="Buscar"></button>
             </form>    
         </div>
     </div>
@@ -114,15 +67,24 @@ if (!isset($header_css_included)) {
             </div>
         </div>
 
-        <div class="heart-icon" role="button" aria-label="Favoritos" tabindex="0"></div>
-        
-        <?php if ($isAdmin):?>
-            <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=store" class="admin-register-btn" title="Registrar nuevo usuario">
-                <span class="admin-plus">+</span>
-                <span class="admin-tag">admin</span>
-            </a>
-        <?php endif; ?>
-    </div>
+            <div class="heart-icon" role="button" aria-label="Favoritos" tabindex="0"></div>
+            
+            <?php if ($isAdmin):?>
+                <div class="admin-menu-container">
+                    <div id="adminMenuToggle" class="admin-register-btn" role="button" aria-label="Menú de administrador" tabindex="0" title="Administrador">
+                        <span class="admin-plus">+</span>
+                        <span class="admin-tag">admin</span>
+                    </div>
+                    
+                    <!-- Menú desplegable de administrador -->
+                    <div id="adminDropdownMenu" class="admin-dropdown-menu">
+                        <a href="#" class="menu-item">Opción 1</a>
+                        <a href="#" class="menu-item">Opción 2</a>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+        </div>            
     <?php endif; ?>
 
     <!-- Lámpara de cambio de tema - DERECHA -->

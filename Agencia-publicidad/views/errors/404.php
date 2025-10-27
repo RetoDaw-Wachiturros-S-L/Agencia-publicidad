@@ -3,33 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>403 - Acceso Denegado | Comerciantes Vitoria</title>
+    <title>404 - Página No Encontrada | Comerciantes Vitoria</title>
     <link rel="icon" type="image/png" href="../../img/logo_SSombra.png">
     <link rel="stylesheet" href="../../css/themes.css">
     <link rel="stylesheet" href="../../css/errors.css">
 </head>
 <body>
     <div class="error-container">
-        <div class="error-code">403</div>
-        <h1 class="error-title">Acceso Denegado</h1>
+        <div class="error-code">404</div>
+        <h1 class="error-title">Página No Encontrada</h1>
         <p class="error-message">
-            Lo sentimos, no tienes permisos para acceder a este recurso. 
-            Si crees que esto es un error, por favor contacta con el administrador.
+            Vaya, parece que la página que buscas no existe o ha sido movida. 
+            ¿Quizás te perdiste en el camino?
         </p>
         <div class="error-actions">
             <a href="../../index.php?accion=index" class="error-btn error-btn-primary">
-                ← Volver al inicio
+                🏠 Ir al inicio
             </a>
             <button onclick="history.back()" class="error-btn error-btn-secondary">
-                Página anterior
+                ← Volver atrás
             </button>
         </div>
         <details class="error-details">
-            <summary>Información técnica</summary>
+            <summary>¿Qué puedo hacer?</summary>
             <p>
-                <strong>Código de error:</strong> <code>403 Forbidden</code><br>
-                <strong>Descripción:</strong> El servidor entiende la solicitud pero se niega a autorizarla.<br>
-                <strong>Posibles causas:</strong> Permisos insuficientes, acceso restringido o sesión expirada.
+                • Verifica que la URL esté escrita correctamente<br>
+                • Vuelve a la página anterior y prueba de nuevo<br>
+                • Regresa al inicio y navega desde allí<br>
+                • Usa el buscador para encontrar lo que necesitas
             </p>
         </details>
     </div>

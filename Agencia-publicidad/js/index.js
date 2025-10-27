@@ -1,99 +1,57 @@
-// Menú desplegable de usuario (solo escritorio)
+// Menús desplegables (usuario, anuncios y administrador)
 document.addEventListener('DOMContentLoaded', () => {
-    const userMenuToggle = document.getElementById('userMenuToggle');
-    const userDropdownMenu = document.getElementById('userDropdownMenu');
+    // Función genérica para manejar menús desplegables con hover
+    function setupDropdownMenu(toggleId, menuId, containerClass) {
+        const toggle = document.getElementById(toggleId);
+        const menu = document.getElementById(menuId);
+        const container = document.querySelector(`.${containerClass}`);
 
-    if (userMenuToggle && userDropdownMenu) {
-        // Solo aplicar funcionalidad en escritorio (pantallas > 750px)
-        const isDesktop = window.innerWidth >= 750;
-        
-        if (isDesktop) {
-            // Toggle del menú al hacer clic
-            userMenuToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                userDropdownMenu.classList.toggle('show');
-            });
+        if (!toggle || !menu || !container) return;
 
-            // Mostrar menú al pasar el ratón (hover)
-            userMenuToggle.addEventListener('mouseenter', () => {
-                userDropdownMenu.classList.add('show');
-            });
+        let hideTimeout = null;
 
-            // Mantener el menú abierto cuando el ratón está sobre él
-            userDropdownMenu.addEventListener('mouseenter', () => {
-                userDropdownMenu.classList.add('show');
-            });
+        // Mostrar menú al hacer hover sobre el toggle
+        toggle.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimeout);
+            menu.classList.add('show');
+        });
 
-            // Cerrar el menú cuando el ratón sale del contenedor
-            const userMenuContainer = document.querySelector('.user-menu-container');
-            if (userMenuContainer) {
-                userMenuContainer.addEventListener('mouseleave', () => {
-                    userDropdownMenu.classList.remove('show');
-                });
+        // Mantener el menú visible cuando el mouse está sobre él
+        menu.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimeout);
+            menu.classList.add('show');
+        });
+
+        // Ocultar menú cuando el mouse sale del contenedor (con pequeño delay)
+        container.addEventListener('mouseleave', () => {
+            hideTimeout = setTimeout(() => {
+                menu.classList.remove('show');
+            }, 100); // 100ms de delay para evitar cierres accidentales
+        });
+
+        // Toggle al hacer clic
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menu.classList.toggle('show');
+        });
+
+        // Evitar que los clics dentro del menú lo cierren
+        menu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Cerrar el menú si se hace clic fuera
+        document.addEventListener('click', (e) => {
+            if (!container.contains(e.target)) {
+                menu.classList.remove('show');
             }
-
-            // Cerrar el menú si se hace clic fuera
-            document.addEventListener('click', (e) => {
-                if (!userMenuContainer.contains(e.target)) {
-                    userDropdownMenu.classList.remove('show');
-                }
-            });
-
-            // Evitar que los clics dentro del menú lo cierren
-            userDropdownMenu.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-        }
+        });
     }
-});
 
-// Menú desplegable de anuncios (solo escritorio)
-document.addEventListener('DOMContentLoaded', () => {
-    const adsMenuToggle = document.getElementById('adsMenuToggle');
-    const adsDropdownMenu = document.getElementById('adsDropdownMenu');
-
-    if (adsMenuToggle && adsDropdownMenu) {
-        // Solo aplicar funcionalidad en escritorio (pantallas > 750px)
-        const isDesktop = window.innerWidth >= 750;
-        
-        if (isDesktop) {
-            // Toggle del menú al hacer clic
-            adsMenuToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                adsDropdownMenu.classList.toggle('show');
-            });
-
-            // Mostrar menú al pasar el ratón (hover)
-            adsMenuToggle.addEventListener('mouseenter', () => {
-                adsDropdownMenu.classList.add('show');
-            });
-
-            // Mantener el menú abierto cuando el ratón está sobre él
-            adsDropdownMenu.addEventListener('mouseenter', () => {
-                adsDropdownMenu.classList.add('show');
-            });
-
-            // Cerrar el menú cuando el ratón sale del contenedor
-            const adsMenuContainer = document.querySelector('.ads-menu-container');
-            if (adsMenuContainer) {
-                adsMenuContainer.addEventListener('mouseleave', () => {
-                    adsDropdownMenu.classList.remove('show');
-                });
-            }
-
-            // Cerrar el menú si se hace clic fuera
-            document.addEventListener('click', (e) => {
-                if (!adsMenuContainer.contains(e.target)) {
-                    adsDropdownMenu.classList.remove('show');
-                }
-            });
-
-            // Evitar que los clics dentro del menú lo cierren
-            adsDropdownMenu.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-        }
-    }
+    // Configurar los tres menús
+    setupDropdownMenu('userMenuToggle', 'userDropdownMenu', 'user-menu-container');
+    setupDropdownMenu('adsMenuToggle', 'adsDropdownMenu', 'ads-menu-container');
+    setupDropdownMenu('adminMenuToggle', 'adminDropdownMenu', 'admin-menu-container');
 });
 
 // Función para acceder a la vista única del anuncio
@@ -149,15 +107,62 @@ document.addEventListener('DOMContentLoaded', () => {
     
     botonesFavorito.forEach(boton => {
         boton.addEventListener('click', async function(e) {
-            e.stopPropagation(); // Evitar que se active el clic del card
+            e.stopPropagation(); 
+            // PAra que la card y el boton sean eventos distintos y no se 'contagien'
             
             const anuncioId = this.getAttribute('data-anuncio-id');
             const esFavorito = this.getAttribute('data-es-favorito') === '1';
             const isLoggedIn = this.getAttribute('data-is-logged-in') === '1';
             const icono = this.querySelector('.heart-icon');
             
-            // Si el usuario no está logueado, redirigir a login
-            if (!isLoggedIn) {
+            if (isLoggedIn) {
+                try {
+                    // Obtener la URL base
+                    const protocol = window.location.protocol;
+                    const host = window.location.host;
+                    const pathname = window.location.pathname;
+                    const basePath = pathname.substring(0, pathname.lastIndexOf('/'));
+                    const baseUrl = `${protocol}//${host}${basePath}`;
+                    
+                    const url = `${baseUrl}/api/favoritos.php`;
+                    
+                    const response = await fetch(url, {
+                        method: esFavorito ? 'DELETE' : 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            anuncioId: parseInt(anuncioId)
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        // Actualizar el estado visual
+                        const nuevoEstado = !esFavorito;
+                        this.setAttribute('data-es-favorito', nuevoEstado ? '1' : '0');
+                        
+                        // Cambiar la clase para actualizar el icono
+                        if (nuevoEstado) {
+                            this.classList.add('favorito-activo');
+                        } else {
+                            this.classList.remove('favorito-activo');
+                        }
+                        
+                        // Actualizar el título
+                        this.title = nuevoEstado ? 'Quitar de favoritos' : 'Agregar a favoritos';
+                        
+                        console.log('Favorito actualizado:', data);
+                    } else {
+                        console.error('Error al actualizar favorito:', data);
+                        alert('Error al actualizar favorito: ' + (data.error || 'Error desconocido'));
+                    }
+                } catch (error) {
+                    console.error('Error de red:', error);
+                    alert('Error de conexión. Inténtalo de nuevo.');
+                }
+            }else{
                 const protocol = window.location.protocol;
                 const host = window.location.host;
                 const pathname = window.location.pathname;
@@ -166,52 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const loginUrl = `${baseUrl}/index.php?controller=AuthController&accion=iniciarSesion`;
                 window.location.href = loginUrl;
-                return;
-            }
-            
-            try {
-                // Obtener la URL base
-                const protocol = window.location.protocol;
-                const host = window.location.host;
-                const pathname = window.location.pathname;
-                const basePath = pathname.substring(0, pathname.lastIndexOf('/'));
-                const baseUrl = `${protocol}//${host}${basePath}`;
-                
-                const url = `${baseUrl}/api/favoritos.php`;
-                
-                const response = await fetch(url, {
-                    method: esFavorito ? 'DELETE' : 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        anuncioId: parseInt(anuncioId)
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    // Actualizar el estado visual
-                    const nuevoEstado = !esFavorito;
-                    this.setAttribute('data-es-favorito', nuevoEstado ? '1' : '0');
-                    
-                    // Cambiar la imagen
-                    const nuevaImagen = nuevoEstado ? 'favorito-activo.png' : 'Heart.png';
-                    icono.src = `${baseUrl}/img/${nuevaImagen}`;
-                    
-                    // Actualizar el título
-                    this.title = nuevoEstado ? 'Quitar de favoritos' : 'Agregar a favoritos';
-                    
-                    console.log('Favorito actualizado:', data);
-                } else {
-                    console.error('Error al actualizar favorito:', data);
-                    alert('Error al actualizar favorito: ' + (data.error || 'Error desconocido'));
-                }
-            } catch (error) {
-                console.error('Error de red:', error);
-                alert('Error de conexión. Inténtalo de nuevo.');
-            }
+            } 
         });
     });
 });

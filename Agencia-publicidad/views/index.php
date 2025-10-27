@@ -18,7 +18,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina principal</title>
+    <title>Comerciantes Vitoria</title>
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>/img/logo_SSombra.png">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/index.css"/>
@@ -42,14 +43,12 @@
                             }
                         ?>
                         <!-- Botón de corazón para favoritos -->
-                        <button class="btn-favorito" 
+                        <button class="btn-favorito <?= $anuncio['es_favorito'] ? 'favorito-activo' : '' ?>" 
                                 data-anuncio-id="<?= $anuncio['id'] ?>" 
                                 data-es-favorito="<?= $anuncio['es_favorito'] ?>"
                                 data-is-logged-in="<?= $isLoggedIn ? '1' : '0' ?>"
                                 title="<?= $isLoggedIn ? ($anuncio['es_favorito'] ? 'Quitar de favoritos' : 'Agregar a favoritos') : 'Iniciar sesión para agregar a favoritos' ?>">
-                            <img src="<?= BASE_URL ?>/img/<?= $anuncio['es_favorito'] ? 'favorito-activo.png' : 'Heart.png' ?>" 
-                                 alt="Favorito" 
-                                 class="heart-icon">
+                            <div class="heart-icon"></div>
                         </button>
                     </div>
                     <h2 id="titulo-anuncio"><?= htmlspecialchars($anuncio['titulo']) ?></h2>

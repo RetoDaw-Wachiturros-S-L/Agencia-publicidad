@@ -13,7 +13,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina principal</title>
+    <title>Comerciantes Vitoria</title>
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>/img/logo_SSombra.png">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/index.css"/>
@@ -56,15 +57,13 @@
 
       <!-- Iconos de acción -->
       <div class="div-icons">
-        <img 
-          src="<?= BASE_URL ?>/img/<?= $esFavorito ? 'favorito-activo.png' : 'Heart.png' ?>" 
-          alt="Favorito"
+        <div 
           class="favorito-icono <?= $esFavorito ? 'favorito-activo' : '' ?>"
           data-id="<?= $anuncio->getId() ?>"
           data-es-favorito="<?= $esFavorito ? '1' : '0' ?>"
           data-is-logged-in="<?= $isLoggedIn ? '1' : '0' ?>"
           title="<?= $isLoggedIn ? ($esFavorito ? 'Quitar de favoritos' : 'Agregar a favoritos') : 'Iniciar sesión para agregar a favoritos' ?>"
-        >
+        ></div>
 
         <img 
           src="<?= BASE_URL ?>/img/mensaje.png" 
@@ -75,6 +74,7 @@
   </div>
 </div>
     <script src="<?= BASE_URL ?>/js/one.ad.js"></script>
+    <script src="<?= BASE_URL ?>/js/index.js"></script>
     </main>
     <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
 </body>
