@@ -20,9 +20,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comerciantes Vitoria</title>
     <link rel="icon" type="image/png" href="<?= BASE_URL ?>/img/logo_SSombra.png">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css?v=2.0"/>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css?v=2.0"/>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/index.css?v=2.0"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/index.css"/>
 </head>
 <body>
     <?php include __DIR__ . '/components/header.php'; ?>
@@ -56,8 +56,8 @@
                 </div>
             <?php endforeach; ?>
         </div>
-        <script src="<?= BASE_URL ?>/js/index.js?v=2.0"></script>
+        <script src="<?= BASE_URL ?>/js/index.js"></script>
     </main>
-    <script src="<?= BASE_URL ?>/js/theme-switcher.js?v=2.0" defer></script>
+    <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
 </body>
 </html>

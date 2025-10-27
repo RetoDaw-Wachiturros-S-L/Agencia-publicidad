@@ -62,6 +62,7 @@
     <?php else: ?>
         <h2>No tienes anuncios favoritos todavía.</h2>
     <?php endif; ?>
+    <script src="<?= BASE_URL ?>/js/index.js"></script>
 </main>
 
 <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>

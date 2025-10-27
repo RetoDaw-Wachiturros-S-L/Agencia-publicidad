@@ -61,6 +61,7 @@
         <h2>No tienes anuncios todavía.</h2>
         <a href="index.php">Volver</a>
     <?php endif; ?>
+    <script src="<?= BASE_URL ?>/js/index.js"></script>
 </main>
 
 <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
