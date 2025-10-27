@@ -22,8 +22,8 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
     <title>Comerciantes Vitoria</title>
 </head>
 <body>
-    <header>
-    </header>
+    <?php include __DIR__ . '/components/header.php'; ?>
+    
      <main>
         <div class="contenido">
             <aside>               
@@ -54,6 +54,9 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
             </section>
         </div>
     </main>
+    
+    <script src="<?= BASE_URL ?>/js/index.js"></script>
+    <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
  
 </body>
 </html>

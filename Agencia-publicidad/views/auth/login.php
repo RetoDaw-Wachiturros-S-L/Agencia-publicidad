@@ -4,6 +4,13 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
     require_once __DIR__ . '/../errors/403.php';
     exit;
 }
+
+require_once __DIR__ . '/../../utils/auth_helper.php';
+
+// Extraer variables globales al scope local
+$currentUser = $GLOBALS['currentUser'] ?? null;
+$isLoggedIn = $GLOBALS['isLoggedIn'] ?? false;
+$isAdmin = $GLOBALS['isAdmin'] ?? false;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -11,10 +18,13 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
     <meta charset="UTF-8">
     <title>Comerciantes Vitoria</title>
     <link rel="icon" type="image/png" href="<?= BASE_URL ?>/img/logo_SSombra.png">
-    <link rel="stylesheet" href="css/themes.css">
-    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/auth.css">
 </head>
 <body>
+    <?php include __DIR__ . '/../components/header.php'; ?>
+    
     <main class="auth-main">
         <h1>Iniciar sesión</h1>
 
@@ -37,9 +47,10 @@ if (!defined('ACCESSED_VIA_ROUTER')) {
         </div>
 
         
-        <script src="js/validaciones.js"></script>
-        <script src="js/login.js"></script>
-        <script src="js/theme-switcher.js" defer></script>
+        <script src="<?= BASE_URL ?>/js/validaciones.js"></script>
+        <script src="<?= BASE_URL ?>/js/login.js"></script>
+        <script src="<?= BASE_URL ?>/js/index.js"></script>
+        <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
 
     </main>
 </body>

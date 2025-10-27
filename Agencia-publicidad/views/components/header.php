@@ -9,7 +9,7 @@
  */
 ?>
 <header>
-    <a href="<?= BASE_URL ?>/index.php" class="logo-link">
+    <a href="<?= BASE_URL ?>/index.php?accion=index" class="logo-link">
         <div class="logo" role="img" aria-label="Logo de comerciantes vitoria"></div>
     </a>
     
