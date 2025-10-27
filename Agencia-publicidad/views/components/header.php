@@ -15,8 +15,9 @@
     
     <div id="buscar">
         <div class="search-container">
-            <form action="index.php?controller=AdsController&accion=buscarByPalabra" method="post">
+            <form action="index.php?controller=AdsController&accion=buscarByPalabra" method="post" id="searchForm">
                 <input type="text" class="search" placeholder="Buscar..." name="buscar_palabra">
+                <button type="submit" class="search-button" aria-label="Buscar"></button>
             </form>    
         </div>
     </div>

@@ -34,6 +34,29 @@
    */
   function applyTheme(theme) {
     html.setAttribute('data-theme', theme);
+    updateFavicon(theme);
+  }
+
+  /**
+   * Actualiza el favicon según el tema
+   */
+  function updateFavicon(theme) {
+    // Buscar el link del favicon existente o crear uno nuevo
+    let favicon = document.querySelector("link[rel*='icon']");
+    
+    if (!favicon) {
+      favicon = document.createElement('link');
+      favicon.rel = 'icon';
+      favicon.type = 'image/png';
+      document.head.appendChild(favicon);
+    }
+    
+    // Cambiar el favicon según el tema
+    if (theme === 'dark') {
+      favicon.href = BASE_URL + '/img/logo_b.png';
+    } else {
+      favicon.href = BASE_URL + '/img/logo_SSombra.png';
+    }
   }
 
   /**
