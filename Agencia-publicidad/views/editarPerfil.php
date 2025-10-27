@@ -29,7 +29,7 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
         <?php endif?>
 
         <h1>Campos a cambiar</h1>
-            <form class="botones" method="post" action="procesarEdicion.php" enctype="multipart/form-data">
+            <form class="botones" method="post" action="index.php?controller=perfilController&accion=" enctype="multipart/form-data">
                 <input type="text" placeholder="Nombre" name="nombre"/>
                 <input type="text" placeholder="Apellido" name="apellido"/>
                 <input type="password" placeholder="Contrasña" name="contrasena"/>

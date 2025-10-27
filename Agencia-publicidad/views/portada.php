@@ -6,13 +6,16 @@
   <title>Comercio Vitoria</title>
   <link rel="stylesheet" href="../css/layout.css"/>
   <link rel="stylesheet" href="../css/portada.css">
+  <link rel="stylesheet" href="../css/themes.css">
+
 </head>
 <body>
     <header></header>
     <main>
         <div class="titulo" >
+            <img src="../img/logo.png" alt="comersio" class="comercio">
             <h1>
-                <img src="../img/logo.png" alt="comersio" class="comercio">
+                
                 OMERCIO VITORIA
             </h1>
 
