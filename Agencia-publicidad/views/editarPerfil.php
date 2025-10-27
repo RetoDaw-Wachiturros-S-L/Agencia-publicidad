@@ -10,24 +10,23 @@
 <body>
 
 
-    <img src="" alt=""><h2>Editar usuario</h2>
+    <img src="" alt="fotoperfil"><h2>Editar usuario</h2>
     <h3>Campos a cambiar</h3>
     <div class="botones">
         <a href="">Nombre</a>
         <a href="">Apellido</a>
         <a href="">Contraseña</a>
         <a href="">Foto de perfil</a>
-
-
-
-
-
         <a href="">Nombre de la empresa</a>
         <a href="">Comentario de la empresa</a>
         <a href="">Numero de telefono</a>
         <a href="">Nif de la empresa</a>
     </div>
 
+
+
+
+    
 
 
 
