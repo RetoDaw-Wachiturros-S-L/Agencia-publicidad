@@ -191,6 +191,34 @@ class DBUser {
 
     return $perfil;
 }
+// Modelo
+public function editarMiPerfil($id, $updates) {
+    if (empty($updates)) {
+        return false; // No hay campos para actualizar
+    }
+
+    $pdo = DBCon::getConnection();
+
+    $set = [];
+    $params = [];
+
+    foreach ($updates as $campo => $valor) {
+        $set[] = "$campo = :$campo";
+        $params[":$campo"] = $valor;
+    }
+
+    $sql = "UPDATE usuarios 
+            LEFT JOIN comerciantes ON usuarios.id = comerciantes.id_usuario
+            SET " . implode(", ", $set) . "
+            WHERE usuarios.id = :id";
+
+    $params[':id'] = $id;
+
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute($params);
+}
+
+
 
 
 

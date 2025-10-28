@@ -32,12 +32,63 @@ class PerfilController {
         
         require_once __DIR__ . '/../views/miPerfil.php';
     }
-    public function efitarPerfil(){
-        $currentUser = \AgenciaPublicidad\Utils\getCurrentUser();
-        $id = $currentUser["id"];
-        $resultado = $this->dbUser->editarMiPerfil($id);
+   // Controlador
+    public function editarPerfil() {
+        $updates = [];
 
+        $nombre = $_POST['nombre'] ?? null;
+        $apellido = $_POST['apellido'] ?? null;
+        $contrasena = $_POST['contrasena'] ?? null;
+        $nombre_empresa = $_POST['nombre_empresa'] ?? null;
+        $comentario_empresa = $_POST['comentario_empresa'] ?? null;
+        $telefono_empresa = $_POST['telefono_empresa'] ?? null;
+        $nif_empresa = $_POST['nif_empresa'] ?? null;
+
+        if (!empty($nombre)) {
+            $updates['nombre'] = $nombre;
+        }
+
+        if (!empty($apellido)) {
+            $updates['apellido'] = $apellido;
+        }
+
+        if (!empty($contrasena)) {
+            $updates['password_hash'] = password_hash($contrasena, PASSWORD_BCRYPT);
+        }
+
+        if (!empty($nombre_empresa)) {
+            $updates['nombre_empresa'] = $nombre_empresa;
+        }
+
+        if (!empty($comentario_empresa)) {
+            $updates['comentario_empresa'] = $comentario_empresa;
+        }
+
+        if (!empty($telefono_empresa)) {
+            $updates['num_telefono'] = $telefono_empresa;
+        }
+
+        if (!empty($nif_empresa)) {
+            $updates['nif_empresa'] = $nif_empresa;
+        }
+
+        // Foto de perfil
+        if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK) {
+            $nombreArchivo = uniqid() . "-" . basename($_FILES['foto_perfil']['name']);
+            $rutaDestino = 'uploads/' . $nombreArchivo;
+            if (move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $rutaDestino)) {
+                $updates['foto_perfil'] = $rutaDestino;
+            }
+        }
+
+        $id=$_SESSION["id"];
+
+        $resultado = $this->dbUser->editarMiPerfil($id, $updates);
+        if($resultado){
+            echo "aaaa";
+        }
     }
+
 
 }
 ?>

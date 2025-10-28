@@ -29,43 +29,29 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
         <?php endif?>
 
         <h1>Campos a cambiar</h1>
-            <form class="botones" method="post" action="index.php?controller=perfilController&accion=" enctype="multipart/form-data">
-                <input type="text" placeholder="Nombre" name="nombre"/>
-                <input type="text" placeholder="Apellido" name="apellido"/>
-                <input type="password" placeholder="Contraseña" name="contrasena"/>
-                
-                <!-- Input file personalizado -->
-                <div class="custom-file">
-                    <input type="file" id="foto_perfil" name="foto_perfil"/>
-                    <label for="foto_perfil"> Foto de perfil</label>
-                </div>
-                
-                <?php if($_SESSION["usuario"]["tipo"]=="COMERCIANTE"):?>
-                    <input type="text" placeholder="Nombre de la empresa" name="nombre_empresa"/>
-                    <input type="text" placeholder="Comentario de la empresa" name="comentario_empresa"/>
-                    <input type="text" placeholder="Número de telefono" name="telefono_empresa"/>
-                    <input type="text" placeholder="NIF de la empresa" name="nif_empresa"/>
-                <?php endif?>
-                
-                <button type="submit" class="boton-enviar">Guardar cambios</button>
-            </form>
+        <form class="botones" id="editar" method="post" action="index.php?controller=perfilController&accion=editarPerfil" enctype="multipart/form-data">
+            <input type="text" placeholder="Nombre" name="nombre" id="nombre"/>
+            <input type="text" placeholder="Apellido" name="apellido" id="apellido"/>
+            <input type="password" placeholder="Contraseña" name="contrasena" id="contrasena"/>
+            
+            <!-- Input file personalizado -->
+            <div class="custom-file">
+                <input type="file" id="foto_perfil" name="foto_perfil" id="foto_perfil"/>
+                <label for="foto_perfil"> Foto de perfil</label>
+            </div>
+            
+            <?php if($_SESSION["usuario"]["tipo"]=="COMERCIANTE"):?>
+                <input type="text" placeholder="Nombre de la empresa" id="nombre_empresa" name="nombre_empresa"/>
+                <input type="text" placeholder="Comentario de la empresa" name="comentario_empresa" id="comentario_empresa"/>
+                <input type="text" placeholder="Número de telefono" name="telefono_empresa" id="telefono_empresa"/>
+                <input type="text" placeholder="NIF de la empresa" name="nif_empresa" id="nif_empresa"/>
+            <?php endif?>
+            
+            <button type="submit" class="boton-enviar">Guardar cambios</button>
+        </form>
 
     </main>
-
-
-
-    
-
-
-
-
-    
-
-
-
-
-
-
-
+        <script src="../js/validaciones.js"></script>
+        <script src="../js/editarPerfil.js"></script>
 </body>
 </html>
