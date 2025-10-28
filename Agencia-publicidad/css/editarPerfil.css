@@ -1,54 +1,123 @@
-*{
-
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
-
 }
 
-a {
+body {
+    background-color: #FFF5E6;
+    color: #154C7E;
+    font-family: 'Arial', sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    gap: 1.5em;
+}
+
+/* Estilo para todos los inputs de texto y contraseña */
+input[type="text"],
+input[type="password"] {
+    color: #154C7E;
+    font-weight: bolder;
+    font-size: 1.5em;
+    border: 2px solid #154C7E;
+    padding: 0.5em 1em;
+    min-width: 20em;
+    background-color: #FFCDC1;
+    border-radius: 15px;
+    box-shadow: 6px 6px 0px #154C7E;
+    transition: all 0.2s ease-in-out;
+}
+
+input[type="text"]:hover,
+input[type="password"]:hover {
+    background-color: #f1cbc1;
+    transform: translateY(-4px);
+    box-shadow: 8px 8px 0px #0F3B61;
+}
+
+/* Estilo específico para el botón de submit */
+input[type="submit"] {
+    background-color: #154C7E;
+    color: #FFF5E6;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 0.5em 2em;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 6px 6px 0px #0F3B61;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+input[type="submit"]:hover {
+    background-color: #0F3B61;
+    transform: translateY(-4px);
+    box-shadow: 8px 8px 0px #0B2A45;
+}
+
+.botones {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    align-items: center;
+}
+button{
   text-decoration: none;
   color: #154C7E;
   font-weight: bolder;
   font-size: 1.7em;
   border: 2px solid #154C7E;
-  padding: 0.3em 4em;
+  padding: 0.3em 2em;
   max-width: fit-content;
-  max-height: 1.3em;
-  background-color: #FFCDC1;
-  border-radius: 15px;
-  box-shadow: 8px 8px 0px #154C7E;
-  transition: all 0.2s ease-in-out;
-}
-
-a:hover {
-  background-color: #f1cbc1;
-  transform: translateY(-4px);
-  box-shadow: 10px 10px 0px #0F3B61;
-}
-.cerrar{
-    text-decoration: none;
-  color: #154C7E;
-  font-weight: bolder;
-  font-size: 1.7em;
-  border: 2px solid #154C7E;
-  padding: 0.3em 4em;
-  max-width: fit-content;
-  max-height: 1.3em;
+  max-height: fit-content;
   background-color: #f78a72;
   border-radius: 15px;
   box-shadow: 8px 8px 0px #F16849;
   transition: all 0.2s ease-in-out;
-
 }
-.cerrar:hover {
+button:hover{
   background-color: #f99b86;
   transform: translateY(-4px);
   box-shadow: 10px 10px 0px #f26c4e;
 }
-body{
-  background-color: #FFF5E6;
-  color: #154C7E;
- 
+/* Contenedor del input file */
+.custom-file {
+    position: relative;
+    display: inline-block;
+    width: 20em;
 }
+
+/* Ocultar input real */
+.custom-file input[type="file"] {
+    display: none;
+}
+
+/* Label estilizado como botón */
+.custom-file label {
+    display: block;
+    background-color: #FFCDC1;
+    color: #154C7E;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+    padding: 0.5em 1em;
+    border-radius: 15px;
+    border: 2px solid #154C7E;
+    box-shadow: 6px 6px 0px #154C7E;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.custom-file label:hover {
+    background-color: #f1cbc1;
+    transform: translateY(-4px);
+    box-shadow: 8px 8px 0px #0F3B61;
+}
+

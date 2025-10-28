@@ -16,11 +16,10 @@ require_once __DIR__ . '/../config/config.php';
     <header></header>
     <main>
         <div class="titulo" >
+            <img src="<?= BASE_URL ?>/img/logo.png" alt="comersio" class="comercio">
             <h1>
-                <img src="<?= BASE_URL ?>/img/logo.png" alt="comersio" class="comercio">
                 OMERCIO VITORIA
             </h1>
-
         </div>
         
         <img src="<?= BASE_URL ?>/img/portada.png" alt="" class="monumento">

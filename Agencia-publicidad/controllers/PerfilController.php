@@ -32,6 +32,12 @@ class PerfilController {
         
         require_once __DIR__ . '/../views/miPerfil.php';
     }
+    public function efitarPerfil(){
+        $currentUser = \AgenciaPublicidad\Utils\getCurrentUser();
+        $id = $currentUser["id"];
+        $resultado = $this->dbUser->editarMiPerfil($id);
+
+    }
 
 }
 ?>
