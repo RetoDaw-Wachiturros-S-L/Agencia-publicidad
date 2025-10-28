@@ -228,14 +228,7 @@ hr{
   outline: none;
   cursor: pointer;
 }
-.boton{
-    height: 3.5em;
-    width: auto;
-}
-img{
-    width: auto;
 
-}
 body {
   background-color: var(--color-bg-primary);
 }

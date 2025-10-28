@@ -24,13 +24,13 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
     
     <main>
         <?php if(empty($_SESSION["usuario"]["foto_perfil"])):?>
-            <h2><img src="../img/fotoperfil.png" alt="fotoperfil"> Editar usuario</h2>
+            <h2><img src="<?= BASE_URL ?>/img/fotoperfil.png" alt="fotoperfil"> Editar usuario</h2>
         <?php else:?>
-            <h2><img src="" alt="fotoperfil"> Editar usuario</h2>
+            <h2><img src="<?= BASE_URL ?><?= $_SESSION["usuario"]["foto_perfil"] ?>" alt="fotoperfil"> Editar usuario</h2>
         <?php endif?>
 
         <h1>Campos a cambiar</h1>
-            <form class="botones" method="post" action="index.php?controller=perfilController&accion=" enctype="multipart/form-data">
+            <form class="botones" method="post" action="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=editarPerfil" enctype="multipart/form-data">
                 <input type="text" placeholder="Nombre" name="nombre"/>
                 <input type="text" placeholder="Apellido" name="apellido"/>
                 <input type="password" placeholder="Contraseña" name="contrasena"/>

@@ -23,7 +23,6 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/auth.css">
 </head>
 <body>
-    <?php include __DIR__ . '/../components/header.php'; ?>
     
     <main class="auth-main">
         <h1>Iniciar sesión</h1>

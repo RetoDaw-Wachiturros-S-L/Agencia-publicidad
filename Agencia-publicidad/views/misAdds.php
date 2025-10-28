@@ -47,19 +47,35 @@
     <?php if (!empty($anuncios)): ?>
         <div class="cards-row">
             <?php foreach ($anuncios as $anuncio): ?>
-                <div class="card-anuncio">
+                <div class="card-anuncio" data-id-anuncio="<?= $anuncio['id'] ?>">
                     <div class="div-tj-img">
-                        <img src="<?= BASE_URL ?>/img/logo.png" alt="logo">
+                        <?php
+                            // Mostrar foto de portada si existe
+                            if (!empty($anuncio['url_foto'])) {
+                                $rutaCompleta = BASE_URL . '/' . $anuncio['url_foto'];
+                                echo "<img src='{$rutaCompleta}' alt='{$anuncio['titulo']}'>";
+                            } else {
+                                // Imagen por defecto
+                                echo "<img src='" . BASE_URL . "/img/logo.png' alt='Sin imagen'>";
+                            }
+                        ?>
+                        <!-- Botón de corazón para favoritos -->
+                        <button class="btn-favorito <?= $anuncio['es_favorito'] ? 'favorito-activo' : '' ?>" 
+                                data-anuncio-id="<?= $anuncio['id'] ?>" 
+                                data-es-favorito="<?= $anuncio['es_favorito'] ?>"
+                                data-is-logged-in="1"
+                                title="<?= $anuncio['es_favorito'] ? 'Quitar de favoritos' : 'Agregar a favoritos' ?>">
+                            <div class="heart-icon"></div>
+                        </button>
                     </div>
-                    <h2 id="titulo-anuncio" ><?= $anuncio["titulo"]?></h2>
-                    <p id="desc-anuncio"><?= $anuncio["detalles"]?></p>
-                    <p id="fecha-anuncio"><?= $anuncio["fecha_publicacion"]?></p>
+                    <h2 id="titulo-anuncio"><?= htmlspecialchars($anuncio['titulo']) ?></h2>
+                    <p id="desc-anuncio"><?= $anuncio['detalles'] ?? 'Sin detalles' ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
     <?php else: ?>
         <h2>No tienes anuncios todavía.</h2>
-        <a href="index.php">Volver</a>
+        <a href="<?= BASE_URL ?>/index.php?controller=AdsController&accion=create">Crear mi primer anuncio</a>
     <?php endif; ?>
     <script src="<?= BASE_URL ?>/js/index.js"></script>
 </main>
