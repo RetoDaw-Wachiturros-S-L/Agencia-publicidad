@@ -1,90 +1,88 @@
-/* Reset específico - Mobile First */
-* {
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-/* Main - Mobile First */
 main {
   display: flex;
   flex-direction: column;
-  padding: 0.5em;
-  gap: 0.8em;
-  min-height: calc(100vh - 6em);
+  padding: 1em;
+  gap: 1em;
+  min-height: calc(100vh - 8em);
 }
 
-/* Contenedor principal de las cards de anuncios - Mobile First */
+/* Contenedor principal de las cards de anuncios */
 .cards-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.8em;
-  margin-bottom: 0.8em;
+  flex-wrap: wrap; /* Permite que las cards se envuelvan a la siguiente fila */
+  gap: 1em; /* Espacio entre cards */
+  margin-bottom: 1em;
 }
 
-/* Estilo individual de cada card de anuncio - Mobile First */
+/* Estilo individual de cada card de anuncio */
 .card-anuncio {
-  flex: 1 1 calc(50% - 0.4em); /* 2 cards por fila en móvil */
+  flex: 1 1 calc(50% - 0.5em); /* 2 cards por fila en móvil (50% - gap) */
   display: flex;
   flex-direction: column;
-  padding: 0.8em;
+  padding: 1em;
   border: 1px solid var(--color-border);
-  border-radius: 0.5em;
+  border-radius: 0.7em;
   background-color: var(--color-bg-secondary);
   box-sizing: border-box;
-  height: 280px; /* Altura optimizada para móvil */
-  overflow: hidden;
+  height: 320px; /* Altura fija para uniformidad visual (aumentada para mejor proporción) */
+  overflow: hidden; /* Evita que el contenido se desborde de la card */
 }
 
-/* Contenedor de la imagen del anuncio - Mobile First */
+
+/* Contenedor de la imagen del anuncio */
 .div-tj-img {
-  position: relative;
+  position: relative; /* Necesario para posicionar el botón de favorito */
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--color-bg-tertiary);
   border: 1px solid var(--color-border);
-  border-radius: 0.5em;
-  margin-bottom: 0.8em;
-  height: 150px; /* Altura optimizada para móvil */
-  overflow: hidden;
+  border-radius: 0.7em;
+  margin-bottom: 1em;
+  height: 180px; /* Altura fija para consistencia visual (ajustada para mejor proporción) */
+  overflow: hidden; /* Evita que las imágenes se desborden */
 }
 
-/* Estilo de las imágenes dentro de las cards - Mobile First */
+/* Estilo de las imágenes dentro de las cards */
 .div-tj-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 0.3em;
+  object-fit: cover; /* Mantiene proporción y recorta si es necesario */
+  border-radius: 0.5em;
 }
 
-/* Estilos para el contenido de texto de las cards - Mobile First */
+/* Estilos para el contenido de texto de las cards */
 #titulo-anuncio {
-  font-size: 1em;
+  font-size: 1.1em;
   font-weight: bold;
-  margin-bottom: 0.4em;
+  margin-bottom: 0.5em;
   line-height: 1.2;
+  /* Truncar título si es muy largo */
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  -webkit-line-clamp: 2; /* Máximo 2 líneas */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 #desc-anuncio {
-  font-size: 0.85em;
+  font-size: 0.9em;
   color: var(--color-text-secondary, #666);
   line-height: 1.3;
+  /* Truncar descripción a una sola línea */
   display: -webkit-box;
-  -webkit-line-clamp: 1;
-  line-clamp: 1;
+  -webkit-line-clamp: 1; /* Solo 1 línea */
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  text-overflow: ellipsis; /* Puntos suspensivos (...) */
+  white-space: nowrap; /* No permite salto de línea */
 }
 
-/* Estilos para el botón de favorito - Mobile First */
+/* Estilos para el botón de favorito */
 .btn-favorito {
   position: absolute; /* Posicionado sobre la imagen */
   top: 10px;
@@ -105,16 +103,19 @@ main {
   z-index: 10; /* Por encima de otros elementos */
 }
 
+/* Efectos hover del botón de favorito */
 .btn-favorito:hover {
   background: rgba(255, 255, 255, 0.3); /* Más opaco al pasar el ratón */
   transform: scale(1.1); /* Aumenta ligeramente el tamaño */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
 }
 
+/* Efecto al hacer clic en el botón */
 .btn-favorito:active {
-  transform: scale(0.95);
+  transform: scale(0.95); /* Se reduce ligeramente */
 }
 
+/* Estilo del icono de corazón dentro del botón */
 .heart-icon {
   width: 24px;
   height: 24px;
@@ -130,65 +131,16 @@ main {
   background-image: var(--icon-heart-active); /* Usa la variable del tema para favorito activo */
 }
 
-/* ====== RESPONSIVE DESIGN - PANTALLAS MAYORES A 750px ====== */
+/* Media queries para diseño responsivo */
 
-@media (min-width: 750px) {
-  /* Main en desktop */
-  main {
-    padding: 1em;
-    gap: 1em;
-    min-height: calc(100vh - 8em);
-  }
-  
-  /* Cards en desktop */
-  .cards-row {
-    gap: 1em;
-    margin-bottom: 1em;
-  }
-  
+/* Tablets y pantallas medianas (768px y más) */
+@media (min-width: 768px) {
   .card-anuncio {
     flex: 1 1 calc(33.333% - 0.67em); /* 3 cards por fila en desktop */
-    padding: 1em;
-    border-radius: 0.7em;
-    height: 320px;
-  }
-  
-  .div-tj-img {
-    border-radius: 0.7em;
-    margin-bottom: 1em;
-    height: 180px;
-  }
-  
-  .div-tj-img img {
-    border-radius: 0.5em;
-  }
-  
-  /* Texto en desktop */
-  #titulo-anuncio {
-    font-size: 1.1em;
-    margin-bottom: 0.5em;
-  }
-  
-  #desc-anuncio {
-    font-size: 0.9em;
-  }
-  
-  /* Botón de favorito en desktop */
-  .btn-favorito {
-    top: 10px;
-    right: 10px;
-    width: 40px;
-    height: 40px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  }
-  
-  .heart-icon {
-    width: 24px;
-    height: 24px;
   }
 }
 
-/* Pantallas muy grandes (1024px y más) */
+/* Pantallas grandes (1024px y más) */
 @media (min-width: 1024px) {
   .card-anuncio {
     flex: 1 1 calc(25% - 0.75em); /* 4 cards por fila en pantallas muy grandes */

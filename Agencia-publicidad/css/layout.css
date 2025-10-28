@@ -1,4 +1,4 @@
-/* Reset y estilos base - Mobile First */
+/* Reset y estilos base */
 * {
   border: 0;
   margin: 0;
@@ -257,27 +257,39 @@ hr {
   overflow: hidden;
 }
 
-/* Elementos generales - Mobile First */
-.persona, .anuncios, .corazon {
-  height: 1.5em;
-  width: auto;
+.logo-link:hover {
+    opacity: 0.8;
 }
 
-.boton {
-  height: 3em;
-  width: auto;
-  padding: 0.5em 1em;
-  border-radius: 0.5em;
-  font-size: 0.9em;
+.logo {
+    height: 4em;
+    width: 12em;
+    background-image: var(--logo-img);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: background-image 0.3s ease;
 }
 
-img {
-  width: auto;
-  max-width: 100%;
-  height: auto;
+#buscar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    max-width: 50%;
+    margin-left: 2em;
+    margin-right: 2em;
+    align-self: center;
 }
 
-/* ====== RESPONSIVE DESIGN - PANTALLAS MAYORES A 750px ====== */
+.login {
+    display: flex;
+    align-items: center;
+    height: auto;
+    text-decoration: none;
+    flex: 0 0 auto;
+    align-self: center;
+}
 
 /* Menú desplegable de administrador */
 .admin-menu-container {
@@ -321,12 +333,10 @@ img {
     min-width: 220px;
   }
   
-  .boton {
-    height: 3.5em;
-    padding: 0.8em 1.5em;
+  .menu-item {
+    padding: 12px 20px;
     font-size: 1em;
   }
 }
-
 
 
