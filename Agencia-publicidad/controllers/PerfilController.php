@@ -32,5 +32,19 @@ class PerfilController {
         
         require_once __DIR__ . '/../views/miPerfil.php';
     }
+    
+    public function editarPerfil() {
+        // Verificar que el usuario esté autenticado
+        if (!\AgenciaPublicidad\Utils\isLoggedIn()) {
+            header('Location: index.php?controller=AuthController&accion=iniciarSesion');
+            exit;
+        }
+        
+        // TODO: Implementar la lógica de edición cuando se procese el POST
+        
+        // Mostrar el formulario de edición
+        require_once __DIR__ . '/../views/editarPerfil.php';
+    }
+
 }
 ?>

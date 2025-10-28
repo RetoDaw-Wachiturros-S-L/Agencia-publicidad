@@ -1,3 +1,6 @@
+<?php
+require_once __DIR__ . '/../../config/config.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,7 +20,7 @@
             Si crees que esto es un error, por favor contacta con el administrador.
         </p>
         <div class="error-actions">
-            <a href="<?= BASE_URL ?>/" class="error-btn error-btn-primary">
+            <a href="<?= BASE_URL ?>/index.php?accion=index" class="error-btn error-btn-primary">
                 ← Volver al inicio
             </a>
             <button onclick="history.back()" class="error-btn error-btn-secondary">
@@ -35,4 +38,5 @@
     </div>
     <script src="<?= BASE_URL ?>/js/theme-switcher.js"></script>
 </body>
+</html>
 </html>

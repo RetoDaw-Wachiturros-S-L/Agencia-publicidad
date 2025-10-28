@@ -38,11 +38,14 @@
   
   .monumento {
     grid-area: foto;
-    height: auto;
-    width: 90%;
+    height: 107%;
+    width: 100%;
     object-fit: cover;
     border: none;
     border: 4px solid var(--color-border);
+    z-index: 1000;
+    margin-top: -3em;
+    margin-left: 2em;
   }
  
 
@@ -60,10 +63,12 @@
   .acceder {
     grid-area: cosa;
     display: flex;
-    align-self: flex-start;
+    flex: none;
+    text-align: center;
+    min-height: fit-content;
+    min-width: fit-content;
     justify-self: center;
     background-color: var(--color-bg-primary);
-    text-align: center;
   }
 
   .titulo h1 {
@@ -96,6 +101,14 @@
   transform: translateY(-4px);
   box-shadow: 10px 10px 0px var(--color-text-secondary);
 }
+.titulo{
+  display: flex;
+  flex-direction: row;
+}
+.comercio{
+  height: 2.4em;
+  width: 2.4em;
+}
 
 @media (max-width: 760px) {
   body {
@@ -112,7 +125,7 @@
       "titulo"
       "foto"
       "boton";
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows:  1fr ;
     width: 90%;
     max-width: 400px;
     padding: 1.5em;
@@ -121,6 +134,7 @@
 
   .titulo {
     grid-area: titulo;
+    justify-self: center;
   }
 
   .monumento {
@@ -128,11 +142,18 @@
     max-width: 80%;
     height: auto;
     border: 2px solid #154C7E;
-  
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+  }
+  header{
+    display: none;
   }
 
   .acceder {
     grid-area: boton;
+
+    
   }
 
   h1 {

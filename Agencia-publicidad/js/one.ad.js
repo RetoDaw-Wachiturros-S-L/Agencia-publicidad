@@ -69,7 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (response.ok) {
                 // Actualizar el toggle para dar la info al usuario
                 icono.classList.add("favorito-activo");
-                icono.src = baseUrl + "/img/favorito-activo.png";
                 icono.dataset.esFavorito = '1';
                 icono.title = 'Quitar de favoritos';
                 guardarEnCache(anuncio);
@@ -93,7 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (response.ok) {
                 icono.classList.remove("favorito-activo");
-                icono.src = baseUrl + "/img/Heart.png";
                 icono.dataset.esFavorito = '0';
                 icono.title = 'Agregar a favoritos';
                 eliminarDeCache(anuncioId);

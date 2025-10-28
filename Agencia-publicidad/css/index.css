@@ -3,10 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 main {
   display: flex;
   flex-direction: column;
-  padding: 1em;
+  padding: 2em 3em;
   gap: 1em;
   min-height: calc(100vh - 8em);
 }
@@ -82,24 +83,26 @@ main {
   position: absolute; 
   top: 10px;
   right: 10px;
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  border-radius: 50%; 
-  width: 40px;
-  height: 40px;
+  background: rgba(255, 255, 255, 0.2); /* Fondo blanco semi-transparente */
+  -webkit-backdrop-filter: blur(10px); /* Compatibilidad Safari */
+  backdrop-filter: blur(10px); /* Efecto de cristal */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Borde sutil */
+  border-radius: 50%; /* Forma circular */
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease; 
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  z-index: 10; /* Para que se pueda ver por encima de las cards */
+  transition: all 0.3s ease; /* Transiciones suaves */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  z-index: 10; /* Por encima de otros elementos */
 }
 
 .btn-favorito:hover {
-  background: rgba(255, 255, 255, 1);
-  transform: scale(1.1); 
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.3); /* Más opaco al pasar el ratón */
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
 }
 
 .btn-favorito:active {
@@ -109,8 +112,16 @@ main {
 .heart-icon {
   width: 24px;
   height: 24px;
+  background-image: var(--icon-heart); /* Usa la variable del tema */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   transition: all 0.3s ease;
-  object-fit: contain; 
+}
+
+/* Cuando el favorito está activo */
+.btn-favorito.favorito-activo .heart-icon {
+  background-image: var(--icon-heart-active); /* Usa la variable del tema para favorito activo */
 }
 
 /* Media queries para diseño responsivo */

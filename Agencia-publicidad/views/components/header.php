@@ -9,7 +9,7 @@
  */
 ?>
 <header>
-    <a href="<?= BASE_URL ?>/index.php" class="logo-link">
+    <a href="<?= BASE_URL ?>/index.php?accion=index" class="logo-link">
         <div class="logo" role="img" aria-label="Logo de comerciantes vitoria"></div>
     </a>
     
@@ -59,10 +59,18 @@
             <div class="heart-icon" role="button" aria-label="Favoritos" tabindex="0"></div>
             
             <?php if ($isAdmin):?>
-                <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=store" class="admin-register-btn" title="Registrar nuevo usuario">
-                    <span class="admin-plus">+</span>
-                    <span class="admin-tag">admin</span>
-                </a>
+                <div class="admin-menu-container">
+                    <div id="adminMenuToggle" class="admin-register-btn" role="button" aria-label="Menú de administrador" tabindex="0" title="Administrador">
+                        <span class="admin-plus">+</span>
+                        <span class="admin-tag">admin</span>
+                    </div>
+                    
+                    <!-- Menú desplegable de administrador -->
+                    <div id="adminDropdownMenu" class="admin-dropdown-menu">
+                        <a href="#" class="menu-item">Opción 1</a>
+                        <a href="#" class="menu-item">Opción 2</a>
+                    </div>
+                </div>
             <?php endif; ?>
 
         </div>            

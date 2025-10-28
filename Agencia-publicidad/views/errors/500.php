@@ -1,3 +1,6 @@
+<?php
+require_once __DIR__ . '/../../config/config.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,7 +20,7 @@
             y está trabajando para solucionar el problema lo antes posible.
         </p>
         <div class="error-actions">
-            <a href="<?= BASE_URL ?>/" class="error-btn error-btn-primary">
+            <a href="<?= BASE_URL ?>/index.php?accion=index" class="error-btn error-btn-primary">
                 🏠 Volver al inicio
             </a>
             <button onclick="location.reload()" class="error-btn error-btn-secondary">

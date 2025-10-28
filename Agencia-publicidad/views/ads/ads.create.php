@@ -1,7 +1,8 @@
 <?php
 if (!defined('ACCESSED_VIA_ROUTER')) {
     http_response_code(403);
-    die('Acceso directo no permitido');
+    require_once __DIR__ . '/../../views/errors/403.php';
+    exit;
 }
 
 require_once __DIR__ . '/../../utils/auth_helper.php';

@@ -234,6 +234,7 @@ class AuthController {
                             'apellido' => $usuario->getApellido(),
                             'tipo' => $usuario->getTipo()->value,
                             'login_time' => time(),
+                            "foto_perfil"=> $usuario->getFoto_perfil(),
                         ];
 
                         // Si es comerciante, obtenemos los datos adicionales

@@ -12,6 +12,7 @@ body {
   padding: 0;
   font-family: 'DM Sans', sans-serif;
   color: var(--color-text-primary);
+  color: #154C7E;
 }
 
 body {
@@ -227,14 +228,7 @@ hr{
   outline: none;
   cursor: pointer;
 }
-.boton{
-    height: 3.5em;
-    width: auto;
-}
-img{
-    width: auto;
 
-}
 body {
   background-color: var(--color-bg-primary);
 }
@@ -292,7 +286,7 @@ body {
 
 .user-dropdown-menu {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 2px);
   left: 50%;
   transform: translateX(-50%) translateY(-10px);
   background-color: var(--color-bg-primary);
@@ -380,7 +374,7 @@ body {
 
 .ads-dropdown-menu {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 2px);
   left: 50%;
   transform: translateX(-50%) translateY(-10px);
   background-color: var(--color-bg-primary);
@@ -436,10 +430,44 @@ body {
   letter-spacing: 0.5px;
 }
 
+/* Menú desplegable de administrador */
+.admin-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.admin-menu-container .admin-register-btn {
+  cursor: pointer;
+}
+
+.admin-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background-color: var(--color-bg-primary);
+  border: 2px solid var(--color-border);
+  border-radius: 25px;
+  min-width: 250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.admin-dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
 /* Responsive - Header */
 @media (max-width: 768px) {
   .user-dropdown-menu,
-  .ads-dropdown-menu {
+  .ads-dropdown-menu,
+  .admin-dropdown-menu {
     right: -20px;
     min-width: 220px;
   }
