@@ -16,7 +16,7 @@ class PerfilController {
     public function miPerfil() {
         // Verificar que el usuario esté autenticado usando auth_helper
         if (!\AgenciaPublicidad\Utils\isLoggedIn()) {
-            header('Location: index.php?controller=OutController&accion=iniciarSesion');
+            header('Location: index.php?controller=AuthController&accion=iniciarSesion');
             exit;
         }
         
