@@ -1,12 +1,15 @@
+<?php
+require_once __DIR__ . '/../../config/config.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error | Comerciantes Vitoria</title>
-    <link rel="icon" type="image/png" href="../../img/logo_SSombra.png">
-    <link rel="stylesheet" href="../../css/themes.css">
-    <link rel="stylesheet" href="../../css/errors.css">
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>/img/logo_SSombra.png">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/errors.css">
 </head>
 <body>
     <div class="error-container">
@@ -17,7 +20,7 @@
             Por favor, intenta de nuevo o contacta con nosotros si el problema persiste.
         </p>
         <div class="error-actions">
-            <a href="../../index.php?accion=index" class="error-btn error-btn-primary">
+            <a href="<?= BASE_URL ?>/index.php?accion=index" class="error-btn error-btn-primary">
                 🏠 Ir al inicio
             </a>
             <button onclick="history.back()" class="error-btn error-btn-secondary">
@@ -38,6 +41,6 @@
             </p>
         </details>
     </div>
-    <script src="../../js/theme-switcher.js"></script>
+    <script src="<?= BASE_URL ?>/js/theme-switcher.js"></script>
 </body>
 </html>
