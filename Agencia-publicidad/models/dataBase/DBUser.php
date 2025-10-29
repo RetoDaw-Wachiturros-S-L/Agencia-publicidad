@@ -195,8 +195,53 @@ class DBUser {
     $perfil = $stmt->fetch(\PDO::FETCH_ASSOC);
 
     return $perfil;
-}
+    }
+    public function actualizarUsuario($id, $usuarioData){
+        $pdo = DBCon::getConnection();
+        $sql ="
+            UPDATE usuarios
+            SET nombre = :nombre,
+            apellido = :apellido
+        WHERE u.id = :id
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":id", $id, \PDO::PARAM_INT);
+        $stmt->bindValue(':nombre', $usuarioData->getNombre);
+        $stmt->bindValue(':apellido', $usuarioData->getApellido);
 
+        $resultado=$stmt->execute();
+        return $resultado && $stmt->rowCount() > 0;        
+        
+    }
+
+    public function actualizarComerciante($id, $usuarioData){
+        $pdo = DBCON::getConnection();
+        $sql ="
+            UPDATE usuarios u
+            JOIN comerciantes c ON u.id = c.id_usuario
+            SET u.nombre = :nombre,
+                u.apellido = :apellido,
+                c.nombre_empresa = :nombre_empresa,
+                c.comentario_empresa= :comentario,
+                c.num_telefono= :numero,
+                c.nif_empresa = :nif
+            WHERE u.id = :id;
+
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":id", $id, \PDO::PARAM_INT);
+        $stmt->bindValue(':nombre', $usuarioData->getNombre());
+        $stmt->bindValue(':apellido', $usuarioData->getApellido());
+        $stmt->bindValue(':nombre_empresa', $usuarioData->getNombreComercio());
+        $stmt->bindValue(':comentario', $usuarioData->getRubro());
+        $stmt->bindValue(':numero', $usuarioData->getNumTelefono());
+        $stmt->bindValue(':nif', $usuarioData->getNifEmpresa());
+
+
+        $resultado=$stmt->execute();
+        return $resultado && $stmt->rowCount() > 0;
+        
+    }
 
 
 }

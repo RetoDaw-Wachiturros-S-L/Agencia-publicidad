@@ -89,12 +89,12 @@ class Comerciante extends UsuarioRegistrado {
     public function toArray(): array {
         return [
             'idComerciante' => $this->idComerciante,
-            'id' => $this->getId(),
+            'id' => $this->getIdUsuario(),
             'nombre' => $this->getNombre(),
             'apellido' => $this->getApellido(),
             'email' => $this->getEmail(),
             'tipo' => $this->getTipo()->value,
-            'fotoPerfil' => $this->getFotoPerfil(),
+            'fotoPerfil' => $this->getFoto_Perfil(),
             'nombreComercio' => $this->nombreComercio,
             'nifEmpresa'=>$this->nifEmpresa,
             'rubro' => $this->rubro,

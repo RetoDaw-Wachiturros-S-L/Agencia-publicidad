@@ -34,6 +34,7 @@ class DBFunctions {
         if ($data) {
             // Ajusta los parámetros según el constructor de UsuarioRegistrado
             return new UsuarioRegistrado(
+                $id,
                 $data['nombre'],
                 $data['apellido'] ?? '',
                 $data['email'],
@@ -48,22 +49,34 @@ class DBFunctions {
 
     public function update(int $id, UsuarioRegistrado $usuario): bool {
         $pdo = DBCon::getConnection();
-        $sql = $pdo->prepare('UPDATE USUARIOS SET
-                                NOMBRE = :NOMBRE,
-                                APELLIDO = :APELLIDO,
-                                EMAIL = :EMAIL,
-                                PASSWORD_HASH = :PASSWORD_HASH,
-                                FOTO_PERFIL = :FOTO_PERFIL,
-                                TIPO_USUARIO = :TIPO_USUARIO 
-                                WHERE ID = :ID');
+        
+        // Solo actualizar contraseña si se proporciona una nueva
+        $updatePassword = ($usuario->getPassword() !== null && $usuario->getPassword() !== '');
+
+        $sqlStr = 'UPDATE USUARIOS SET
+                    NOMBRE = :NOMBRE,
+                    APELLIDO = :APELLIDO,
+                    EMAIL = :EMAIL,
+                    FOTO_PERFIL = :FOTO_PERFIL,
+                    TIPO_USUARIO = :TIPO_USUARIO';
+        if ($updatePassword) {
+            $sqlStr .= ', PASSWORD_HASH = :PASSWORD_HASH';
+        }
+        $sqlStr .= ' WHERE ID = :ID';
+
+        $sql = $pdo->prepare($sqlStr);
 
         $sql->bindValue(':NOMBRE', $usuario->getNombre(), \PDO::PARAM_STR);
-        $sql->bindValue(':APELLIDO', $usuario->getApellido() ??null, \PDO::PARAM_STR);
-        $sql->bindValue(':EMAIL', $usuario->getEmail() ??null, \PDO::PARAM_STR);
-        $sql->bindValue(':PASSWORD_HASH', password_hash($usuario->getContrasena() ?? '', PASSWORD_BCRYPT), \PDO::PARAM_STR);
-        $sql->bindValue(':FOTO_PERFIL', $usuario->getFotoPerfil() ??null, \PDO::PARAM_STR);
+        $sql->bindValue(':APELLIDO', $usuario->getApellido() ?? null, \PDO::PARAM_STR);
+        $sql->bindValue(':EMAIL', $usuario->getEmail() ?? null, \PDO::PARAM_STR);
+        // FIX: método correcto con guion bajo
+        $sql->bindValue(':FOTO_PERFIL', $usuario->getFoto_perfil() ?? null, \PDO::PARAM_STR);
         $sql->bindValue(':TIPO_USUARIO', $usuario->getTipo()->value, \PDO::PARAM_STR);
+        if ($updatePassword) {
+            $sql->bindValue(':PASSWORD_HASH', password_hash($usuario->getPassword(), PASSWORD_BCRYPT), \PDO::PARAM_STR);
+        }
         $sql->bindValue(':ID', $id);
+        
         return $sql->execute();
     }               
 
