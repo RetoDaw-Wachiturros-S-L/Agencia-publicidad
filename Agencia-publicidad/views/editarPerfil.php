@@ -43,7 +43,7 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
             <form class="botones" method="post" action="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=<?=$var?>" enctype="multipart/form-data">
                 <input type="text" placeholder="Nombre" name="nombre" value="<?=$perfil["nombre"]?>"/>
                 <input type="text" placeholder="Apellido" name="apellido" value="<?=$perfil["apellido"]?>"/>
-                <a href="" class="contrasena">Cambiar contraseña</a>
+                <a href="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=vistaContrasena" class="contrasena">Cambiar contraseña</a>
                 
                 <!-- Input file personalizado -->
                 <div class="custom-file">
