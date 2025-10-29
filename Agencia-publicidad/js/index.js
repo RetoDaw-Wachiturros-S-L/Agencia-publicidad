@@ -54,52 +54,50 @@ document.addEventListener('DOMContentLoaded', () => {
     setupDropdownMenu('adminMenuToggle', 'adminDropdownMenu', 'admin-menu-container');
 });
 
-// Función para acceder a la vista única del anuncio
 document.addEventListener('DOMContentLoaded', () => {
-    // Obtener TODOS los cards
-    const cards = document.querySelectorAll('.card-anuncio');
-    
-    console.log('Cards encontrados:', cards.length); // DEBUG
-    
-    // Añadir listener a CADA card individualmente
-    cards.forEach(card => {
-        // Añadir cursor pointer
-        card.style.cursor = 'pointer';
-        
-        // Obtener el ID desde el atributo data
-        const idAnuncio = card.getAttribute('data-id-anuncio');
-        
-        // Añadir event listener
-        card.addEventListener('click', function(e) {
-            // Evitar que el clic en el botón de favorito redirija
-            if (e.target.closest('.btn-favorito')) {
-                return;
-            }
-            
-            if (idAnuncio) {
-                // Obtener la URL base de forma más confiable
-                // Extraer el base URL desde la ubicación actual
-                const protocol = window.location.protocol; // http: o https:
-                const host = window.location.host; // localhost o dominio
-                const pathname = window.location.pathname; // /Wachiturros/Agencia-publicidad/Agencia-publicidad/index.php
-                
-                // Extraer el directorio base (todo antes de index.php)
-                const basePath = pathname.substring(0, pathname.lastIndexOf('/'));
-                const baseUrl = `${protocol}//${host}${basePath}`;
-                
-                // Construir la URL
-                const url = `${baseUrl}/index.php?controller=AdsController&accion=show&id=${idAnuncio}`;
-                
-                console.log('Redirigiendo a:', url); // DEBUG
-                
-                // Redirigir
-                window.location.href = url;
-            } else {
-                console.error('No se encontró ID del anuncio');
-            }
-        });
+  // Interceptar clics en el botón de editar para evitar propagación
+  document.querySelectorAll('.btn-editar-anuncio').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation(); 
+      // evita que el clic llegue al btn de editar anuncio
+      
     });
+  });
+
+  // Obtener TODOS los cards
+  const cards = document.querySelectorAll('.card-anuncio');
+
+  cards.forEach(card => {
+    card.style.cursor = 'pointer';
+    const idAnuncio = card.getAttribute('data-id-anuncio');
+    console.log(idAnuncio);
+
+    card.addEventListener('click', function(e) {
+      if (
+        e.target.closest('.btn-favorito') ||
+        e.target.closest('.btn-editar-anuncio')
+      ) {
+        return;
+      }
+
+      if (idAnuncio) {
+        const protocol = window.location.protocol;
+        const host = window.location.host;
+        const pathname = window.location.pathname;
+        const basePath = pathname.substring(0, pathname.lastIndexOf('/'));
+        const baseUrl = `${protocol}//${host}${basePath}`;
+        const url = `${baseUrl}/index.php?controller=AdsController&accion=show&id=${idAnuncio}`;
+
+        console.log('Redirigiendo a:', url);
+        window.location.href = url;
+      } else {
+        console.error('No se encontró ID del anuncio');
+      }
+    });
+  });
 });
+
+
 
 // Función para manejar favoritos
 document.addEventListener('DOMContentLoaded', () => {

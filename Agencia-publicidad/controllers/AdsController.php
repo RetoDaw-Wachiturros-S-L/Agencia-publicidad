@@ -57,14 +57,21 @@ class AdsController{
         require "views/ads/ads.delete.php";
     }
 
-    public function edit(int $id, Anuncio $anuncio):bool {
+    public function edit() {
         //no hace falta obtener el id comerciante xq se da por hecho que la sesion del admin o del comerciante ya lo tiene implicito
-        $id = $_POST["id"] ?? null;
+        $id = $_GET['id'] ?? null;
+        // echo "El id existe ";
+        // echo $id ?? 0;
 
         if(!isset($id)) throw new \Exception("No se puede buscar por un id si no hay");
+        // echo "El id existe dps de la primera validacion";
         if($id == "" || $id <= 0) throw new \Exception("El id no puede ser menor a 0");
+        
+        // echo "El id seigue existiendo dps de las validaciones";
+        $anuncio = $this->dbFunctions->getById($id);
+        $fechaFormateada = $anuncio->getFechaPublicacion()->format('Y-m-d H:i');
 
-        return $this->dbFunctions->update($id,$anuncio);
+        require __DIR__ . "/../views/ads/ads.update.php";
     }
 
     public function delete():bool {

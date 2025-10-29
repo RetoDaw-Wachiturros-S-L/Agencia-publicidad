@@ -24,7 +24,7 @@ class DBUser {
         $stmt->bindValue(':apellido', $usuario->getApellido());
         $stmt->bindValue(':email', $usuario->getEmail());
         // Hashear la contraseña antes de guardarla
-        $hashedPassword = password_hash($usuario->getContrasena(), PASSWORD_BCRYPT);
+        $hashedPassword = password_hash($usuario->getPassword(), PASSWORD_BCRYPT);
         $stmt->bindValue(':contrasenna', $hashedPassword);
         $stmt->bindValue(':tipo_usuario', $usuario->getTipo()->value);
         
@@ -149,8 +149,10 @@ class DBUser {
         $pdo = DBCon::getConnection();
 
         $sql = "SELECT 
-                    a.titulo,
-                    a.detalles,
+                    a.id, 
+                    a.id_comerciante, 
+                    a.titulo, 
+                    a.detalles, 
                     a.fecha_publicacion 
                 FROM anuncios a
                 JOIN comerciantes c ON a.id_comerciante = c.id

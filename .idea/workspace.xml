@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17232e9b-d86a-418d-b839-90fb80c0604c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/api/favoritos.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/api/favoritos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/controllers/AdsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/controllers/AdsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/css/oneAd.css" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/css/oneAd.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/js/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Agencia-publicidad/js/one.ad.js" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/js/one.ad.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/models/dataBase/DBUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/models/dataBase/DBUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/views/misAdds.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/views/misAdds.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,21 +29,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "develop",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/nani"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/nani&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="17232e9b-d86a-418d-b839-90fb80c0604c" name="Changes" comment="" />
