@@ -63,8 +63,16 @@ class PerfilController {
             $_POST['num_telefono'] ?? ''
         );
 
+
         // Llamar al método que actualiza la base de datos
-        $resultado = $this->dbUser->actualizarUsuario($id, $usuarioData);
+        $resultado = $this->dbUser->actualizarComerciante($id, $usuarioData);
+
+        if($resultado){
+            require_once __DIR__ . '/../views/editarExito.php';
+
+        }else{
+            require_once __DIR__ . '/../views/editarError.php';
+        }
     }
 
     public function insertarDatosPerfil(){
@@ -83,9 +91,12 @@ class PerfilController {
 
    
         $resultado= $this->dbUser->actualizarUsuario($id, $usuarioData);
-      
+        if($resultado){
+            require_once __DIR__ . '/../views/editarExito.php';
 
-
+        }else{
+            require_once __DIR__ . '/../views/editarError.php';
+        }
     }
 
 }

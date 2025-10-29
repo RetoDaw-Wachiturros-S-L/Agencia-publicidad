@@ -207,8 +207,8 @@ class DBUser {
         $stmt->bindValue(':nombre', $usuarioData->getNombre);
         $stmt->bindValue(':apellido', $usuarioData->getApellido);
 
-        $stmt->execute();
-        
+        $resultado=$stmt->execute();
+        return $resultado && $stmt->rowCount() > 0;        
         
     }
 
@@ -228,15 +228,16 @@ class DBUser {
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(":id", $id, \PDO::PARAM_INT);
-        $stmt->bindValue(':nombre', $usuarioData->getNombre);
-        $stmt->bindValue(':apellido', $usuarioData->getApellido);
-        $stmt->bindValue(':nombre_empresa', $usuarioData->getNombreComercio);
-        $stmt->bindValue(':comentario', $usuarioData->getRubro);
-        $stmt->bindValue(':numero', $usuarioData->getNumTelefono);
-        $stmt->bindValue(':nif', $usuarioData->getNifEmpresa);
+        $stmt->bindValue(':nombre', $usuarioData->getNombre());
+        $stmt->bindValue(':apellido', $usuarioData->getApellido());
+        $stmt->bindValue(':nombre_empresa', $usuarioData->getNombreComercio());
+        $stmt->bindValue(':comentario', $usuarioData->getRubro());
+        $stmt->bindValue(':numero', $usuarioData->getNumTelefono());
+        $stmt->bindValue(':nif', $usuarioData->getNifEmpresa());
 
 
-        $stmt->execute();
+        $resultado=$stmt->execute();
+        return $resultado && $stmt->rowCount() > 0;
         
     }
 
