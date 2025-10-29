@@ -27,13 +27,14 @@ class Comerciante extends UsuarioRegistrado {
     ) {
         // Llamar al constructor padre PRIMERO
         parent::__construct(
-            $id,
-            $nombre,
-            $apellido,
-            $email,
-            $contrasena,
-            TipoPersonaEnum::COMERCIANTE,
-            $fotoPerfil
+            $id,                    // id_usuario
+            $nombre,                // nombre
+            $apellido,              // apellido
+            $email,                 // email
+            $contrasena,            // password
+            new \DateTime(),         // fecha_inscripcion
+            $fotoPerfil,            // foto_perfil
+            TipoPersonaEnum::COMERCIANTE // tipo
         );
         
         // Luego inicializar las propiedades de Comerciante

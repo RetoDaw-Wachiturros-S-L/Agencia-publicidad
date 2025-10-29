@@ -15,7 +15,7 @@ require_once __DIR__ . '/../models/dataBase/DBUser.php';
 require_once __DIR__ . '/../models/Comerciante.php';
 require_once __DIR__ . '/../utils/auth_helper.php';
 
-class OutController {
+class AuthController {
     
     private DBFunctions $dbFunctions;
     private DBUser $dbUser;
@@ -29,14 +29,12 @@ class OutController {
         // Usar las funciones del auth_helper
         if (!\Agenciapublicidad\Utils\isLoggedIn()) {
             http_response_code(403);
-            echo "Error: Usuario no autenticado";
             require_once __DIR__ . '/../views/errors/403.php';
             exit;
         }
 
         if (!\Agenciapublicidad\Utils\isAdmin()) {
             http_response_code(403);
-            echo "Error: No tienes permisos para registrar usuarios";
             require_once __DIR__ . '/../views/errors/403.php';
             exit;
         }
@@ -176,8 +174,9 @@ class OutController {
                             $apellido,
                             $email,
                             $contrasena,
+                            $fechaInscripcion,
+                            $fotoPerfil,
                             $tipoUsuario,
-                            $fotoPerfil
                         );
                         
                         $this->dbUser->guardarUsuario($nuevoUsuario);
@@ -238,7 +237,7 @@ class OutController {
                             "foto_perfil"=> $usuario->getFotoPerfil(),
                         ];
 
-                        // Si es comerciante, obtener datos adicionales
+                        // Si es comerciante, obtenemos los datos adicionales
                         if ($usuario->getTipo()->value == TipoPersonaEnum::COMERCIANTE) {
                             $comerciante = $this->dbUser->usuarioComerciante($usuario);
                             
@@ -290,6 +289,7 @@ class OutController {
     public function favourites(){
         $id=$_SESSION["usuario"]["id"];
         $anuncios = $this->dbUser->sacarfavoritos($id);
+        //Lo hacemos asi para que el array de anuncios se pueda iterar en favoritos.php
         require_once __DIR__ . '/../views/favoritos.php';
            
     }
@@ -302,6 +302,37 @@ class OutController {
         $id=$_SESSION["usuario"]["id"];
         $perfil = $this->dbUser->verMiPerfil($id);
         require_once __DIR__. '/../views/miPerfil.php';
+    }
+
+    // Métodos para manejar errores HTTP
+    public function error403() {
+        http_response_code(403);
+        require_once __DIR__ . '/../views/errors/403.php';
+        exit;
+    }
+
+    public function error404() {
+        http_response_code(404);
+        require_once __DIR__ . '/../views/errors/404.php';
+        exit;
+    }
+
+    public function error500() {
+        http_response_code(500);
+        require_once __DIR__ . '/../views/errors/500.php';
+        exit;
+    }
+
+    public function error503() {
+        http_response_code(503);
+        require_once __DIR__ . '/../views/errors/503.php';
+        exit;
+    }
+
+    public function error() {
+        http_response_code(500);
+        require_once __DIR__ . '/../views/errors/error.php';
+        exit;
     }
 }
 ?>

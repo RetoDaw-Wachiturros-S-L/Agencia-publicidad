@@ -1,26 +1,27 @@
 <?php 
 use AgenciaPublicidad\Models\TipoPersonaEnum;
-    require_once __DIR__ . '/../utils/auth_helper.php';
-    require_once __DIR__ . '/../models/TipoPersonaEnum.php';
- // Extraer variables globales al scope local
-    $currentUser = $GLOBALS['currentUser'] ?? null;
-    $isLoggedIn = $GLOBALS['isLoggedIn'] ?? false;
-    $isAdmin = $GLOBALS['isAdmin'] ?? false;     
+require_once __DIR__ . '/../utils/auth_helper.php';
+require_once __DIR__ . '/../models/TipoPersonaEnum.php';
 
-
+// Extraer variables globales al scope local
+$currentUser = $GLOBALS['currentUser'] ?? null;
+$isLoggedIn = $GLOBALS['isLoggedIn'] ?? false;
+$isAdmin = $GLOBALS['isAdmin'] ?? false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/editarPerfil.css"/>
-
-
+    <title>Editar Perfil - Comerciantes Vitoria</title>
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>/img/logo_SSombra.png">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/editarPerfil.css"/>
 </head>
 <body>
-
+    <?php include __DIR__ . '/components/header.php'; ?>
+    
     <main>
         <?php if(empty($_SESSION["usuario"]["foto_perfil"])):?>
             <h2><img src="../img/fotoperfil.png" alt="fotoperfil"> Editar usuario</h2>
@@ -53,5 +54,6 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
     </main>
         <script src="../js/validaciones.js"></script>
         <script src="../js/editarPerfil.js"></script>
+
 </body>
 </html>

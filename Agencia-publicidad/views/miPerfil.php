@@ -15,14 +15,15 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>/img/logo_SSombra.png">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/perfil.css"/>
-
-    <title>Document</title>
-
+    <title>Comerciantes Vitoria</title>
 </head>
 <body>
-    <header>
-    </header>
+    <?php include __DIR__ . '/components/header.php'; ?>
+    
      <main>
         <div class="contenido">
             <aside>               
@@ -53,6 +54,9 @@ use AgenciaPublicidad\Models\TipoPersonaEnum;
             </section>
         </div>
     </main>
+    
+    <script src="<?= BASE_URL ?>/js/index.js"></script>
+    <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
  
 </body>
 </html>
