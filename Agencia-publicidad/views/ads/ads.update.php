@@ -37,16 +37,10 @@
             ?>
             </div>
 
-                <form 
-                    class="container-div-info" 
-                    method="post" 
-                    id="form-editar-anuncio"
-                >
-                <!-- 
-                Id de anuncio para capturarlo en js 
-                -->
-                <input type="hidden" name="anuncioId" value="<?= $anuncio->getId() ?>">
-                <!-- Datos editables del anuncio -->
+                <form class="container-div-info" method="post" action="index.php?controller=AdsController&accion=update">
+
+                <input type="hidden" name="id" value="<?= htmlspecialchars($anuncio->getId()) ?>">
+
                 <div class="info-div">
                     <label for="titulo-anuncio">Título del anuncio:</label>
                     <input 
@@ -65,13 +59,8 @@
                         name="descripcion" 
                         value="<?= htmlspecialchars($anuncio->getDescripcion() ?? 'Sin detalles') ?>" 
                     >
+                    <input type="submit" id="btn-guardar" class="submit-anuncio-upd">
 
-                    <button 
-                        type="button"
-                        id="btn-guardar"
-                        class="submit-anuncio-upd">
-                    Guardar
-                    </button>   
 
                 </div>
 
@@ -84,28 +73,12 @@
                     <li>Tel: <?= htmlspecialchars($anuncio->getAnunciante()->getNumTelefono() ?? 'Sin detalles') ?></li>
                     </ul>
                     <p><span class="fecha-formateada">Publicado en: <?= $fechaFormateada ?></span></p>
-                </div>
-
-                <!-- Icono de favoritos -->
-                <div class="div-icons">
-                    <div 
-                        class="favorito-icono"
-                        data-anuncio-id="<?= $anuncio->getId() ?>" 
-                        data-es-favorito="<?= $anuncio->getEsFavorito() ?>" 
-                        data-is-logged-in="<?= $isLoggedIn ? '1' : '0' ?>"
-                        title="<?= $isLoggedIn ? ($anuncio->getEsFavorito() ? 'Quitar de favoritos' : 'Agregar a favoritos') : 'Iniciar sesión para agregar a favoritos' ?>"
-                    >
-                    <div class="heart-icon"></div>
-                    <span class="contador-favs"> <?= $anuncio->getNumFavoritos() ?> </span>
-                    </div>
-                </div>  
+                </div> 
             </form>
         </div>
         
         </div>
     </main>
-    <script src="<?= BASE_URL ?>/js/one.ad.js?v=<?= time() ?>" defer></script>
-    <script src="<?= BASE_URL ?>/js/index.js" defer></script>
     <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
 </body>
 </html>

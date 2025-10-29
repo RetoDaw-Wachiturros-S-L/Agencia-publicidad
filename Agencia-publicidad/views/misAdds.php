@@ -51,6 +51,13 @@
                     >
                         Editar Anuncio
                     </a>
+
+                    <a 
+                        href="<?= BASE_URL ?>/index.php?controller=AdsController&accion=delete&id=<?= $anuncio['id'] ?>"
+                        class="btn-borrar-anuncio"
+                    >
+                    Borrar Anuncio
+                    </a>
                 </div>
             <?php endforeach; ?>
         </div>

@@ -133,6 +133,29 @@ main {
   transition: all 0.3s ease; /* suaviza la transición */
 }
 
+.btn-borrar-anuncio{
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  max-width: 50%;
+  background-color: var(--color-bg-secondary);
+  border: 2px  solid var(--color-border-light);
+  border-radius: .8em;
+  align-items: center;
+  align-content: center;
+  padding: .3em;
+  color: var(--color-text-secondary);
+  margin: 1%;
+  text-decoration: none;
+}
+.btn-borrar-anuncio:hover {
+  background-color: var(--color-error-bg); /* cambia el fondo al pasar el mouse */
+  color: var(--color-text-primary); /* cambia el color del texto */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* agrega una sombra sutil */
+  cursor: pointer; /* muestra el cursor de mano */
+  transform: scale(1.02); /* efecto de zoom suave */
+  transition: all 0.3s ease; /* suaviza la transición */
+} 
 
 .heart-icon {
   width: 24px;

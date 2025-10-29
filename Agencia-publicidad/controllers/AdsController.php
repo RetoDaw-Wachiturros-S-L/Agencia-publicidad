@@ -73,11 +73,56 @@ class AdsController{
 
         require __DIR__ . "/../views/ads/ads.update.php";
     }
+    
+    public function update(){
+        $id = $_POST['id'] ?? null;
+        $titulo = $_POST['titulo'] ?? null;
+        $descripcion = $_POST['descripcion'] ?? null;
+
+        $anuncioAntiguo = $this->dbFunctions->getById($id);
+        
+        if(!$anuncioAntiguo){
+            throw new \Exception("No se encuentra ese anuncio");
+        }         echo "Se mira si existe el ad";
+
+        if($anuncioAntiguo->getTitulo() != $titulo){
+            $anuncioAntiguo->setTitulo($titulo);
+        }
+        if($anuncioAntiguo->getDescripcion() != $descripcion){
+            $anuncioAntiguo->setDescripcion($descripcion);
+        }
+
+        $this->dbFunctions->update($id, $anuncioAntiguo);
+        
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+        
+        header("Location: index.php");
+        exit;  
+        //si todo va bien volverá a la pagina para ver la actualizacion normalmente, si no saltará al inicio.
+        
+    }
 
     public function delete():bool {
-        $id = $_POST["idAnuncio"] ?? null;
-        if(!isset($id)) throw new \Exception("No se puede borrar un anuncio si no se proporciona un Id");
-        return $this->dbFunctions->delete($id);
+        $id = $_GET["id"] ?? null;
+
+        if(!isset($id)){
+          throw new \Exception("No se puede borrar un anuncio si no se proporciona un Id");  
+        } 
+
+        $this->dbFunctions->delete($id);
+
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+
+        header("Location: index.php");
+        exit;
+
+
     }
 
     public function create() {
