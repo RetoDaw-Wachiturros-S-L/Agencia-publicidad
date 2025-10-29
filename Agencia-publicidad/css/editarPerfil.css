@@ -19,6 +19,26 @@ main {
     text-align: center;
     gap: 1.5em;
 }
+  .contrasena {
+  text-decoration: none;
+  color: var(--color-text-primary);
+  font-weight: bolder;
+  font-size: 1.7em;
+  border: 2px solid var(--color-border);
+  padding: 0.3em 4em;
+  width: fit-content;
+  max-height: fit-content;
+  background-color: var(--color-bg-primary);
+  border-radius: 15px;
+  box-shadow: 8px 8px 0px var(--color-border);
+  transition: all 0.2s ease-in-out;
+}
+
+.contrasena:hover {
+  background-color: var(--color-bg-tertiary);
+  transform: translateY(-4px);
+  box-shadow: 10px 10px 0px var(--color-text-secondary);
+}
 
 /* Estilo para todos los inputs de texto y contraseña */
 input[type="text"],
