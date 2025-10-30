@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17232e9b-d86a-418d-b839-90fb80c0604c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/controllers/AdsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/controllers/AdsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/css/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/css/oneAd.css" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/css/oneAd.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/js/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/js/one.ad.js" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/js/one.ad.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/models/dataBase/DBUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/models/dataBase/DBUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/views/misAdds.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/views/misAdds.php" afterDir="false" />
-    </list>
+    <list default="true" id="17232e9b-d86a-418d-b839-90fb80c0604c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

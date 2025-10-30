@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
   cards.forEach(card => {
     card.style.cursor = 'pointer';
     const idAnuncio = card.getAttribute('data-id-anuncio');
-    console.log(idAnuncio);
+    // console.log(idAnuncio);
 
     card.addEventListener('click', function(e) {
       if (

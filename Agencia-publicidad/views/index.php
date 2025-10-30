@@ -51,11 +51,12 @@
                             <div class="heart-icon"></div>
                         </button>
                     </div>
-                    <h2 id="titulo-anuncio"><?= htmlspecialchars($anuncio['titulo']) ?></h2>
-                    <p id="desc-anuncio"><?= $anuncio['detalles'] ?? 'Sin detalles' ?></p>
+                    <h2 class="titulo-anuncio"><?= htmlspecialchars($anuncio['titulo']) ?></h2>
+                    <p class="desc-anuncio"><?= $anuncio['detalles'] ?? 'Sin detalles' ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
+        <script src="<?= BASE_URL ?>/js/ads.js" defer></script>
         <script src="<?= BASE_URL ?>/js/index.js"></script>
     </main>
     <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>

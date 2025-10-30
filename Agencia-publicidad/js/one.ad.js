@@ -1,5 +1,6 @@
 
 function guardarEnCache(anuncio){
+  
     const anunciosDeCache = JSON.parse(sessionStorage.getItem("anuncios")) || {};
     anunciosDeCache[anuncio.id] = anuncio;
     sessionStorage.setItem("anuncios", JSON.stringify(anunciosDeCache));
