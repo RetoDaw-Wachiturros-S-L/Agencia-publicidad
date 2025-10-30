@@ -288,6 +288,7 @@ class AuthController {
 
     public function favourites(){
         $id=$_SESSION["usuario"]["id"];
+        //No hace falta validar por que en caso de no ser usuario registrado no aparece la vista de favoritos (asi que siempre tendra un Id)
         $anuncios = $this->dbUser->sacarfavoritos($id);
         //Lo hacemos asi para que el array de anuncios se pueda iterar en favoritos.php
         require_once __DIR__ . '/../views/favoritos.php';
