@@ -123,23 +123,28 @@ class DBUser {
     }
     public function sacarfavoritos($id) {
         $pdo = DBCon::getConnection();
+        try{
+            $sql = "SELECT 
+                        a.id, 
+                        a.id_comerciante, 
+                        a.titulo, 
+                        a.detalles, 
+                        a.fecha_publicacion,
+                        fa.url_foto
+                    FROM anuncios a
+                    JOIN favoritos f ON a.id = f.id_anuncio
+                    JOIN usuarios u ON f.id_usuario = u.id
+                    JOIN fotos_anuncios fa ON a.id = fa.id_anuncio AND fa.es_portada = TRUE
+                    WHERE u.id = :id_usuario";
 
-        $sql = "SELECT 
-                    a.id, 
-                    a.id_comerciante, 
-                    a.titulo, 
-                    a.detalles, 
-                    a.fecha_publicacion
-                FROM anuncios a
-                JOIN favoritos f ON a.id = f.id_anuncio
-                JOIN usuarios u ON f.id_usuario = u.id
-                WHERE u.id = :id_usuario";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(":id_usuario", $id, \PDO::PARAM_INT);
+            $stmt->execute();
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(":id_usuario", $id, \PDO::PARAM_INT);
-    $stmt->execute();
-
-    $anuncios = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $anuncios = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        }catch(\Exception $ex){
+            echo $ex;
+        }
 
     return $anuncios;
     }
