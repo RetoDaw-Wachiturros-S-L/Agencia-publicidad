@@ -13,7 +13,7 @@ class DBFunctions {
     function getAll(){
         $pdo = DBCon::getConnection();
         $sql = "SELECT 
-                    nombre, apellido,
+                    id, nombre, apellido,
                     email, fecha_inscripcion, foto_perfil, tipo_usuario
                 FROM usuarios";
         $stmt = $pdo->query($sql);
@@ -80,12 +80,7 @@ class DBFunctions {
         return $sql->execute();
     }               
 
-    public function delete(int $id): bool {
-        $pdo = DBCon::getConnection();
-        $sql = $pdo->prepare('DELETE FROM USUARIOS WHERE ID = :ID');
-        $sql->bindValue(':ID', $id);
-        return $sql->execute();
-    }
+    
         
 }
 

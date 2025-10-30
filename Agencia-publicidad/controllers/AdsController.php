@@ -25,7 +25,7 @@ class AdsController{
         return $anuncios;
     }
 
-    //TODO todas las funciones deberian de devolver algo a la view de momento solo estamos depurando
+    //TODO: todas las funciones deberian de devolver algo a la view de momento solo estamos depurando
     public function show() {
         $id = $_GET["id"] ?? null;
 

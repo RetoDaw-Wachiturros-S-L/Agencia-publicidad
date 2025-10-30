@@ -67,8 +67,8 @@
                     
                     <!-- Menú desplegable de administrador -->
                     <div id="adminDropdownMenu" class="admin-dropdown-menu">
-                        <a href="#" class="menu-item">Opción 1</a>
-                        <a href="#" class="menu-item">Opción 2</a>
+                        <a href="<?= BASE_URL ?>/index.php?controller=AdminController&accion=createUser" class="menu-item">Crear usuarios</a>
+                        <a href="<?= BASE_URL ?>/index.php?controller=AdminController&accion=modifyUser" class="menu-item">Modificar usuarios</a>
                     </div>
                 </div>
             <?php endif; ?>

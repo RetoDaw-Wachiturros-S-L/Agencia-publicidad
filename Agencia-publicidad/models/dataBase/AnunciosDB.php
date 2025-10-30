@@ -15,6 +15,7 @@ require_once __DIR__ . '/../UsuarioRegistrado.php';
 require_once __DIR__ . '/../Comerciante.php';
 
 class AnunciosDB{
+
     public function getAll():array{
         $pdo = DBCon::getConnection();
         
@@ -158,6 +159,7 @@ class AnunciosDB{
         $sql->execute();
         return $sql->rowCount() > 0; //retorna las afectadas
     }
+
     public function delete(int $id):bool{
         $pdo = DBCon::getConnection();
         $sql = $pdo->prepare("DELETE FROM anuncios WHERE ID = :ID");
@@ -192,7 +194,8 @@ class AnunciosDB{
         
         // Retornar el ID del anuncio recién creado
         return (int)$pdo->lastInsertId();
-    }        
+    }      
+
     public function getAllByIdComerciante(int $idComerciante){
         $pdo = DBCon::getConnection();
         $sql = $pdo->prepare("SELECT id, titulo, detalles, fecha_publicacion FROM anuncios WHERE id_comerciante = :id_comerciante");
@@ -208,10 +211,7 @@ class AnunciosDB{
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
     }
-
-    /**
-     * Verifica si un anuncio está en favoritos del usuario actual
-     */
+    
     public function isFavorito(int $anuncioId, int $usuarioId): bool {
         $pdo = DBCon::getConnection();
         $sql = $pdo->prepare("SELECT COUNT(*) FROM favoritos WHERE id_anuncio = :anuncio_id AND id_usuario = :usuario_id");

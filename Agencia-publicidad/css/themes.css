@@ -48,6 +48,12 @@
   --icon-heart: url(../img/Heart.png);
   --icon-heart-active: url(../img/favorito-activo.png);
   --icon-login: url(../img/login.png);
+
+  /* Badges */
+
+  --badge-admin: #ff8282;
+  --badge-comerciante: #fff082;
+  --badge-visitante: #bfc7c6;
 }
 
 /* Tema oscuro */
