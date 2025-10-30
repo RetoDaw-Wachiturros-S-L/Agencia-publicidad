@@ -75,5 +75,6 @@
         </div>
     </main>
     <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
+    <div class="lampara" role="button" aria-label="Cambiar tema" tabindex="0"></div>
 </body>
 </html>

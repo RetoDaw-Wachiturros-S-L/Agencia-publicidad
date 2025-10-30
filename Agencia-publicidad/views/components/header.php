@@ -35,13 +35,11 @@
             
                 <!-- Menú desplegable de usuario -->
                 <div id="userDropdownMenu" class="user-dropdown-menu">
-                    <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=favourites" class="menu-item">Mis favoritos</a>
+                    <a href="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=miPerfil" class="menu-item">Mi perfil</a>
                     <a href="#" class="menu-item menu-item-notification">
                         Mis mensajes
                         <span class="notification-badge"></span>
                     </a>
-                    <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=verAnuncios" class="menu-item">Mis anuncios</a>
-                    <a href="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=miPerfil" class="menu-item">Mi perfil</a>
                     <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=logout" class="menu-item menu-item-logout">Cerrar sesión</a>
                 </div>
             </div>
@@ -52,11 +50,11 @@
                 <!-- Menú desplegable de anuncios -->
                 <div id="adsDropdownMenu" class="ads-dropdown-menu">
                     <a href="<?= BASE_URL ?>/index.php?controller=AdsController&accion=create" class="menu-item">Crear anuncio</a>
-                    <a href="#" class="menu-item">Editar mis anuncios</a>
+                    <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=verAnuncios" class="menu-item">Mis anuncios</a>
                 </div>
             </div>
 
-            <div class="heart-icon" role="button" aria-label="Favoritos" tabindex="0"></div>
+            <a href="<?= BASE_URL ?>/index.php?controller=AuthController&accion=favourites" class="heart-icon" role="button" aria-label="Favoritos" tabindex="0"></a>
             
             <?php if ($isAdmin):?>
                 <div class="admin-menu-container">
