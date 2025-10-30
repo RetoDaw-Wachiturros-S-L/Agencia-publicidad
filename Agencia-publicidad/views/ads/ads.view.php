@@ -37,7 +37,7 @@
                         ?>
                     </div>
                     <h2 id="titulo-anuncio"><?= htmlspecialchars($anuncio['titulo']) ?></h2>
-                    <p id="desc-anuncio"><?= htmlspecialchars($anuncio['detalles'] ?? 'Sin detalles') ?></p>
+                    <div class="desc-anuncio"><?= $anuncio['detalles'] ?? 'Sin detalles' ?></div>
                 </div>
             <?php endforeach; ?>
         </div>

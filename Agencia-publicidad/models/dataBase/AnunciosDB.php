@@ -204,11 +204,27 @@ class AnunciosDB{
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function getByPalabra(string $palabras) :array {
+    public function getByPalabra(string $palabras) :array|null {
         $pdo = DBcon::getConnection();
-        $sql = $pdo->prepare("SELECT id, id_comerciante, titulo, detalles, fecha_publicacion FROM anuncios WHERE titulo LIKE :palabra");
-        $sql->bindValue(":palabra", '%' .  $palabras . '%', \PDO::PARAM_STR);
-        $sql->execute();
+        try{
+            $sql = $pdo->prepare("
+                            SELECT 
+                                a.id, 
+                                a.id_comerciante, 
+                                a.titulo, 
+                                a.detalles, 
+                                a.fecha_publicacion,
+                                f.url_foto
+                            FROM anuncios a
+                            LEFT JOIN fotos_anuncios f ON a.id = f.id_anuncio AND f.es_portada = TRUE
+                            WHERE a.titulo LIKE :palabra");
+
+            $sql->bindValue(":palabra", '%' .  $palabras . '%', \PDO::PARAM_STR);
+            $sql->execute();
+
+        }catch(\Exception $ex){
+            echo $ex;
+        }
         return $sql->fetchAll(\PDO::FETCH_ASSOC);
     }
     

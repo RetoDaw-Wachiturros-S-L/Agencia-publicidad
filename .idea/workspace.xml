@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17232e9b-d86a-418d-b839-90fb80c0604c" name="Changes" comment="" />
+    <list default="true" id="17232e9b-d86a-418d-b839-90fb80c0604c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/models/dataBase/AnunciosDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/models/dataBase/AnunciosDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/views/ads/ads.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/views/ads/ads.view.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
