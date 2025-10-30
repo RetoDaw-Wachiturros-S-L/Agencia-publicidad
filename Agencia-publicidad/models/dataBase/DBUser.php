@@ -149,8 +149,10 @@ class DBUser {
         $pdo = DBCon::getConnection();
 
         $sql = "SELECT 
-                    a.titulo,
-                    a.detalles,
+                    a.id, 
+                    a.id_comerciante, 
+                    a.titulo, 
+                    a.detalles, 
                     a.fecha_publicacion 
                 FROM anuncios a
                 JOIN comerciantes c ON a.id_comerciante = c.id

@@ -1,3 +1,4 @@
+
 function guardarEnCache(anuncio){
     const anunciosDeCache = JSON.parse(sessionStorage.getItem("anuncios")) || {};
     anunciosDeCache[anuncio.id] = anuncio;
@@ -107,3 +108,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+

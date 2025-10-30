@@ -98,6 +98,11 @@ class PerfilController {
             require_once __DIR__ . '/../views/editarError.php';
         }
     }
-
+    public function vistaContrasena(){
+            require_once __DIR__ . '/../views/editarPassword.php';
+    }
+    public function cambiarContrasena(){
+            require_once __DIR__ . '/../views/editarPassword.php';
+    }
 }
 ?>

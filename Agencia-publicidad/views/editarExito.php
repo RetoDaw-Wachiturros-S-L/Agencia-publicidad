@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-        <link rel="stylesheet" href="<?= BASE_URL ?>/css/editar.css"/>
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/perfilEditado.css"/>
 
 </head>
 <body>
     <main>
-        <h2>
-            Los cambios fueron aplicados con exito
-        </h2>
-        <div id="botones">
-            <a href="">Volver</a>
-            <a href="">Ir a inico</a>
+
+        <h2>Perfil modificado con exito</h2>
+        <div class="volver">
+            <a href="<?= BASE_URL ?>/index.php?accion=index">Ir a inicio</a>
+            <a href="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=editarPerfil">volver</a>
+
         </div>
 
-    </main>  
+    </main>
+    <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
+
+
 </body>
 </html>
