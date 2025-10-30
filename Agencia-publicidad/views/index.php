@@ -52,7 +52,7 @@
                         </button>
                     </div>
                     <h2 class="titulo-anuncio"><?= htmlspecialchars($anuncio['titulo']) ?></h2>
-                    <p class="desc-anuncio"><?= $anuncio['detalles'] ?? 'Sin detalles' ?></p>
+                    <div class="desc-anuncio"><?= $anuncio['detalles'] ?? 'Sin detalles' ?></div>
                 </div>
             <?php endforeach; ?>
         </div>

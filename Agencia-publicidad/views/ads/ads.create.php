@@ -38,8 +38,15 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
     
     <!-- Summernote en español -->
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/lang/summernote-es-ES.min.js"></script>
+    <style>
+        .lampara {
+            margin-left: 3em;
+            margin-top: 0.1px;
+        }
+    </style>
 </head>
 <body>    
+    <div class="lampara" role="button" aria-label="Cambiar tema" tabindex="0"></div>
     <main>
         <h1>Crear Nuevo Anuncio</h1>
         
@@ -127,7 +134,6 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
             });
         });
     </script>
-    
     <!-- Scripts externos (incluyen preview de imágenes) -->
     <script src="<?= BASE_URL ?>/js/create.js"></script>
     <script src="<?= BASE_URL ?>/js/validaciones.js"></script>
