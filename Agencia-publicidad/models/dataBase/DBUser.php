@@ -196,6 +196,15 @@ class DBUser {
 
     return $perfil;
     }
+
+
+    public function delete(int $id): bool {
+        $pdo = DBCon::getConnection();
+        $sql = $pdo->prepare('DELETE FROM usuarios WHERE ID = :ID');
+        $sql->bindValue(':ID', $id);
+        return $sql->execute();
+    }
+
     public function actualizarUsuario($id, $usuarioData){
         $pdo = DBCon::getConnection();
         $sql ="

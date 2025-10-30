@@ -1,11 +1,15 @@
 <?php
-if (!defined('ACCESSED_VIA_ROUTER')) {
+require_once __DIR__ . '/../../config/config.php';
+require_once __DIR__ . '/../../utils/auth_helper.php';
+
+use function Agenciapublicidad\Utils\isAdmin;
+
+// Verificar que sea admin
+if (!isAdmin()) {
     http_response_code(403);
     require_once __DIR__ . '/../errors/403.php';
     exit;
 }
-
-require_once __DIR__ . '/../../utils/auth_helper.php';
 
 // Extraer variables globales al scope local
 $currentUser = $GLOBALS['currentUser'] ?? null;
@@ -16,26 +20,33 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Comerciantes Vitoria</title>
+    <title>Crear Usuario - Panel Admin</title>
     <link rel="icon" type="image/png" href="<?= BASE_URL ?>/img/logo_SSombra.png">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/auth.css">
 </head>
 <body>
-    <?php include __DIR__ . '/../components/header.php'; ?>
     
     <main class="auth-main">
-        <h1>Formulario de registro de nuevo usuario</h1>
+        <h1>Crear Nuevo Usuario</h1>
 
         <?php
         // Si hay algún mensaje de error lo mostramos:
-        if(isset($mensaje_error)) :?>
-            <p class="mensaje-error"><?= $mensaje_error ?></p>
+        if(isset($_SESSION['error'])) :?>
+            <p class="mensaje-error"><?= htmlspecialchars($_SESSION['error']) ?></p>
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
+
+        <?php
+        // Si hay algún mensaje de éxito lo mostramos:
+        if(isset($_SESSION['success'])) :?>
+            <p class="mensaje-exito"><?= htmlspecialchars($_SESSION['success']) ?></p>
+            <?php unset($_SESSION['success']); ?>
         <?php endif; ?>
 
         <div id="form-container">
-            <form action='index.php?controller=AuthController&accion=store' method='post' id="registro">
+            <form action='<?= BASE_URL ?>/index.php?controller=AdminController&accion=storeUser' method='post' id="registro">
                 <fieldset>
                     <legend>Registro</legend>
                     
@@ -74,22 +85,35 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
                         <!-- <input type="file" name="url_fotos"> -->
                     </p>
                     
+                    <p>
+                        <label>Tipo de Usuario*</label>
+                    </p>
                     
                     <p>
-                        <label for="es_comercio">¿Eres un comercio?</label>
-                        <input type="checkbox" name="es_comercio" id="es_comercio" value="1">
+                        <label for="tipo_visitante">Visitante</label>
+                        <input type="checkbox" name="tipo" id="tipo_visitante" value="VISITANTE" class="tipo-checkbox" checked>
+                    </p>
+                    
+                    <p>
+                        <label for="es_comercio">Comerciante</label>
+                        <input type="checkbox" name="tipo" id="es_comercio" value="COMERCIANTE" class="tipo-checkbox">
+                    </p>
+                    
+                    <p>
+                        <label for="tipo_admin">Administrador</label>
+                        <input type="checkbox" name="tipo" id="tipo_admin" value="ADMIN" class="tipo-checkbox">
                     </p>
                     
                     <div id="formulario_extra">
                         <p>
                             <label for="nombreEmpresa">Nombre de la empresa:*</label>
-                            <input type="text" id="nombreEmpresa" name="nombreEmpresa" placeholder="Nombre de la empresa" maxlength="50" required>
+                            <input type="text" id="nombreEmpresa" name="nombreEmpresa" placeholder="Nombre de la empresa" maxlength="50">
                             <span class="error"></span>
                         </p>
                         
                         <p>
                             <label for="nifEmpresa">NIF de la empresa:*</label>
-                            <input type="text" id="nifEmpresa" name="nifEmpresa" placeholder="NIF de la empresa" minlength="9" maxlength="9" required>
+                            <input type="text" id="nifEmpresa" name="nifEmpresa" placeholder="NIF de la empresa" minlength="9" maxlength="9">
                             <span class="error"></span>
                         </p>
                         
@@ -107,7 +131,7 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
                     </div>
                     
                     <p>
-                        <input type='submit' value='Registrar'>
+                        <input type='submit' value='Crear Usuario'>
                     </p>
                 </fieldset>
             </form>
@@ -115,6 +139,7 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
 
         <script src="<?= BASE_URL ?>/js/validaciones.js"></script>
         <script src="<?= BASE_URL ?>/js/register.js"></script>
+        <script src="<?= BASE_URL ?>/js/admin-create-user.js"></script>
         <script src="<?= BASE_URL ?>/js/index.js"></script>
         <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
     </main>

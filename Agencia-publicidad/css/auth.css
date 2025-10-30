@@ -1,5 +1,5 @@
-/* Reset específico para eliminar el margen del body */
-* {
+/* Reset específico solo dentro de auth-main */
+.auth-main * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
