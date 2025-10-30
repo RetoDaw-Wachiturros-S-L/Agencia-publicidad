@@ -211,12 +211,12 @@ class DBUser {
             UPDATE usuarios
             SET nombre = :nombre,
             apellido = :apellido
-        WHERE u.id = :id
+        WHERE id = :id
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(":id", $id, \PDO::PARAM_INT);
-        $stmt->bindValue(':nombre', $usuarioData->getNombre);
-        $stmt->bindValue(':apellido', $usuarioData->getApellido);
+        $stmt->bindValue(':nombre', $usuarioData->getNombre());
+        $stmt->bindValue(':apellido', $usuarioData->getApellido());
 
         $resultado=$stmt->execute();
         return $resultado && $stmt->rowCount() > 0;        
