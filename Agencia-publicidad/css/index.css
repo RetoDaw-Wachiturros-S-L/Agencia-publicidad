@@ -18,10 +18,18 @@ main {
   gap: 1em; 
   margin-bottom: 1em;
 }
+.cards-row:has(.card-anuncio:nth-child(1):nth-last-child(1)) {
+  justify-content: flex-start;
+}
+
+.cards-row:has(.card-anuncio:nth-child(1):nth-last-child(1)) .card-anuncio {
+  flex: 25% 0 0;
+}
+
 
 .card-anuncio {
   /* Pone 2 cards por cada fila calculando un gap y un ancho que ocupe */
-  flex: 1 1 calc(50% - 0.5em); 
+  flex: 1 calc(25% - 0.5em); 
   display: flex;
   flex-direction: column;
   padding: 1em;
@@ -29,7 +37,7 @@ main {
   border-radius: 0.7em;
   background-color: var(--color-bg-secondary);
   box-sizing: border-box;
-  height: 320px; 
+  height: 375px; 
   overflow: hidden; /* Evita que el contenido se desborde de la card */
 }
 
