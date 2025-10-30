@@ -157,16 +157,6 @@ main {
   transition: all 0.3s ease; /* suaviza la transición */
 } 
 
-.heart-icon {
-  width: 24px;
-  height: 24px;
-  background-image: var(--icon-heart); /* Usa la variable del tema */
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  transition: all 0.3s ease;
-}
-
 /* Cuando el favorito está activo */
 .btn-favorito.favorito-activo .heart-icon {
   background-image: var(--icon-heart-active); /* Usa la variable del tema para favorito activo */
