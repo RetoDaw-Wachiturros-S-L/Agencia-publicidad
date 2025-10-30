@@ -41,8 +41,8 @@ main {
 }
 
 /* Estilo para todos los inputs de texto y contraseña */
-input[type="text"],
-input[type="password"] {
+main input[type="text"],
+main input[type="password"] {
     color: #154C7E;
     font-weight: bolder;
     font-size: 1.5em;
@@ -55,12 +55,13 @@ input[type="password"] {
     transition: all 0.2s ease-in-out;
 }
 
-input[type="text"]:hover,
-input[type="password"]:hover {
+main input[type="text"]:hover,
+main input[type="password"]:hover {
     background-color: #f1cbc1;
     transform: translateY(-4px);
     box-shadow: 8px 8px 0px #0F3B61;
 }
+
 
 /* Estilo específico para el botón de submit */
 input[type="submit"] {

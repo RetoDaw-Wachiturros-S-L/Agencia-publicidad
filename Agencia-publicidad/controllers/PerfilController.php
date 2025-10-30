@@ -102,7 +102,22 @@ class PerfilController {
             require_once __DIR__ . '/../views/editarPassword.php';
     }
     public function cambiarContrasena(){
-            require_once __DIR__ . '/../views/editarPassword.php';
+        $contrasena1=$_POST["contrasena"];
+        $contrasenaVerdad= $this->dbUser->verificarContrasena($_SESSION["usuario"]["id"], $contrasena1);
+        if($contrasenaVerdad){
+            $resultado= $this->dbUser->actualizarUsuario($_SESSION["usuario"]["id"], $contrasena1);
+            if($resultado){
+                require_once __DIR__ . '/../views/editarExito.php';
+
+            }else{
+                require_once __DIR__ . '/../views/editarError.php';
+            }
+
+        }else{
+            echo"<script>alert(contraseña incorrecta)</script>";
+            
+
+        }
     }
 }
 ?>
