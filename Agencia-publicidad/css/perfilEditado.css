@@ -1,17 +1,25 @@
-/* Reset específico para eliminar el margen del body */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   background-color: #FFF5E6;
-  margin: 0;
-  width: 100;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* evita barra de desplazamiento */
 }
-.volver{
-    background-color: #FFCDC1;
-}   
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+}
 
 a {
   display: block;
@@ -27,22 +35,6 @@ a {
   color: var(--color-text-primary);
   width: 10em;
 }
-.volver{
-    display: flex;
-    flex-direction: row;
-    width: fit-content;
-    padding: 3em;
-    border-radius: 2em;
-    margin: 3em;
-}
-main{
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    align-items: center;
-    justify-content: center;
-    justify-items: center;
-}
 
 a:hover {
   background-color: var(--color-accent-primary);
@@ -50,4 +42,13 @@ a:hover {
   border-color: var(--color-accent-primary);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(255, 107, 74, 0.3);
+}
+
+.volver {
+  display: flex;
+  gap: 1.7em;
+  padding: 2em;
+  border-radius: 2em;
+  background-color: #FFCDC1;
+
 }
