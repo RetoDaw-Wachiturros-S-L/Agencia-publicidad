@@ -20,7 +20,13 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/editarPerfil.css"/>
 </head>
 <body>
-    
+    <header>
+    <a href="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=miPerfil">
+        <img src="<?= BASE_URL ?>/img/vector.png" alt="Ir a mi perfil" style="cursor: pointer;">
+    </a>
+    </header>
+
+
     <main>
         <?php if(empty($_SESSION["usuario"]["foto_perfil"])):?>
             <h2><img src="<?= BASE_URL ?>/img/fotoperfil.png" alt="fotoperfil"> Editar usuario</h2>
@@ -44,11 +50,6 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
                 <input type="text" placeholder="Apellido" name="apellido" value="<?=$perfil["apellido"]?>"/>
                 <a href="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=vistaContrasena" class="contrasena">Cambiar contraseña</a>
                 
-                <!-- Input file personalizado -->
-                <div class="custom-file">
-                    <input type="file" id="foto_perfil" name="foto_perfil"/>
-                    <label for="foto_perfil"> Foto de perfil</label>
-                </div>
                 
                 <?php if($_SESSION["usuario"]["tipo"]=="COMERCIANTE"):?>
                     <input type="text" placeholder="Nombre de la empresa" name="nombre_empresa" value="<?=$perfil["nombre_empresa"]?>"/>

@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/editarPerfil.css"/>
 </head>
 <body>
+    <header>
+        <a href="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=editarPerfil">
+            <img src="<?= BASE_URL ?>/img/vector.png" alt="Ir a mi perfil" style="cursor: pointer;">
+        </a>
+    </header>
 
 
     <main>
