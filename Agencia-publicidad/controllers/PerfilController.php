@@ -3,6 +3,8 @@ namespace AgenciaPublicidad\Controllers;
 
 require_once __DIR__ . '/../models/dataBase/DBUser.php';
 require_once __DIR__ . '/../utils/auth_helper.php';
+use AgenciaPublicidad\Models\TipoPersonaEnum;
+
 
 use AgenciaPublicidad\Models\Comerciante;
 use AgenciaPublicidad\Models\dataBase\DBUser;
@@ -77,6 +79,8 @@ class PerfilController {
 
     public function insertarDatosPerfil(){
         $id=$_SESSION["usuario"]["id"];
+        $tipoEnum = TipoPersonaEnum::from($_SESSION["usuario"]["tipo"]);
+
         $usuarioData = new UsuarioRegistrado(
             $_SESSION["usuario"]["id"],
             $_POST['nombre'] ?? '',
@@ -85,14 +89,15 @@ class PerfilController {
             null,
             null,
             null,
-            $_SESSION["usuario"]["tipo"]
+            $tipoEnum // ✅ siempre un TipoPersonaEnum válido
         );
 
 
-   
+
         $resultado= $this->dbUser->actualizarUsuario($id, $usuarioData);
+        
         if($resultado){
-            require_once __DIR__ . '/../views/editarExito.php';
+            require_once __DIR__ . '/../views/editarExito.php'; 
 
         }else{
             require_once __DIR__ . '/../views/editarError.php';
@@ -114,7 +119,7 @@ class PerfilController {
             }
 
         }else{
-            echo"<script>alert(contraseña incorrecta)</script>";
+            echo"<script>alert('contraseña incorrecta')</script>";
             
 
         }
