@@ -1,3 +1,6 @@
+header{
+  position: static;
+}
 main {
   height: 100vh;
   min-width: 301px;
@@ -10,6 +13,7 @@ main {
   height: auto; /* Cambiado de min-height: 100% a height: auto */
   align-items: center;
   align-self: center;
+  padding: 1%;
 }
 
 .card-anuncio {
@@ -30,17 +34,17 @@ main {
   border-radius: 0.7em;
   margin-bottom: 1em;
   width: 100%;
-  height: auto; /* Cambiado de height: 60% a auto */
+  height: auto;
   max-height: 1024px;
   overflow: hidden;
 }
 
 .div-tj-img-unico img {
-  width: 100%; /* Se ajusta al ancho del contenedor */
-  height: auto; /* Altura automática manteniendo proporción */
-  object-fit: cover; /* Recorta si es necesario */
+  width: 100%; 
+  height: auto; 
+  object-fit: cover; 
   border-radius: 0.5em;
-  display: block; /* Elimina espacio debajo de la imagen */
+  display: block; 
 }
 
 .container-div-info {
