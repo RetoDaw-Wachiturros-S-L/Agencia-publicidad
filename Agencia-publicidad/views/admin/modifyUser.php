@@ -19,8 +19,15 @@ if (!isAdmin()) {
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/adminModify.css">
+    <style>
+        .lampara {
+            margin-left: 3em;
+            margin-top: 0.1px;
+        }
+    </style>
 </head>
 <body>
+    <div class="lampara" role="button" aria-label="Cambiar tema" tabindex="0"></div>
     <main>
         <div class="admin-container">
             <div class="admin-header">
@@ -101,6 +108,8 @@ if (!isAdmin()) {
             <?php endif; ?>
         </div>
     </main>
+    
 </body>
+    <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
     <script src="<?= BASE_URL ?>/js/admin.modifyUser.js"></script>
 </html>
