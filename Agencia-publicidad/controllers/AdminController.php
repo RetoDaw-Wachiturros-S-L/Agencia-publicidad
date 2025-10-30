@@ -223,13 +223,14 @@ class AdminController {
         $id = $_GET['id'] ?? null;
         if (!$id) {
             header('Location: ' . BASE_URL . '/index.php?controller=AdminController&accion=modifyUser');
+            echo "Acabas de dar una vuelta";
             exit;
         }
 
         try {
-            $dbFunctions = new DBFunctions();
-            $resultado = $dbFunctions->delete($id);
-
+            $DBUser = new DBUser();
+            $resultado = $DBUser->delete($id);
+            echo $resultado;
             if ($resultado) {
                 $_SESSION['success'] = 'Usuario eliminado exitosamente';
             } else {

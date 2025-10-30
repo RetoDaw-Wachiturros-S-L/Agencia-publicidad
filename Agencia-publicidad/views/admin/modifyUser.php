@@ -26,7 +26,7 @@ if (!isAdmin()) {
             <div class="admin-header">
                 <h1>Gestión de Usuarios</h1>
                 <div style="display: flex; gap: 1em;">
-                    <a href="javascript:history.back()" class="btn-back">
+                    <a href="<?= BASE_URL ?>/index.php?controller=MainController&accion=index" class="btn-back">
                         ← Volver atrás
                     </a>
                     <a href="<?= BASE_URL ?>/index.php?controller=AdminController&accion=createUser" class="btn-create">

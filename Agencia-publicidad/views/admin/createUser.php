@@ -107,13 +107,13 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
                     <div id="formulario_extra">
                         <p>
                             <label for="nombreEmpresa">Nombre de la empresa:*</label>
-                            <input type="text" id="nombreEmpresa" name="nombreEmpresa" placeholder="Nombre de la empresa" maxlength="50" required>
+                            <input type="text" id="nombreEmpresa" name="nombreEmpresa" placeholder="Nombre de la empresa" maxlength="50">
                             <span class="error"></span>
                         </p>
                         
                         <p>
                             <label for="nifEmpresa">NIF de la empresa:*</label>
-                            <input type="text" id="nifEmpresa" name="nifEmpresa" placeholder="NIF de la empresa" minlength="9" maxlength="9" required>
+                            <input type="text" id="nifEmpresa" name="nifEmpresa" placeholder="NIF de la empresa" minlength="9" maxlength="9">
                             <span class="error"></span>
                         </p>
                         
