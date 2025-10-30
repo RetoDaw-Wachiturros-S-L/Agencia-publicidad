@@ -113,8 +113,8 @@ class DBUser {
             $usuarioRegistrado->getNombre(),       // nombre
             $usuarioRegistrado->getApellido(),     // apellido
             $usuarioRegistrado->getEmail(),        // email
-            $usuarioRegistrado->getTipo(),   // ::COMERCIANTE
-            $usuarioRegistrado->getFotoPerfil(),   // fotoPerfil
+            $usuarioRegistrado->getPassword(),   // ::COMERCIANTE
+            $usuarioRegistrado->getFoto_Perfil(),   // fotoPerfil
             $comerciante['nombre_empresa'],        // nombreComercio
             $comerciante['nif_empresa'],
             $comerciante['comentario_empresa'],     // rubro

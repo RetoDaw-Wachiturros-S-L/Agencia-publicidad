@@ -238,7 +238,7 @@ class AuthController {
                         ];
 
                         // Si es comerciante, obtenemos los datos adicionales
-                        if ($usuario->getTipo()->value == TipoPersonaEnum::COMERCIANTE) {
+                        if ($usuario->getTipo()->value == 'COMERCIANTE') {
                             $comerciante = $this->dbUser->usuarioComerciante($usuario);
                             
                             if ($comerciante && $comerciante->getIdComerciante()) {
