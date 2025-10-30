@@ -39,9 +39,7 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
     <!-- Summernote en español -->
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/lang/summernote-es-ES.min.js"></script>
 </head>
-<body>
-    <?php include __DIR__ . '/../components/header.php'; ?>
-    
+<body>    
     <main>
         <h1>Crear Nuevo Anuncio</h1>
         
