@@ -66,6 +66,7 @@
     flex: none;
     text-align: center;
     min-height: fit-content;
+    min-width: -webkit-fill-available;
     min-width: fit-content;
     justify-self: center;
     background-color: var(--color-bg-primary);
