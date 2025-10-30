@@ -20,7 +20,6 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/editarPerfil.css"/>
 </head>
 <body>
-    <?php include __DIR__ . '/components/header.php'; ?>
     
     <main>
         <?php if(empty($_SESSION["usuario"]["foto_perfil"])):?>

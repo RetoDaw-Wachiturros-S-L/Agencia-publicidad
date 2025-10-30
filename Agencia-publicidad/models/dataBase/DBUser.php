@@ -251,6 +251,47 @@ class DBUser {
         return $resultado && $stmt->rowCount() > 0;
         
     }
+    public function verificarContrasena($id, $contrasena): bool {
+        $pdo = DBCon::getConnection();
+
+        $sql = "
+            SELECT password_hash
+            FROM usuarios
+            WHERE id = :id
+        ";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":id", $id, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        $hash = $stmt->fetchColumn();
+
+        // Si no hay resultado (usuario no encontrado)
+        if (!$hash) {
+            return false;
+        }
+
+        // Verifica si la contraseña coincide con el hash
+        return password_verify($contrasena, $hash);
+    }
+    public function actualizarContrasena($id, $nuevaCon): bool {
+        $pdo = DBCon::getConnection();
+
+        // Crear hash seguro de la nueva contraseña
+        $hash = password_hash($nuevaCon, PASSWORD_DEFAULT);
+
+        $sql = "UPDATE usuarios SET password_hash = :hash WHERE id = :id";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":hash", $hash, \PDO::PARAM_STR);
+        $stmt->bindValue(":id", $id, \PDO::PARAM_INT);
+
+        // Ejecutar y devolver true si se actualizó al menos 1 fila
+        return $stmt->execute() && $stmt->rowCount() > 0;
+    }
+
+
+
 
 
 }
