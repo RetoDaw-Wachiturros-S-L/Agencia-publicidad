@@ -149,15 +149,14 @@ class AnunciosDB{
     public function update(int $id, Anuncio $anuncioData):bool{
         $pdo = DBCon::getConnection();
         $sql = $pdo->prepare("UPDATE 
-                                ANUNCIOS SET
+                                anuncios SET
                                 TITULO = :TITULO,
                                 DETALLES = :DETALLES
-
-                                --CAMPO FECHA_ACTUALIAZCION?
                                 WHERE ID = :ID");
         $sql->bindValue(':TITULO', $anuncioData->getTitulo());
         $sql->bindValue(':DETALLES', $anuncioData->getDescripcion());
-        $sql->execute([":ID"=> $id]);
+        $sql->bindValue(":ID", $id);
+        $sql->execute();
         return $sql->rowCount() > 0; //retorna las afectadas
     }
 

@@ -28,12 +28,22 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
         <?php else:?>
             <h2><img src="<?= BASE_URL ?><?= $_SESSION["usuario"]["foto_perfil"] ?>" alt="fotoperfil"> Editar usuario</h2>
         <?php endif?>
-
+        <?php if($_SESSION["usuario"]["tipo"] == "COMERCIANTE"){
+            $var="insertarDatosPerfilComerci";
+        }else{
+            $var="insertarDatosPerfil";
+        }    
+        ?>
+            
+     
+    
+        
         <h1>Campos a cambiar</h1>
-            <form class="botones" method="post" action="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=editarPerfil" enctype="multipart/form-data">
-                <input type="text" placeholder="Nombre" name="nombre"/>
-                <input type="text" placeholder="Apellido" name="apellido"/>
-                <input type="password" placeholder="Contraseña" name="contrasena"/>
+         
+            <form class="botones" method="post" action="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=<?=$var?>" enctype="multipart/form-data">
+                <input type="text" placeholder="Nombre" name="nombre" value="<?=$perfil["nombre"]?>"/>
+                <input type="text" placeholder="Apellido" name="apellido" value="<?=$perfil["apellido"]?>"/>
+                <a href="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=vistaContrasena" class="contrasena">Cambiar contraseña</a>
                 
                 <!-- Input file personalizado -->
                 <div class="custom-file">
@@ -42,10 +52,10 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
                 </div>
                 
                 <?php if($_SESSION["usuario"]["tipo"]=="COMERCIANTE"):?>
-                    <input type="text" placeholder="Nombre de la empresa" name="nombre_empresa"/>
-                    <input type="text" placeholder="Comentario de la empresa" name="comentario_empresa"/>
-                    <input type="text" placeholder="Número de telefono" name="telefono_empresa"/>
-                    <input type="text" placeholder="NIF de la empresa" name="nif_empresa"/>
+                    <input type="text" placeholder="Nombre de la empresa" name="nombre_empresa" value="<?=$perfil["nombre_empresa"]?>"/>
+                    <input type="text" placeholder="Comentario de la empresa" name="comentario_empresa" value="<?=$perfil["comentario_empresa"]?>"/>
+                    <input type="text" placeholder="Número de telefono" name="telefono_empresa" value="<?=$perfil["num_telefono"]?>"/>
+                    <input type="text" placeholder="NIF de la empresa" name="nif_empresa" value="<?=$perfil["nif_empresa"]?>"/>
                 <?php endif?>
                 
                 <button type="submit" class="boton-enviar">Guardar cambios</button>

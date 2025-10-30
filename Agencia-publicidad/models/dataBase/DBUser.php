@@ -149,8 +149,10 @@ class DBUser {
         $pdo = DBCon::getConnection();
 
         $sql = "SELECT 
-                    a.titulo,
-                    a.detalles,
+                    a.id, 
+                    a.id_comerciante, 
+                    a.titulo, 
+                    a.detalles, 
                     a.fecha_publicacion 
                 FROM anuncios a
                 JOIN comerciantes c ON a.id_comerciante = c.id
@@ -195,6 +197,7 @@ class DBUser {
     return $perfil;
     }
 
+
     public function delete(int $id): bool {
         $pdo = DBCon::getConnection();
         $sql = $pdo->prepare('DELETE FROM usuarios WHERE ID = :ID');
@@ -202,6 +205,52 @@ class DBUser {
         return $sql->execute();
     }
 
+    public function actualizarUsuario($id, $usuarioData){
+        $pdo = DBCon::getConnection();
+        $sql ="
+            UPDATE usuarios
+            SET nombre = :nombre,
+            apellido = :apellido
+        WHERE u.id = :id
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":id", $id, \PDO::PARAM_INT);
+        $stmt->bindValue(':nombre', $usuarioData->getNombre);
+        $stmt->bindValue(':apellido', $usuarioData->getApellido);
+
+        $resultado=$stmt->execute();
+        return $resultado && $stmt->rowCount() > 0;        
+        
+    }
+
+    public function actualizarComerciante($id, $usuarioData){
+        $pdo = DBCON::getConnection();
+        $sql ="
+            UPDATE usuarios u
+            JOIN comerciantes c ON u.id = c.id_usuario
+            SET u.nombre = :nombre,
+                u.apellido = :apellido,
+                c.nombre_empresa = :nombre_empresa,
+                c.comentario_empresa= :comentario,
+                c.num_telefono= :numero,
+                c.nif_empresa = :nif
+            WHERE u.id = :id;
+
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":id", $id, \PDO::PARAM_INT);
+        $stmt->bindValue(':nombre', $usuarioData->getNombre());
+        $stmt->bindValue(':apellido', $usuarioData->getApellido());
+        $stmt->bindValue(':nombre_empresa', $usuarioData->getNombreComercio());
+        $stmt->bindValue(':comentario', $usuarioData->getRubro());
+        $stmt->bindValue(':numero', $usuarioData->getNumTelefono());
+        $stmt->bindValue(':nif', $usuarioData->getNifEmpresa());
+
+
+        $resultado=$stmt->execute();
+        return $resultado && $stmt->rowCount() > 0;
+        
+    }
 
 
 }
