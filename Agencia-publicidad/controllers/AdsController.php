@@ -167,6 +167,7 @@ class AdsController{
                 try {
                     // Verificar que el usuario sea comerciante antes de intentar crear
                     $currentUser = $_SESSION['usuario'] ?? null;
+                    var_export($currentUser);
                     if (!$currentUser || $currentUser['tipo'] != 'COMERCIANTE') {
                         echo "<script>alert('ERROR: Solo los comerciantes pueden crear anuncios. Tu tipo de usuario es: " . ($currentUser['tipo'] ?? 'NO DEFINIDO') . "'); window.history.back();</script>";
                         exit;

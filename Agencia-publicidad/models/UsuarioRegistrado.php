@@ -9,12 +9,12 @@ class UsuarioRegistrado{
     private ?string $apellido;
     private ?string $email;
     private ?string $password;
-    private DateTime $fecha_inscripcion;
+    private ?DateTime $fecha_inscripcion;
     private ?string $foto_perfil;
     private TipoPersonaEnum $tipo; 
     // admin, comerciante, visitante
 
-    public function __construct(?int $id_usuario, string $nombre, ?string $apellido, string $email, string $password, DateTime $fecha_inscripcion, ?string $foto_perfil, TipoPersonaEnum $tipo) {
+    public function __construct(?int $id_usuario, string $nombre, ?string $apellido, string $email, ?string $password, ?DateTime $fecha_inscripcion, ?string $foto_perfil, TipoPersonaEnum $tipo) {
         $this->id_usuario = $id_usuario;
         $this->nombre = $nombre;
         $this->apellido = $apellido ?? '';
