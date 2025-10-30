@@ -87,8 +87,8 @@
   font-weight: bolder;
   font-size: 1.7em;
   border: 2px solid var(--color-border);
-  padding: 0.3em 4em;
-  max-width: 5em;
+  padding: 0.3em 1em;
+  max-width: fit-content;
   max-height: 1.3em;
   background-color: var(--color-bg-primary);
   border-radius: 15px;
