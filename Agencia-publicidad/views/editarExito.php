@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/perfilEditado.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/perfilEditado.css"/>
 
 </head>

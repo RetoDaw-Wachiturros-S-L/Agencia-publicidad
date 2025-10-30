@@ -28,6 +28,9 @@ function validarEspecial(valor, regex) {
   const regexp = regex;
   return regexp.test(valor);
 }
+function validarRepetir(con1, con2){
+  return(con1=con2)
+}
 
 function mostrarError(input, mensaje) {
   const errorSpan = input.nextElementSibling;

@@ -65,7 +65,7 @@
   
   /* Colores de texto */
   --color-text-primary: #FFCF70;
-  --color-text-secondary: #b0b0b0;
+  --color-text-secondary: #ffc34d;
   --color-text-light: #ffffff;
   --color-input-text: #FFCF70;
   
@@ -94,7 +94,7 @@
   
   /* Separadores */
   --color-separator: rgb(80, 80, 80);
-  
+
   /* Imágenes */
   --icon-search: url(../img/lupa_b.png);
   --icon-lamp: url(../img/lampara_b.png);
@@ -104,6 +104,12 @@
   --icon-heart: url(../img/Heart_b.png);
   --icon-heart-active: url(../img/favorito_activo_b.png);
   --icon-login: url(../img/login_b.png);
+
+  /* Badges */
+
+  --badge-admin: #2f2f2f;
+  --badge-comerciante: #624979;
+  --badge-visitante: #396b43;
 }
 
 /* Transición suave al cambiar de tema */
