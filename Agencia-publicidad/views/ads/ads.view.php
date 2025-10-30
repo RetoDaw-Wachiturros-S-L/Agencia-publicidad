@@ -1,0 +1,48 @@
+<?php
+    require_once __DIR__ . '/../../utils/auth_helper.php';
+    
+    $currentUser = $GLOBALS['currentUser'] ?? null;
+    $isLoggedIn = $GLOBALS['isLoggedIn'] ?? false;
+    $isAdmin = $GLOBALS['isAdmin'] ?? false;
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comerciantes Vitoria</title>
+    <link rel="icon" type="image/png" href="<?= BASE_URL ?>/img/logo_SSombra.png">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/themes.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/layout.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/index.css"/>
+</head>
+<body>
+    <?php include __DIR__ . '/../components/header.php'; ?>
+    
+    <main>
+        <div class="cards-row">
+            <?php foreach($anuncios as $anuncio): ?>
+                <!-- Cuando se clicka en la card manda el id anuncio para la view (Y consecuentemente si se le quiere dar a like o quitarlo) -->
+                <div class="card-anuncio" data-id-anuncio="<?= $anuncio['id'] ?>">
+                    <div class="div-tj-img">
+                        <?php
+                            // Mostrar foto de portada si existe
+                            if (!empty($anuncio['url_foto'])) {
+                                $rutaCompleta = BASE_URL . '/' . $anuncio['url_foto'];
+                                echo "<img src='{$rutaCompleta}' alt='{$anuncio['titulo']}'>";
+                            } else {
+                                //Si no se sustituye por una genérica
+                                echo "<img src='" . BASE_URL . "/img/logo.png' alt='Sin imagen'>";
+                            }
+                        ?>
+                    </div>
+                    <h2 id="titulo-anuncio"><?= htmlspecialchars($anuncio['titulo']) ?></h2>
+                    <div class="desc-anuncio"><?= $anuncio['detalles'] ?? 'Sin detalles' ?></div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <script src="<?= BASE_URL ?>/js/index.js"></script>
+    </main>
+    <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
+</body>
+</html>

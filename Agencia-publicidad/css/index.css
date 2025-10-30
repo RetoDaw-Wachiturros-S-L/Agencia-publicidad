@@ -1,0 +1,180 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  padding: 2em 3em;
+  gap: 1em;
+  min-height: calc(100vh - 8em);
+}
+
+.cards-row {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 1em; 
+  margin-bottom: 1em;
+}
+
+
+.card-anuncio {
+  /* Emn moviles(o pantalla pequeña) se ven 2 card que ocupan el 50% de la view, liego en pantalla grande ocupan el 25% */
+  flex: 1 1 calc(50% - 0.5em); 
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  border: 1px solid var(--color-border);
+  border-radius: 0.7em;
+  background-color: var(--color-bg-secondary);
+  box-sizing: border-box;
+  height: 320px; 
+  overflow: hidden; /* Evita que el contenido se desborde de la card */
+}
+
+
+.div-tj-img {
+  position: relative; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: 0.7em;
+  margin-bottom: 1em;
+  height: 180px; /* Altura fija para consistencia visual (ajustada para mejor proporción) */
+  width: auto;
+  overflow: hidden; 
+}
+
+.div-tj-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  border-radius: 0.5em;
+}
+
+/* Estilos para el contenido de texto de las cards, lo trunca si es muy largi */
+#titulo-anuncio {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Máximo 2 líneas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.desc-anuncio {
+  max-height: 50%;
+  font-size: 0.9em;
+  color: var(--color-text-secondary, #666);
+  /* Trunca la descripcion sustituyendo las n lineas que tanga con (...) y luego la deja como invisible */
+  display: -webkit-box;
+  -webkit-line-clamp: 1; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Puntos suspensivos (...) */
+  white-space: nowrap; 
+}
+
+.btn-favorito {
+  position: absolute; 
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.2); /* Fondo blanco semi-transparente */
+  -webkit-backdrop-filter: blur(10px); /* Compatibilidad Safari */
+  backdrop-filter: blur(10px); /* Efecto de cristal */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Borde sutil */
+  border-radius: 50%; /* Forma circular */
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Transiciones suaves */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  z-index: 10; /* Por encima de otros elementos */
+}
+
+.btn-favorito:hover {
+  background: rgba(255, 255, 255, 0.3); /* Más opaco al pasar el ratón */
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+}
+
+.btn-favorito:active {
+  transform: scale(0.95); 
+}
+
+.btn-editar-anuncio{
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  max-width: 50%;
+  background-color: var(--color-bg-tertiary);
+  border: 2px  solid var(--color-border-light);
+  border-radius: .8em;
+  align-items: center;
+  align-content: center;
+  padding: .3em;
+  color: var(--color-text-secondary);
+  margin: 1%;
+  text-decoration: none;
+}
+.btn-editar-anuncio:hover {
+  background-color: var(--color-bg-secondary); 
+  color: var(--color-text-primary); 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+  cursor: pointer; 
+  transform: scale(1.02); 
+  transition: all 0.3s ease; 
+}
+
+.btn-borrar-anuncio{
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  max-width: 50%;
+  background-color: var(--color-bg-secondary);
+  border: 2px  solid var(--color-border-light);
+  border-radius: .8em;
+  align-items: center;
+  align-content: center;
+  padding: .3em;
+  color: var(--color-text-secondary);
+  margin: 1%;
+  text-decoration: none;
+}
+.btn-borrar-anuncio:hover {
+  background-color: var(--color-error-bg); /* cambia el fondo al pasar el mouse */
+  color: var(--color-text-primary); /* cambia el color del texto */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* agrega una sombra sutil */
+  cursor: pointer; /* muestra el cursor de mano */
+  transform: scale(1.02); /* efecto de zoom suave */
+  transition: all 0.3s ease; /* suaviza la transición */
+} 
+
+/* Cuando el favorito está activo */
+.btn-favorito.favorito-activo .heart-icon {
+  background-image: var(--icon-heart-active); /* Usa la variable del tema para favorito activo */
+}
+
+/* Media queries para diseño responsivo */
+
+@media (min-width: 768px) {
+  .card-anuncio {
+    flex: 1 1 calc(33.333% - 0.67em); /* 3 cards por fila */
+  }
+}
+
+/* Pantallas grandes (≥1024px) */
+@media (min-width: 1024px) {
+  .card-anuncio {
+    flex: 1 1 calc(25% - 0.75em); /* 4 cards por fila */
+  }
+}

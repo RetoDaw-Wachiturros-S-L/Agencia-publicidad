@@ -1,0 +1,121 @@
+/* Reset específico para eliminar el margen del body */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Mobile First - Grid Layout */
+main {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto auto;
+  place-items: center;
+  place-content: center;
+  gap: 2em;
+  padding: 1.5em;
+  background-color: var(--color-bg-primary);
+}
+
+/* Título */
+h1 {
+  color: var(--color-text-primary);
+  font-size: 2em;
+  text-align: center;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Contenedor del formulario */
+#form-container {
+  border-radius: 1em;
+  padding: 2em;
+  width: 100%;
+  max-width: 525px;
+  min-width: 350px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+
+input[type="email"],
+input[type="password"] {
+  text-align: center;
+  background-color: var(--color-bg-secondary);
+  border: solid 2px var(--color-border);
+  border-radius: 0.2em;
+  padding: 0.9em;
+  font-size: 1.3em;
+  color: var(--color-input-text);
+  box-shadow: 6px 6px 0 var(--color-border);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+input[type="email"]:hover,
+input[type="password"]:hover,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+  transform: scale(1.05);
+  box-shadow: 9px 9px 0 var(--color-border);
+}
+
+#btn-login {
+  color: var(--color-text-primary);
+  text-align: center;
+  background-color: var(--color-accent-secondary);
+  border: solid 2px var(--color-border);
+  border-radius: 0.2em;
+  padding: 0.9em;
+  font-size: 1.3em;
+  box-shadow: 6px 6px 0 2px var(--color-accent-primary);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Pantallas más grandes */
+@media screen and (min-width: 768px) {
+  main {
+    padding: 2em;
+  }
+
+  h1 {
+    font-size: 2.5em;
+    margin-top: 0.5em;
+  }
+
+  #form-container {
+    padding: 2.5em;
+    max-width: 750px;
+    min-width: 500px;
+  }  input[type="email"],
+  input[type="password"] {
+    padding: 1em;
+    font-size: 1.5em;
+    box-shadow: 9px 9px 0 var(--color-border);
+  }
+
+  input[type="email"]:hover,
+  input[type="password"]:hover,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="submit"]:hover,
+  input[type="submit"]:focus {
+    transform: scale(1.1);
+    box-shadow: 12px 12px 0 var(--color-border);
+  }
+
+  #btn-login {
+    padding: 1em;
+    font-size: 1.5em;
+    box-shadow: 9px 9px 0 2px var(--color-accent-primary);
+  }
+}

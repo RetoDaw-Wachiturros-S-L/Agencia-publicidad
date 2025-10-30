@@ -1,0 +1,89 @@
+<?php 
+//CRUD de tabla usuarios
+namespace AgenciaPublicidad\Models\dataBase;
+
+use AgenciaPublicidad\Models\UsuarioRegistrado;
+use AgenciaPublicidad\Models\dataBase\DBCon;
+
+require_once __DIR__ . '/DBCon.php';
+require_once __DIR__ . '/../UsuarioRegistrado.php';
+
+class DBFunctions {
+
+    function getAll(){
+        $pdo = DBCon::getConnection();
+        $sql = "SELECT 
+                    id, nombre, apellido,
+                    email, fecha_inscripcion, foto_perfil, tipo_usuario
+                FROM usuarios";
+        $stmt = $pdo->query($sql);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getById($id): UsuarioRegistrado|null {
+        $pdo = DBCon::getConnection();
+        $sql = $pdo->prepare("SELECT 
+                    nombre, apellido,
+                    email, fecha_inscripcion, foto_perfil, tipo_usuario, password_hash
+                FROM usuarios
+                WHERE ID = :ID");
+        $sql->bindValue(":ID", $id);
+        $sql->execute();
+        $data = $sql->fetch(\PDO::FETCH_ASSOC);
+
+        if ($data) {
+            // Ajusta los parámetros según el constructor de UsuarioRegistrado
+            return new UsuarioRegistrado(
+                $id,
+                $data['nombre'],
+                $data['apellido'] ?? '',
+                $data['email'],
+                $data['password_hash'], // o null si no quieres exponer el hash
+                $data['fecha_inscripcion'] ?? null,
+                $data['foto_perfil'] ?? null,
+                $data['tipo_usuario']
+            );
+        }
+        return null;
+    }
+
+    public function update(int $id, UsuarioRegistrado $usuario): bool {
+        $pdo = DBCon::getConnection();
+        
+        // Solo actualizar contraseña si se proporciona una nueva
+        $updatePassword = ($usuario->getPassword() !== null && $usuario->getPassword() !== '');
+
+        $sqlStr = 'UPDATE USUARIOS SET
+                    NOMBRE = :NOMBRE,
+                    APELLIDO = :APELLIDO,
+                    EMAIL = :EMAIL,
+                    FOTO_PERFIL = :FOTO_PERFIL,
+                    TIPO_USUARIO = :TIPO_USUARIO';
+        if ($updatePassword) {
+            $sqlStr .= ', PASSWORD_HASH = :PASSWORD_HASH';
+        }
+        $sqlStr .= ' WHERE ID = :ID';
+
+        $sql = $pdo->prepare($sqlStr);
+
+        $sql->bindValue(':NOMBRE', $usuario->getNombre(), \PDO::PARAM_STR);
+        $sql->bindValue(':APELLIDO', $usuario->getApellido() ?? null, \PDO::PARAM_STR);
+        $sql->bindValue(':EMAIL', $usuario->getEmail() ?? null, \PDO::PARAM_STR);
+        // FIX: método correcto con guion bajo
+        $sql->bindValue(':FOTO_PERFIL', $usuario->getFoto_perfil() ?? null, \PDO::PARAM_STR);
+        $sql->bindValue(':TIPO_USUARIO', $usuario->getTipo()->value, \PDO::PARAM_STR);
+        if ($updatePassword) {
+            $sql->bindValue(':PASSWORD_HASH', password_hash($usuario->getPassword(), PASSWORD_BCRYPT), \PDO::PARAM_STR);
+        }
+        $sql->bindValue(':ID', $id);
+        
+        return $sql->execute();
+    }               
+
+    
+        
+}
+
+
+
+?>
