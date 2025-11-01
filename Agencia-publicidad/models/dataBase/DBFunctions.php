@@ -44,7 +44,7 @@ class DBFunctions {
                 $data['password_hash'], // o null si no quieres exponer el hash
                 $fechaInscripcion ?? new \DateTime(),
                 $data['foto_perfil'] ?? null,
-                $tipo ?? TipoPersonaEnum::VISITANTE
+                $tipo ?? TipoPersonaEnum::ADMINISTRADOR,
             );
         }
         return null;

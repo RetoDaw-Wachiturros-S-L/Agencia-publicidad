@@ -63,7 +63,7 @@ if (!isAdmin()) {
                     <select id="tipo" name="tipo" required>
                         <option value="VISITANTE" <?= $usuario->getTipo()->value === 'VISITANTE' ? 'selected' : '' ?> > <?= TipoPersonaEnum::VISITANTE->value ?> </option>
                         <option value="COMERCIANTE" <?= $usuario->getTipo()->value === 'COMERCIANTE' ? 'selected' : '' ?>><?= TipoPersonaEnum::COMERCIANTE->value ?></option>
-                        <option value="ADMIN" <?= $usuario->getTipo()->value === 'ADMIN' ? 'selected' : '' ?>><?= TipoPersonaEnum::ADMINISTRADOR->value ?></option>
+                        <option value="ADMINISTRADOR" <?= $usuario->getTipo()->value === 'ADMIN' ? 'selected' : '' ?>><?= TipoPersonaEnum::ADMINISTRADOR->value ?></option>
                     </select>
                 </div>
 
