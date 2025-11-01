@@ -74,6 +74,7 @@ if (!isAdmin()) {
             </form>
         </div>
     </main>
-    <script scr="<?= BASE_URL ?>/js/theme-switcher.js"></script>
 </body>
+    <script scr="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
+
 </html>

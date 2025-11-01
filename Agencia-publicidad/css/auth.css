@@ -4,6 +4,7 @@ body:has(.auth-main) {
   padding: 0 !important;
 }
 
+
 /* Mobile First - Grid Layout - Solo para páginas de autenticación */
 .auth-main {
   min-height: 90vh;
@@ -12,7 +13,6 @@ body:has(.auth-main) {
   place-items: center;
   place-content: center;
   gap: 2em;
-  padding: 1.5em;
   background-color: var(--color-bg-primary);
 }
 
