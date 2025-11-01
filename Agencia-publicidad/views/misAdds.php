@@ -43,21 +43,15 @@
 
                     <h2 id="titulo-anuncio"><?= htmlspecialchars($anuncio['titulo']) ?></h2>
 
-                    <p id="desc-anuncio"><?= $anuncio['detalles'] ?? 'Sin detalles' ?></p>
+                    <div id="desc-anuncio"><?= $anuncio['detalles'] ?? 'Sin detalles' ?></div>
                     
-                    <a
-                        class="btn-editar-anuncio"
-                        href="<?= BASE_URL ?>/index.php?controller=AdsController&accion=edit&id=<?= $anuncio['id'] ?>"
-                    >
-                        Editar Anuncio
-                    </a>
+                    <div class="acciones-anuncio">
+                        <a class="btn-editar-anuncio" href="<?= BASE_URL ?>/index.php?controller=AdsController&accion=edit&id=<?= $anuncio['id'] ?>">Editar Anuncio</a>
 
-                    <a 
-                        href="<?= BASE_URL ?>/index.php?controller=AdsController&accion=delete&id=<?= $anuncio['id'] ?>"
-                        class="btn-borrar-anuncio"
-                    >
-                    Borrar Anuncio
-                    </a>
+                        <a href="<?= BASE_URL ?>/index.php?controller=AdsController&accion=delete&id=<?= $anuncio['id'] ?>" class="btn-borrar-anuncio">Borrar Anuncio</a>
+                    </div>
+
+
                 </div>
             <?php endforeach; ?>
         </div>

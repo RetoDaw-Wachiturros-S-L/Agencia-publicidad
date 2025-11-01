@@ -48,7 +48,10 @@
                         id="titulo-anuncio"
                         class="input-anuncio-upd" 
                         name="titulo" 
-                        value="<?= htmlspecialchars($anuncio->getTitulo()) ?>" 
+                        value="<?= $anuncio->getTitulo() ?>" 
+                        required
+                        minlength="2"
+                        maxlength="150"
                     >
 
                     <label for="desc-anuncio">Descripción:</label>
@@ -57,26 +60,23 @@
                         class="input-anuncio-upd"  
                         id="desc-anuncio" 
                         name="descripcion" 
-                        value="<?= htmlspecialchars($anuncio->getDescripcion() ?? 'Sin detalles') ?>" 
+                        value="<?= $anuncio->getDescripcion() ?? 'Sin detalles' ?>" 
                     >
                     <input type="submit" id="btn-guardar" class="submit-anuncio-upd">
-
-
                 </div>
 
                 <!-- Datos de la empresa -->
                 <div class="info-div">
                     <h2>Datos de la empresa:</h2>
                     <ul>
-                    <li><?= htmlspecialchars($anuncio->getAnunciante()->getNombreComercio() ?? 'Sin detalles') ?></li>
-                    <li>Mail: <?= htmlspecialchars($anuncio->getAnunciante()->getEmail() ?? 'Sin detalles') ?></li>
-                    <li>Tel: <?= htmlspecialchars($anuncio->getAnunciante()->getNumTelefono() ?? 'Sin detalles') ?></li>
+                    <li><?= $anuncio->getAnunciante()->getNombreComercio() ?? 'Sin detalles' ?></li>
+                    <li>Mail: <?= $anuncio->getAnunciante()->getEmail() ?? 'Sin detalles' ?></li>
+                    <li>Telf: <?= $anuncio->getAnunciante()->getNumTelefono() ?? 'Sin detalles' ?></li>
                     </ul>
-                    <p><span class="fecha-formateada">Publicado en: <?= $fechaFormateada ?></span></p>
+                    <div><span class="fecha-formateada">Publicado en: <?= $fechaFormateada ?></span></div>
                 </div> 
             </form>
         </div>
-        
         </div>
     </main>
     <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>

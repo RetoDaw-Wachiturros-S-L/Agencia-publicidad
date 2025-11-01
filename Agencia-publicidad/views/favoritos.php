@@ -53,7 +53,7 @@
             <?php endforeach; ?>
         </div>
     <?php else: ?>
-        <h2>No tienes anuncios favoritos todavía.</h2>
+        <h1 class="no-fav-titulo">No tienes anuncios favoritos todavía.</h1>
         <a href="<?= BASE_URL ?>/index.php?accion=index">Explorar anuncios</a>
     <?php endif; ?>
     <script src="<?= BASE_URL ?>/js/index.js"></script>

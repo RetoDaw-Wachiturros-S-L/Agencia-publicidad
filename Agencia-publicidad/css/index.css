@@ -34,7 +34,6 @@ main {
   overflow: hidden; /* Evita que el contenido se desborde de la card */
 }
 
-
 .div-tj-img {
   position: relative; 
   display: flex;
@@ -68,7 +67,7 @@ main {
   overflow: hidden;
 }
 
-.desc-anuncio {
+.desc-anuncio, #desc-anuncio {
   max-height: 50%;
   font-size: 0.9em;
   color: var(--color-text-secondary, #666);
@@ -109,6 +108,14 @@ main {
 
 .btn-favorito:active {
   transform: scale(0.95); 
+}
+
+.acciones-anuncio {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* por si no caben en pantallas pequeñas */
+  gap: 1em;
+  margin-top: 1em;
 }
 
 .btn-editar-anuncio{

@@ -5,8 +5,8 @@
 }
 
 body {
-    background-color: #FFF5E6;
-    color: #154C7E;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
     font-family: 'Arial', sans-serif;
 }
 
@@ -27,48 +27,48 @@ main h1, main h2 {
 
 .contrasena {
     text-decoration: none;
-    color: #154C7E; 
+    color: var(--color-input-text); 
     font-weight: bolder;
     font-size: 1.5em;
-    border: 2px solid #154C7E; 
+    border: 2px solid var(--color-border); 
     padding: 0.5em 1em;
     width: 100%;
     max-width: 35em; 
-    background-color: #FFF5E6; 
+    background-color: var(--color-accent-primary); 
     border-radius: 15px;
-    box-shadow: 6px 6px 0px #154C7E;
+    box-shadow: 6px 6px 0px var(--color-border);
     transition: all 0.2s ease-in-out;
     display: inline-block;
     text-align: center;
 }
 
 .contrasena:hover {
-    background-color: #FFCDC1;
+    background-color: var(--color-accent-hover); 
     transform: translateY(-2px);
-    box-shadow: 8px 8px 0px #0F3B61;
+    box-shadow: 8px 8px 0px var(--color-border);
 }
 
 
 main input[type="text"],
 main input[type="password"] {
-    color: #154C7E;
+    color: var(--color-input-text);
     font-weight: bolder;
     font-size: 1.5em;
-    border: 2px solid #154C7E;
+    border: 2px solid var(--color-border);
     padding: 0.5em 1em;
     width: 100%;
     max-width: 35em;
-    background-color: #FFCDC1;
+    background-color: var(--color-bg-secondary);
     border-radius: 15px;
-    box-shadow: 6px 6px 0px #154C7E;
+    box-shadow: 6px 6px 0px var(--color-border);
     transition: all 0.2s ease-in-out;
 }
 
 main input[type="text"]:hover,
 main input[type="password"]:hover {
-    background-color: #f1cbc1;
+    background-color: var(--color-bg-tertiary);
     transform: translateY(-2px);
-    box-shadow: 8px 8px 0px #0F3B61;
+    box-shadow: 8px 8px 0px var(--color-border);
 }
 
 form.botones {
@@ -81,24 +81,24 @@ form.botones {
 }
 button, input[type="submit"] {
     text-decoration: none;
-    color: #154C7E;
+    color: var(--color-input-text);
     font-weight: bolder;
     font-size: 1.5em;
-    border: 2px solid #154C7E;
+    border: 2px solid var(--color-border);
     padding: 0.5em 1em;
     width: 100%;
     max-width: 35em;
-    background-color: #f78a72;
+    background-color: var(--color-accent-primary);
     border-radius: 15px;
-    box-shadow: 6px 6px 0px #F16849;
+    box-shadow: 6px 6px 0px var(--color-border);
     transition: all 0.2s ease-in-out;
     cursor: pointer;
 }
 
 button:hover, input[type="submit"]:hover {
-    background-color: #f99b86;
+    background-color: var(--color-accent-hover);
     transform: translateY(-2px);
-    box-shadow: 8px 8px 0px #f26c4e;
+    box-shadow: 8px 8px 0px var(--color-border);
 }
 
 main h2 img {

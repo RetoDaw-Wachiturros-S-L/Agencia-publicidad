@@ -158,8 +158,10 @@ class DBUser {
                     a.id_comerciante, 
                     a.titulo, 
                     a.detalles, 
-                    a.fecha_publicacion 
+                    a.fecha_publicacion,
+                    fa.url_foto
                 FROM anuncios a
+                LEFT JOIN fotos_anuncios fa ON a.id = fa.id_anuncio
                 JOIN comerciantes c ON a.id_comerciante = c.id
                 JOIN usuarios u ON c.id_usuario  =  u.id 
                 WHERE u.id = :id";

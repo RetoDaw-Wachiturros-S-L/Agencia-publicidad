@@ -40,22 +40,19 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
         }    
         ?>
             
-     
-    
-        
-        <h1>Campos a cambiar</h1>
+     <h1>Campos a cambiar</h1>
          
             <form class="botones" method="post" action="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=<?=$var?>" enctype="multipart/form-data">
-                <input type="text" placeholder="Nombre" name="nombre" value="<?=$perfil["nombre"]?>"/>
-                <input type="text" placeholder="Apellido" name="apellido" value="<?=$perfil["apellido"]?>"/>
+                <input type="text" placeholder="Nombre" name="nombre" value="<?=$perfil["nombre"]?>" required minlength="2" maxlength="50"/>
+                <input type="text" placeholder="Apellido" name="apellido" value="<?=$perfil["apellido"]?>" minlength="2" maxlength="50"/>
                 <a href="<?= BASE_URL ?>/index.php?controller=PerfilController&accion=vistaContrasena" class="contrasena">Cambiar contraseña</a>
                 
                 
                 <?php if($_SESSION["usuario"]["tipo"]=="COMERCIANTE"):?>
-                    <input type="text" placeholder="Nombre de la empresa" name="nombre_empresa" value="<?=$perfil["nombre_empresa"]?>"/>
-                    <input type="text" placeholder="Comentario de la empresa" name="comentario_empresa" value="<?=$perfil["comentario_empresa"]?>"/>
-                    <input type="text" placeholder="Número de telefono" name="telefono_empresa" value="<?=$perfil["num_telefono"]?>"/>
-                    <input type="text" placeholder="NIF de la empresa" name="nif_empresa" value="<?=$perfil["nif_empresa"]?>"/>
+                    <input type="text" placeholder="Nombre de la empresa" name="nombre_empresa" value="<?=$perfil["nombre_empresa"]?>" required minlength="2" maxlength="150"/>
+                    <input type="text" placeholder="Comentario de la empresa" name="comentario_empresa" value="<?=$perfil["comentario_empresa"]?>" minlength="2" maxlength="150"/>
+                    <input type="text" placeholder="Número de telefono" name="telefono_empresa" value="<?=$perfil["num_telefono"]?>" minlength="9" maxlength="9"/>
+                    <input type="text" placeholder="NIF de la empresa" name="nif_empresa" value="<?=$perfil["nif_empresa"]?>" minlength="9" maxlength="9"/>
                 <?php endif?>
                 
                 <button type="submit" class="boton-enviar">Guardar cambios</button>
