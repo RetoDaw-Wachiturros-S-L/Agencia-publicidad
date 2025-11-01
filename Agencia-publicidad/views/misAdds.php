@@ -56,8 +56,8 @@
             <?php endforeach; ?>
         </div>
     <?php else: ?>
-        <h2>No tienes anuncios todavía.</h2>
-        <a href="<?= BASE_URL ?>/index.php?controller=AdsController&accion=create">Crear mi primer anuncio</a>
+        <h2 class="no-auncios">No tienes anuncios todavía.</h2>
+        <a class="no-anuncios-a" href="<?= BASE_URL ?>/index.php?controller=AdsController&accion=create">Crear mi primer anuncio</a>
     <?php endif; ?>
     <script src="<?= BASE_URL ?>/js/index.js"></script>
 </main>

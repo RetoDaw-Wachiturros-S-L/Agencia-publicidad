@@ -4,6 +4,7 @@ namespace AgenciaPublicidad\Models\dataBase;
 
 use AgenciaPublicidad\Models\UsuarioRegistrado;
 use AgenciaPublicidad\Models\dataBase\DBCon;
+use AgenciaPublicidad\Models\TipoPersonaEnum;
 
 require_once __DIR__ . '/DBCon.php';
 require_once __DIR__ . '/../UsuarioRegistrado.php';
@@ -32,6 +33,8 @@ class DBFunctions {
         $data = $sql->fetch(\PDO::FETCH_ASSOC);
 
         if ($data) {
+            $fechaInscripcion = new \DateTime($data['fecha_inscripcion']);
+            $tipo = TipoPersonaEnum::from($data['tipo_usuario']);
             // Ajusta los parámetros según el constructor de UsuarioRegistrado
             return new UsuarioRegistrado(
                 $id,
@@ -39,9 +42,9 @@ class DBFunctions {
                 $data['apellido'] ?? '',
                 $data['email'],
                 $data['password_hash'], // o null si no quieres exponer el hash
-                $data['fecha_inscripcion'] ?? null,
+                $fechaInscripcion ?? new \DateTime(),
                 $data['foto_perfil'] ?? null,
-                $data['tipo_usuario']
+                $tipo ?? TipoPersonaEnum::VISITANTE
             );
         }
         return null;
@@ -53,7 +56,7 @@ class DBFunctions {
         // Solo actualizar contraseña si se proporciona una nueva
         $updatePassword = ($usuario->getPassword() !== null && $usuario->getPassword() !== '');
 
-        $sqlStr = 'UPDATE USUARIOS SET
+        $sqlStr = 'UPDATE usuarios SET
                     NOMBRE = :NOMBRE,
                     APELLIDO = :APELLIDO,
                     EMAIL = :EMAIL,

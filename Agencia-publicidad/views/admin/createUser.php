@@ -101,7 +101,7 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
                     
                     <p>
                         <label for="tipo_admin">Administrador</label>
-                        <input type="checkbox" name="tipo" id="tipo_admin" value="ADMIN" class="tipo-checkbox">
+                        <input type="checkbox" name="tipo" id="tipo_admin" value="ADMINISTRADOR" class="tipo-checkbox">
                     </p>
                     
                     <div id="formulario_extra">

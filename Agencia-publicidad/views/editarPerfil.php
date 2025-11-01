@@ -59,7 +59,7 @@ $isAdmin = $GLOBALS['isAdmin'] ?? false;
             </form>
     </main>
     
-    <script src="<?= BASE_URL ?>/js/index.js"></script>
+    <script src="<?= BASE_URL ?>/js/index.js" defer></script>
     <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
 </body>
 </html>

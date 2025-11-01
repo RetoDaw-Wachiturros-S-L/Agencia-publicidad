@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/oneAd.css"/>
 </head>
 <body>
+
     <?php include __DIR__ . '/../components/header.php'; ?>
 
     <main>
@@ -75,6 +76,5 @@
         </div>
     </main>
     <script src="<?= BASE_URL ?>/js/theme-switcher.js" defer></script>
-    <div class="lampara" role="button" aria-label="Cambiar tema" tabindex="0"></div>
 </body>
 </html>
