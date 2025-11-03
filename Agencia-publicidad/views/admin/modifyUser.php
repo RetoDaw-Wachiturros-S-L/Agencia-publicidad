@@ -44,14 +44,14 @@ if (!isAdmin()) {
 
             <?php if (isset($_SESSION['success'])): ?>
                 <div class="message success-message">
-                    <?= htmlspecialchars($_SESSION['success']) ?>
+                    <?= ($_SESSION['success']) ?>
                     <?php unset($_SESSION['success']); ?>
                 </div>
             <?php endif; ?>
 
             <?php if (isset($_SESSION['error'])): ?>
                 <div class="message error-message">
-                    <?= htmlspecialchars($_SESSION['error']) ?>
+                    <?= ($_SESSION['error']) ?>
                     <?php unset($_SESSION['error']); ?>
                 </div>
             <?php endif; ?>
@@ -73,9 +73,9 @@ if (!isAdmin()) {
                     <tbody>
                         <?php foreach ($usuarios as $usuario): ?>
                             <tr>
-                                <td><?= $usuario['nombre'] ? htmlspecialchars($usuario['nombre']) : 'null' ?></td>
-                                <td><?= $usuario['apellido'] ? htmlspecialchars($usuario['apellido']) : 'null' ?></td>
-                                <td><?= $usuario['email'] ? htmlspecialchars($usuario['email']) : 'null' ?></td>
+                                <td><?= $usuario['nombre'] ? $usuario['nombre'] : 'Sin detalles' ?></td>
+                                <td><?= $usuario['apellido'] ? $usuario['apellido'] : 'Sin detelles' ?></td>
+                                <td><?= $usuario['email'] ? $usuario['email'] : 'Sin detalles' ?></td>
                                 <td>
                                     <?php
                                     $tipo = strtolower($usuario['tipo_usuario'] ?? '');
@@ -84,10 +84,10 @@ if (!isAdmin()) {
                                     if ($tipo === 'comerciante') $badgeClass = 'badge-comerciante';
                                     ?>
                                     <span class="badge <?= $badgeClass ?>">
-                                        <?= $tipo ? htmlspecialchars(ucfirst($tipo)) : 'null' ?>
+                                        <?= $tipo ? (ucfirst($tipo)) : 'null' ?>
                                     </span>
                                 </td>
-                                <td><?= $usuario['fecha_inscripcion'] ? htmlspecialchars($usuario['fecha_inscripcion']) : 'null' ?></td>
+                                <td><?= $usuario['fecha_inscripcion'] ? ($usuario['fecha_inscripcion']) : 'null' ?></td>
                                 <td>
                                     <div class="actions">
                                         <a href="<?= BASE_URL ?>/index.php?controller=AdminController&accion=editUser&id=<?= $usuario['id'] ?? '' ?>" 
@@ -95,10 +95,7 @@ if (!isAdmin()) {
                                             Editar
                                         </a>
                                         <a href="<?= BASE_URL ?>/index.php?controller=AdminController&accion=deleteUser&id=<?= $usuario['id'] ?? '' ?>" 
-                                           class="btn-action btn-delete"
-                                           onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')">
-                                            Eliminar
-                                        </a>
+                                           class="btn-action btn-delete">Eliminar</a>
                                     </div>
                                 </td>
                             </tr>

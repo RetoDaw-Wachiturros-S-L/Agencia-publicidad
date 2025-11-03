@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17232e9b-d86a-418d-b839-90fb80c0604c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Agencia-publicidad/uploads/anuncios/medium/anuncio_31_6903c7dfcfd5e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Agencia-publicidad/uploads/anuncios/original/anuncio_31_6903c7dfcfd5e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Agencia-publicidad/uploads/anuncios/thumbnails/anuncio_31_6903c7dfcfd5e.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/css/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/views/ads/ads.update.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/views/ads/ads.update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/views/misAdds.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/views/misAdds.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/js/admin.modifyUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/js/admin.modifyUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/views/admin/modifyUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/views/admin/modifyUser.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
