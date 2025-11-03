@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17232e9b-d86a-418d-b839-90fb80c0604c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/js/admin.modifyUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/js/admin.modifyUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agencia-publicidad/views/admin/modifyUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/Agencia-publicidad/views/admin/modifyUser.php" afterDir="false" />
-    </list>
+    <list default="true" id="17232e9b-d86a-418d-b839-90fb80c0604c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
